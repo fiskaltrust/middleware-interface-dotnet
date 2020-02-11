@@ -1,0 +1,104 @@
+resources:
+- repo: self
+
+trigger:
+  batch: true
+
+pr: none
+
+variables:
+- group: 'Code Signing Certificates'
+- name: BuildConfiguration
+  value: release
+- name: BuildPlatform
+  value: any cpu
+- name: Solution
+  value: 'fiskaltrust.if.sln'
+- name: TestFrameworks
+  value: net40
+
+jobs:
+  - job: Build 
+    pool:
+      vmImage: windows-latest
+    steps:
+    - task: VisualStudioTestPlatformInstaller@1
+      displayName: VsTest Platform Installer
+
+    - task: DotNetCoreCLI@2
+      displayName: Restore
+      inputs:
+        command: restore
+        projects: '**/*.csproj'
+
+    - task: DotNetCoreCLI@2
+      displayName: Build
+      inputs:
+        projects: '**/*.csproj'
+        arguments: '--configuration $(BuildConfiguration)'
+
+    - task: codesigning@2
+      displayName: 'Code Signing '
+      inputs:
+        secureFileId: 'codesigning.pfx'
+        signCertPassword: '$(Code_Signing_Password)'
+        filePaths: |
+         **/*.dll
+         **/*.exe
+
+      # dotnet test does not call all tests with each target framework when using a multi-target project. Should be fixed a second time in https://github.com/Microsoft/vstest/issues/1603
+    - script: dotnet test --no-build --configuration $(buildConfiguration)  --test-adapter-path:. --logger:nunit;LogFilePath=TestResultsNet40.xml -f net40
+      displayName: 'dotnet Test ifPOS net40'
+      workingDirectory:  'test\fiskaltrust.ifPOS.Tests'
+
+    - script: dotnet test --no-build --configuration $(buildConfiguration)  --test-adapter-path:. --logger:nunit;LogFilePath=TestResultsNet461.xml -f net461
+      displayName: 'dotnet Test ifPOS net461'
+      workingDirectory:  'test\fiskaltrust.ifPOS.Tests'
+
+    - script: dotnet test --no-build --configuration $(buildConfiguration)  --test-adapter-path:. --logger:nunit;LogFilePath=TestResultsNetCoreApp30.xml -f netcoreapp3.0
+      displayName: 'dotnet Test ifPOS netcoreapp30'
+      workingDirectory:  'test\fiskaltrust.ifPOS.Tests'
+
+    - script: dotnet test --no-build --configuration $(buildConfiguration)  --test-adapter-path:. --logger:nunit;LogFilePath=TestResults.xml
+      displayName: 'dotnet Test ifPOS FileLock'
+      workingDirectory:  'test\fiskaltrust.ifPOS.FileLock.Tests'
+
+    - script: dotnet test --no-build --configuration $(buildConfiguration)  --test-adapter-path:. --logger:nunit;LogFilePath=TestResultsNet40.xml -f net40
+      displayName: 'dotnet Test ifPOS TwoDCode net40'
+      workingDirectory:  'test\fiskaltrust.ifPOS.TwoDCode.Tests'
+
+    - script: dotnet test --no-build --configuration $(buildConfiguration)  --test-adapter-path:. --logger:nunit;LogFilePath=TestResultsNet461.xml -f net461
+      displayName: 'dotnet Test ifPOS TwoDCode net461'
+      workingDirectory:  'test\fiskaltrust.ifPOS.TwoDCode.Tests'
+
+    - script: dotnet test --no-build --configuration $(buildConfiguration)  --test-adapter-path:. --logger:nunit;LogFilePath=TestResultsNet40.xml -f net40
+      displayName: 'dotnet Test ifPOS Utilities net40'
+      workingDirectory:  'test\fiskaltrust.ifPOS.Utilities.Tests'
+
+    - script: dotnet test --no-build --configuration $(buildConfiguration)  --test-adapter-path:. --logger:nunit;LogFilePath=TestResultsNet461.xml -f net461
+      displayName: 'dotnet Test ifPOS Utilities net461'
+      workingDirectory:  'test\fiskaltrust.ifPOS.Utilities.Tests'
+
+    - task: PublishTestResults@2
+      displayName: 'Publish Test Results'
+      inputs:
+        testResultsFormat: NUnit
+        testResultsFiles: '**/*TestResults*.xml'
+        mergeTestResults: true
+        failTaskOnFailedTests: true
+        buildConfiguration: $(buildConfiguration)
+
+    - script: dotnet pack --no-build --output $(Build.ArtifactStagingDirectory) --configuration $(buildConfiguration) --version-suffix "$(prerelease)" /p:Build=$(Build.BuildId) /p:GitCommit=$(ShortGitCommit)
+      displayName: 'dotnet pack ifPOS'
+
+    - task: CopyFiles@1
+      displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+      inputs:
+        SourceFolder: '$(build.sourcesdirectory)'
+        Contents: '**\bin\$(BuildConfiguration)\**\*'
+        TargetFolder: '$(build.artifactstagingdirectory)'
+   
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: drop'
+      inputs:
+        PathtoPublish: '$(build.artifactstagingdirectory)'
