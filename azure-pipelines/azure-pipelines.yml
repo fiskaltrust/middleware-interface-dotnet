@@ -59,26 +59,6 @@ jobs:
       displayName: 'dotnet Test ifPOS netcoreapp30'
       workingDirectory:  'test\fiskaltrust.ifPOS.Tests'
 
-    - script: dotnet test --no-build --configuration $(buildConfiguration)  --test-adapter-path:. --logger:nunit;LogFilePath=TestResults.xml
-      displayName: 'dotnet Test ifPOS FileLock'
-      workingDirectory:  'test\fiskaltrust.ifPOS.FileLock.Tests'
-
-    - script: dotnet test --no-build --configuration $(buildConfiguration)  --test-adapter-path:. --logger:nunit;LogFilePath=TestResultsNet40.xml -f net40
-      displayName: 'dotnet Test ifPOS TwoDCode net40'
-      workingDirectory:  'test\fiskaltrust.ifPOS.TwoDCode.Tests'
-
-    - script: dotnet test --no-build --configuration $(buildConfiguration)  --test-adapter-path:. --logger:nunit;LogFilePath=TestResultsNet461.xml -f net461
-      displayName: 'dotnet Test ifPOS TwoDCode net461'
-      workingDirectory:  'test\fiskaltrust.ifPOS.TwoDCode.Tests'
-
-    - script: dotnet test --no-build --configuration $(buildConfiguration)  --test-adapter-path:. --logger:nunit;LogFilePath=TestResultsNet40.xml -f net40
-      displayName: 'dotnet Test ifPOS Utilities net40'
-      workingDirectory:  'test\fiskaltrust.ifPOS.Utilities.Tests'
-
-    - script: dotnet test --no-build --configuration $(buildConfiguration)  --test-adapter-path:. --logger:nunit;LogFilePath=TestResultsNet461.xml -f net461
-      displayName: 'dotnet Test ifPOS Utilities net461'
-      workingDirectory:  'test\fiskaltrust.ifPOS.Utilities.Tests'
-
     - task: PublishTestResults@2
       displayName: 'Publish Test Results'
       inputs:
