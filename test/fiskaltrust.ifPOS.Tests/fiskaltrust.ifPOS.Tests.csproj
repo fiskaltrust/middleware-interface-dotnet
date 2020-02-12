@@ -45,7 +45,9 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net40'">
+    <PackageReference Include="Microsoft.Bcl.Async" Version="1.0.168" />
     <PackageReference Include="FluentAssertions" Version="2.2.0 " />
+    <PackageReference Include="HttpClient" Version="0.6.0" />
     <Reference Include="System.ServiceModel.Web" />
     <PackageReference Include="Newtonsoft.Json" Version="6.0.8" />
   </ItemGroup>
@@ -56,10 +58,6 @@
     <PackageReference Include="System.Interactive.Async" Version="4.0.0" />
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="1.1.0" />
     <PackageReference Include="System.Linq.Async" Version="4.0.0" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
-    <Folder Remove="Helpers\Wcf\" />
   </ItemGroup>
 
 </Project>

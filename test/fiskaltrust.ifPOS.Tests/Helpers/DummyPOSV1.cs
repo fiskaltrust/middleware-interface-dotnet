@@ -7,9 +7,6 @@ using System.Threading.Tasks;
 
 namespace fiskaltrust.ifPOS.Tests.Helpers
 {
-#if WCF
-    [System.ServiceModel.ServiceBehavior(InstanceContextMode = System.ServiceModel.InstanceContextMode.Single)]
-#endif
     public class DummyPOSV1 : DummyPOS, IPOS
     {
         private Task<T> FromResult<T>(T result)

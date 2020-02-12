@@ -20,9 +20,6 @@ namespace fiskaltrust.ifPOS.v1
 
 #if STREAMING
         [OperationContract(Name = "v1/Journal")]
-#if WCF
-        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare,  UriTemplate = "v1/journal")]
-#endif
         IAsyncEnumerable<JournalResponse> JournalAsync(JournalRequest request);
 #endif
 

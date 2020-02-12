@@ -2,6 +2,8 @@
 using FluentAssertions;
 using fiskaltrust.ifPOS.v1;
 using NUnit.Framework;
+using System.Threading.Tasks;
+using System.IO;
 
 namespace fiskaltrust.ifPOS.Tests.v1.IPOS
 {
@@ -11,33 +13,31 @@ namespace fiskaltrust.ifPOS.Tests.v1.IPOS
         protected abstract ifPOS.v1.IPOS CreateClient();
 
         [OneTimeSetUp]
-        public void BaseSetUp()
-        {
-            StartHost();
-        }
+        public void BaseSetUp() => StartHost();
 
         [Test]
-        public void SignAsync_ShouldReturnSameQueueId()
+        public async Task SignAsync_ShouldReturnSameQueueId()
         {
             var client = CreateClient();
             var queueId = Guid.NewGuid().ToString();
-            var response = client.SignAsync(new ReceiptRequest
+            var signRequest = new ReceiptRequest
             {
                 ftQueueID = queueId
-            }).Result;
+            };
+            var response = await client.SignAsync(signRequest);
             response.ftQueueID.Should().Be(queueId);
         }
 
         [Test]
-        public void EchoAsync_ShouldReturnSameMessage()
+        public async Task EchoAsync_ShouldReturnSameMessage()
         {
             var client = CreateClient();
-            var inMessage = "Hello World!";
-            var outMessage = client.EchoAsync(new EchoRequest
+            var echoRequest = new EchoRequest
             {
-                Message = inMessage
-            }).Result;
-            outMessage.Message.Should().Be(inMessage);
+                Message = "Hello World!"
+            };
+            var outMessage = await client.EchoAsync(echoRequest);
+            outMessage.Message.Should().Be(echoRequest.Message);
         }
     }
 }

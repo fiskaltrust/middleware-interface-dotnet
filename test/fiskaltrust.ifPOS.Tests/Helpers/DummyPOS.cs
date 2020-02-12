@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System;
 using System.IO;
-using System.Linq;
 using System.Text;
 
 namespace fiskaltrust.ifPOS.Tests.Helpers
 {
-#if WCF
-    [System.ServiceModel.ServiceBehavior(InstanceContextMode = System.ServiceModel.InstanceContextMode.Single)]
-#endif
     public class DummyPOS : ifPOS.v0.IPOS
     {
         private delegate string Echo_Delegate(string message);
@@ -59,14 +55,12 @@ namespace fiskaltrust.ifPOS.Tests.Helpers
 
         public Stream Journal(long ftJournalType, long from, long to)
         {
-            var ms = new MemoryStream();
-            var bw = new BinaryWriter(ms);
-            bw.Write(ftJournalType);
-            bw.Write(from);
-            bw.Write(to);
-            bw.Flush();
-            ms.Position = 0;
-            return ms;
+            var json = JsonConvert.SerializeObject(new {
+                ftJournalType,
+                from,
+                to
+            });
+            return new MemoryStream(Encoding.UTF8.GetBytes(json));
         }
 
         public IAsyncResult BeginJournal(long ftJournalType, long from, long to, AsyncCallback callback, object state)

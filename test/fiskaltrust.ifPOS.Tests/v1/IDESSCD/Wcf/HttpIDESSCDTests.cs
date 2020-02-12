@@ -1,4 +1,4 @@
-﻿#if NET461
+﻿#if WCF
 
 using fiskaltrust.ifPOS.Tests.Helpers;
 using System.ServiceModel;
@@ -31,7 +31,7 @@ namespace fiskaltrust.ifPOS.Tests.v1.IDESSCD
 
         protected override ifPOS.v1.de.IDESSCD CreateClient() => WcfHelper.GetRestProxy<ifPOS.v1.de.IDESSCD>(_url);
 
-        protected override void StartHost() => _serviceHost = WcfHelper.StartRestHost(_url, new DummyDESSCD());
+        protected override void StartHost() => _serviceHost = WcfHelper.StartRestHost<ifPOS.v1.de.IDESSCD>(_url, new DummyDESSCD());
 
         [Test]
         public async Task ExportDataV1_ShouldReturn()
@@ -56,12 +56,20 @@ namespace fiskaltrust.ifPOS.Tests.v1.IDESSCD
         [Test]
         public async Task StartTransactionV1_ShouldReturn()
         {
-            using (var httpClient = new HttpClient())
+            try
             {
-                var requestData = new StartTransactionRequest();
-                var content = new StringContent(JsonConvert.SerializeObject(requestData), Encoding.UTF8, "application/json");
-                var result = await httpClient.PostAsync(new Uri(_url + "/v1/starttransactionexportdata"), content);
-                result.EnsureSuccessStatusCode();
+                using (var httpClient = new HttpClient())
+                {
+                    var requestData = new StartTransactionRequest();
+                    var content = new StringContent(JsonConvert.SerializeObject(requestData), Encoding.UTF8, "application/json");
+                    var result = await httpClient.PostAsync(new Uri(_url + "/v1/starttransactionexportdata"), content);
+                    result.EnsureSuccessStatusCode();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
         }
 

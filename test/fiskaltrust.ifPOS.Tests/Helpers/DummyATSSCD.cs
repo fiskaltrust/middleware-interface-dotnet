@@ -2,9 +2,6 @@
 
 namespace fiskaltrust.ifPOS.Tests.Helpers
 {
-#if WCF
-    [System.ServiceModel.ServiceBehavior(InstanceContextMode = System.ServiceModel.InstanceContextMode.Single)]
-#endif
     public class DummyATSSCD : ifPOS.v0.IATSSCD
     {
         public static string zda = "ZDA";

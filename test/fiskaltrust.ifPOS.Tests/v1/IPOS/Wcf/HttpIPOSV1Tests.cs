@@ -7,8 +7,10 @@ using FluentAssertions;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
-using System.Net;
+using System.Net.Http;
 using System.ServiceModel;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace fiskaltrust.ifPOS.Tests.v1.IPOS
 {
@@ -31,18 +33,16 @@ namespace fiskaltrust.ifPOS.Tests.v1.IPOS
             _serviceHost = null;
         }
 
-
         protected override ifPOS.v1.IPOS CreateClient() => WcfHelper.GetRestProxy<ifPOS.v1.IPOS>(_url);
 
         protected override void StartHost() => _serviceHost = WcfHelper.StartRestHost<ifPOS.v1.IPOS>(_url, new DummyPOSV1());
 
         [Test]
-        public void SignV0_ShouldReturnSameQueueId_For_WebClient()
+        public async Task SignV0_ShouldReturnSameQueueId_For_WebClient()
         {
             var queueId = Guid.NewGuid().ToString();
-            using (var webClient = new WebClient())
+            using (var httpClient = new HttpClient())
             {
-                webClient.Headers["content-type"] = "application/json";
                 var json = JsonConvert.SerializeObject(new ReceiptRequest
                 {
                     ftQueueID = queueId,
@@ -57,22 +57,23 @@ namespace fiskaltrust.ifPOS.Tests.v1.IPOS
                 {
                     DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
                 });
-                var result = webClient.UploadString(new Uri(_url + "/v0/sign"), json);
-                var response = JsonConvert.DeserializeObject<ReceiptResponse>(result, new JsonSerializerSettings
+                var result = await httpClient.PostAsync(new Uri(_url + "/v0/sign"), new StringContent(json, Encoding.UTF8, "application/json"));
+                result.EnsureSuccessStatusCode();
+                var content = await result.Content.ReadAsStringAsync();
+                var response = JsonConvert.DeserializeObject<ReceiptResponse>(content, new JsonSerializerSettings
                 {
                     DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
-                }); 
+                });
                 response.ftQueueID.Should().Be(queueId);
             }
         }
 
         [Test]
-        public void SignV1_ShouldReturnSameQueueId_For_WebClient()
+        public async Task SignV1_ShouldReturnSameQueueId_For_WebClient()
         {
             var queueId = Guid.NewGuid().ToString();
-            using (var webClient = new WebClient())
+            using (var httpClient = new HttpClient())
             {
-                webClient.Headers["content-type"] = "application/json";
                 var json = JsonConvert.SerializeObject(new ReceiptRequest
                 {
                     ftQueueID = queueId,
@@ -87,8 +88,10 @@ namespace fiskaltrust.ifPOS.Tests.v1.IPOS
                 {
                     DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
                 });
-                var result = webClient.UploadString(new Uri(_url + "/v1/sign"), json);
-                var response = JsonConvert.DeserializeObject<ReceiptResponse>(result, new JsonSerializerSettings
+                var result = await httpClient.PostAsync(new Uri(_url + "/v1/sign"), new StringContent(json, Encoding.UTF8, "application/json"));
+                result.EnsureSuccessStatusCode();
+                var content = await result.Content.ReadAsStringAsync();
+                var response = JsonConvert.DeserializeObject<ReceiptResponse>(content, new JsonSerializerSettings
                 {
                     DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
                 });
@@ -97,67 +100,47 @@ namespace fiskaltrust.ifPOS.Tests.v1.IPOS
         }
 
         [Test]
-        public void EchoV0_ShouldReturnSameMessage_For_WebClient()
+        public async Task EchoV0_ShouldReturnSameMessage_For_WebClient()
         {
-            var inMessage = "Hello World!";
-            using (var webClient = new WebClient())
+            var inMessage = Guid.NewGuid().ToString();
+            using (var httpClient = new HttpClient())
             {
-                webClient.Headers["content-type"] = "application/json";
                 var json = JsonConvert.SerializeObject(inMessage);
-                var result = webClient.UploadString(new Uri(_url + "/v0/echo"), json);
-                var response = JsonConvert.DeserializeObject<string>(result);
+                var result = await httpClient.PostAsync(new Uri(_url + "/v0/echo"), new StringContent(json, Encoding.UTF8, "application/json"));
+                result.EnsureSuccessStatusCode();
+                var content = await result.Content.ReadAsStringAsync();
+                var response = JsonConvert.DeserializeObject<string>(content);
                 response.Should().Be(inMessage);
             }
         }
 
         [Test]
-        public void Echov1_ShouldReturnSameMessage_For_WebClient()
+        public async Task Echov1_ShouldReturnSameMessage_For_WebClient()
         {
-            var inMessage = "Hello World!";
-            using (var webClient = new WebClient())
+            var inMessage = Guid.NewGuid().ToString();
+            using (var httpClient = new HttpClient())
             {
-                webClient.Headers["content-type"] = "application/json";
                 var json = JsonConvert.SerializeObject(new EchoRequest
                 {
                     Message = inMessage
                 });
-                var result = webClient.UploadString(new Uri(_url + "/v1/echo"), "POST", json);
-                var response = JsonConvert.DeserializeObject<EchoResponse>(result);
+                var result = await httpClient.PostAsync(new Uri(_url + "/v1/echo"), new StringContent(json, Encoding.UTF8, "application/json"));
+                result.EnsureSuccessStatusCode();
+                var content = await result.Content.ReadAsStringAsync();
+                var response = JsonConvert.DeserializeObject<EchoResponse>(content);
                 response.Message.Should().Be(inMessage);
             }
         }
 
-
         [Test]
-        public void JournalV0_ShouldReturnSameMessage_For_WebClient()
+        public async Task JournalV0_ShouldReturnSameMessage_For_WebClient()
         {
-            var inMessage = "Hello World!";
-            using (var webClient = new WebClient())
+            using (var httpClient = new HttpClient())
             {
-                webClient.Headers["content-type"] = "application/json";
-                var json = JsonConvert.SerializeObject(inMessage);
-                var result = webClient.UploadString(new Uri(_url + "/v0/journal?type=0&from=0&to=0"), json);
-                var response = JsonConvert.DeserializeObject<string>(result);
-                response.Should().Be(inMessage);
-            }
-        }
-
-        [Test]
-        public void JournalV1_ShouldReturnSameMessage_For_WebClient()
-        {
-            var inMessage = "Hello World!";
-            using (var webClient = new WebClient())
-            {
-                webClient.Headers["content-type"] = "application/json";
-                var json = JsonConvert.SerializeObject(new JournalRequest
-                {
-                    From = 0x0,
-                    To = 0x0,
-                    ftJournalType = 0x0
-                });
-                var result = webClient.UploadString(new Uri(_url + "/v1/journal"), "POST", json);
-                var response = JsonConvert.DeserializeObject<EchoResponse>(result);
-                response.Message.Should().Be(inMessage);
+                var result = await httpClient.PostAsync(new Uri(_url + "/v0/journal?type=0&from=0&to=0"), new StringContent(""));
+                result.EnsureSuccessStatusCode();
+                var content = await result.Content.ReadAsStringAsync();
+                content.Should().Be("{\"ftJournalType\":0,\"from\":0,\"to\":0}");
             }
         }
     }
