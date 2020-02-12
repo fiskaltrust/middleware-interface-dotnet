@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.ServiceModel;
 #if WCF
 using System.ServiceModel.Web;
@@ -54,8 +55,7 @@ namespace fiskaltrust.ifPOS.v0
 #if WCF
         [WebInvoke(UriTemplate = "v0/journal?type={ftJournalType}&from={from}&to={to}")]
 #endif
-        [Obsolete("This method is obsolete, use v1.JournalAsync instead.")]
-        System.IO.Stream Journal(long ftJournalType, long from, long to);
+        Stream Journal(long ftJournalType, long from, long to);
 
         /// <summary>
         /// Stream down a journal async begin pattern
@@ -76,7 +76,7 @@ namespace fiskaltrust.ifPOS.v0
         /// <param name="result"></param>
         /// <returns></returns>
         [Obsolete("This method is obsolete, use v1.JournalAsync instead.")]
-        System.IO.Stream EndJournal(IAsyncResult result);
+        Stream EndJournal(IAsyncResult result);
 
         /// <summary>
         /// Function to test communication

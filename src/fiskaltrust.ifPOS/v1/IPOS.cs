@@ -25,7 +25,7 @@ namespace fiskaltrust.ifPOS.v1
 
         [OperationContract(Name = "v1/Echo")]
 #if WCF
-        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare,  UriTemplate = "v1/echo")]
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare,  UriTemplate = "v1/echo")]        
 #endif
         Task<EchoResponse> EchoAsync(EchoRequest message);
     }
