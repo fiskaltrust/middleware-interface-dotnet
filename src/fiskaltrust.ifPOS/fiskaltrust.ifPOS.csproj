@@ -23,7 +23,6 @@
     <PackageTags>fiskaltrust interface</PackageTags>
     <TargetFrameworks>net40;net461;netstandard2.0;netstandard2.1</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <AssemblyCompany>fiskaltrust consulting gmbh</AssemblyCompany>
     <AssemblyProduct>fiskaltrust.if</AssemblyProduct>
   </PropertyGroup>

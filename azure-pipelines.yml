@@ -14,8 +14,6 @@ variables:
   value: any cpu
 - name: Solution
   value: 'fiskaltrust.if.sln'
-- name: TestFrameworks
-  value: net40
 
 jobs:
   - job: Build 
@@ -59,7 +57,7 @@ jobs:
         failTaskOnFailedTests: true
         buildConfiguration: $(buildConfiguration)
 
-    - script: dotnet pack --no-build --output $(Build.ArtifactStagingDirectory) --configuration $(buildConfiguration) --version-suffix "$(prerelease)" /p:Build=$(Build.BuildId) /p:GitCommit=$(ShortGitCommit)
+    - script: dotnet pack --no-build --output $(Build.ArtifactStagingDirectory) --configuration $(buildConfiguration)
       displayName: 'dotnet pack ifPOS'
 
     - task: PublishBuildArtifacts@1
