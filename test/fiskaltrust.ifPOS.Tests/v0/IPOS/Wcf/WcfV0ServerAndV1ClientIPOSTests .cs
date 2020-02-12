@@ -26,6 +26,8 @@ namespace fiskaltrust.ifPOS.Tests.v0.IPOS
         protected override ifPOS.v0.IPOS CreateClient() => WcfHelper.GetProxy<ifPOS.v1.IPOS>(_url);
 
         protected override void StartHost() => _serviceHost = WcfHelper.StartHost<ifPOS.v0.IPOS>(_url, new DummyPOS());
+
+        protected override void StopHost() => _serviceHost.Close();
     }
 }
 

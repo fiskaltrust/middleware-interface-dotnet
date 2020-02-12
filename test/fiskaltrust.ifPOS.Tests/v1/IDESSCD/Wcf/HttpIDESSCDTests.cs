@@ -33,6 +33,8 @@ namespace fiskaltrust.ifPOS.Tests.v1.IDESSCD
 
         protected override void StartHost() => _serviceHost = WcfHelper.StartRestHost<ifPOS.v1.de.IDESSCD>(_url, new DummyDESSCD());
 
+        protected override void StopHost() => _serviceHost.Close();
+
         [Test]
         public async Task ExportDataV1_ShouldReturn()
         {

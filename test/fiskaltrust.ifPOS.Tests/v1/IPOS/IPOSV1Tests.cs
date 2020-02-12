@@ -10,10 +10,14 @@ namespace fiskaltrust.ifPOS.Tests.v1.IPOS
     public abstract class IPOSV1Tests
     {
         protected abstract void StartHost();
+        protected abstract void StopHost();
         protected abstract ifPOS.v1.IPOS CreateClient();
 
         [OneTimeSetUp]
         public void BaseSetUp() => StartHost();
+
+        [OneTimeTearDown]
+        public void BaseTearDown() => StopHost();
 
         [Test]
         public async Task SignAsync_ShouldReturnSameQueueId()

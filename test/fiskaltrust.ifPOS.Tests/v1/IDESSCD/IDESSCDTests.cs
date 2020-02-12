@@ -7,10 +7,14 @@ namespace fiskaltrust.ifPOS.Tests.v1.IDESSCD
     public abstract class IDESSCDTests
     {
         protected abstract void StartHost();
+        protected abstract void StopHost();
         protected abstract ifPOS.v1.de.IDESSCD CreateClient();
 
         [OneTimeSetUp]
         public void BaseSetUp() => StartHost();
+
+        [OneTimeTearDown]
+        public void BaseTearDown() => StopHost();
 
         [Test]
         public void ExportDataAsync_ShouldReturn()

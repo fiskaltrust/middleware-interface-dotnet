@@ -32,6 +32,12 @@ namespace fiskaltrust.ifPOS.Tests.v1.IPOS
                 _server = GrpcHelper.StartHost(_host, _port, new DummyPOSV1());
         }
 
+        protected override void StopHost()
+        {
+            Task.Run(() => _server.ShutdownAsync()).Wait();
+            _server = null;
+        }
+
         [Test]
         public async Task Journal()
         {

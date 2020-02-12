@@ -12,13 +12,14 @@ namespace fiskaltrust.ifPOS.Tests.v0.IPOS
         private Stream JournalAsyncStream = null;
 
         protected abstract void StartHost();
+        protected abstract void StopHost();
         protected abstract ifPOS.v0.IPOS CreateClient();
 
         [OneTimeSetUp]
-        public void BaseSetUp()
-        {
-            StartHost();
-        }
+        public void BaseSetUp() => StartHost();
+
+        [OneTimeTearDown]
+        public void BaseTearDown() => StopHost();
 
         [Test]
         [Obsolete]

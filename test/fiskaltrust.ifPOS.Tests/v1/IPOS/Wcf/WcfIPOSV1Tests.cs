@@ -30,6 +30,8 @@ namespace fiskaltrust.ifPOS.Tests.v1.IPOS
 
         protected override void StartHost() => _serviceHost = WcfHelper.StartHost<ifPOS.v1.IPOS>(_url, new DummyPOSV1());
 
+        protected override void StopHost() => _serviceHost.Close();
+
         [Test]
         [Obsolete]
         public void Sign_ShouldReturnSameQueueId_For_v0Client()
