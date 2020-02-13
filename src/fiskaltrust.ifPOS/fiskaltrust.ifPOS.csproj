@@ -4,7 +4,7 @@
     <PackageId>fiskaltrust.interface</PackageId>
     <Authors>fiskaltrust</Authors>
     <Company>fiskaltrust</Company>
-    <PackageLicenseUrl>https://www.fiskaltrust.at/license/interface</PackageLicenseUrl>
+    <PackageLicenseUrl>https://github.com/fiskaltrust/middleware-interface-dotnet/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/fiskaltrust/middleware-interface-dotnet</PackageProjectUrl>
     <PackageIconUrl>https://portal.fiskaltrust.at/Content/favicons/favicon-64x64.png</PackageIconUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
