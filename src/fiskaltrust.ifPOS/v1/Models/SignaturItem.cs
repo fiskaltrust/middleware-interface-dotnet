@@ -11,7 +11,7 @@ namespace fiskaltrust.ifPOS.v1
         public enum Types : long
         {
             /// <summary>
-            /// 
+            /// unknown
             /// </summary>
             Unknown = 0x0000,
             /// <summary>
@@ -63,11 +63,11 @@ namespace fiskaltrust.ifPOS.v1
             /// </summary>
             Unknown = 0x00,
             /// <summary>
-            /// 
+            /// Text
             /// </summary>
             Text = 0x01,
             /// <summary>
-            /// 
+            /// Link
             /// </summary>
             Link = 0x02,
             /// <summary>
@@ -110,6 +110,10 @@ namespace fiskaltrust.ifPOS.v1
             /// Barcode, possible for Base32 data
             /// </summary>
             Code39 = 0x0C
+            /// <summary>
+            /// Base64 data
+            /// </summary>
+            Base64 = 0x0D
         }
 
         /// <summary>

@@ -11,7 +11,7 @@ namespace fiskaltrust.ifPOS.v0
         public enum Types : long
         {
             /// <summary>
-            /// 
+            /// unknown
             /// </summary>
             Unknown = 0x0000,
             /// <summary>
@@ -63,11 +63,11 @@ namespace fiskaltrust.ifPOS.v0
             /// </summary>
             Unknown = 0x00,
             /// <summary>
-            /// 
+            /// Text
             /// </summary>
             Text = 0x01,
             /// <summary>
-            /// 
+            /// Link
             /// </summary>
             Link = 0x02,
             /// <summary>
