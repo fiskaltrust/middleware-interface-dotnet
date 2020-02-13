@@ -1,9 +1,10 @@
 fiskaltrust.Middleware Interface
 =========================
-A NuGet package that can be used to include the free fiskaltrust Middleware into POS systems.
 
 [![Nuget](https://img.shields.io/nuget/v/fiskaltrust.interface?label=nuget)](https://nuget.org/packages/fiskaltrust.interface)
 [![Build Status](https://fiskaltrust.visualstudio.com/department-develop-research/_apis/build/status/fiskaltrust.if/fiskaltrust.middleware-interface-dotnet?branchName=master)](https://fiskaltrust.visualstudio.com/department-develop-research/_build/latest?definitionId=334)
+
+A NuGet package that can be used to include the free fiskaltrust Middleware into POS systems.
 
 ## Overview
 The fiskaltrust Middleware is a software that can be used in POS systems to fullfil legal requirements with minimal impact and development effort. It works both on Windows and Linux, and can be integrated via gRPC, WCF or REST. Simply put, the fiskaltrust.Middleware publishes the `IPOS` interface via one (or multiple) of these protocols, and the POS system can use that endpoint to sign receipts and request exports (= journals).
