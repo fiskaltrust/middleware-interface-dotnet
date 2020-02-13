@@ -109,7 +109,7 @@ namespace fiskaltrust.ifPOS.v1
             /// <summary>
             /// Barcode, possible for Base32 data
             /// </summary>
-            Code39 = 0x0C
+            Code39 = 0x0C,
             /// <summary>
             /// Base64 data
             /// </summary>
@@ -121,7 +121,6 @@ namespace fiskaltrust.ifPOS.v1
         /// </summary>
         [DataMember(Order = 10, EmitDefaultValue = true, IsRequired = true)]
         public long ftSignatureFormat { get; set; }
-
 
         /// <summary>
         /// Type of signature according to the reference table in the appendix, e.g.: signature indicating a failure notification

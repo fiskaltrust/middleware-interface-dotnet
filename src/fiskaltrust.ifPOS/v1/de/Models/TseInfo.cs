@@ -27,12 +27,6 @@ namespace fiskaltrust.ifPOS.v1.de
         [DataMember(Order = 7)]
         public TseState CurrentState { get; set; }
 
-        /// <summary>
-        /// Should contain other generic infomations:
-        ///  - Count of transactions specified by type (SE API's GetSupportedTransactionUpdateVariants)
-        ///  - SCU model specifics
-        ///  - ...
-        /// </summary>
         [DataMember(Order = 8)]
         public Dictionary<string, object> Info { get; set; }
     }
