@@ -13,15 +13,15 @@ This repository contains the .NET interface as a NuGet package; due to the open 
 ## Getting Started
 To implement the Middleware into your POS system, please include the latest version of the NuGet package and take a look at the [interface documentation](https://github.com/fiskaltrust/interface-doc).
 
-Additionally, please have a look at the [demo repository](https://github.com/fiskaltrust/demo/), which contains minimal sample applications for a broad variety of programming languages. Some usage examples can also be taken from the [tests](https://github.com/fiskaltrust/middleware-interface-dotnet/tree/master/test/fiskaltrust.ifPOS.Tests/v1/IPOS/Wcf).
+Additionally, please have a look at the [demo repository](https://github.com/fiskaltrust/demo/), which contains minimal sample applications for a broad variety of programming languages. Some usage examples can also be taken from the [tests](test/fiskaltrust.ifPOS.Tests/v1/IPOS/Wcf).
 
 ## Contributions
 If you want to contribute to this repository, please review this README file to understand how it is structured and which tools are used.
 
 ## Versioning
-Currently, the _Minor_ version is incremented for each country that is added to the interface. Beginning from the future version 2.0, we will switch to [semantic versioning](https://semver.org/).
+Currently, the _Minor_ version is incremented for each country that is added to the interface. Starting with the future version 2.0, we will switch to [semantic versioning](https://semver.org/).
 
 For the list of currently available versions, please have a look at the [NuGet Version History](https://www.nuget.org/packages/fiskaltrust.interface/).
 
-
 ## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
