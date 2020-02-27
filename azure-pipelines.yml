@@ -3,8 +3,9 @@ resources:
 
 trigger:
   batch: true
-
-pr: none
+  
+pr:
+- master
 
 variables:
 - group: 'Code Signing Certificates'
