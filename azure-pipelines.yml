@@ -30,8 +30,8 @@ jobs:
       displayName: Install nbgv CLI
 
     - powershell: |
-        if (-not $Env:BUILD_SOURCEBRANCH.StartsWith("refs/tags/v") -or
-            -not $Env:BUILD_SOURCEBRANCH.StartsWith("refs/heads/master") -or
+        if (-not $Env:BUILD_SOURCEBRANCH.StartsWith("refs/tags/v") -and
+            -not $Env:BUILD_SOURCEBRANCH.StartsWith("refs/heads/master") -and
             -not $Env:BUILD_SOURCEBRANCH.StartsWith("refs/heads/release")) {
           git config --global user.email "fiskaltrust@fiskaltrust.cloud"
           git config --global user.name "fiskaltrust"
