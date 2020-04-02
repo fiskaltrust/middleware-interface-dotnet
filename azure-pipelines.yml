@@ -24,6 +24,28 @@ jobs:
     - task: VisualStudioTestPlatformInstaller@1
       displayName: VsTest Platform Installer
 
+    - powershell: |
+        dotnet tool install -g nbgv 
+      workingDirectory: '/'
+      displayName: Install nbgv CLI
+
+    - powershell: |
+        if (-not $Env:BUILD_SOURCEBRANCH.StartsWith("refs/tags/v") -or
+            -not $Env:BUILD_SOURCEBRANCH.StartsWith("refs/heads/master") -or
+            -not $Env:BUILD_SOURCEBRANCH.StartsWith("refs/heads/release")) {
+          git config --global user.email "fiskaltrust@fiskaltrust.cloud"
+          git config --global user.name "fiskaltrust"
+          $date = "$(Get-Date -UFormat "%y")$("{0:D3}" -f (Get-Date).DayofYear)"  
+          $versionPostfix = ".$date.$(Build.BuildId)"
+          $versionContent = Get-Content 'version.json' -Raw | ConvertFrom-Json
+          $versionContent.version = "$($versionContent.version)$versionPostfix"
+          $versionContent | ConvertTo-Json -Depth 32 | Set-Content 'version.json'
+          git add .
+          git commit -m "Version bump" -q
+        }
+        nbgv cloud
+      displayName: Set NBGV version
+
     - task: DotNetCoreCLI@2
       displayName: Restore
       inputs:
