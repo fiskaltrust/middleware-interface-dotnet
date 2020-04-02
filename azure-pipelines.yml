@@ -36,7 +36,7 @@ jobs:
           git config --global user.email "fiskaltrust@fiskaltrust.cloud"
           git config --global user.name "fiskaltrust"
           $date = "$(Get-Date -UFormat "%y")$("{0:D3}" -f (Get-Date).DayofYear)"  
-          $versionPostfix = ".$date.$(Build.BuildId)"
+          $versionPostfix = "-$date-$(Build.BuildId)"
           $versionContent = Get-Content 'version.json' -Raw | ConvertFrom-Json
           $versionContent.version = "$($versionContent.version)$versionPostfix"
           $versionContent | ConvertTo-Json -Depth 32 | Set-Content 'version.json'
