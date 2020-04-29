@@ -11,21 +11,21 @@ namespace fiskaltrust.ifPOS.v1.de
     {
         [OperationContract]
 #if WCF
-        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v1/starttransactionexportdata", Method = "POST")]
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v1/starttransaction", Method = "POST")]
 #endif
-        Task<StartTransactionResponse> StartTransactionExportDataAsync(StartTransactionRequest request);
+        Task<StartTransactionResponse> StartTransactionAsync(StartTransactionRequest request);
 
         [OperationContract]
 #if WCF
-        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v1/updatetransactionexportdata")]
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v1/updatetransaction")]
 #endif
-        Task<UpdateTransactionResponse> UpdateTransactionExportDataAsync(UpdateTransactionRequest request);
+        Task<UpdateTransactionResponse> UpdateTransactionAsync(UpdateTransactionRequest request);
 
         [OperationContract]
 #if WCF
-        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v1/finishtransactionexportdata")]
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v1/finishtransaction")]
 #endif
-        Task<FinishTransactionResponse> FinishTransactionExportDataAsync(FinishTransactionRequest request);
+        Task<FinishTransactionResponse> FinishTransactionAsync(FinishTransactionRequest request);
 
         [OperationContract]
 #if WCF

@@ -16,12 +16,9 @@ namespace fiskaltrust.ifPOS.v1.de
         public string ProcessDataBase64 { get; set; }
 
         [DataMember(Order = 4)]
-        public Guid ReceiptRequestItemId { get; set; }
+        public Guid QueueItemId { get; set; }
 
         [DataMember(Order = 5)]
-        public string ReceiptRequestHash { get; set; }
-
-        [DataMember(Order = 6)]
-        public bool ShouldRetrySending { get; set; }
+        public bool IsRetry { get; set; }
     }
 }

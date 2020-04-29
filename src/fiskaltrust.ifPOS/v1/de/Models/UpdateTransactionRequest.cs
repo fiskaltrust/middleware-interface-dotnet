@@ -10,7 +10,7 @@ namespace fiskaltrust.ifPOS.v1.de
         public string ClientId { get; set; }
 
         [DataMember(Order = 2)]
-        public long TransactionNumber { get; set; }
+        public ulong TransactionNumber { get; set; }
 
         [DataMember(Order = 3)]
         public string ProcessType { get; set; }
@@ -19,12 +19,9 @@ namespace fiskaltrust.ifPOS.v1.de
         public string ProcessDataBase64 { get; set; }
 
         [DataMember(Order = 5)]
-        public Guid ReceiptRequestItemId { get; set; }
+        public Guid QueueItemId { get; set; }
 
         [DataMember(Order = 6)]
-        public string ReceiptRequestHash { get; set; }
-
-        [DataMember(Order = 7)]
-        public bool ShouldRetrySending { get; set; }
+        public bool IsRetry { get; set; }
     }
 }

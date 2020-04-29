@@ -6,7 +6,7 @@ namespace fiskaltrust.ifPOS.v1.de
     public class TseSignatureData
     {
         [DataMember(Order = 1)]
-        public long SignatureCounter { get; set; }
+        public ulong SignatureCounter { get; set; }
 
         [DataMember(Order = 2)]
         public string SignatureAlgorithm { get; set; }
@@ -15,6 +15,6 @@ namespace fiskaltrust.ifPOS.v1.de
         public string SignatureBase64 { get; set; }
 
         [DataMember(Order = 4)]
-        public string PublicKey { get; set; }
+        public string PublicKeyBase64 { get; set; }
     }
 }

@@ -7,13 +7,13 @@ namespace fiskaltrust.ifPOS.v1.de
     public class UpdateTransactionResponse
     {
         [DataMember(Order = 1)]
-        public long TransactionNumber { get; set; }
+        public ulong TransactionNumber { get; set; }
 
         [DataMember(Order = 2)]
-        public DateTime StartTime { get; set; }
+        public DateTime TimeStamp { get; set; }
 
         [DataMember(Order = 3)]
-        public string CertificateSerialNumber { get; set; }
+        public string TseSerialNumberOctet { get; set; }
 
         [DataMember(Order = 4)]
         public string ClientId { get; set; }
@@ -25,12 +25,7 @@ namespace fiskaltrust.ifPOS.v1.de
         public string ProcessDataBase64 { get; set; }
 
         [DataMember(Order = 7)]
-        public TseLogData LogData { get; set; }
-
-        [DataMember(Order = 8)]
         public TseSignatureData SignatureData { get; set; }
 
-        [DataMember(Order = 9)]
-        public bool MoreExportDataAvailable { get; set; }
     }
 }
