@@ -6,19 +6,19 @@ namespace fiskaltrust.ifPOS.v1.de
     [DataContract]
     public class StartTransactionResponse
     {
-        [DataMember(Order = 1)]
+        [DataMember(Order = 10)]
         public ulong TransactionNumber { get; set; }
 
-        [DataMember(Order = 2)]
+        [DataMember(Order = 20)]
         public DateTime TimeStamp { get; set; }
 
-        [DataMember(Order = 3)]
+        [DataMember(Order = 30)]
         public string TseSerialNumberOctet { get; set; }
 
-        [DataMember(Order = 4)]
+        [DataMember(Order = 40)]
         public string ClientId { get; set; }
 
-        [DataMember(Order = 5)]
+        [DataMember(Order = 50)]
         public TseSignatureData SignatureData { get; set; }
     }
 }
