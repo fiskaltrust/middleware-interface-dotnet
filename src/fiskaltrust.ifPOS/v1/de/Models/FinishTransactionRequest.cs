@@ -6,25 +6,22 @@ namespace fiskaltrust.ifPOS.v1.de
     [DataContract]
     public class FinishTransactionRequest
     {
-        [DataMember(Order = 1)]
+        [DataMember(Order = 10)]
         public string ClientId { get; set; }
 
-        [DataMember(Order = 2)]
-        public long TransactionNumber { get; set; }
+        [DataMember(Order = 20)]
+        public ulong TransactionNumber { get; set; }
 
-        [DataMember(Order = 3)]
+        [DataMember(Order = 30)]
         public string ProcessType { get; set; }
 
-        [DataMember(Order = 4)]
+        [DataMember(Order = 40)]
         public string ProcessDataBase64 { get; set; }
 
-        [DataMember(Order = 5)]
-        public Guid ReceiptRequestItemId { get; set; }
+        [DataMember(Order = 50)]
+        public Guid QueueItemId { get; set; }
 
-        [DataMember(Order = 6)]
-        public string ReceiptRequestHash { get; set; }
-
-        [DataMember(Order = 7)]
-        public bool ShouldRetrySending { get; set; }
+        [DataMember(Order = 60)]
+        public bool IsRetry { get; set; }
     }
 }

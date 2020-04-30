@@ -3,9 +3,9 @@
 namespace fiskaltrust.ifPOS.v1.de
 {
     [DataContract]
-    public class TseState
+    public class RegisterClientIdRequest
     {
         [DataMember(Order = 10)]
-        public TseStates CurrentState;
+        public string ClientId { get; set; }
     }
 }

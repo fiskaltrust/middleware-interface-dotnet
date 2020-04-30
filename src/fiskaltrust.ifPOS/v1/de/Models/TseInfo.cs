@@ -6,28 +6,37 @@ namespace fiskaltrust.ifPOS.v1.de
     [DataContract]
     public class TseInfo
     {
-        [DataMember(Order = 1)]
+        [DataMember(Order = 10)]
         public long MaxNumberOfClients { get; set; }
 
-        [DataMember(Order = 2)]
+        [DataMember(Order = 20)]
         public long CurrentNumberOfClients { get; set; }
 
-        [DataMember(Order = 3)]
+        [DataMember(Order = 30)]
+        public IEnumerable<string> CurrentClientIds { get; set; }
+
+        [DataMember(Order = 40)]
         public long MaxNumberOfTransactions { get; set; }
 
-        [DataMember(Order = 4)]
+        [DataMember(Order = 50)]
         public long CurrentNumberOfTransactions { get; set; }
 
-        [DataMember(Order = 5)]
-        public IEnumerable<CertificateInfo> Certificates { get; set; }
+        [DataMember(Order = 60)]
+        public string TsePublicKeyBase64 { get; set; }
 
-        [DataMember(Order = 6)]
-        public IEnumerable<string> SerialNumbersBase64 { get; set; }
+        [DataMember(Order = 70)]
+        public string TseSerialNumberOctet { get; set; }
 
-        [DataMember(Order = 7)]
+        [DataMember(Order = 80)]
         public TseState CurrentState { get; set; }
 
-        [DataMember(Order = 8)]
+        [DataMember(Order = 90)]
+        public IEnumerable<string> CertificatesBase64 { get; set; }
+
+        [DataMember(Order = 100)]
+        public IEnumerable<string> SerialnumbersOctet { get; set; }
+
+        [DataMember(Order = 110)]
         public Dictionary<string, object> Info { get; set; }
     }
 }

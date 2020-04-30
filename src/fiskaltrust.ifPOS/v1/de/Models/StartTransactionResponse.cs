@@ -6,31 +6,19 @@ namespace fiskaltrust.ifPOS.v1.de
     [DataContract]
     public class StartTransactionResponse
     {
-        [DataMember(Order = 1)]
-        public long TransactionNumber { get; set; }
+        [DataMember(Order = 10)]
+        public ulong TransactionNumber { get; set; }
 
-        [DataMember(Order = 2)]
-        public DateTime StartTime { get; set; }
+        [DataMember(Order = 20)]
+        public DateTime TimeStamp { get; set; }
 
-        [DataMember(Order = 3)]
-        public string CertificateSerialNumber { get; set; }
+        [DataMember(Order = 30)]
+        public string TseSerialNumberOctet { get; set; }
 
-        [DataMember(Order = 4)]
+        [DataMember(Order = 40)]
         public string ClientId { get; set; }
 
-        [DataMember(Order = 5)]
-        public string ProcessType { get; set; }
-
-        [DataMember(Order = 6)]
-        public string ProcessDataBase64 { get; set; }
-
-        [DataMember(Order = 7)]
-        public TseLogData LogData { get; set; }
-
-        [DataMember(Order = 8)]
+        [DataMember(Order = 50)]
         public TseSignatureData SignatureData { get; set; }
-
-        [DataMember(Order = 9)]
-        public bool MoreExportDataAvailable { get; set; }
     }
 }
