@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net461;netstandard2.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="fiskaltrust.interface" Version="1.3.0-rc1" />
+    <PackageReference Include="Newtonsoft.Json" Version="6.0.8" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <PackageId>fiskaltrust.Middleware.Interface.Http</PackageId>
+    <Authors>fiskaltrust</Authors>
+    <Company>fiskaltrust</Company>
+    <PackageLicenseUrl>https://github.com/fiskaltrust/middleware-interface-dotnet/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/fiskaltrust/middleware-interface-dotnet</PackageProjectUrl>
+    <PackageIconUrl>https://portal.fiskaltrust.at/Content/favicons/favicon-64x64.png</PackageIconUrl>
+    <Description>An optional helper implementation to simplify the usage of the fiskaltrust Middleware interface via HTTP.</Description>
+    <Copyright>Copyright 2020</Copyright>
+    <PackageTags>fiskaltrust interface</PackageTags>
+    <AssemblyCompany>fiskaltrust</AssemblyCompany>
+    <AssemblyProduct>fiskaltrust.Middleware.Interface.Http</AssemblyProduct>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\fiskaltrust.ifPOS\fiskaltrust.Middleware.Interface.csproj" />
+  </ItemGroup>
+
+</Project>
