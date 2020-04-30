@@ -14,9 +14,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{18766606-E68
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4A4977D1-0B9A-44F9-B4A3-3D08FBB58D14}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.ifPOS", "src\fiskaltrust.ifPOS\fiskaltrust.ifPOS.csproj", "{ED0862F3-D1A0-4246-A22D-937F471647CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.Middleware.Interface", "src\fiskaltrust.ifPOS\fiskaltrust.Middleware.Interface.csproj", "{ED0862F3-D1A0-4246-A22D-937F471647CE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.ifPOS.Tests", "test\fiskaltrust.ifPOS.Tests\fiskaltrust.ifPOS.Tests.csproj", "{B4ECE1C6-E1F3-4F54-98B8-B588D9DB52D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.Middleware.Interface.Tests", "test\fiskaltrust.ifPOS.Tests\fiskaltrust.Middleware.Interface.Tests.csproj", "{B4ECE1C6-E1F3-4F54-98B8-B588D9DB52D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

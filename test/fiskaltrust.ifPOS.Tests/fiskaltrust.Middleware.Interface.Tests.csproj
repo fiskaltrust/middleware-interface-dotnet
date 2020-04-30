@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\fiskaltrust.ifPOS\fiskaltrust.ifPOS.csproj" />
+    <ProjectReference Include="..\..\src\fiskaltrust.ifPOS\fiskaltrust.Middleware.Interface.csproj" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net40'">
