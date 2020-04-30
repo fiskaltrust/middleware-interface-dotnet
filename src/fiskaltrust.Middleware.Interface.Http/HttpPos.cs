@@ -15,13 +15,13 @@ namespace fiskaltrust.Middleware.Interface.Http
     public class HttpPos : IPOS
     {
         private readonly string _url;
-        private readonly HttpPosOptions _options;
+        private readonly POSOptions _options;
 
         private delegate string AsyncEchoCaller(string message);
         private delegate ifPOS.v0.ReceiptResponse AsyncSignCaller(ifPOS.v0.ReceiptRequest request);
         private delegate Stream AsyncJournalCaller(long ftJournalType, long from, long to);
 
-        public HttpPos(HttpPosOptions options)
+        public HttpPos(POSOptions options)
         {
             _url = options.Url.Replace("rest://", "http://").Replace("xml://", "http://");
             _options = options;
