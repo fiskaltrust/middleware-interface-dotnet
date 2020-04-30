@@ -3,12 +3,11 @@
 namespace fiskaltrust.ifPOS.v1.de
 {
     [DataContract]
-    public class StartExportSessionByTransactionRequest
+    public class ExportDataRequest
     {
         [DataMember(Order = 10)]
-        public ulong From { get; set; }
-
+        public string TokenId { get; set; }
         [DataMember(Order = 20)]
-        public ulong To { get; set; }
+        public int MaxJunkSize { get; set; }
     }
 }

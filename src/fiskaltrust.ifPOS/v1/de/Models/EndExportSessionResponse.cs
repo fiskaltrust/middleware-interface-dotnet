@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
+﻿using System.Runtime.Serialization;
 
 namespace fiskaltrust.ifPOS.v1.de
 {
@@ -10,12 +6,12 @@ namespace fiskaltrust.ifPOS.v1.de
     public class EndExportSessionResponse
     {
         [DataMember(Order = 10)]
-        StartExportSessionResponse Session { get; set; }
+        public string TokenId { get; set; }
 
         [DataMember(Order = 20)]
-        bool IsValid { get; set; }
+        public bool IsValid { get; set; }
 
         [DataMember(Order = 30)]
-        bool IsErased { get; set; }
+        public bool IsErased { get; set; }
     }
 }

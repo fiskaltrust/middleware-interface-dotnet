@@ -21,14 +21,6 @@ namespace fiskaltrust.ifPOS.v1.de
         [DataMember(Order = 50)]
         public long CurrentNumberOfTransactions { get; set; }
 
-        /*
-        [DataMember(Order = 60)]
-        public IEnumerable<CertificateInfo> Certificates { get; set; }
-
-        [DataMember(Order = 70)]
-        public IEnumerable<string> SerialNumbersBase64 { get; set; }
-        */
-
         [DataMember(Order = 60)]
         public string TsePublicKeyBase64 { get; set; }
 
@@ -39,6 +31,9 @@ namespace fiskaltrust.ifPOS.v1.de
         public TseState CurrentState { get; set; }
 
         [DataMember(Order = 90)]
+        public IEnumerable<string> CertificatesBase64 { get; set; }
+
+        [DataMember(Order = 100)]
         public Dictionary<string, object> Info { get; set; }
     }
 }
