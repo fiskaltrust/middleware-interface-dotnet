@@ -6,9 +6,9 @@
 
   <ItemGroup>
     <PackageReference Include="fiskaltrust.interface" Version="1.3.0-rc1" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="6.0.8" />
   </ItemGroup>
-
+  
   <PropertyGroup>
     <PackageId>fiskaltrust.Middleware.Interface.Http</PackageId>
     <Authors>fiskaltrust</Authors>
@@ -26,5 +26,6 @@
   <ItemGroup>
     <ProjectReference Include="..\fiskaltrust.ifPOS\fiskaltrust.Middleware.Interface.csproj" />
   </ItemGroup>
+  
 
 </Project>

@@ -24,6 +24,7 @@ namespace fiskaltrust.Middleware.Interface.Http
         public HttpPos(POSOptions options)
         {
             _url = options.Url.Replace("rest://", "http://").Replace("xml://", "http://");
+            _url = _url.EndsWith("/") ? _url : $"{_url}/ ";
             _options = options;
         }
 
@@ -147,17 +148,20 @@ namespace fiskaltrust.Middleware.Interface.Http
 
         private async Task<TResponse> JsonSignAsync<TRequest, TResponse>(TRequest request, string endpoint)
         {
-            var jsonstring = JsonConvert.SerializeObject(request);
+            var jsonstring = JsonConvert.SerializeObject(request, new JsonSerializerSettings
+            {
+                DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
+            });
             var jsonContent = new StringContent(jsonstring, Encoding.UTF8, "application/json");
 
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_url);
 
-                using (var response = await client.PostAsync(Path.Combine(_url, endpoint), jsonContent))
+                using (var response = await client.PostAsync(endpoint, jsonContent))
                 {
-                    response.EnsureSuccessStatusCode();
                     var content = await response.Content.ReadAsStringAsync();
+                    response.EnsureSuccessStatusCode();
 
                     return JsonConvert.DeserializeObject<TResponse>(content);
                 }
