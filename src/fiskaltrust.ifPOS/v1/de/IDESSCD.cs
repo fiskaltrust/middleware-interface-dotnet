@@ -49,7 +49,7 @@ namespace fiskaltrust.ifPOS.v1.de
 #if WCF
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v1/unregisterclientid", Method = "POST")]
 #endif
-        Task<UnregisterClientIdResponse> UnRegisterClientId(UnregisterClientIdRequest request);
+        Task<UnregisterClientIdResponse> UnregisterClientId(UnregisterClientIdRequest request);
 
         [OperationContract]
 #if WCF
