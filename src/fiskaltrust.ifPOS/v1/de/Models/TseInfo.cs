@@ -34,6 +34,9 @@ namespace fiskaltrust.ifPOS.v1.de
         public IEnumerable<string> CertificatesBase64 { get; set; }
 
         [DataMember(Order = 100)]
+        public IEnumerable<string> SerialnumbersOctet { get; set; }
+
+        [DataMember(Order = 110)]
         public Dictionary<string, object> Info { get; set; }
     }
 }
