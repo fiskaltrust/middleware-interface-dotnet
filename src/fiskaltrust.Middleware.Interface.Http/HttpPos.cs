@@ -14,8 +14,8 @@ namespace fiskaltrust.Middleware.Interface.Http
 {
     public class HttpPos : IPOS
     {
-        private readonly string _url;
         private readonly POSOptions _options;
+        private readonly HttpClient _httpClient;
 
         private delegate string AsyncEchoCaller(string message);
         private delegate ifPOS.v0.ReceiptResponse AsyncSignCaller(ifPOS.v0.ReceiptRequest request);
@@ -23,9 +23,24 @@ namespace fiskaltrust.Middleware.Interface.Http
 
         public HttpPos(POSOptions options)
         {
-            _url = options.Url.Replace("rest://", "http://").Replace("xml://", "http://");
-            _url = _url.EndsWith("/") ? _url : $"{_url}/ ";
+            _httpClient = GetClient(options);
             _options = options;
+        }
+
+        private HttpClient GetClient(POSOptions options)
+        {
+            var url = options.Url.Replace("rest://", "http://").Replace("xml://", "http://");
+            url = url.EndsWith("/") ? url : $"{url}/ ";
+
+            var client = new HttpClient { BaseAddress = new Uri(url) };
+
+            if (options.CashboxId.HasValue)
+                client.DefaultRequestHeaders.Add("cashboxid", options.CashboxId.Value.ToString());
+
+            if (!string.IsNullOrEmpty(options.AccessToken))
+                client.DefaultRequestHeaders.Add("accesstoken", options.AccessToken);
+
+            return client;
         }
 
         IAsyncResult ifPOS.v0.IPOS.BeginEcho(string message, AsyncCallback callback, object state)
@@ -42,19 +57,14 @@ namespace fiskaltrust.Middleware.Interface.Http
 
         string ifPOS.v0.IPOS.Echo(string message)
         {
-            using (var client = new HttpClient())
+            var jsonstring = JsonConvert.SerializeObject(message);
+            var jsonContent = new StringContent(jsonstring, Encoding.UTF8, "application/json");
+
+            using (var response = _httpClient.PostAsync("v0/Echo", jsonContent).Result)
             {
-                client.BaseAddress = new Uri(_url);
-
-                var jsonstring = JsonConvert.SerializeObject(message);
-                var jsonContent = new StringContent(jsonstring, Encoding.UTF8, "application/json");
-
-                using (var response = client.PostAsync("v0/Echo", jsonContent).Result)
-                {
-                    response.EnsureSuccessStatusCode();
-                    var reponse = response.Content.ReadAsStringAsync().Result;
-                    return JsonConvert.DeserializeObject<string>(reponse);
-                }
+                response.EnsureSuccessStatusCode();
+                var reponse = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<string>(reponse);
             }
         }
 
@@ -75,19 +85,14 @@ namespace fiskaltrust.Middleware.Interface.Http
             var xmlString = XmlSerializationHelpers.Serialize(message);
             var xmlContent = new StringContent(xmlString, Encoding.UTF8, "application/xml");
 
-            using (var client = new HttpClient())
+            using (var response = await _httpClient.PostAsync("v1/Echo", xmlContent))
             {
-                client.BaseAddress = new Uri(_url);
+                response.EnsureSuccessStatusCode();
+                var content = await response.Content.ReadAsStringAsync();
 
-                using (var response = await client.PostAsync("v1/Echo", xmlContent))
-                {
-                    response.EnsureSuccessStatusCode();
-                    var content = await response.Content.ReadAsStringAsync();
-
-                    var xml = XElement.Parse(content);
-                    string jsonText = JsonConvert.SerializeXNode(xml);
-                    return JsonConvert.DeserializeObject<EchoResponse>(jsonText);
-                }
+                var xml = XElement.Parse(content);
+                string jsonText = JsonConvert.SerializeXNode(xml);
+                return JsonConvert.DeserializeObject<EchoResponse>(jsonText);
             }
         }
 
@@ -96,16 +101,11 @@ namespace fiskaltrust.Middleware.Interface.Http
             var jsonstring = JsonConvert.SerializeObject(message);
             var jsonContent = new StringContent(jsonstring, Encoding.UTF8, "application/json");
 
-            using (var client = new HttpClient())
+            using (var response = await _httpClient.PostAsync("v1/Echo", jsonContent))
             {
-                client.BaseAddress = new Uri(_url);
-
-                using (var response = await client.PostAsync("v1/Echo", jsonContent))
-                {
-                    response.EnsureSuccessStatusCode();
-                    var content = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<EchoResponse>(content.ToString());
-                }
+                response.EnsureSuccessStatusCode();
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<EchoResponse>(content.ToString());
             }
         }
 
@@ -154,17 +154,12 @@ namespace fiskaltrust.Middleware.Interface.Http
             });
             var jsonContent = new StringContent(jsonstring, Encoding.UTF8, "application/json");
 
-            using (var client = new HttpClient())
+            using (var response = await _httpClient.PostAsync(endpoint, jsonContent))
             {
-                client.BaseAddress = new Uri(_url);
+                var content = await response.Content.ReadAsStringAsync();
+                response.EnsureSuccessStatusCode();
 
-                using (var response = await client.PostAsync(endpoint, jsonContent))
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    response.EnsureSuccessStatusCode();
-
-                    return JsonConvert.DeserializeObject<TResponse>(content);
-                }
+                return JsonConvert.DeserializeObject<TResponse>(content);
             }
         }
 
@@ -173,19 +168,14 @@ namespace fiskaltrust.Middleware.Interface.Http
             var xmlString = XmlSerializationHelpers.Serialize(request);
             var xmlContent = new StringContent(xmlString, Encoding.UTF8, "application/xml");
 
-            using (var client = new HttpClient())
+            using (var response = await _httpClient.PostAsync(endpoint, xmlContent))
             {
-                client.BaseAddress = new Uri(_url);
+                response.EnsureSuccessStatusCode();
+                var content = await response.Content.ReadAsStringAsync();
+                var xml = XElement.Parse(content);
+                string jsonText = JsonConvert.SerializeXNode(xml);
 
-                using (var response = await client.PostAsync(endpoint, xmlContent))
-                {
-                    response.EnsureSuccessStatusCode();
-                    var content = await response.Content.ReadAsStringAsync();
-                    var xml = XElement.Parse(content);
-                    string jsonText = JsonConvert.SerializeXNode(xml);
-
-                    return JsonConvert.DeserializeObject<TResponse>(jsonText);
-                }
+                return JsonConvert.DeserializeObject<TResponse>(jsonText);
             }
         }
 
@@ -204,9 +194,8 @@ namespace fiskaltrust.Middleware.Interface.Http
 
         Stream ifPOS.v0.IPOS.Journal(long ftJournalType, long from, long to)
         {
-            using (var client = new HttpClient())
+            using (var client = GetClient(_options))
             {
-                client.BaseAddress = new Uri(_url);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
