@@ -3,6 +3,10 @@ resources:
 
 trigger:
   batch: true
+  branches:
+    include:
+    - master
+    - refs/tags/*
   
 pr:
 - master
@@ -14,7 +18,7 @@ variables:
 - name: BuildPlatform
   value: any cpu
 - name: Solution
-  value: 'fiskaltrust.if.sln'
+  value: 'fiskaltrust.Middleware.Interface.sln'
 
 jobs:
   - job: Build 
@@ -24,33 +28,22 @@ jobs:
     - task: VisualStudioTestPlatformInstaller@1
       displayName: VsTest Platform Installer
 
-    - powershell: |
-        dotnet tool install -g nbgv 
-      workingDirectory: '/'
-      displayName: Install nbgv CLI
-
-    - powershell: |
-        if (-not $Env:BUILD_SOURCEBRANCH.StartsWith("refs/tags/v") -and
-            -not $Env:BUILD_SOURCEBRANCH.StartsWith("refs/heads/master") -and
-            -not $Env:BUILD_SOURCEBRANCH.StartsWith("refs/heads/release")) {
-          git config --global user.email "fiskaltrust@fiskaltrust.cloud"
-          git config --global user.name "fiskaltrust"
-          $date = "$(Get-Date -UFormat "%y")$("{0:D3}" -f (Get-Date).DayofYear)"  
-          $versionPostfix = "-$date-$(Build.BuildId)"
-          $versionContent = Get-Content 'version.json' -Raw | ConvertFrom-Json
-          $versionContent.version = "$($versionContent.version)$versionPostfix"
-          $versionContent | ConvertTo-Json -Depth 32 | Set-Content 'version.json'
-          git add .
-          git commit -m "Version bump" -q
-        }
-        nbgv cloud
-      displayName: Set NBGV version
+    - task: yavt@1
+      inputs:
+        mode: 'Multi'
+        semverVersion: 'v1'
+    
+    - powershell: |   
+        $nugetFeed = if ($Env:BUILD_SOURCEBRANCH.StartsWith("refs/heads/release/") -or $Env:BUILD_SOURCEBRANCH.StartsWith("refs/tags/v")) { "release" } else { "dev" }
+        Write-Host "##vso[task.setvariable variable=NuGetFeed;]$nugetFeed"
+      displayName: Set NuGet feed
 
     - task: DotNetCoreCLI@2
       displayName: Restore
       inputs:
         command: restore
         projects: '**/*.csproj'
+        vstsFeed: $(NuGetFeed)
 
     - task: DotNetCoreCLI@2
       displayName: Build
