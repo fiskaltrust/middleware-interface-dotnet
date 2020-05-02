@@ -199,12 +199,10 @@ namespace fiskaltrust.Middleware.Interface.Http
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                using (var response = client.GetAsync($"v0/journal?type={ftJournalType}&from={from}&to={to}").Result)
-                {
-                    response.EnsureSuccessStatusCode();
-                    var stream = response.Content.ReadAsStreamAsync().Result;
-                    return stream;
-                }
+                var response = client.PostAsync($"v0/journal?type={ftJournalType}&from={from}&to={to}", null).Result;
+                response.EnsureSuccessStatusCode();
+                var stream = response.Content.ReadAsStreamAsync().Result;
+                return stream;
             }
         }
 
