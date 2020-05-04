@@ -14,13 +14,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{18766606-E68
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4A4977D1-0B9A-44F9-B4A3-3D08FBB58D14}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.Middleware.Interface", "src\fiskaltrust.ifPOS\fiskaltrust.Middleware.Interface.csproj", "{ED0862F3-D1A0-4246-A22D-937F471647CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.interface", "src\fiskaltrust.ifPOS\fiskaltrust.interface.csproj", "{ED0862F3-D1A0-4246-A22D-937F471647CE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.Middleware.Interface.Tests", "test\fiskaltrust.ifPOS.Tests\fiskaltrust.Middleware.Interface.Tests.csproj", "{B4ECE1C6-E1F3-4F54-98B8-B588D9DB52D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fiskaltrust.Middleware.Interface.Http", "src\fiskaltrust.Middleware.Interface.Http\fiskaltrust.Middleware.Interface.Http.csproj", "{191B6405-4ACC-4200-87C9-72D9DBE59776}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.Middleware.Interface.Http", "src\fiskaltrust.Middleware.Interface.Http\fiskaltrust.Middleware.Interface.Http.csproj", "{191B6405-4ACC-4200-87C9-72D9DBE59776}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fiskaltrust.Middleware.Interface.Soap", "src\fiskaltrust.Middleware.Interface.Soap\fiskaltrust.Middleware.Interface.Soap.csproj", "{B461D451-1794-4088-8208-62F10604B60A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.Middleware.Interface.Soap", "src\fiskaltrust.Middleware.Interface.Soap\fiskaltrust.Middleware.Interface.Soap.csproj", "{B461D451-1794-4088-8208-62F10604B60A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.Middleware.Interface.Grpc", "src\fiskaltrust.Middleware.Interface.Grpc\fiskaltrust.Middleware.Interface.Grpc.csproj", "{0D9AB222-DCBF-4037-9210-A08BBE80859B}"
 EndProject

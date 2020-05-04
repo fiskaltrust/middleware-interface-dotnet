@@ -24,7 +24,7 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\fiskaltrust.ifPOS\fiskaltrust.Middleware.Interface.csproj" />
+    <ProjectReference Include="..\fiskaltrust.ifPOS\fiskaltrust.interface.csproj" />
   </ItemGroup>
   
 
