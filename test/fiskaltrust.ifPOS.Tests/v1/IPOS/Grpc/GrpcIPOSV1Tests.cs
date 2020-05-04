@@ -3,7 +3,6 @@
 using fiskaltrust.ifPOS.Tests.Helpers;
 using fiskaltrust.ifPOS.Tests.Helpers.Grpc;
 using fiskaltrust.ifPOS.v1;
-using fiskaltrust.Middleware.Interface.Grpc;
 using FluentAssertions;
 using Grpc.Core;
 using NUnit.Framework;
@@ -24,7 +23,7 @@ namespace fiskaltrust.ifPOS.Tests.v1.IPOS
             _server = null;
         }
 
-        protected override ifPOS.v1.IPOS CreateClient() => new GrpcPosFactory().CreatePosAsync(new GrpcPosOptions { Url = $"http://{_host}:{_port}" });
+        protected override ifPOS.v1.IPOS CreateClient() => GrpcHelper.GetClient<ifPOS.v1.IPOS>(_host, _port);
 
         protected override void StartHost()
         {

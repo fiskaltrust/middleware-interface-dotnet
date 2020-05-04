@@ -11,9 +11,6 @@ using System.Net.Http;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
-#if !NET40
-using fiskaltrust.Middleware.Interface.Http;
-#endif
 
 namespace fiskaltrust.ifPOS.Tests.v1.IPOS
 {
@@ -36,11 +33,7 @@ namespace fiskaltrust.ifPOS.Tests.v1.IPOS
             _serviceHost = null;
         }
 
-#if NET40
         protected override ifPOS.v1.IPOS CreateClient() => WcfHelper.GetRestProxy<ifPOS.v1.IPOS>(_url);
-#else
-        protected override ifPOS.v1.IPOS CreateClient() => new HttpPosFactory().CreatePosAsync(new HttpPosOptions { Url = _url }); 
-#endif
 
         protected override void StartHost() => _serviceHost = WcfHelper.StartRestHost<ifPOS.v1.IPOS>(_url, new DummyPOSV1());
 

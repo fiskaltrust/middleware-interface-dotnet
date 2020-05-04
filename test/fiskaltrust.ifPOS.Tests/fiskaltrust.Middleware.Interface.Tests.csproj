@@ -23,9 +23,7 @@
     <DefineConstants>GRPC;STREAMING</DefineConstants>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net461' OR '$(TargetFramework)' == 'net40'">
-    <ProjectReference Include="..\..\src\fiskaltrust.Middleware.Interface.Soap\fiskaltrust.Middleware.Interface.Soap.csproj" />
-    
+  <ItemGroup Condition="'$(TargetFramework)' == 'net461' OR '$(TargetFramework)' == 'net40'">    
     <Reference Include="System.ServiceModel" />
     <PackageReference Include="NUnit" Version="3.10.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
@@ -55,9 +53,6 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net461' OR '$(TargetFramework)' == 'netcoreapp3.0'">
-    <ProjectReference Include="..\..\src\fiskaltrust.Middleware.Interface.Http\fiskaltrust.Middleware.Interface.Http.csproj" />
-    <ProjectReference Include="..\..\src\fiskaltrust.Middleware.Interface.Grpc\fiskaltrust.Middleware.Interface.Grpc.csproj" />
-
     <PackageReference Include="Grpc.Core" Version="2.28.1" />
     <PackageReference Include="protobuf-net.Grpc.Native" Version="1.0.37" />
     <PackageReference Include="System.Interactive.Async" Version="4.0.0" />
@@ -65,13 +60,13 @@
     <PackageReference Include="System.Linq.Async" Version="4.0.0" />
   </ItemGroup>
 
-  <Target Name="ChangeAliasesOfInterfaceNameAssemblies" BeforeTargets="FindReferenceAssembliesForReferences;ResolveReferences">
+  <!--<Target Name="ChangeAliasesOfInterfaceNameAssemblies" BeforeTargets="FindReferenceAssembliesForReferences;ResolveReferences">
 
     <ItemGroup>
-      <ReferencePath Condition="'%(FileName)' == 'fiskaltrust.interface'">
+      <ReferencePath Condition="'%(FileName)' == 'fiskaltrust.interface' AND '%(Version)' != '1.0.0.0'">
         <Aliases>excluded</Aliases>
       </ReferencePath>
     </ItemGroup>
-  </Target>
+  </Target>-->
   
 </Project>
