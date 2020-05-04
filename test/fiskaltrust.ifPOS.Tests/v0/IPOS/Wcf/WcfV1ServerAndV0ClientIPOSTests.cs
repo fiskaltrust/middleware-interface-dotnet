@@ -24,7 +24,7 @@ namespace fiskaltrust.ifPOS.Tests.v0.IPOS
             _serviceHost = null;
         }
 
-        protected override ifPOS.v0.IPOS CreateClient() => new SoapPosFactory().CreatePosAsync(new ifPOS.v1.POSOptions { Url = _url });
+        protected override ifPOS.v0.IPOS CreateClient() => new SoapPosFactory().CreatePosAsync(new SoapPosOptions { Url = _url });
 
         protected override void StartHost() => _serviceHost = WcfHelper.StartHost<ifPOS.v0.IPOS>(_url, new DummyPOSV1());
 

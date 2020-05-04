@@ -5,11 +5,11 @@ using System.ServiceModel.Channels;
 
 namespace fiskaltrust.Middleware.Interface.Soap
 {
-    public class SoapPosFactory : IPOSFactory
+    public class SoapPosFactory
     {
         private const long MAX_RECEIVED_MESSAGE_SIZE = 16 * 1024 * 1024;
 
-        public IPOS CreatePosAsync(POSOptions options)
+        public IPOS CreatePosAsync(SoapPosOptions options)
         {
             var uri = new Uri(options.Url);
             Binding binding = uri.Scheme switch

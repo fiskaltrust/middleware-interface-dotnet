@@ -3,8 +3,8 @@ using System;
 
 namespace fiskaltrust.Middleware.Interface.Http
 {
-    public class HttpPosFactory : IPOSFactory
+    public class HttpPosFactory
     {
-        public IPOS CreatePosAsync(POSOptions options) => new HttpPos(options);
+        public IPOS CreatePosAsync(HttpPosOptions options) => new HttpPos(options);
     }
 }

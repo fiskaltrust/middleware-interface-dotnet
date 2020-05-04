@@ -23,9 +23,4 @@
     <AssemblyProduct>fiskaltrust.Middleware.Interface.Http</AssemblyProduct>
   </PropertyGroup>
   
-  <ItemGroup>
-    <ProjectReference Include="..\fiskaltrust.ifPOS\fiskaltrust.interface.csproj" />
-  </ItemGroup>
-  
-
 </Project>

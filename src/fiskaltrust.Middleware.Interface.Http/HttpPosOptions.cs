@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace fiskaltrust.ifPOS.v1
+namespace fiskaltrust.Middleware.Interface.Http
 {
-    public class POSOptions
+    public class HttpPosOptions
     {
         public string Url { get; set; }
         public HttpCommunicationType CommunicationType { get; set; }

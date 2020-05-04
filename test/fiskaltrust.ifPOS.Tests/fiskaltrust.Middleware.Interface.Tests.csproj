@@ -65,4 +65,12 @@
     <PackageReference Include="System.Linq.Async" Version="4.0.0" />
   </ItemGroup>
 
+  <Target Name="ChangeAliasesOfInterfaceNameAssemblies" BeforeTargets="FindReferenceAssembliesForReferences;ResolveReferences">
+    <ItemGroup>
+      <ReferencePath Condition="'%(FileName)' == 'fiskaltrust.interface'">
+        <Aliases>excluded</Aliases>
+      </ReferencePath>
+    </ItemGroup>
+  </Target>
+  
 </Project>

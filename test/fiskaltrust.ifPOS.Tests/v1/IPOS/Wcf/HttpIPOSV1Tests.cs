@@ -39,7 +39,7 @@ namespace fiskaltrust.ifPOS.Tests.v1.IPOS
 #if NET40
         protected override ifPOS.v1.IPOS CreateClient() => WcfHelper.GetRestProxy<ifPOS.v1.IPOS>(_url);
 #else
-        protected override ifPOS.v1.IPOS CreateClient() => new HttpPosFactory().CreatePosAsync(new POSOptions { Url = _url }); 
+        protected override ifPOS.v1.IPOS CreateClient() => new HttpPosFactory().CreatePosAsync(new HttpPosOptions { Url = _url }); 
 #endif
 
         protected override void StartHost() => _serviceHost = WcfHelper.StartRestHost<ifPOS.v1.IPOS>(_url, new DummyPOSV1());

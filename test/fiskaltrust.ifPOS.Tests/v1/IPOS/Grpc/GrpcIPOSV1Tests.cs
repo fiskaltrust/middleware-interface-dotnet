@@ -24,7 +24,7 @@ namespace fiskaltrust.ifPOS.Tests.v1.IPOS
             _server = null;
         }
 
-        protected override ifPOS.v1.IPOS CreateClient() => new GrpcPosFactory().CreatePosAsync(new POSOptions { Url = $"http://{_host}:{_port}" });
+        protected override ifPOS.v1.IPOS CreateClient() => new GrpcPosFactory().CreatePosAsync(new GrpcPosOptions { Url = $"http://{_host}:{_port}" });
 
         protected override void StartHost()
         {
