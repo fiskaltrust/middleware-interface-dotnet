@@ -48,7 +48,7 @@ jobs:
     - task: DotNetCoreCLI@2
       displayName: Build
       inputs:
-        projects: '**/*.csproj'
+        projects: '$(Solution)'
         arguments: '--configuration $(BuildConfiguration)'
 
     - task: codesigning@2

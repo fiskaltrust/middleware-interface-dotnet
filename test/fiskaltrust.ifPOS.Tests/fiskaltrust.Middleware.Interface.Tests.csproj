@@ -66,6 +66,7 @@
   </ItemGroup>
 
   <Target Name="ChangeAliasesOfInterfaceNameAssemblies" BeforeTargets="FindReferenceAssembliesForReferences;ResolveReferences">
+
     <ItemGroup>
       <ReferencePath Condition="'%(FileName)' == 'fiskaltrust.interface'">
         <Aliases>excluded</Aliases>
