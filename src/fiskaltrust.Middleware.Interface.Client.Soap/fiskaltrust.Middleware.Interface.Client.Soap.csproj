@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <_PackageFiles Include="$(OutputPath)\net461\fiskaltrust.Middleware.Interface.Client.Shared.dll">
+    <_PackageFiles Include="$(OutputPath)\fiskaltrust.Middleware.Interface.Client.Shared.dll">
       <BuildAction>None</BuildAction>
       <PackagePath>lib\net461\</PackagePath>
     </_PackageFiles>
