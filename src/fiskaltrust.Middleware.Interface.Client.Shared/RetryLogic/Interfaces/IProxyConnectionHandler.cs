@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace fiskaltrust.Middleware.Interface.Client.Shared
+namespace fiskaltrust.Middleware.Interface.Client.Shared.RetryLogic.Interfaces
 {
     public interface IProxyConnectionHandler<T> where T : class
     {

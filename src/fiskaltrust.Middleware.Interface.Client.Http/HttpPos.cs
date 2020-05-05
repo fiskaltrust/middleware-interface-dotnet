@@ -29,10 +29,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
 
         private HttpClient GetClient(HttpPosOptions options)
         {
-            var url = options.Url.Replace("rest://", "http://").Replace("xml://", "http://");
-            url = url.EndsWith("/") ? url : $"{url}/ ";
-
-            var client = new HttpClient { BaseAddress = new Uri(url) };
+            var client = new HttpClient { BaseAddress = options.Url };
 
             if (options.CashboxId.HasValue)
                 client.DefaultRequestHeaders.Add("cashboxid", options.CashboxId.Value.ToString());

@@ -1,4 +1,5 @@
 ﻿using fiskaltrust.Middleware.Interface.Client.Shared.Options;
+using fiskaltrust.Middleware.Interface.Client.Shared.RetryLogic.Interfaces;
 using System;
 using System.Threading.Tasks;
 

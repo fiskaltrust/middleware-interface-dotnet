@@ -1,4 +1,5 @@
 ﻿using fiskaltrust.ifPOS.v1;
+using fiskaltrust.Middleware.Interface.Client.Shared.RetryLogic.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;

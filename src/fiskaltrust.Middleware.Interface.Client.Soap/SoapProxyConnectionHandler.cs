@@ -1,4 +1,5 @@
 ﻿using fiskaltrust.Middleware.Interface.Client.Shared;
+using fiskaltrust.Middleware.Interface.Client.Shared.RetryLogic.Interfaces;
 using System;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
@@ -45,7 +46,6 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap
             {
                 // We can ignore the case when shutdown failed
             }
-            _proxy = null;
             var binding = ConfigureBinding();
             var factory = new ChannelFactory<T>(binding, new EndpointAddress(_options.Url));
             _proxy = factory.CreateChannel();
@@ -76,11 +76,10 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap
 
         private Binding ConfigureBinding()
         {
-            var uri = new Uri(_options.Url);
             var sendTimeout = TimeSpan.FromSeconds(SEND_TIMEOUT_SEC);
             var receiveTimeout = TimeSpan.FromDays(RECEIVE_TIMEOUT_DAYS);
 
-            return uri.Scheme switch
+            return _options.Url.Scheme switch
             {
                 "http" => new BasicHttpBinding(BasicHttpSecurityMode.None) { MaxReceivedMessageSize = MAX_RECEIVED_MESSAGE_SIZE, SendTimeout = sendTimeout, ReceiveTimeout = receiveTimeout },
                 "https" => new BasicHttpBinding(BasicHttpSecurityMode.Transport) { MaxReceivedMessageSize = MAX_RECEIVED_MESSAGE_SIZE, SendTimeout = sendTimeout, ReceiveTimeout = receiveTimeout },

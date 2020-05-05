@@ -3,10 +3,9 @@ using fiskaltrust.Middleware.Interface.Client.Shared;
 
 namespace fiskaltrust.Middleware.Interface.Client.Soap
 {
-    public class SoapPosFactory
+    public static class SoapPosFactory
     {
-
-        public IPOS CreatePosAsync(PosOptions options)
+        public static IPOS CreatePosAsync(PosOptions options)
         {
             var connectionhandler = new SoapProxyConnectionHandler<IPOS>(options);
             var retryPolicyHelper = new RetryPolicyHandler<IPOS>(options.RetryPolicyOptions, connectionhandler);

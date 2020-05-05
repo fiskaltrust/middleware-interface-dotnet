@@ -1,4 +1,4 @@
-﻿using fiskaltrust.Middleware.Interface.Client.Shared;
+﻿using fiskaltrust.Middleware.Interface.Client.Shared.RetryLogic.Interfaces;
 using Grpc.Core;
 using ProtoBuf.Grpc.Client;
 using System;
@@ -23,8 +23,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Grpc
             {
                 return Task.CompletedTask;
             }
-            var uri = new Uri(_options.Url);
-            _channel = new Channel(uri.Host, uri.Port, _options.ChannelCredentials);
+            _channel = new Channel(_options.Url.Host, _options.Url.Port, _options.ChannelCredentials);
             _proxy = _channel.CreateGrpcService<T>();
 
             return Task.CompletedTask;
@@ -40,9 +39,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Grpc
             {
                 // We can ignore the case when shutdown failed
             }
-            _channel = null;
-            var uri = new Uri(_options.Url);
-            _channel = new Channel(uri.Host, uri.Port, ChannelCredentials.Insecure);
+            _channel = new Channel(_options.Url.Host, _options.Url.Port, ChannelCredentials.Insecure);
             _proxy = _channel.CreateGrpcService<T>();
         }
 
