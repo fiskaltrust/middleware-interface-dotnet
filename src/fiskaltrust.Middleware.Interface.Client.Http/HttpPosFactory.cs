@@ -1,7 +1,7 @@
 ﻿using fiskaltrust.ifPOS.v1;
 using System;
 
-namespace fiskaltrust.Middleware.Interface.Http
+namespace fiskaltrust.Middleware.Interface.Client.Http
 {
     public class HttpPosFactory
     {

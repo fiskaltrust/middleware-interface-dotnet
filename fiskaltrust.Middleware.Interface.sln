@@ -18,11 +18,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.interface", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.Middleware.Interface.Tests", "test\fiskaltrust.ifPOS.Tests\fiskaltrust.Middleware.Interface.Tests.csproj", "{B4ECE1C6-E1F3-4F54-98B8-B588D9DB52D9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.Middleware.Interface.Http", "src\fiskaltrust.Middleware.Interface.Http\fiskaltrust.Middleware.Interface.Http.csproj", "{191B6405-4ACC-4200-87C9-72D9DBE59776}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{7CCEF987-3E5A-48D0-9D69-708C62526829}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.Middleware.Interface.Soap", "src\fiskaltrust.Middleware.Interface.Soap\fiskaltrust.Middleware.Interface.Soap.csproj", "{B461D451-1794-4088-8208-62F10604B60A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.Middleware.Interface.Client.Grpc", "src\fiskaltrust.Middleware.Interface.Client.Grpc\fiskaltrust.Middleware.Interface.Client.Grpc.csproj", "{5274E790-A7AD-4360-8613-72E9CCDF43CE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.Middleware.Interface.Grpc", "src\fiskaltrust.Middleware.Interface.Grpc\fiskaltrust.Middleware.Interface.Grpc.csproj", "{0D9AB222-DCBF-4037-9210-A08BBE80859B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.Middleware.Interface.Client.Http", "src\fiskaltrust.Middleware.Interface.Client.Http\fiskaltrust.Middleware.Interface.Client.Http.csproj", "{71C15B88-ACE8-4926-AA1D-85ECA2199AE3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.Middleware.Interface.Client.Soap", "src\fiskaltrust.Middleware.Interface.Client.Soap\fiskaltrust.Middleware.Interface.Client.Soap.csproj", "{FB69506F-4B31-4F9E-90EC-078D035A17EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fiskaltrust.Middleware.Interface.Client.Shared", "src\fiskaltrust.Middleware.Interface.Client.Shared\fiskaltrust.Middleware.Interface.Client.Shared.csproj", "{4CF9D784-E218-414D-8A14-56D514C0FBA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,18 +42,22 @@ Global
 		{B4ECE1C6-E1F3-4F54-98B8-B588D9DB52D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4ECE1C6-E1F3-4F54-98B8-B588D9DB52D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4ECE1C6-E1F3-4F54-98B8-B588D9DB52D9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{191B6405-4ACC-4200-87C9-72D9DBE59776}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{191B6405-4ACC-4200-87C9-72D9DBE59776}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{191B6405-4ACC-4200-87C9-72D9DBE59776}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{191B6405-4ACC-4200-87C9-72D9DBE59776}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B461D451-1794-4088-8208-62F10604B60A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B461D451-1794-4088-8208-62F10604B60A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B461D451-1794-4088-8208-62F10604B60A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B461D451-1794-4088-8208-62F10604B60A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0D9AB222-DCBF-4037-9210-A08BBE80859B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D9AB222-DCBF-4037-9210-A08BBE80859B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D9AB222-DCBF-4037-9210-A08BBE80859B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0D9AB222-DCBF-4037-9210-A08BBE80859B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5274E790-A7AD-4360-8613-72E9CCDF43CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5274E790-A7AD-4360-8613-72E9CCDF43CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5274E790-A7AD-4360-8613-72E9CCDF43CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5274E790-A7AD-4360-8613-72E9CCDF43CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71C15B88-ACE8-4926-AA1D-85ECA2199AE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71C15B88-ACE8-4926-AA1D-85ECA2199AE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71C15B88-ACE8-4926-AA1D-85ECA2199AE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71C15B88-ACE8-4926-AA1D-85ECA2199AE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB69506F-4B31-4F9E-90EC-078D035A17EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB69506F-4B31-4F9E-90EC-078D035A17EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB69506F-4B31-4F9E-90EC-078D035A17EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB69506F-4B31-4F9E-90EC-078D035A17EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CF9D784-E218-414D-8A14-56D514C0FBA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CF9D784-E218-414D-8A14-56D514C0FBA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CF9D784-E218-414D-8A14-56D514C0FBA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CF9D784-E218-414D-8A14-56D514C0FBA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,9 +65,11 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{ED0862F3-D1A0-4246-A22D-937F471647CE} = {18766606-E68D-44CC-B89A-5807F901D943}
 		{B4ECE1C6-E1F3-4F54-98B8-B588D9DB52D9} = {4A4977D1-0B9A-44F9-B4A3-3D08FBB58D14}
-		{191B6405-4ACC-4200-87C9-72D9DBE59776} = {18766606-E68D-44CC-B89A-5807F901D943}
-		{B461D451-1794-4088-8208-62F10604B60A} = {18766606-E68D-44CC-B89A-5807F901D943}
-		{0D9AB222-DCBF-4037-9210-A08BBE80859B} = {18766606-E68D-44CC-B89A-5807F901D943}
+		{7CCEF987-3E5A-48D0-9D69-708C62526829} = {18766606-E68D-44CC-B89A-5807F901D943}
+		{5274E790-A7AD-4360-8613-72E9CCDF43CE} = {7CCEF987-3E5A-48D0-9D69-708C62526829}
+		{71C15B88-ACE8-4926-AA1D-85ECA2199AE3} = {7CCEF987-3E5A-48D0-9D69-708C62526829}
+		{FB69506F-4B31-4F9E-90EC-078D035A17EB} = {7CCEF987-3E5A-48D0-9D69-708C62526829}
+		{4CF9D784-E218-414D-8A14-56D514C0FBA9} = {7CCEF987-3E5A-48D0-9D69-708C62526829}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3CAE7E81-C6A5-44FA-8E98-F9207561129F}

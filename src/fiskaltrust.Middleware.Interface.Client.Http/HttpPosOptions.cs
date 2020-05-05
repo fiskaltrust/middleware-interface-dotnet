@@ -1,10 +1,10 @@
-﻿using System;
+﻿using fiskaltrust.Middleware.Interface.Client.Shared;
+using System;
 
-namespace fiskaltrust.Middleware.Interface.Http
+namespace fiskaltrust.Middleware.Interface.Client.Http
 {
-    public class HttpPosOptions
+    public class HttpPosOptions : PosOptions
     {
-        public string Url { get; set; }
         public HttpCommunicationType CommunicationType { get; set; }
         public Guid? CashboxId { get; set; }
         public string AccessToken { get; set; }

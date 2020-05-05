@@ -1,5 +1,5 @@
 ﻿using fiskaltrust.ifPOS.v1;
-using fiskaltrust.Middleware.Interface.Http.Helpers;
+using fiskaltrust.Middleware.Interface.Client.Http.Helpers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace fiskaltrust.Middleware.Interface.Http
+namespace fiskaltrust.Middleware.Interface.Client.Http
 {
     public class HttpPos : IPOS
     {

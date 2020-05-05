@@ -1,13 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net40;net461</TargetFrameworks>
+    <TargetFrameworks>net461</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="fiskaltrust.interface" Version="1.3.0-rc1" />
     <PackageReference Include="Newtonsoft.Json" Version="6.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\fiskaltrust.Middleware.Interface.Client.Shared\fiskaltrust.Middleware.Interface.Client.Shared.csproj">
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <_PackageFiles Include="$(OutputPath)\net461\fiskaltrust.Middleware.Interface.Client.Shared.dll">
+      <BuildAction>None</BuildAction>
+      <PackagePath>lib\net461\</PackagePath>
+    </_PackageFiles>
   </ItemGroup>
 
   <PropertyGroup>

@@ -8,6 +8,23 @@
     <PackageReference Include="fiskaltrust.interface" Version="1.3.0-rc1" />
     <PackageReference Include="Newtonsoft.Json" Version="6.0.8" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\fiskaltrust.Middleware.Interface.Client.Shared\fiskaltrust.Middleware.Interface.Client.Shared.csproj">
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <_PackageFiles Include="$(OutputPath)\net461\fiskaltrust.Middleware.Interface.Client.Shared.dll">
+      <BuildAction>None</BuildAction>
+      <PackagePath>lib\net461\</PackagePath>
+    </_PackageFiles>
+    <_PackageFiles Include="$(OutputPath)\netstandard2.0\fiskaltrust.Middleware.Interface.Client.Shared.dll">
+      <BuildAction>None</BuildAction>
+      <PackagePath>lib\netstandard2.0\</PackagePath>
+    </_PackageFiles>
+  </ItemGroup>
   
   <PropertyGroup>
     <PackageId>fiskaltrust.Middleware.Interface.Http</PackageId>

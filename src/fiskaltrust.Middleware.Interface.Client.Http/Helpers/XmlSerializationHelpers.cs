@@ -2,7 +2,7 @@
 using System.IO;
 using System.Xml.Serialization;
 
-namespace fiskaltrust.Middleware.Interface.Http.Helpers
+namespace fiskaltrust.Middleware.Interface.Client.Http.Helpers
 {
     internal static class XmlSerializationHelpers
     {
