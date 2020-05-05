@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace fiskaltrust.Middleware.Interface.Client.Grpc
 {
-    public class GrpcProxyConnectionHandler<T> : IProxyConnectionHandler<T> where T : class
+    internal class GrpcProxyConnectionHandler<T> : IProxyConnectionHandler<T> where T : class
     {
         private T _proxy;
         private Channel _channel;

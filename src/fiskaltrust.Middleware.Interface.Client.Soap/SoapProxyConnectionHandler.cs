@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace fiskaltrust.Middleware.Interface.Client.Soap
 {
-    public class SoapProxyConnectionHandler<T> : IProxyConnectionHandler<T> where T : class
+    internal class SoapProxyConnectionHandler<T> : IProxyConnectionHandler<T> where T : class
     {
         private const long MAX_RECEIVED_MESSAGE_SIZE = 16 * 1024 * 1024;
         private const int SEND_TIMEOUT_SEC = 15;
