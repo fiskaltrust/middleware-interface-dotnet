@@ -12,7 +12,7 @@ using System.Xml.Linq;
 
 namespace fiskaltrust.Middleware.Interface.Client.Http
 {
-    public class HttpPos : IPOS
+    internal class HttpPos : IPOS
     {
         private readonly HttpPosOptions _options;
         private readonly HttpClient _httpClient;
