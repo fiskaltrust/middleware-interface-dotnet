@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <PackageId>fiskaltrust.Middleware.Interface.Soap</PackageId>
+    <PackageId>fiskaltrust.Middleware.Interface.Client.Soap</PackageId>
     <Authors>fiskaltrust</Authors>
     <Company>fiskaltrust</Company>
     <PackageLicenseUrl>https://github.com/fiskaltrust/middleware-interface-dotnet/LICENSE</PackageLicenseUrl>
