@@ -16,6 +16,45 @@ To implement the Middleware into your POS system, please include the latest vers
 
 Additionally, please have a look at the [demo repository](https://github.com/fiskaltrust/demo/), which contains minimal sample applications for a broad variety of programming languages. Some usage examples can also be taken from the [tests](test/fiskaltrust.ifPOS.Tests/v1/IPOS/Wcf).
 
+## Clients
+For even simpler usage, we offer client packages for the supported communication protocols. Just follow the link in the Badge to install the respective package, and use the snippets above to create an instance of IPOS.
+
+### gRPC
+[![Nuget](https://img.shields.io/nuget/v/fiskaltrust.Middleware.Interface.Client.Grpc?label=nuget)](https://nuget.org/packages/fiskaltrust.Middleware.Interface.Client.Grpc)
+
+```cs
+var pos = await GrpcPosFactory.CreatePosAsync(new GrpcPosOptions 
+{ 
+    Url = new Uri(url), 
+    RetryPolicyOptions = new RetryPolicyOptions { ... } // Optional
+});
+```
+
+### HTTP/REST
+[![Nuget](https://img.shields.io/nuget/v/fiskaltrust.Middleware.Interface.Client.Http?label=nuget)](https://nuget.org/packages/fiskaltrust.Middleware.Interface.Client.Http)
+
+```cs
+var pos = await HttpPosFactory.CreatePosAsync(new HttpPosOptions 
+{ 
+    Url = new Uri(url), 
+    CommunicationType = HttpCommunicationType.Json,     // Or HttpCommunicationType.Xml
+    CashboxId = cashboxId,
+    AccessToken = "<ACCESS_TOKEN>"                      // Only required for SignaturCloud 
+    RetryPolicyOptions = new RetryPolicyOptions { ... } // Optional
+});
+```
+
+### SOAP/WCF
+[![Nuget](https://img.shields.io/nuget/v/fiskaltrust.Middleware.Interface.Client.Soap?label=nuget)](https://nuget.org/packages/fiskaltrust.Middleware.Interface.Client.Soap)
+
+```cs
+var pos = await SoapPosFactory.CreatePosAsync(new PosOptions 
+{ 
+    Url = new Uri(url), 
+    RetryPolicyOptions = new RetryPolicyOptions { ... } // Optional
+});
+```
+
 ## Contributions
 If you want to contribute to this repository, please review this README file to understand how it is structured and which tools are used.
 
