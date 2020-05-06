@@ -1,15 +1,15 @@
-﻿#if GRPC
-
-using fiskaltrust.ifPOS.Tests.Helpers;
-using fiskaltrust.ifPOS.Tests.Helpers.Grpc;
-using fiskaltrust.ifPOS.v1;
+﻿using fiskaltrust.ifPOS.v1;
+using fiskaltrust.Middleware.Interface.Client.Grpc;
+using fiskaltrust.Middleware.Interface.Client.Tests.Helpers;
+using fiskaltrust.Middleware.Interface.Client.Tests.Helpers.Grpc;
 using FluentAssertions;
 using Grpc.Core;
 using NUnit.Framework;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace fiskaltrust.ifPOS.Tests.v1.IPOS
+namespace fiskaltrust.Middleware.Interface.Client.Tests.IPOS.Grpc
 {
     public class GrpcIPOSV1Tests : IPOSV1Tests
     {
@@ -23,7 +23,7 @@ namespace fiskaltrust.ifPOS.Tests.v1.IPOS
             _server = null;
         }
 
-        protected override ifPOS.v1.IPOS CreateClient() => GrpcHelper.GetClient<ifPOS.v1.IPOS>(_host, _port);
+        protected override ifPOS.v1.IPOS CreateClient() => GrpcPosFactory.CreatePosAsync(new GrpcPosOptions { Url = new Uri($"http://{_host}:{_port}") }).Result;
 
         protected override void StartHost()
         {
@@ -72,5 +72,3 @@ namespace fiskaltrust.ifPOS.Tests.v1.IPOS
         }
     }
 }
-
-#endif
