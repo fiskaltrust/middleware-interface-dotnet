@@ -61,9 +61,13 @@ jobs:
          **/*.exe
 
     - script: dotnet test --no-build --configuration $(buildConfiguration)  --test-adapter-path:. --logger:nunit;LogFilePath=TestResults.xml
-      displayName: 'dotnet Test ifPOS'
+      displayName: 'dotnet test ifPOS'
       workingDirectory:  'test\fiskaltrust.ifPOS.Tests'
 
+    - script: dotnet test --no-build --configuration $(buildConfiguration)  --test-adapter-path:. --logger:nunit;LogFilePath=TestResults.xml
+      displayName: 'dotnet test Clients'
+      workingDirectory:  'fiskaltrust.Middleware.Interface.Client.Tests'
+      
     - task: PublishTestResults@2
       displayName: 'Publish Test Results'
       inputs:
