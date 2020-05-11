@@ -6,6 +6,6 @@ namespace fiskaltrust.ifPOS.v1.de
     public class TseState
     {
         [DataMember(Order = 10)]
-        public TseStates CurrentState;
+        public TseStates CurrentState { get; set; }
     }
 }

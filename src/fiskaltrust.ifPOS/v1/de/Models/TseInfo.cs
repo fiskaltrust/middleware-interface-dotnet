@@ -28,7 +28,7 @@ namespace fiskaltrust.ifPOS.v1.de
         public string TseSerialNumberOctet { get; set; }
 
         [DataMember(Order = 80)]
-        public TseState CurrentState { get; set; }
+        public TseStates CurrentState { get; set; }
 
         [DataMember(Order = 90)]
         public IEnumerable<string> CertificatesBase64 { get; set; }
