@@ -13,9 +13,9 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap
         private const int RECEIVE_TIMEOUT_DAYS = 14;
 
         private T _proxy;
-        private readonly PosOptions _options;
+        private readonly ClientOptions _options;
 
-        public SoapProxyConnectionHandler(PosOptions options)
+        public SoapProxyConnectionHandler(ClientOptions options)
         {
             _options = options;
         }

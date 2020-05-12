@@ -2,7 +2,7 @@
 
 namespace fiskaltrust.Middleware.Interface.Client.Http
 {
-    public class HttpPosOptions : PosOptions
+    public class HttpPosClientOptions : ClientOptions
     {
         public HttpCommunicationType CommunicationType { get; set; }
         public Guid? CashboxId { get; set; }

@@ -14,20 +14,20 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
 {
     internal class HttpPos : IPOS
     {
-        private readonly HttpPosOptions _options;
+        private readonly HttpPosClientOptions _options;
         private readonly HttpClient _httpClient;
 
         private delegate string AsyncEchoCaller(string message);
         private delegate ifPOS.v0.ReceiptResponse AsyncSignCaller(ifPOS.v0.ReceiptRequest request);
         private delegate Stream AsyncJournalCaller(long ftJournalType, long from, long to);
 
-        public HttpPos(HttpPosOptions options)
+        public HttpPos(HttpPosClientOptions options)
         {
             _httpClient = GetClient(options);
             _options = options;
         }
 
-        private HttpClient GetClient(HttpPosOptions options)
+        private HttpClient GetClient(HttpPosClientOptions options)
         {
             var url = options.Url.ToString().EndsWith("/") ? options.Url : new Uri($"{options.Url}/");
             var client = new HttpClient { BaseAddress = url };

@@ -12,7 +12,6 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
 
         public PosRetryProxyClient(IRetryPolicyHandler<IPOS> retryPolicyHelper) => _retryPolicyHelper = retryPolicyHelper;
 
-
         public IAsyncResult BeginEcho(string message, AsyncCallback callback, object state) => _retryPolicyHelper.RetryFuncAsync(async (proxy) => await Task.FromResult(proxy.BeginEcho(message, callback, state))).Result;
 
         public IAsyncResult BeginJournal(long ftJournalType, long from, long to, AsyncCallback callback, object state) => _retryPolicyHelper.RetryFuncAsync(async (proxy) => await Task.FromResult(proxy.BeginJournal(ftJournalType, from, to, callback, state))).Result;

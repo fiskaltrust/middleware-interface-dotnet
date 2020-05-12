@@ -23,7 +23,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IPOS.Grpc
             _server = null;
         }
 
-        protected override ifPOS.v1.IPOS CreateClient() => GrpcPosFactory.CreatePosAsync(new GrpcPosOptions { Url = new Uri($"http://{_host}:{_port}") }).Result;
+        protected override ifPOS.v1.IPOS CreateClient() => GrpcPosFactory.CreatePosAsync(new GrpcClientOptions { Url = new Uri($"http://{_host}:{_port}") }).Result;
 
         protected override void StartHost()
         {

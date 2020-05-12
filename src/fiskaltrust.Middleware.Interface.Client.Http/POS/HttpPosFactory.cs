@@ -6,7 +6,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
 {
     public static class HttpPosFactory
     {
-        public static async Task<IPOS> CreatePosAsync(HttpPosOptions options)
+        public static async Task<IPOS> CreatePosAsync(HttpPosClientOptions options)
         {
             var connectionhandler = new HttpProxyConnectionHandler<IPOS>(new HttpPos(options));
 

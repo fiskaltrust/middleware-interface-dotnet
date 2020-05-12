@@ -6,7 +6,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap
 {
     public static class SoapPosFactory
     {
-        public static async Task<IPOS> CreatePosAsync(PosOptions options)
+        public static async Task<IPOS> CreatePosAsync(ClientOptions options)
         {
             var connectionhandler = new SoapProxyConnectionHandler<IPOS>(options);
 

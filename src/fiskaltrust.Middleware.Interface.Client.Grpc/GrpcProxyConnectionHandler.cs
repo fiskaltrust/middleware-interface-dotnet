@@ -9,9 +9,9 @@ namespace fiskaltrust.Middleware.Interface.Client.Grpc
     {
         private T _proxy;
         private Channel _channel;
-        private readonly GrpcPosOptions _options;
+        private readonly GrpcClientOptions _options;
 
-        public GrpcProxyConnectionHandler(GrpcPosOptions options)
+        public GrpcProxyConnectionHandler(GrpcClientOptions options)
         {
             _options = options;
         }

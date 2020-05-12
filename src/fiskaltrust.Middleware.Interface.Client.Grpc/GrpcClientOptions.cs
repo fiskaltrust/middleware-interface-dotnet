@@ -2,7 +2,7 @@
 
 namespace fiskaltrust.Middleware.Interface.Client.Grpc
 {
-    public class GrpcPosOptions : PosOptions
+    public class GrpcClientOptions : ClientOptions
     {
         public ChannelCredentials ChannelCredentials { get; set; } = ChannelCredentials.Insecure;
     }

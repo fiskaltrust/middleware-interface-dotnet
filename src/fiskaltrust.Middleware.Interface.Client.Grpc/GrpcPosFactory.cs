@@ -6,7 +6,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Grpc
 {
     public static class GrpcPosFactory
     {
-        public static async Task<IPOS> CreatePosAsync(GrpcPosOptions options)
+        public static async Task<IPOS> CreatePosAsync(GrpcClientOptions options)
         {
             var connectionhandler = new GrpcProxyConnectionHandler<IPOS>(options);
 
