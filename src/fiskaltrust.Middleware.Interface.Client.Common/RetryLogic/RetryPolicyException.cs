@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace fiskaltrust.Middleware.Interface.Client.Shared
+namespace fiskaltrust.Middleware.Interface.Client
 {
     public class RetryPolicyException : Exception
     {

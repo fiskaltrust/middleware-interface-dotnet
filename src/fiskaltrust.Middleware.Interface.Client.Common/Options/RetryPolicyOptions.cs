@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace fiskaltrust.Middleware.Interface.Client.Shared.Options
+namespace fiskaltrust.Middleware.Interface.Client
 {
     public class RetryPolicyOptions
     {

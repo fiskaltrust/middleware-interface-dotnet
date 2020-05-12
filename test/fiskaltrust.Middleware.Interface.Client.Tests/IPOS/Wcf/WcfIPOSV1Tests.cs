@@ -1,7 +1,6 @@
 ﻿#if WCF
 
 using fiskaltrust.ifPOS.v0;
-using fiskaltrust.Middleware.Interface.Client.Shared;
 using fiskaltrust.Middleware.Interface.Client.Soap;
 using fiskaltrust.Middleware.Interface.Client.Tests.Helpers;
 using fiskaltrust.Middleware.Interface.Client.Tests.Helpers.Grpc;

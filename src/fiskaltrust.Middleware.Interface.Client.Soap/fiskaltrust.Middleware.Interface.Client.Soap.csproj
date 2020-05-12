@@ -11,13 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\fiskaltrust.Middleware.Interface.Client.Shared\fiskaltrust.Middleware.Interface.Client.Shared.csproj">
-      <PrivateAssets>all</PrivateAssets>
-    </ProjectReference>
+    <ProjectReference Include="..\fiskaltrust.Middleware.Interface.Client.Common\fiskaltrust.Middleware.Interface.Client.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <_PackageFiles Include="$(OutputPath)\fiskaltrust.Middleware.Interface.Client.Shared.dll">
+    <_PackageFiles Include="$(OutputPath)\fiskaltrust.Middleware.Interface.Client.Common.dll">
       <BuildAction>None</BuildAction>
       <PackagePath>lib\net461\</PackagePath>
     </_PackageFiles>

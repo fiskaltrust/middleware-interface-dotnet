@@ -1,7 +1,6 @@
-﻿using fiskaltrust.Middleware.Interface.Client.Shared.RetryLogic.Interfaces;
+﻿using fiskaltrust.Middleware.Interface.Client.Common.RetryLogic;
 using Grpc.Core;
 using ProtoBuf.Grpc.Client;
-using System;
 using System.Threading.Tasks;
 
 namespace fiskaltrust.Middleware.Interface.Client.Grpc

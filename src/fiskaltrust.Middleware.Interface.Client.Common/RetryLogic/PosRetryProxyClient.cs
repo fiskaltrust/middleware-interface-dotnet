@@ -1,13 +1,12 @@
 ﻿using fiskaltrust.ifPOS.v1;
-using fiskaltrust.Middleware.Interface.Client.Shared.RetryLogic.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace fiskaltrust.Middleware.Interface.Client.Shared
+namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
 {
-    public class PosRetryProxyClient : ifPOS.v1.IPOS
+    public class PosRetryProxyClient : IPOS
     {
         private readonly IRetryPolicyHandler<IPOS> _retryPolicyHelper;
 
@@ -43,6 +42,6 @@ namespace fiskaltrust.Middleware.Interface.Client.Shared
 
         public ifPOS.v0.ReceiptResponse Sign(ifPOS.v0.ReceiptRequest data) => _retryPolicyHelper.RetryFuncAsync(async (proxy) => await Task.FromResult(proxy.Sign(data))).Result;
 
-        public async Task<ifPOS.v1.ReceiptResponse> SignAsync(ifPOS.v1.ReceiptRequest request) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.SignAsync(request));
+        public async Task<ReceiptResponse> SignAsync(ReceiptRequest request) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.SignAsync(request));
     }
 }

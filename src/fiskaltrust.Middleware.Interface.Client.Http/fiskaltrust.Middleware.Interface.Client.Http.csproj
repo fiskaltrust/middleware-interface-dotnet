@@ -10,17 +10,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\fiskaltrust.Middleware.Interface.Client.Shared\fiskaltrust.Middleware.Interface.Client.Shared.csproj">
+    <ProjectReference Include="..\fiskaltrust.Middleware.Interface.Client.Common\fiskaltrust.Middleware.Interface.Client.Common.csproj">
       <PrivateAssets>all</PrivateAssets>
     </ProjectReference>
   </ItemGroup>
 
   <ItemGroup>
-    <_PackageFiles Include="$(OutputPath)\net461\fiskaltrust.Middleware.Interface.Client.Shared.dll">
+    <_PackageFiles Include="$(OutputPath)\net461\fiskaltrust.Middleware.Interface.Client.Common.dll">
       <BuildAction>None</BuildAction>
       <PackagePath>lib\net461\</PackagePath>
     </_PackageFiles>
-    <_PackageFiles Include="$(OutputPath)\netstandard2.0\fiskaltrust.Middleware.Interface.Client.Shared.dll">
+    <_PackageFiles Include="$(OutputPath)\netstandard2.0\fiskaltrust.Middleware.Interface.Client.Common.dll">
       <BuildAction>None</BuildAction>
       <PackagePath>lib\netstandard2.0\</PackagePath>
     </_PackageFiles>

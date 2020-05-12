@@ -1,5 +1,4 @@
-﻿using fiskaltrust.Middleware.Interface.Client.Shared;
-using System;
+﻿using System;
 
 namespace fiskaltrust.Middleware.Interface.Client.Http
 {

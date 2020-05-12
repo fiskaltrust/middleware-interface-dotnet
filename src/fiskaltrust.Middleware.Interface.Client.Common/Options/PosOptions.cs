@@ -1,7 +1,6 @@
-﻿using fiskaltrust.Middleware.Interface.Client.Shared.Options;
-using System;
+﻿using System;
 
-namespace fiskaltrust.Middleware.Interface.Client.Shared
+namespace fiskaltrust.Middleware.Interface.Client
 {
     public class PosOptions
     {

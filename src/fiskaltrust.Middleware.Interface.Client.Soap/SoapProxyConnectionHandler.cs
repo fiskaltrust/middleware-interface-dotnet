@@ -1,5 +1,4 @@
-﻿using fiskaltrust.Middleware.Interface.Client.Shared;
-using fiskaltrust.Middleware.Interface.Client.Shared.RetryLogic.Interfaces;
+﻿using fiskaltrust.Middleware.Interface.Client.Common.RetryLogic;
 using System;
 using System.ServiceModel;
 using System.ServiceModel.Channels;

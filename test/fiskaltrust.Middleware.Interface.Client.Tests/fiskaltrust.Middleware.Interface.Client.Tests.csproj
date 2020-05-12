@@ -8,9 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\fiskaltrust.Middleware.Interface.Client.Common\fiskaltrust.Middleware.Interface.Client.Common.csproj" />
     <ProjectReference Include="..\..\src\fiskaltrust.Middleware.Interface.Client.Grpc\fiskaltrust.Middleware.Interface.Client.Grpc.csproj" />
     <ProjectReference Include="..\..\src\fiskaltrust.Middleware.Interface.Client.Http\fiskaltrust.Middleware.Interface.Client.Http.csproj" />
-    <ProjectReference Include="..\..\src\fiskaltrust.Middleware.Interface.Client.Shared\fiskaltrust.Middleware.Interface.Client.Shared.csproj" />
     <ProjectReference Include="..\..\src\fiskaltrust.Middleware.Interface.Client.Soap\fiskaltrust.Middleware.Interface.Client.Soap.csproj" />
   </ItemGroup>
 

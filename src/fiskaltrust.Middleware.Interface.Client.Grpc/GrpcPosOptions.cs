@@ -1,5 +1,4 @@
-﻿using fiskaltrust.Middleware.Interface.Client.Shared;
-using Grpc.Core;
+﻿using Grpc.Core;
 
 namespace fiskaltrust.Middleware.Interface.Client.Grpc
 {

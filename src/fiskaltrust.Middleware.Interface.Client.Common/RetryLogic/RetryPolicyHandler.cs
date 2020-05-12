@@ -1,9 +1,7 @@
-﻿using fiskaltrust.Middleware.Interface.Client.Shared.Options;
-using fiskaltrust.Middleware.Interface.Client.Shared.RetryLogic.Interfaces;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 
-namespace fiskaltrust.Middleware.Interface.Client.Shared
+namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
 {
     public class RetryPolicyHandler<T> : IRetryPolicyHandler<T> where T : class
     {
