@@ -46,6 +46,6 @@ namespace fiskaltrust.ifPOS.Tests.Helpers
 
         public async Task<EndExportSessionResponse> EndExportSessionAsync(EndExportSessionRequest request) => await FromResult(new EndExportSessionResponse());
 
-        public async Task<TseEchoResponse> EchoAsync(TseEchoRequest request) => await FromResult(new TseEchoResponse { Message = request.Message });
+        public async Task<ScuEchoResponse> EchoAsync(ScuEchoRequest request) => await FromResult(new ScuEchoResponse { Message = request.Message });
     }
 }

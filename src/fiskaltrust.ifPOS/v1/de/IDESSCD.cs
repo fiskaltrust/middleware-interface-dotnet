@@ -97,6 +97,6 @@ namespace fiskaltrust.ifPOS.v1.de
 #if WCF
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v1/echo", Method = "POST")]
 #endif
-        Task<TseEchoResponse> EchoAsync(TseEchoRequest request);
+        Task<ScuEchoResponse> EchoAsync(ScuEchoRequest request);
     }
 }
