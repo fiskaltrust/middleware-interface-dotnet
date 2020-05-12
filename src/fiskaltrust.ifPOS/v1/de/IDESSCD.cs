@@ -92,5 +92,11 @@ namespace fiskaltrust.ifPOS.v1.de
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v1/endexportsession", Method = "POST")]
 #endif
         Task<EndExportSessionResponse> EndExportSessionAsync(EndExportSessionRequest request);
+
+        [OperationContract]
+#if WCF
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v1/echo", Method = "POST")]
+#endif
+        Task<ScuEchoResponse> EchoAsync(ScuEchoRequest request);
     }
 }
