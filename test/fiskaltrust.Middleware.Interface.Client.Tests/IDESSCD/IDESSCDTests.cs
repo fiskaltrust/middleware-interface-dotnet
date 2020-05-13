@@ -75,6 +75,76 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IDESSCD
         }
 
         [Test]
+        public void EchoAsync_ShouldReturn()
+        {
+            var client = CreateClient();
+            var result = client.EchoAsync(new ScuEchoRequest()).Result;
+            result.Should().NotBeNull();
+        }
+
+        [Test]
+        public void EndExportSessionAsync_ShouldReturn()
+        {
+            var client = CreateClient();
+            var result = client.EndExportSessionAsync(new EndExportSessionRequest()).Result;
+            result.Should().NotBeNull();
+        }
+
+        [Test]
+        public void ExecuteSelfTestAsync_ShouldNotThrow()
+        {
+            var client = CreateClient();
+            client.ExecuteSelfTestAsync().Wait();
+        }
+
+        [Test]
+        public void ExecuteSetTseTimeAsync_ShouldNotThrow()
+        {
+            var client = CreateClient();
+            client.ExecuteSetTseTimeAsync().Wait();
+        }
+
+        [Test]
+        public void RegisterClientId_ShouldReturn()
+        {
+            var client = CreateClient();
+            var result = client.RegisterClientId(new RegisterClientIdRequest()).Result;
+            result.Should().NotBeNull();
+        }
+
+        [Test]
+        public void UnregisterClientId_ShouldReturn()
+        {
+            var client = CreateClient();
+            var result = client.UnregisterClientId(new UnregisterClientIdRequest()).Result;
+            result.Should().NotBeNull();
+        }
+
+        [Test]
+        public void StartExportSessionAsync_ShouldReturn()
+        {
+            var client = CreateClient();
+            var result = client.StartExportSessionAsync().Result;
+            result.Should().NotBeNull();
+        }
+
+        [Test]
+        public void StartExportSessionByTimeStampAsync_ShouldReturn()
+        {
+            var client = CreateClient();
+            var result = client.StartExportSessionByTimeStampAsync(new StartExportSessionByTimeStampRequest { From = DateTime.Now, To = DateTime.Now }).Result;
+            result.Should().NotBeNull();
+        }
+
+        [Test]
+        public void StartExportSessionByTransactionAsync_ShouldReturn()
+        {
+            var client = CreateClient();
+            var result = client.StartExportSessionByTransactionAsync(new StartExportSessionByTransactionRequest()).Result;
+            result.Should().NotBeNull();
+        }
+
+        [Test]
         public async Task GetTseInfoAsync_ShouldHandleRetry_EvenIf_ServerShutDown()
         {
             var finished = false;

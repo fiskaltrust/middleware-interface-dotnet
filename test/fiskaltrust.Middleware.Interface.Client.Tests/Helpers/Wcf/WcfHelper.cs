@@ -25,6 +25,10 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.Helpers.Grpc
         public static ServiceHost StartRestHost<T>(string url, T component)
         {
             var restHost = new WebServiceHost(component, new Uri(url));
+
+            var debugBehavior = restHost.Description.Behaviors.Find<ServiceDebugBehavior>();
+            debugBehavior.IncludeExceptionDetailInFaults = true;
+
             var sep = restHost.AddServiceEndpoint(typeof(T), new WebHttpBinding(), "");
             var whb = sep.Behaviors.Find<WebHttpBehavior>();
             if (whb == null)
