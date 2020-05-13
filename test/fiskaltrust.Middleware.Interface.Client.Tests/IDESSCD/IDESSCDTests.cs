@@ -30,15 +30,15 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IDESSCD
         public void ExportDataAsync_ShouldReturn()
         {
             var client = CreateClient();
-            var result = client.ExportDataAsync().Result;
+            var result = client.ExportDataAsync(new ExportDataRequest()).Result;
             result.Should().NotBeNull();
         }
 
         [Test]
-        public void FinishTransactionExportDataAsync_ShouldReturn()
+        public void FinishTransactionAsync_ShouldReturn()
         {
             var client = CreateClient();
-            var result = client.FinishTransactionExportDataAsync(new FinishTransactionRequest()).Result;
+            var result = client.FinishTransactionAsync(new FinishTransactionRequest()).Result;
             result.Should().NotBeNull();
         }
 
@@ -51,18 +51,18 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IDESSCD
         }
 
         [Test]
-        public void StartTransactionExportDataAsync_ShouldReturn()
+        public void StartTransactionAsync_ShouldReturn()
         {
             var client = CreateClient();
-            var result = client.StartTransactionExportDataAsync(new StartTransactionRequest()).Result;
+            var result = client.StartTransactionAsync(new StartTransactionRequest()).Result;
             result.Should().NotBeNull();
         }
 
         [Test]
-        public void UpdateTransactionExportDataAsync_ShouldReturn()
+        public void UpdateTransactionAsync_ShouldReturn()
         {
             var client = CreateClient();
-            var result = client.UpdateTransactionExportDataAsync(new UpdateTransactionRequest()).Result;
+            var result = client.UpdateTransactionAsync(new UpdateTransactionRequest()).Result;
             result.Should().NotBeNull();
         }
 
@@ -89,7 +89,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IDESSCD
             });
 
             StopHost();
-            await Task.Delay(TimeSpan.FromSeconds(5));
+            await Task.Delay(TimeSpan.FromSeconds(3));
             StartHost();
             finished = true;
             await tseInfoThread;

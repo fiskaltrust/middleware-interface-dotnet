@@ -9,34 +9,36 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.Helpers
 #endif
     public class DummyDESSCD : ifPOS.v1.de.IDESSCD
     {
-#if WCF
-        [System.ServiceModel.Web.WebInvoke(BodyStyle = System.ServiceModel.Web.WebMessageBodyStyle.Bare, UriTemplate = "v1/exportdata", Method = "GET")]
-#endif
-        public async Task<TseExportDataResult> ExportDataAsync() => await Task.FromResult(new TseExportDataResult());
+        public async Task<ExportDataResponse> ExportDataAsync() => await Task.FromResult(new ExportDataResponse());
 
-#if WCF
-        [System.ServiceModel.Web.WebInvoke(BodyStyle = System.ServiceModel.Web.WebMessageBodyStyle.Bare, UriTemplate = "v1/finishtransactionexportdata")]
-#endif
-        public async Task<FinishTransactionResponse> FinishTransactionExportDataAsync(FinishTransactionRequest request) => await Task.FromResult(new FinishTransactionResponse { StartTime = DateTime.Now, EndTime = DateTime.Now });
+        public async Task<FinishTransactionResponse> FinishTransactionAsync(FinishTransactionRequest request) => await Task.FromResult(new FinishTransactionResponse { StartTransactionTimeStamp = DateTime.Now, TimeStamp = DateTime.Now });
 
-#if WCF
-        [System.ServiceModel.Web.WebInvoke(BodyStyle = System.ServiceModel.Web.WebMessageBodyStyle.Bare, UriTemplate = "v1/starttransactionexportdata", Method = "POST")]
-#endif
-        public async Task<StartTransactionResponse> StartTransactionExportDataAsync(StartTransactionRequest request) => await Task.FromResult(new StartTransactionResponse { StartTime = DateTime.Now });
+        public async Task<StartTransactionResponse> StartTransactionAsync(StartTransactionRequest request) => await Task.FromResult(new StartTransactionResponse { TimeStamp = DateTime.Now });
 
-#if WCF
-        [System.ServiceModel.Web.WebInvoke(BodyStyle = System.ServiceModel.Web.WebMessageBodyStyle.Bare, UriTemplate = "v1/updatetransactionexportdata")]
-#endif
-        public async Task<UpdateTransactionResponse> UpdateTransactionExportDataAsync(UpdateTransactionRequest request) => await Task.FromResult(new UpdateTransactionResponse { StartTime = DateTime.Now });
+        public async Task<UpdateTransactionResponse> UpdateTransactionAsync(UpdateTransactionRequest request) => await Task.FromResult(new UpdateTransactionResponse { TimeStamp = DateTime.Now });
 
-#if WCF
-        [System.ServiceModel.Web.WebInvoke(BodyStyle = System.ServiceModel.Web.WebMessageBodyStyle.Bare, UriTemplate = "v1/tseinfo", Method = "GET")]
-#endif
         public async Task<TseInfo> GetTseInfoAsync() => await Task.FromResult(new TseInfo());
 
-#if WCF
-        [System.ServiceModel.Web.WebInvoke(BodyStyle = System.ServiceModel.Web.WebMessageBodyStyle.Bare, UriTemplate = "v1/tsestate", Method = "POST")]
-#endif
         public async Task<TseState> SetTseStateAsync(TseState state) => await Task.FromResult(new TseState());
+
+        public async Task<RegisterClientIdResponse> RegisterClientId(RegisterClientIdRequest request) => await Task.FromResult(new RegisterClientIdResponse());
+
+        public async Task<UnregisterClientIdResponse> UnregisterClientId(UnregisterClientIdRequest request) => await Task.FromResult(new UnregisterClientIdResponse());
+
+        public async Task ExecuteSetTseTimeAsync() => await Task.CompletedTask;
+
+        public async Task ExecuteSelfTestAsync() => await Task.CompletedTask;
+
+        public async Task<StartExportSessionResponse> StartExportSessionAsync() => await Task.FromResult(new StartExportSessionResponse());
+
+        public async Task<StartExportSessionResponse> StartExportSessionByTimeStampAsync(StartExportSessionByTimeStampRequest request) => await Task.FromResult(new StartExportSessionResponse());
+
+        public async Task<StartExportSessionResponse> StartExportSessionByTransactionAsync(StartExportSessionByTransactionRequest request) => await Task.FromResult(new StartExportSessionResponse());
+
+        public async Task<ExportDataResponse> ExportDataAsync(ExportDataRequest request) => await Task.FromResult(new ExportDataResponse());
+
+        public async Task<EndExportSessionResponse> EndExportSessionAsync(EndExportSessionRequest request) => await Task.FromResult(new EndExportSessionResponse());
+
+        public async Task<ScuEchoResponse> EchoAsync(ScuEchoRequest request) => await Task.FromResult(new ScuEchoResponse());
     }
 }
