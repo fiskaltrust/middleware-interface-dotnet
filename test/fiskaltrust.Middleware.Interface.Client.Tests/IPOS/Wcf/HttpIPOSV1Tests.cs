@@ -2,7 +2,7 @@
 
 using fiskaltrust.Middleware.Interface.Client.Http;
 using fiskaltrust.Middleware.Interface.Client.Tests.Helpers;
-using fiskaltrust.Middleware.Interface.Client.Tests.Helpers.Grpc;
+using fiskaltrust.Middleware.Interface.Tests.Helpers.Wcf;
 using System;
 using System.ServiceModel;
 

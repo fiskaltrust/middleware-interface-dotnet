@@ -11,12 +11,10 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
     internal class HttpDESSCD : IDESSCD
     {
         private readonly HttpClient _httpClient;
-        private readonly JsonSerializerSettings _serializerSettings;
 
         public HttpDESSCD(ClientOptions options)
         {
             _httpClient = GetClient(options);
-            _serializerSettings = new JsonSerializerSettings { DateFormatHandling = DateFormatHandling.MicrosoftDateFormat };
         }
 
         public async Task<ExportDataResponse> ExportDataAsync() => await ExecuteHttpGetAsync<ExportDataResponse>("v1", "exportdata").ConfigureAwait(false);
@@ -58,14 +56,14 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
 
             if (parameter != null)
             {
-                var json = JsonConvert.SerializeObject(parameter, _serializerSettings);
+                var json = JsonConvert.SerializeObject(parameter);
                 stringContent = new StringContent(json, Encoding.UTF8, "application/json");
             }
             var response = await _httpClient.PostAsync(url, stringContent).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
 
             var result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<T>(result, _serializerSettings);
+            return JsonConvert.DeserializeObject<T>(result);
         }
 
         private async Task ExecuteHttpPostAsync(string urlVersion, string urlMethod, object parameter = null)
@@ -75,7 +73,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
 
             if (parameter != null)
             {
-                var json = JsonConvert.SerializeObject(parameter, _serializerSettings);
+                var json = JsonConvert.SerializeObject(parameter);
                 stringContent = new StringContent(json, Encoding.UTF8, "application/json");
             }
             var response = await _httpClient.PostAsync(url, stringContent).ConfigureAwait(false);
@@ -89,7 +87,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             response.EnsureSuccessStatusCode();
 
             var result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<T>(result, _serializerSettings);
+            return JsonConvert.DeserializeObject<T>(result);
         }
 
         private HttpClient GetClient(ClientOptions options)

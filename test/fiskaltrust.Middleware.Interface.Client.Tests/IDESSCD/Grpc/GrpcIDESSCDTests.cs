@@ -1,7 +1,7 @@
 ﻿using fiskaltrust.ifPOS.v1.de;
 using fiskaltrust.Middleware.Interface.Client.Grpc;
 using fiskaltrust.Middleware.Interface.Client.Tests.Helpers;
-using fiskaltrust.Middleware.Interface.Client.Tests.Helpers.Grpc;
+using fiskaltrust.Middleware.Interface.Tests.Helpers.Grpc;
 using Grpc.Core;
 using System;
 using System.Threading.Tasks;

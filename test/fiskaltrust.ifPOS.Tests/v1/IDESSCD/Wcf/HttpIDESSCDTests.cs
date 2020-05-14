@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using fiskaltrust.ifPOS.v1.de;
 using Newtonsoft.Json;
 using System.Text;
-using fiskaltrust.ifPOS.Tests.Helpers.Wcf;
+using fiskaltrust.Middleware.Interface.Tests.Helpers.Wcf;
 
 namespace fiskaltrust.ifPOS.Tests.v1.IDESSCD
 {
@@ -164,11 +164,7 @@ namespace fiskaltrust.ifPOS.Tests.v1.IDESSCD
                     From = DateTime.UtcNow.AddDays(-1.0),
                     To = DateTime.UtcNow.AddDays(1.0)
                 };
-                var jsonSettings = new JsonSerializerSettings()
-                {
-                    DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
-                };
-                var content = new StringContent(JsonConvert.SerializeObject(requestData, jsonSettings), Encoding.UTF8, "application/json");
+                var content = new StringContent(JsonConvert.SerializeObject(requestData), Encoding.UTF8, "application/json");
                 var result = await httpClient.PostAsync(new Uri(_url + "/v1/startexportsessionbytimestamp"), content);
                 result.EnsureSuccessStatusCode();
             }

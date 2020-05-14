@@ -1,10 +1,9 @@
 ﻿#if GRPC
-
 using Grpc.Core;
 using ProtoBuf.Grpc.Server;
 using ProtoBuf.Grpc.Client;
 
-namespace fiskaltrust.ifPOS.Tests.Helpers.Grpc
+namespace fiskaltrust.Middleware.Interface.Tests.Helpers.Grpc
 {
     public static class GrpcHelper
     {
@@ -26,5 +25,4 @@ namespace fiskaltrust.ifPOS.Tests.Helpers.Grpc
         }
     }
 }
-
 #endif

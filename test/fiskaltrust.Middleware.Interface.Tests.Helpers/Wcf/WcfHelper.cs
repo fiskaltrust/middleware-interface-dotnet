@@ -1,25 +1,15 @@
 ﻿#if WCF
 using System;
-using System.Collections.ObjectModel;
+using System.Linq;
 using System.ServiceModel;
-using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
 using System.ServiceModel.Web;
+using fiskaltrust.Middleware.Interface.Tests.Helpers.Wcf.Formatting;
 
-namespace fiskaltrust.ifPOS.Tests.Helpers.Wcf
+namespace fiskaltrust.Middleware.Interface.Tests.Helpers.Wcf
 {
     public static class WcfHelper
     {
-        public static T GetProxy<T>(string url)
-        {
-            var binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
-            binding.SendTimeout = TimeSpan.FromSeconds(15);
-            binding.ReceiveTimeout = TimeSpan.FromDays(14);
-            var factory = new ChannelFactory<T>(binding, new EndpointAddress(url));
-            return factory.CreateChannel();
-        }
-
         public static ServiceHost StartHost<T>(string url, T component)
         {
             var host = new ServiceHost(component, new Uri(url));
@@ -33,16 +23,39 @@ namespace fiskaltrust.ifPOS.Tests.Helpers.Wcf
             host.Open();
             return host;
         }
+        public static T GetProxy<T>(string url)
+        {
+            var binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None)
+            {
+                SendTimeout = TimeSpan.FromSeconds(15),
+                ReceiveTimeout = TimeSpan.FromDays(14)
+            };
+            var factory = new ChannelFactory<T>(binding, new EndpointAddress(url));
+            return factory.CreateChannel();
+        }
+
 
         public static ServiceHost StartRestHost<T>(string url, T component)
         {
             var restHost = new WebServiceHost(component, new Uri(url));
+
+            var debugBehavior = restHost.Description.Behaviors.Find<ServiceDebugBehavior>();
+            debugBehavior.IncludeExceptionDetailInFaults = true;
+
             var sep = restHost.AddServiceEndpoint(typeof(T), new WebHttpBinding(), "");
             var whb = sep.Behaviors.Find<WebHttpBehavior>();
             if (whb == null)
             {
                 whb = new WebHttpBehavior();
                 sep.Behaviors.Add(whb);
+            }
+
+            foreach (var operation in sep.Contract.Operations)
+            {
+                if (!operation.Behaviors.OfType<ClientJsonDateFormatter>().Any())
+                {
+                    operation.Behaviors.Add(new ClientJsonDateFormatter());
+                }
             }
 
             whb.AutomaticFormatSelectionEnabled = true;
@@ -59,9 +72,11 @@ namespace fiskaltrust.ifPOS.Tests.Helpers.Wcf
 
         public static T GetRestProxy<T>(string url) where T : class
         {
-            var binding = new BasicHttpBinding();
-            binding.SendTimeout = TimeSpan.FromSeconds(15);
-            binding.ReceiveTimeout = TimeSpan.FromDays(14);
+            var binding = new BasicHttpBinding
+            {
+                SendTimeout = TimeSpan.FromSeconds(15),
+                ReceiveTimeout = TimeSpan.FromDays(14)
+            };
 
             var factory = new WebChannelFactory<T>(new Uri(url));
             return factory.CreateChannel();

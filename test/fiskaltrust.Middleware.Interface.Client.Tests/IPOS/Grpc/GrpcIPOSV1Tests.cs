@@ -1,7 +1,7 @@
 ﻿using fiskaltrust.ifPOS.v1;
 using fiskaltrust.Middleware.Interface.Client.Grpc;
 using fiskaltrust.Middleware.Interface.Client.Tests.Helpers;
-using fiskaltrust.Middleware.Interface.Client.Tests.Helpers.Grpc;
+using fiskaltrust.Middleware.Interface.Tests.Helpers.Grpc;
 using FluentAssertions;
 using Grpc.Core;
 using NUnit.Framework;

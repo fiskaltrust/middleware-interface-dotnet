@@ -146,10 +146,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
 
         private async Task<TResponse> JsonSignAsync<TRequest, TResponse>(TRequest request, string endpoint)
         {
-            var jsonstring = JsonConvert.SerializeObject(request, new JsonSerializerSettings
-            {
-                DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
-            });
+            var jsonstring = JsonConvert.SerializeObject(request);
             var jsonContent = new StringContent(jsonstring, Encoding.UTF8, "application/json");
 
             using (var response = await _httpClient.PostAsync(endpoint, jsonContent))

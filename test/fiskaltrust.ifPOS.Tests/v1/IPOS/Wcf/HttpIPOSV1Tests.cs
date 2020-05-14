@@ -1,8 +1,8 @@
 ﻿#if WCF
 
 using fiskaltrust.ifPOS.Tests.Helpers;
-using fiskaltrust.ifPOS.Tests.Helpers.Wcf;
 using fiskaltrust.ifPOS.v1;
+using fiskaltrust.Middleware.Interface.Tests.Helpers.Wcf;
 using FluentAssertions;
 using Newtonsoft.Json;
 using NUnit.Framework;
@@ -52,20 +52,14 @@ namespace fiskaltrust.ifPOS.Tests.v1.IPOS
                     cbTerminalID = "",
                     cbReceiptReference = "",
                     cbReceiptMoment = DateTime.Now,
-                    cbChargeItems = new ChargeItem[5],
-                    cbPayItems = new PayItem[5],
+                    cbChargeItems = new ChargeItem[] { },
+                    cbPayItems = new PayItem[] { },
                     ftReceiptCase = 100
-                }, new JsonSerializerSettings
-                {
-                    DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
                 });
                 var result = await httpClient.PostAsync(new Uri(_url + "/v0/sign"), new StringContent(json, Encoding.UTF8, "application/json"));
                 result.EnsureSuccessStatusCode();
                 var content = await result.Content.ReadAsStringAsync();
-                var response = JsonConvert.DeserializeObject<ReceiptResponse>(content, new JsonSerializerSettings
-                {
-                    DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
-                });
+                var response = JsonConvert.DeserializeObject<ReceiptResponse>(content);
                 response.ftQueueID.Should().Be(queueId);
             }
         }
@@ -83,20 +77,14 @@ namespace fiskaltrust.ifPOS.Tests.v1.IPOS
                     cbTerminalID = "",
                     cbReceiptReference = "",
                     cbReceiptMoment = DateTime.Now,
-                    cbChargeItems = new ChargeItem[5],
-                    cbPayItems = new PayItem[5],
+                    cbChargeItems = new ChargeItem[] { },
+                    cbPayItems = new PayItem[] { },
                     ftReceiptCase = 100
-                }, new JsonSerializerSettings
-                {
-                    DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
                 });
                 var result = await httpClient.PostAsync(new Uri(_url + "/v1/sign"), new StringContent(json, Encoding.UTF8, "application/json"));
                 result.EnsureSuccessStatusCode();
                 var content = await result.Content.ReadAsStringAsync();
-                var response = JsonConvert.DeserializeObject<ReceiptResponse>(content, new JsonSerializerSettings
-                {
-                    DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
-                });
+                var response = JsonConvert.DeserializeObject<ReceiptResponse>(content);
                 response.ftQueueID.Should().Be(queueId);
             }
         }

@@ -30,7 +30,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
                 {
                     if (trial == _options.Retries - 1)
                     {
-                        throw new RetryPolicyException("The host is not reachable!", ex);
+                        throw new RetryPolicyException("The maximum number of retries was reached while sending this request.", ex);
                     }
                 }
 
@@ -59,7 +59,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
                 {
                     if (trial == _options.Retries - 1)
                     {
-                        throw new RetryPolicyException("The host is not reachable!", ex);
+                        throw new RetryPolicyException("The maximum number of retries was reached while sending this request.", ex);
                     }
                 }
 

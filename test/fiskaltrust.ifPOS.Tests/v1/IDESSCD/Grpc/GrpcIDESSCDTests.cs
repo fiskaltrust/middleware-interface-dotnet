@@ -3,7 +3,7 @@
 using fiskaltrust.ifPOS.Tests.Helpers;
 using Grpc.Core;
 using System.Threading.Tasks;
-using fiskaltrust.ifPOS.Tests.Helpers.Grpc;
+using fiskaltrust.Middleware.Interface.Tests.Helpers.Grpc;
 
 namespace fiskaltrust.ifPOS.Tests.v1.IDESSCD
 {
