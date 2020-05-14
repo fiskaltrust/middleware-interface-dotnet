@@ -2,13 +2,13 @@
 using fiskaltrust.Middleware.Interface.Client.Common.RetryLogic;
 using System.Threading.Tasks;
 
-namespace fiskaltrust.Middleware.Interface.Client.Grpc
+namespace fiskaltrust.Middleware.Interface.Client.Http
 {
-    public static class GrpcDeSscdFactory
+    public static class HttpDESSCDFactory
     {
-        public static async Task<IDESSCD> CreateSscdAsync(GrpcClientOptions options)
+        public static async Task<IDESSCD> CreateSSCDAsync(ClientOptions options)
         {
-            var connectionhandler = new GrpcProxyConnectionHandler<IDESSCD>(options);
+            var connectionhandler = new HttpProxyConnectionHandler<IDESSCD>(new HttpDESSCD(options));
 
             if (options.RetryPolicyOptions != null)
             {

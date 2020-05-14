@@ -20,7 +20,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IDESSCD.Grpc
             _server = null;
         }
 
-        protected override ifPOS.v1.de.IDESSCD CreateClient() => GrpcDeSscdFactory.CreateSscdAsync(new GrpcClientOptions { Url = new Uri($"http://{_host}:{_port}"), RetryPolicyOptions = _retryPolicyOptions }).Result;
+        protected override ifPOS.v1.de.IDESSCD CreateClient() => GrpcDESSCDFactory.CreateSSCDAsync(new GrpcClientOptions { Url = new Uri($"http://{_host}:{_port}"), RetryPolicyOptions = _retryPolicyOptions }).Result;
 
         protected override void StartHost()
         {

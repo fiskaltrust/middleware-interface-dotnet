@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace fiskaltrust.Middleware.Interface.Client.Http
 {
-    internal class HttpDeSscd : IDESSCD
+    internal class HttpDESSCD : IDESSCD
     {
         private readonly HttpClient _httpClient;
         private readonly JsonSerializerSettings _serializerSettings;
 
-        public HttpDeSscd(ClientOptions options)
+        public HttpDESSCD(ClientOptions options)
         {
             _httpClient = GetClient(options);
             _serializerSettings = new JsonSerializerSettings { DateFormatHandling = DateFormatHandling.MicrosoftDateFormat };
