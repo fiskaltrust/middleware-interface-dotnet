@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
-using System.Timers;
 
 namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
 {
@@ -23,12 +23,8 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
             {
                 try
                 {
-                    var timeoutTimer = new Timer(_options.ClientTimeout.TotalMilliseconds);
-                    timeoutTimer.Elapsed += (source, e) => throw new TimeoutException();
-                    timeoutTimer.Start();
-                    var result = await action(await _proxyConnectionHandler.GetProxyAsync());
-                    timeoutTimer.Stop();
-                    return result;
+                    var tokenSource = new CancellationTokenSource(_options.ClientTimeout);                    
+                    return await Task.Run(async () => await action(await _proxyConnectionHandler.GetProxyAsync()), tokenSource.Token);
                 }
                 catch (Exception ex)
                 {
@@ -55,11 +51,8 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
             {
                 try
                 {
-                    var timeoutTimer = new Timer(_options.ClientTimeout.TotalMilliseconds);
-                    timeoutTimer.Elapsed += (source, e) => throw new TimeoutException();
-                    timeoutTimer.Start();
-                    await action(await _proxyConnectionHandler.GetProxyAsync());
-                    timeoutTimer.Stop();
+                    var tokenSource = new CancellationTokenSource(_options.ClientTimeout);
+                    await Task.Run(async () => await action(await _proxyConnectionHandler.GetProxyAsync()), tokenSource.Token);
                     return;
                 }
                 catch (Exception ex)
