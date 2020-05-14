@@ -33,7 +33,7 @@ namespace fiskaltrust.ifPOS.Tests.v1.IPOS
 
         protected override void StopHost()
         {
-            Task.Run(() => _server.ShutdownAsync()).Wait();
+            _server.KillAsync().Wait();
             _server = null;
         }
 
