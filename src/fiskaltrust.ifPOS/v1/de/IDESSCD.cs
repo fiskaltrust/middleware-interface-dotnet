@@ -43,13 +43,13 @@ namespace fiskaltrust.ifPOS.v1.de
 #if WCF
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v1/registerclientid", Method = "POST")]
 #endif
-        Task<RegisterClientIdResponse> RegisterClientId(RegisterClientIdRequest request);
+        Task<RegisterClientIdResponse> RegisterClientIdAsync(RegisterClientIdRequest request);
 
         [OperationContract]
 #if WCF
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v1/unregisterclientid", Method = "POST")]
 #endif
-        Task<UnregisterClientIdResponse> UnregisterClientId(UnregisterClientIdRequest request);
+        Task<UnregisterClientIdResponse> UnregisterClientIdAsync(UnregisterClientIdRequest request);
 
         [OperationContract]
 #if WCF

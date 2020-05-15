@@ -28,9 +28,9 @@ namespace fiskaltrust.ifPOS.Tests.Helpers
             TimeStamp = DateTime.UtcNow
         });
 
-        public async Task<RegisterClientIdResponse> RegisterClientId(RegisterClientIdRequest request) => await FromResult(new RegisterClientIdResponse());
+        public async Task<RegisterClientIdResponse> RegisterClientIdAsync(RegisterClientIdRequest request) => await FromResult(new RegisterClientIdResponse());
 
-        public async Task<UnregisterClientIdResponse> UnregisterClientId(UnregisterClientIdRequest request) => await FromResult(new UnregisterClientIdResponse());
+        public async Task<UnregisterClientIdResponse> UnregisterClientIdAsync(UnregisterClientIdRequest request) => await FromResult(new UnregisterClientIdResponse());
 
         public Task ExecuteSetTseTimeAsync() => Task.Factory.StartNew(() => { return; });
 
