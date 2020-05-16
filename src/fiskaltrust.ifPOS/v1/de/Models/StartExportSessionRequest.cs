@@ -1,18 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
 
 namespace fiskaltrust.ifPOS.v1.de
 {
     [DataContract]
-    public class StartExportSessionByTimeStampRequest
+    public class StartExportSessionRequest
     {
         [DataMember(Order = 10)]
         public string ClientId { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Prepares data deletion at session end.
+        /// </summary>
         [DataMember(Order = 20)]
-        public DateTime From { get; set; }
-
-        [DataMember(Order = 30)]
-        public DateTime To { get; set; }
+        public bool Erase { get; set; }
     }
 }
