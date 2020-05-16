@@ -10,7 +10,7 @@ namespace fiskaltrust.ifPOS.v1.de
     public class StartExportSessionRequest
     {
         [DataMember(Order = 10)]
-        public string ClientId { get; set; } = string.Empty;
+        public string ClientId { get; set; }
 
         /// <summary>
         /// Prepares data deletion at session end.

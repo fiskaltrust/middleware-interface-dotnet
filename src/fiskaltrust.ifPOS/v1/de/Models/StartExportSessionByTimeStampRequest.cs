@@ -7,7 +7,7 @@ namespace fiskaltrust.ifPOS.v1.de
     public class StartExportSessionByTimeStampRequest
     {
         [DataMember(Order = 10)]
-        public string ClientId { get; set; } = string.Empty;
+        public string ClientId { get; set; }
 
         [DataMember(Order = 20)]
         public DateTime From { get; set; }
