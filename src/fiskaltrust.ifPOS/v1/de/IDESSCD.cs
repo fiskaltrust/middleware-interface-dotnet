@@ -67,7 +67,7 @@ namespace fiskaltrust.ifPOS.v1.de
 #if WCF
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v1/startexportsession", Method = "POST")]
 #endif
-        Task<StartExportSessionResponse> StartExportSessionAsync();
+        Task<StartExportSessionResponse> StartExportSessionAsync(StartExportSessionRequest request);
 
         [OperationContract(Name = "v1/StartExportSessionByTimeStamp")]
 #if WCF

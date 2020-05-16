@@ -90,7 +90,7 @@ namespace fiskaltrust.ifPOS.Tests.v1.IDESSCD
         public void StartExportSessionAsync_ShouldReturn()
         {
             var client = CreateClient();
-            var result = client.StartExportSessionAsync().Result;
+            var result = client.StartExportSessionAsync(new StartExportSessionRequest()).Result;
             result.Should().NotBeNull();
         }
 
