@@ -33,17 +33,11 @@ jobs:
         mode: 'Multi'
         semverVersion: 'v1'
     
-    - powershell: |   
-        $nugetFeed = if ($Env:BUILD_SOURCEBRANCH.StartsWith("refs/heads/release/") -or $Env:BUILD_SOURCEBRANCH.StartsWith("refs/tags/v")) { "release" } else { "dev" }
-        Write-Host "##vso[task.setvariable variable=NuGetFeed;]$nugetFeed"
-      displayName: Set NuGet feed
-
     - task: DotNetCoreCLI@2
       displayName: Restore
       inputs:
         command: restore
         projects: '**/*.csproj'
-        vstsFeed: $(NuGetFeed)
 
     - task: DotNetCoreCLI@2
       displayName: Build
