@@ -36,7 +36,7 @@ namespace fiskaltrust.ifPOS.Tests.Helpers
 
         public Task ExecuteSelfTestAsync() => Task.Factory.StartNew(() => { return; });
 
-        public async Task<StartExportSessionResponse> StartExportSessionAsync() => await FromResult(new StartExportSessionResponse());
+        public async Task<StartExportSessionResponse> StartExportSessionAsync(StartExportSessionRequest request) => await FromResult(new StartExportSessionResponse());
 
         public async Task<StartExportSessionResponse> StartExportSessionByTimeStampAsync(StartExportSessionByTimeStampRequest request) => await FromResult(new StartExportSessionResponse());
 
