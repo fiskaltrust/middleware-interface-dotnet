@@ -10,11 +10,11 @@ namespace fiskaltrust.ifPOS.v1.de
         public string TokenId { get; set; }
 
         /// <summary>
-        /// Base64 encoded junks of data as part of the download.
+        /// Base64 encoded junk of data as part of the download.
         /// If MaxJunkSize is 0, no data will be responded. TarFileEndOfFile and TotalTarFileSize are populated anyway.
         /// </summary>
         [DataMember(Order = 20)]
-        public IEnumerable<string> TarFileByteJunksBase64 { get; set; }
+        public string TarFileByteJunkBase64 { get; set; }
 
         /// <summary>
         /// Signal no more data to download.
