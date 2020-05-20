@@ -39,31 +39,31 @@ namespace fiskaltrust.ifPOS.v1.de
         /// <summary>
         /// current list of started stransactions
         /// </summary>
-        [DataMember(Order =60)]
+        [DataMember(Order = 60)]
         public IEnumerable<ulong> CurrentTransactionNumberss { get; set; }
 
         /// <summary>
-        /// maximum number of signatures
+        /// maximum number of signatures which can be provided by the device over lifetime
         /// </summary>
-        [DataMember(Order =70)]
+        [DataMember(Order = 70)]
         public long MaxNumberOfSignatures { get; set; }
 
         /// <summary>
         /// current number of signatures created
         /// </summary>
-        [DataMember(Order =80)]
-        public long CurrentNumbersOfSignatures { get; set; } //signaturecounter
+        [DataMember(Order = 80)]
+        public long CurrentNumbersOfSignatures { get; set; }
 
         /// <summary>
         /// maximum size of log-memory in bytes
         /// </summary>
-        [DataMember(Order =90)]
+        [DataMember(Order = 90)]
         public long MaxLogMemorySize { get; set; }
 
         /// <summary>
         /// current size of used log memory in bytes
         /// </summary>
-        [DataMember(Order =100)]
+        [DataMember(Order = 100)]
         public long CurrentLogMemorySize { get; set; }
 
         /// <summary>
@@ -75,26 +75,26 @@ namespace fiskaltrust.ifPOS.v1.de
         /// <summary>
         /// identification of the device firmware
         /// </summary>
-        [DataMember(Order =120)]
+        [DataMember(Order = 120)]
         public string FirmwareIdentification { get; set; }
 
         /// <summary>
         /// certification identification of the device assigned by BSI
         /// </summary>
-        [DataMember(Order =130)]
+        [DataMember(Order = 130)]
         public string CertificationIdentification { get; set; }
 
 
         /// <summary>
-        /// signature algorithm used by te device
+        /// friendly name of the signature algorithm used by te device (e.g. 'ecdsa-plain-SHA256', 'ecdsa-plain-SHA384', 'ecdsa-plain-SHA512', aso.)
         /// </summary>
-        [DataMember(Order =140)]
+        [DataMember(Order = 140)]
         public string SignatureAlgorithm { get; set; }
 
         /// <summary>
-        /// log time format used by the device
+        /// log time format used by the device. Values can be 'unixTime', 'utcTime', 'generalizedTime'.
         /// </summary>
-        [DataMember(Order =150)]
+        [DataMember(Order = 150)]
         public string LogTimeFormat { get; set; }
 
         /// <summary>
