@@ -1,5 +1,5 @@
 {
-  "version": "1.3.1-rc2",
+  "version": "1.3.1-rc5",
   "releaseBranches": [
     "^refs/heads/master$",
     "^refs/tags/v\\d+(?:\\.\\d+)*(?:-.*)?$"

@@ -60,7 +60,7 @@ namespace fiskaltrust.ifPOS.Tests.v1.IDESSCD
         public void RegisterClientId_ShouldReturn()
         {
             var client = CreateClient();
-            var result = client.RegisterClientId(new RegisterClientIdRequest()).Result;
+            var result = client.RegisterClientIdAsync(new RegisterClientIdRequest()).Result;
             result.Should().NotBeNull();
         }
 
@@ -68,7 +68,7 @@ namespace fiskaltrust.ifPOS.Tests.v1.IDESSCD
         public void UnregisterClientId_ShouldReturn()
         {
             var client = CreateClient();
-            var result = client.UnregisterClientId(new UnregisterClientIdRequest()).Result;
+            var result = client.UnregisterClientIdAsync(new UnregisterClientIdRequest()).Result;
             result.Should().NotBeNull();
         }
 
@@ -90,7 +90,7 @@ namespace fiskaltrust.ifPOS.Tests.v1.IDESSCD
         public void StartExportSessionAsync_ShouldReturn()
         {
             var client = CreateClient();
-            var result = client.StartExportSessionAsync().Result;
+            var result = client.StartExportSessionAsync(new StartExportSessionRequest()).Result;
             result.Should().NotBeNull();
         }
 
