@@ -21,15 +21,15 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.Helpers
 
         public async Task<TseState> SetTseStateAsync(TseState state) => await Task.FromResult(new TseState());
 
-        public async Task<RegisterClientIdResponse> RegisterClientId(RegisterClientIdRequest request) => await Task.FromResult(new RegisterClientIdResponse());
+        public async Task<RegisterClientIdResponse> RegisterClientIdAsync(RegisterClientIdRequest request) => await Task.FromResult(new RegisterClientIdResponse());
 
-        public async Task<UnregisterClientIdResponse> UnregisterClientId(UnregisterClientIdRequest request) => await Task.FromResult(new UnregisterClientIdResponse());
+        public async Task<UnregisterClientIdResponse> UnregisterClientIdAsync(UnregisterClientIdRequest request) => await Task.FromResult(new UnregisterClientIdResponse());
 
         public async Task ExecuteSetTseTimeAsync() => await Task.CompletedTask;
 
         public async Task ExecuteSelfTestAsync() => await Task.CompletedTask;
 
-        public async Task<StartExportSessionResponse> StartExportSessionAsync() => await Task.FromResult(new StartExportSessionResponse());
+        public async Task<StartExportSessionResponse> StartExportSessionAsync(StartExportSessionRequest request) => await Task.FromResult(new StartExportSessionResponse());
 
         public async Task<StartExportSessionResponse> StartExportSessionByTimeStampAsync(StartExportSessionByTimeStampRequest request) => await Task.FromResult(new StartExportSessionResponse());
 
@@ -39,6 +39,6 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.Helpers
 
         public async Task<EndExportSessionResponse> EndExportSessionAsync(EndExportSessionRequest request) => await Task.FromResult(new EndExportSessionResponse());
 
-        public async Task<ScuEchoResponse> EchoAsync(ScuEchoRequest request) => await Task.FromResult(new ScuEchoResponse());
+        public async Task<ScuDeEchoResponse> EchoAsync(ScuDeEchoRequest request) => await Task.FromResult(new ScuDeEchoResponse());
     }
 }

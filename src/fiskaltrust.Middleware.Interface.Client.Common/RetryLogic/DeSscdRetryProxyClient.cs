@@ -9,7 +9,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
 
         public DeSscdRetryProxyClient(IRetryPolicyHandler<IDESSCD> retryPolicyHelper) => _retryPolicyHelper = retryPolicyHelper;
 
-        public async Task<ScuEchoResponse> EchoAsync(ScuEchoRequest request) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.EchoAsync(request));
+        public async Task<ScuDeEchoResponse> EchoAsync(ScuDeEchoRequest request) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.EchoAsync(request));
 
         public async Task<EndExportSessionResponse> EndExportSessionAsync(EndExportSessionRequest request) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.EndExportSessionAsync(request));
 
@@ -23,11 +23,11 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
 
         public async Task<TseInfo> GetTseInfoAsync() => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.GetTseInfoAsync());
 
-        public async Task<RegisterClientIdResponse> RegisterClientId(RegisterClientIdRequest request) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.RegisterClientId(request));
+        public async Task<RegisterClientIdResponse> RegisterClientIdAsync(RegisterClientIdRequest request) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.RegisterClientIdAsync(request));
 
         public async Task<TseState> SetTseStateAsync(TseState state) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.SetTseStateAsync(state));
 
-        public async Task<StartExportSessionResponse> StartExportSessionAsync() => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.StartExportSessionAsync());
+        public async Task<StartExportSessionResponse> StartExportSessionAsync(StartExportSessionRequest request) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.StartExportSessionAsync(request));
 
         public async Task<StartExportSessionResponse> StartExportSessionByTimeStampAsync(StartExportSessionByTimeStampRequest request) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.StartExportSessionByTimeStampAsync(request));
 
@@ -35,7 +35,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
 
         public async Task<StartTransactionResponse> StartTransactionAsync(StartTransactionRequest request) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.StartTransactionAsync(request));
 
-        public async Task<UnregisterClientIdResponse> UnregisterClientId(UnregisterClientIdRequest request) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.UnregisterClientId(request));
+        public async Task<UnregisterClientIdResponse> UnregisterClientIdAsync(UnregisterClientIdRequest request) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.UnregisterClientIdAsync(request));
 
         public async Task<UpdateTransactionResponse> UpdateTransactionAsync(UpdateTransactionRequest request) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.UpdateTransactionAsync(request));
     }

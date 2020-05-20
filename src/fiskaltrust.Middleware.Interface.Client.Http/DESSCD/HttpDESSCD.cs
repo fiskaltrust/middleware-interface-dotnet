@@ -29,15 +29,15 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
 
         public async Task<UpdateTransactionResponse> UpdateTransactionAsync(UpdateTransactionRequest request) => await ExecuteHttpPostAsync<UpdateTransactionResponse>("v1", "updatetransaction", request).ConfigureAwait(false);
 
-        public async Task<RegisterClientIdResponse> RegisterClientId(RegisterClientIdRequest request) => await ExecuteHttpPostAsync<RegisterClientIdResponse>("v1", "registerclientid", request).ConfigureAwait(false);
+        public async Task<RegisterClientIdResponse> RegisterClientIdAsync(RegisterClientIdRequest request) => await ExecuteHttpPostAsync<RegisterClientIdResponse>("v1", "registerclientid", request).ConfigureAwait(false);
 
-        public async Task<UnregisterClientIdResponse> UnregisterClientId(UnregisterClientIdRequest request) => await ExecuteHttpPostAsync<UnregisterClientIdResponse>("v1", "unregisterclientid", request).ConfigureAwait(false);
+        public async Task<UnregisterClientIdResponse> UnregisterClientIdAsync(UnregisterClientIdRequest request) => await ExecuteHttpPostAsync<UnregisterClientIdResponse>("v1", "unregisterclientid", request).ConfigureAwait(false);
 
         public async Task ExecuteSetTseTimeAsync() => await ExecuteHttpPostAsync("v1", "executesettsetime").ConfigureAwait(false);
 
         public async Task ExecuteSelfTestAsync() => await ExecuteHttpPostAsync("v1", "executeselftest").ConfigureAwait(false);
 
-        public async Task<StartExportSessionResponse> StartExportSessionAsync() => await ExecuteHttpPostAsync<StartExportSessionResponse>("v1", "startexportsession").ConfigureAwait(false);
+        public async Task<StartExportSessionResponse> StartExportSessionAsync(StartExportSessionRequest request) => await ExecuteHttpPostAsync<StartExportSessionResponse>("v1", "startexportsession", request).ConfigureAwait(false);
 
         public async Task<StartExportSessionResponse> StartExportSessionByTimeStampAsync(StartExportSessionByTimeStampRequest request) => await ExecuteHttpPostAsync<StartExportSessionResponse>("v1", "startexportsessionbytimestamp", request).ConfigureAwait(false);
 
@@ -47,7 +47,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
 
         public async Task<EndExportSessionResponse> EndExportSessionAsync(EndExportSessionRequest request) => await ExecuteHttpPostAsync<EndExportSessionResponse>("v1", "endexportsession", request).ConfigureAwait(false);
 
-        public async Task<ScuEchoResponse> EchoAsync(ScuEchoRequest request) => await ExecuteHttpPostAsync<ScuEchoResponse>("v1", "echo", request).ConfigureAwait(false);
+        public async Task<ScuDeEchoResponse> EchoAsync(ScuDeEchoRequest request) => await ExecuteHttpPostAsync<ScuDeEchoResponse>("v1", "echo", request).ConfigureAwait(false);
 
         private async Task<T> ExecuteHttpPostAsync<T>(string urlVersion, string urlMethod, object parameter = null)
         {
