@@ -9,7 +9,7 @@ namespace fiskaltrust.ifPOS.v1.de
         public string TokenId { get; set; }
 
         /// <summary>
-        /// SHA-256 (SHA-2) over all received junks.
+        /// SHA-256 (SHA-2) over all received chunks.
         /// Verifies data integrity. EndSession.
         /// </summary>
         [DataMember(Order = 20)]

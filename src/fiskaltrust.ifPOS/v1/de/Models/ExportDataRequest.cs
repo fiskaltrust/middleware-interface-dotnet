@@ -8,6 +8,6 @@ namespace fiskaltrust.ifPOS.v1.de
         [DataMember(Order = 10)]
         public string TokenId { get; set; }
         [DataMember(Order = 20)]
-        public int MaxJunkSize { get; set; }
+        public int MaxChunkSize { get; set; }
     }
 }
