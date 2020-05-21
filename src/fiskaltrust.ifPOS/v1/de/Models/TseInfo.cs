@@ -37,10 +37,10 @@ namespace fiskaltrust.ifPOS.v1.de
         public long CurrentNumberOfTransactions { get; set; }
 
         /// <summary>
-        /// current list of started stransactions
+        /// current list of started transactions
         /// </summary>
         [DataMember(Order = 60)]
-        public IEnumerable<ulong> CurrentTransactionNumberss { get; set; }
+        public IEnumerable<ulong> CurrentTransactionNumbers { get; set; }
 
         /// <summary>
         /// maximum number of signatures which can be provided by the device over lifetime
