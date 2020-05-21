@@ -14,5 +14,8 @@ namespace fiskaltrust.ifPOS.v1
 
         [DataMember(Order = 3)]
         public long To { get; set; }
+
+        [DataMember(Order = 4)]
+        public int MaxChunkSize { get; set; } = 4096;
     }
 }

@@ -28,19 +28,19 @@ namespace fiskaltrust.ifPOS.v1.de
         /// maximal number of started transactions supported
         /// </summary>
         [DataMember(Order = 40)]
-        public long MaxNumberOfTransactions { get; set; }
+        public long MaxNumberOfStartedTransactions { get; set; }
 
         /// <summary>
         /// current number of started transactions
         /// </summary>
         [DataMember(Order = 50)]
-        public long CurrentNumberOfTransactions { get; set; }
+        public long CurrentNumberOfStartedTransactions { get; set; }
 
         /// <summary>
         /// current list of started transactions
         /// </summary>
         [DataMember(Order = 60)]
-        public IEnumerable<ulong> CurrentTransactionNumbers { get; set; }
+        public IEnumerable<ulong> CurrentStartedTransactionNumbers { get; set; }
 
         /// <summary>
         /// maximum number of signatures which can be provided by the device over lifetime
