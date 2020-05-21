@@ -52,7 +52,7 @@ namespace fiskaltrust.ifPOS.v1.de
         /// current number of signatures created
         /// </summary>
         [DataMember(Order = 80)]
-        public long CurrentNumbersOfSignatures { get; set; }
+        public long CurrentNumberOfSignatures { get; set; }
 
         /// <summary>
         /// maximum size of log-memory in bytes
