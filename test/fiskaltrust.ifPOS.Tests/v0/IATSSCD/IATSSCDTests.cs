@@ -3,7 +3,7 @@
 using System;
 using System.ServiceModel;
 using fiskaltrust.ifPOS.Tests.Helpers;
-using fiskaltrust.ifPOS.Tests.Helpers.Wcf;
+using fiskaltrust.Middleware.Interface.Tests.Helpers.Wcf;
 using FluentAssertions;
 using NUnit.Framework;
 

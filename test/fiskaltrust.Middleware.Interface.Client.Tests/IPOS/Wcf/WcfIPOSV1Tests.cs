@@ -1,10 +1,9 @@
 ﻿#if WCF
 
 using fiskaltrust.ifPOS.v0;
-using fiskaltrust.Middleware.Interface.Client.Shared;
 using fiskaltrust.Middleware.Interface.Client.Soap;
 using fiskaltrust.Middleware.Interface.Client.Tests.Helpers;
-using fiskaltrust.Middleware.Interface.Client.Tests.Helpers.Grpc;
+using fiskaltrust.Middleware.Interface.Tests.Helpers.Wcf;
 using FluentAssertions;
 using NUnit.Framework;
 using System;
@@ -28,7 +27,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IPOS.Wcf
             _serviceHost = null;
         }
 
-        protected override ifPOS.v1.IPOS CreateClient() => SoapPosFactory.CreatePosAsync(new PosOptions { Url = new Uri(_url) }).Result;
+        protected override ifPOS.v1.IPOS CreateClient() => SoapPosFactory.CreatePosAsync(new ClientOptions { Url = new Uri(_url) }).Result;
 
         protected override void StartHost() => _serviceHost = WcfHelper.StartHost<ifPOS.v1.IPOS>(_url, new DummyPOSV1());
 

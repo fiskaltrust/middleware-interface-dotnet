@@ -1,8 +1,8 @@
 ﻿#if GRPC
 
 using fiskaltrust.ifPOS.Tests.Helpers;
-using fiskaltrust.ifPOS.Tests.Helpers.Grpc;
 using fiskaltrust.ifPOS.v1;
+using fiskaltrust.Middleware.Interface.Tests.Helpers.Grpc;
 using FluentAssertions;
 using Grpc.Core;
 using NUnit.Framework;
@@ -33,7 +33,7 @@ namespace fiskaltrust.ifPOS.Tests.v1.IPOS
 
         protected override void StopHost()
         {
-            Task.Run(() => _server.ShutdownAsync()).Wait();
+            _server.KillAsync().Wait();
             _server = null;
         }
 

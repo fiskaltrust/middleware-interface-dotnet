@@ -1,7 +1,6 @@
-﻿using fiskaltrust.Middleware.Interface.Client.Shared.RetryLogic.Interfaces;
+﻿using fiskaltrust.Middleware.Interface.Client.Common.RetryLogic;
 using Grpc.Core;
 using ProtoBuf.Grpc.Client;
-using System;
 using System.Threading.Tasks;
 
 namespace fiskaltrust.Middleware.Interface.Client.Grpc
@@ -10,9 +9,9 @@ namespace fiskaltrust.Middleware.Interface.Client.Grpc
     {
         private T _proxy;
         private Channel _channel;
-        private readonly GrpcPosOptions _options;
+        private readonly GrpcClientOptions _options;
 
-        public GrpcProxyConnectionHandler(GrpcPosOptions options)
+        public GrpcProxyConnectionHandler(GrpcClientOptions options)
         {
             _options = options;
         }

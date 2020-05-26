@@ -2,7 +2,7 @@
 
 using fiskaltrust.Middleware.Interface.Client.Http;
 using fiskaltrust.Middleware.Interface.Client.Tests.Helpers;
-using fiskaltrust.Middleware.Interface.Client.Tests.Helpers.Grpc;
+using fiskaltrust.Middleware.Interface.Tests.Helpers.Wcf;
 using System;
 using System.ServiceModel;
 
@@ -27,7 +27,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IPOS.Wcf
             _serviceHost = null;
         }
 
-        protected override ifPOS.v1.IPOS CreateClient() => HttpPosFactory.CreatePosAsync(new HttpPosOptions { Url = new Uri(_url) }).Result;
+        protected override ifPOS.v1.IPOS CreateClient() => HttpPosFactory.CreatePosAsync(new HttpPosClientOptions { Url = new Uri(_url) }).Result;
 
         protected override void StartHost() => _serviceHost = WcfHelper.StartRestHost<ifPOS.v1.IPOS>(_url, new DummyPOSV1());
 

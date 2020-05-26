@@ -1,5 +1,4 @@
-﻿using fiskaltrust.Middleware.Interface.Client.Shared;
-using fiskaltrust.Middleware.Interface.Client.Shared.RetryLogic.Interfaces;
+﻿using fiskaltrust.Middleware.Interface.Client.Common.RetryLogic;
 using System;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
@@ -14,9 +13,9 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap
         private const int RECEIVE_TIMEOUT_DAYS = 14;
 
         private T _proxy;
-        private readonly PosOptions _options;
+        private readonly ClientOptions _options;
 
-        public SoapProxyConnectionHandler(PosOptions options)
+        public SoapProxyConnectionHandler(ClientOptions options)
         {
             _options = options;
         }

@@ -1,12 +1,12 @@
 ﻿using fiskaltrust.ifPOS.v1;
-using fiskaltrust.Middleware.Interface.Client.Shared;
+using fiskaltrust.Middleware.Interface.Client.Common.RetryLogic;
 using System.Threading.Tasks;
 
 namespace fiskaltrust.Middleware.Interface.Client.Soap
 {
     public static class SoapPosFactory
     {
-        public static async Task<IPOS> CreatePosAsync(PosOptions options)
+        public static async Task<IPOS> CreatePosAsync(ClientOptions options)
         {
             var connectionhandler = new SoapProxyConnectionHandler<IPOS>(options);
 

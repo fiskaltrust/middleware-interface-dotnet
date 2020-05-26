@@ -23,7 +23,7 @@ For even simpler usage, we offer client packages for the supported communication
 [![Nuget](https://img.shields.io/nuget/v/fiskaltrust.Middleware.Interface.Client.Grpc?label=nuget)](https://nuget.org/packages/fiskaltrust.Middleware.Interface.Client.Grpc)
 
 ```cs
-var pos = await GrpcPosFactory.CreatePosAsync(new GrpcPosOptions 
+var pos = await GrpcPosFactory.CreatePosAsync(new GrpcClientOptions 
 { 
     Url = new Uri(url), 
     RetryPolicyOptions = new RetryPolicyOptions { ... } // Optional
@@ -34,7 +34,7 @@ var pos = await GrpcPosFactory.CreatePosAsync(new GrpcPosOptions
 [![Nuget](https://img.shields.io/nuget/v/fiskaltrust.Middleware.Interface.Client.Http?label=nuget)](https://nuget.org/packages/fiskaltrust.Middleware.Interface.Client.Http)
 
 ```cs
-var pos = await HttpPosFactory.CreatePosAsync(new HttpPosOptions 
+var pos = await HttpPosFactory.CreatePosAsync(new HttpPosClientOptions
 { 
     Url = new Uri(url), 
     CommunicationType = HttpCommunicationType.Json,     // Or HttpCommunicationType.Xml
@@ -48,7 +48,7 @@ var pos = await HttpPosFactory.CreatePosAsync(new HttpPosOptions
 [![Nuget](https://img.shields.io/nuget/v/fiskaltrust.Middleware.Interface.Client.Soap?label=nuget)](https://nuget.org/packages/fiskaltrust.Middleware.Interface.Client.Soap)
 
 ```cs
-var pos = await SoapPosFactory.CreatePosAsync(new PosOptions 
+var pos = await SoapPosFactory.CreatePosAsync(new ClientOptions
 { 
     Url = new Uri(url), 
     RetryPolicyOptions = new RetryPolicyOptions { ... } // Optional

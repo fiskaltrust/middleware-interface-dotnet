@@ -1,7 +1,7 @@
 ﻿#if WCF
 
 using fiskaltrust.ifPOS.Tests.Helpers;
-using fiskaltrust.ifPOS.Tests.Helpers.Wcf;
+using fiskaltrust.Middleware.Interface.Tests.Helpers.Wcf;
 using System.ServiceModel;
 
 namespace fiskaltrust.ifPOS.Tests.v1.IDESSCD

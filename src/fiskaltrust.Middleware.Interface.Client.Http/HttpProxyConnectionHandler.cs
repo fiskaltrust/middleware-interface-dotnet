@@ -1,4 +1,4 @@
-﻿using fiskaltrust.Middleware.Interface.Client.Shared.RetryLogic.Interfaces;
+﻿using fiskaltrust.Middleware.Interface.Client.Common.RetryLogic;
 using System.Threading.Tasks;
 
 namespace fiskaltrust.Middleware.Interface.Client.Http

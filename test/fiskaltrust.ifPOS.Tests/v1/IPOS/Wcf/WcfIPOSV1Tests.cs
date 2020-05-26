@@ -1,8 +1,8 @@
 ﻿#if WCF
 
 using fiskaltrust.ifPOS.Tests.Helpers;
-using fiskaltrust.ifPOS.Tests.Helpers.Wcf;
 using fiskaltrust.ifPOS.v0;
+using fiskaltrust.Middleware.Interface.Tests.Helpers.Wcf;
 using FluentAssertions;
 using NUnit.Framework;
 using System;
