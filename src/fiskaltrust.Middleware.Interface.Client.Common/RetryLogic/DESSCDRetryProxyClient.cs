@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 
 namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
 {
-    public class DeSscdRetryProxyClient : IDESSCD
+    public class DESSCDRetryProxyClient : IDESSCD
     {
         private readonly IRetryPolicyHandler<IDESSCD> _retryPolicyHelper;
 
-        public DeSscdRetryProxyClient(IRetryPolicyHandler<IDESSCD> retryPolicyHelper) => _retryPolicyHelper = retryPolicyHelper;
+        public DESSCDRetryProxyClient(IRetryPolicyHandler<IDESSCD> retryPolicyHelper) => _retryPolicyHelper = retryPolicyHelper;
 
         public async Task<ScuDeEchoResponse> EchoAsync(ScuDeEchoRequest request) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.EchoAsync(request));
 

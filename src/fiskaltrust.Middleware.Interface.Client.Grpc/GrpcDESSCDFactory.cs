@@ -13,7 +13,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Grpc
             if (options.RetryPolicyOptions != null)
             {
                 var retryPolicyHelper = new RetryPolicyHandler<IDESSCD>(options.RetryPolicyOptions, connectionhandler);
-                return new DeSscdRetryProxyClient(retryPolicyHelper);
+                return new DESSCDRetryProxyClient(retryPolicyHelper);
             }
             else
             {
