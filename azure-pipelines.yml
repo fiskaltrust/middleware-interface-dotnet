@@ -74,7 +74,7 @@ jobs:
         buildConfiguration: $(buildConfiguration)
 
     - script: dotnet pack --no-build --output $(Build.ArtifactStagingDirectory) --configuration $(buildConfiguration)
-      displayName: 'dotnet pack ifPOS'
+      displayName: 'dotnet pack'
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
