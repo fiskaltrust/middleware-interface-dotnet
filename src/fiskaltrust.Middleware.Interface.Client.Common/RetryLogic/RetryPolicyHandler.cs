@@ -1,4 +1,6 @@
-﻿using System;
+﻿using fiskaltrust.ifPOS.v1;
+using System;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,11 +28,22 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
                     var tokenSource = new CancellationTokenSource(_options.ClientTimeout);                    
                     return await Task.Run(async () => await action(await _proxyConnectionHandler.GetProxyAsync()), tokenSource.Token);
                 }
+                catch(TaskCanceledException)
+                {
+                    if (trial == _options.Retries - 1)
+                    {
+                        throw new RetryPolicyException("The maximum number of retries was reached while sending this request.");
+                    }
+                }
+                catch(ScuException)
+                {
+                    throw;
+                }
                 catch (Exception ex)
                 {
                     if (trial == _options.Retries - 1)
                     {
-                        throw new RetryPolicyException("The maximum number of retries was reached while sending this request.", ex);
+                        throw;
                     }
                 }
 
@@ -55,11 +68,22 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
                     await Task.Run(async () => await action(await _proxyConnectionHandler.GetProxyAsync()), tokenSource.Token);
                     return;
                 }
+                catch (TaskCanceledException)
+                {
+                    if (trial == _options.Retries - 1)
+                    {
+                        throw new RetryPolicyException("The maximum number of retries was reached while sending this request.");
+                    }
+                }
+                catch (ScuException)
+                {
+                    throw;
+                }
                 catch (Exception ex)
                 {
                     if (trial == _options.Retries - 1)
                     {
-                        throw new RetryPolicyException("The maximum number of retries was reached while sending this request.", ex);
+                        throw;
                     }
                 }
 

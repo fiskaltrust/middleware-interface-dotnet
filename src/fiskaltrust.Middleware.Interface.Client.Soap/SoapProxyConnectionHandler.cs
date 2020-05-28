@@ -1,4 +1,5 @@
 ﻿using fiskaltrust.Middleware.Interface.Client.Common.RetryLogic;
+using fiskaltrust.Middleware.Interface.Client.Soap.Extensions;
 using System;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
@@ -9,7 +10,6 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap
     internal class SoapProxyConnectionHandler<T> : IProxyConnectionHandler<T> where T : class
     {
         private const long MAX_RECEIVED_MESSAGE_SIZE = 16 * 1024 * 1024;
-        private const int SEND_TIMEOUT_SEC = 15;
         private const int RECEIVE_TIMEOUT_DAYS = 14;
 
         private T _proxy;
@@ -75,7 +75,8 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap
 
         private Binding ConfigureBinding()
         {
-            var sendTimeout = TimeSpan.FromSeconds(SEND_TIMEOUT_SEC);
+            // Use timeout * 2 to make sure the call doesn't end before the outer timeout
+            var sendTimeout = _options.RetryPolicyOptions?.ClientTimeout.Double() ?? RetryPolicyOptions.Default.ClientTimeout.Double();
             var receiveTimeout = TimeSpan.FromDays(RECEIVE_TIMEOUT_DAYS);
 
             return _options.Url.Scheme switch
