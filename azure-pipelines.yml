@@ -73,8 +73,12 @@ jobs:
         failTaskOnFailedTests: true
         buildConfiguration: $(buildConfiguration)
 
-    - script: dotnet pack --no-build --output $(Build.ArtifactStagingDirectory) --configuration $(buildConfiguration)
-      displayName: 'dotnet pack'
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'pack'
+        packagesToPack: 'src/**/*.csproj'
+        nobuild: true
+        versioningScheme: 'off'
 
     - task: PublishBuildArtifacts@1
       displayName: 'Publish Artifact: drop'
