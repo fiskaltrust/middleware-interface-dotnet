@@ -9,7 +9,6 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap
     internal class SoapProxyConnectionHandler<T> : IProxyConnectionHandler<T> where T : class
     {
         private const long MAX_RECEIVED_MESSAGE_SIZE = 16 * 1024 * 1024;
-        private const int SEND_TIMEOUT_SEC = 15;
         private const int RECEIVE_TIMEOUT_DAYS = 14;
 
         private T _proxy;
@@ -75,7 +74,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap
 
         private Binding ConfigureBinding()
         {
-            var sendTimeout = TimeSpan.FromSeconds(SEND_TIMEOUT_SEC);
+            var sendTimeout = _options.RetryPolicyOptions?.ClientTimeout ?? RetryPolicyOptions.Default.ClientTimeout;
             var receiveTimeout = TimeSpan.FromDays(RECEIVE_TIMEOUT_DAYS);
 
             return _options.Url.Scheme switch
