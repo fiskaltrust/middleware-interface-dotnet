@@ -25,17 +25,24 @@ namespace fiskaltrust.Middleware.Interface.Client.Shared
                 try
                 {
                     var timeoutTimer = new System.Timers.Timer(_options.ClientTimeout.TotalMilliseconds);
-                    timeoutTimer.Elapsed += (source, e) => throw new TimeoutException();
+                    timeoutTimer.Elapsed += (source, e) => throw new RetryTimeoutException();
                     timeoutTimer.Start();
                     var result = await action(await _proxyConnectionHandler.GetProxyAsync());
                     timeoutTimer.Stop();
                     return result;
                 }
-                catch (Exception ex)
+                catch (RetryTimeoutException ex)
                 {
                     if (trial == _options.Retries - 1)
                     {
                         throw new RetryPolicyException("The host is not reachable!", ex);
+                    }
+                }
+                catch (Exception)
+                {
+                    if (trial == _options.Retries - 1)
+                    {
+                        throw;
                     }
                 }
 
