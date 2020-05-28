@@ -74,6 +74,7 @@ jobs:
         buildConfiguration: $(buildConfiguration)
 
     - task: DotNetCoreCLI@2
+      displayName: dotnet pack
       inputs:
         command: 'pack'
         packagesToPack: 'src/**/*.csproj'
