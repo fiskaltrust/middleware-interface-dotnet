@@ -22,7 +22,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Grpc
             {
                 return Task.CompletedTask;
             }
-            _channel = new Channel(_options.Url.Host, _options.Url.Port, _options.ChannelCredentials);
+            _channel = new Channel(_options.Url.Host, _options.Url.Port, _options.ChannelCredentials, _options.ChannelOptions);
             _proxy = _channel.CreateGrpcService<T>();
 
             return Task.CompletedTask;
@@ -32,13 +32,16 @@ namespace fiskaltrust.Middleware.Interface.Client.Grpc
         {
             try
             {
-                await _channel.ShutdownAsync();
+                if (_channel != null)
+                {
+                    await _channel.ShutdownAsync();
+                }
             }
             catch
             {
                 // We can ignore the case when shutdown failed
             }
-            _channel = new Channel(_options.Url.Host, _options.Url.Port, ChannelCredentials.Insecure);
+            _channel = new Channel(_options.Url.Host, _options.Url.Port, _options.ChannelCredentials, _options.ChannelOptions);
             _proxy = _channel.CreateGrpcService<T>();
         }
 
