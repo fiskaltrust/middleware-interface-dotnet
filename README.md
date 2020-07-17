@@ -39,7 +39,8 @@ var pos = await HttpPosFactory.CreatePosAsync(new HttpPosClientOptions
     Url = new Uri(url), 
     CommunicationType = HttpCommunicationType.Json,     // Or HttpCommunicationType.Xml
     CashboxId = cashboxId,
-    AccessToken = "<ACCESS_TOKEN>"                      // Only required for SignaturCloud 
+    AccessToken = "<ACCESS_TOKEN>"                      // Only required for SignaturCloud
+    UseUnversionedLegacyUrls = false                    // Optional. Set `true` for fiskaltrust.Middleware < 1.3
     RetryPolicyOptions = new RetryPolicyOptions { ... } // Optional
 });
 ```
@@ -62,6 +63,22 @@ If you want to contribute to this repository, please review this README file to 
 Currently, the _Minor_ version is incremented for each country that is added to the interface. Starting with the future version 2.0, we will switch to [semantic versioning](https://semver.org/).
 
 For the list of currently available versions, please have a look at the [NuGet Version History](https://www.nuget.org/packages/fiskaltrust.interface/).
+
+### fiskaltrust.Middleware < 1.3
+
+Versions before v1.3 of the fiskaltrust.Middleware only support the `fiskaltrust.ifPOS.v0` and need to use unversioned legacy urls.
+
+```cs
+ifPOS.v0.IPOS pos = await HttpPosFactory.CreatePosAsync(new HttpPosClientOptions
+{ 
+    Url = new Uri(url), 
+    CommunicationType = HttpCommunicationType.Json,
+    CashboxId = cashboxId,
+    AccessToken = "<ACCESS_TOKEN>"
+    UseUnversionedLegacyUrls = true                     // Needs to be true
+    RetryPolicyOptions = new RetryPolicyOptions { ... }
+});
+```
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
