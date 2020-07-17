@@ -21,6 +21,8 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
         private delegate ifPOS.v0.ReceiptResponse AsyncSignCaller(ifPOS.v0.ReceiptRequest request);
         private delegate Stream AsyncJournalCaller(long ftJournalType, long from, long to);
 
+        private string V0VersionUrl => _options.UseUnversionedLegacyUrls ? "" : "v0/";
+
         public HttpPos(HttpPosClientOptions options)
         {
             _httpClient = GetClient(options);
@@ -205,7 +207,5 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
         {
             throw new NotSupportedException("Async streaming is not supported in HTTP. Please call the non-async Journal method.");
         }
-
-        private string V0VersionUrl => _options.UseUnversionedLegacyUrls ? "" : "v0/";
     }
 }
