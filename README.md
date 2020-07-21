@@ -39,8 +39,25 @@ var pos = await HttpPosFactory.CreatePosAsync(new HttpPosClientOptions
     Url = new Uri(url), 
     CommunicationType = HttpCommunicationType.Json,     // Or HttpCommunicationType.Xml
     CashboxId = cashboxId,
-    AccessToken = "<ACCESS_TOKEN>"                      // Only required for SignaturCloud 
+    AccessToken = "<ACCESS_TOKEN>"                      // Only required for SignaturCloud
+    UseUnversionedLegacyUrls = false                    // Optional. Set `true` for fiskaltrust.Middleware < 1.3
     RetryPolicyOptions = new RetryPolicyOptions { ... } // Optional
+});
+```
+
+### fiskaltrust.Middleware < 1.3
+
+Versions before v1.3 of the fiskaltrust.Middleware only support the `fiskaltrust.ifPOS.v0` and need to use unversioned legacy urls.
+
+```cs
+ifPOS.v0.IPOS pos = await HttpPosFactory.CreatePosAsync(new HttpPosClientOptions
+{ 
+    Url = new Uri(url), 
+    CommunicationType = HttpCommunicationType.Json,
+    CashboxId = cashboxId,
+    AccessToken = "<ACCESS_TOKEN>"
+    UseUnversionedLegacyUrls = true                     // Needs to be true
+    RetryPolicyOptions = new RetryPolicyOptions { ... }
 });
 ```
 
