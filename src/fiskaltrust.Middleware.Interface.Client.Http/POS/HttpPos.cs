@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -62,7 +63,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             var jsonstring = JsonConvert.SerializeObject(message);
             var jsonContent = new StringContent(jsonstring, Encoding.UTF8, "application/json");
 
-            using (var response = _httpClient.PostAsync($"{_v0VersionUrl}Echo", jsonContent).Result)
+            using (var response = _httpClient.PostAsync($"{_v0VersionUrl}json/Echo", jsonContent).Result)
             {
                 response.EnsureSuccessStatusCode();
                 var reponse = response.Content.ReadAsStringAsync().Result;
@@ -128,11 +129,11 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
         {
             if (_options.CommunicationType == HttpCommunicationType.Json)
             {
-                return JsonSignAsync<ifPOS.v0.ReceiptRequest, ifPOS.v0.ReceiptResponse>(data, $"{_v0VersionUrl}sign").Result;
+                return JsonSignAsync<ifPOS.v0.ReceiptRequest, ifPOS.v0.ReceiptResponse>(data, $"{_v0VersionUrl}json/sign").Result;
             }
             else
             {
-                return XmlSignAsync<ifPOS.v0.ReceiptRequest, ifPOS.v0.ReceiptResponse>(data, $"{_v0VersionUrl}sign").Result;
+                return XmlSignAsync<ifPOS.v0.ReceiptRequest, ifPOS.v0.ReceiptResponse>(data, $"{_v0VersionUrl}xml/sign").Result;
             }
         }
 
@@ -198,7 +199,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = client.PostAsync($"{_v0VersionUrl}journal?type={ftJournalType}&from={from}&to={to}", null).Result;
+                var response = client.PostAsync($"{_v0VersionUrl}json/journal?type={ftJournalType}&from={from}&to={to}", new StringContent("", Encoding.UTF8, "application/json")).Result;
                 response.EnsureSuccessStatusCode();
                 var stream = response.Content.ReadAsStreamAsync().Result;
                 return stream;
