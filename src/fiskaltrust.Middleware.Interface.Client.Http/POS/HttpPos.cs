@@ -88,7 +88,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             var xmlString = XmlSerializationHelpers.Serialize(message);
             var xmlContent = new StringContent(xmlString, Encoding.UTF8, "application/xml");
 
-            using (var response = _httpClient.PostAsync($"{_v0VersionUrl}xml/echo", xmlContent).Result)
+            using (var response = _httpClient.PostAsync($"xml/{_v0VersionUrl}echo", xmlContent).Result)
             {
                 response.EnsureSuccessStatusCode();
                 var content = response.Content.ReadAsStringAsync().Result;
@@ -155,11 +155,11 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
         {
             if (_options.CommunicationType == HttpCommunicationType.Json)
             {
-                return JsonSignAsync<ifPOS.v0.ReceiptRequest, ifPOS.v0.ReceiptResponse>(data, $"{_v0VersionUrl}json/sign").Result;
+                return JsonSignAsync<ifPOS.v0.ReceiptRequest, ifPOS.v0.ReceiptResponse>(data, $"json/{_v0VersionUrl}sign").Result;
             }
             else
             {
-                return XmlSignAsync<ifPOS.v0.ReceiptRequest, ifPOS.v0.ReceiptResponse>(data, $"{_v0VersionUrl}xml/sign").Result;
+                return XmlSignAsync<ifPOS.v0.ReceiptRequest, ifPOS.v0.ReceiptResponse>(data, $"xml/{_v0VersionUrl}sign").Result;
             }
         }
 
@@ -235,7 +235,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue($"application/{format}"));
 
-                var response = client.PostAsync($"{_v0VersionUrl}{format}/journal?type={ftJournalType}&from={from}&to={to}", new StringContent("", Encoding.UTF8, $"application/{format}")).Result;
+                var response = client.PostAsync($"{format}/{_v0VersionUrl}journal?type={ftJournalType}&from={from}&to={to}", new StringContent("", Encoding.UTF8, $"application/{format}")).Result;
                 response.EnsureSuccessStatusCode();
                 var stream = response.Content.ReadAsStreamAsync().Result;
                 return stream;
