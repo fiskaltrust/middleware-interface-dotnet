@@ -1,5 +1,6 @@
 ﻿using fiskaltrust.ifPOS.v1;
 using fiskaltrust.Middleware.Interface.Client.Common.RetryLogic;
+using  fiskaltrust.Middleware.Interface.Client.Soap.Helpers;
 using System.Threading.Tasks;
 
 namespace fiskaltrust.Middleware.Interface.Client.Soap
@@ -13,11 +14,11 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap
             if (options.RetryPolicyOptions != null)
             {
                 var retryPolicyHelper = new RetryPolicyHandler<IPOS>(options.RetryPolicyOptions, connectionhandler);
-                return new PosRetryProxyClient(retryPolicyHelper);
+                return new AsyncPOSHelper(new PosRetryProxyClient(retryPolicyHelper));
             }
             else
             {
-                return await connectionhandler.GetProxyAsync();
+                return new AsyncPOSHelper(await connectionhandler.GetProxyAsync());
             }
         }
     }
