@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace fiskaltrust.Middleware.Interface.Client.Http.Extensions
+namespace fiskaltrust.Middleware.Interface.Client.Extensions
 {
     public static class StreamExtensions
     {

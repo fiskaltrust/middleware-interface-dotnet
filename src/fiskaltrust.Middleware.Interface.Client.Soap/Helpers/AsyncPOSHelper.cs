@@ -5,13 +5,33 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
-namespace fiskaltrust.Middleware.Interface.Client.Http.Helpers
+namespace fiskaltrust.Middleware.Interface.Client.Soap.Helpers
 {
-    public class AsyncJournalPOSHelper : IPOS
+    [StructLayout(LayoutKind.Explicit)]
+    public struct ReceiptRequestUnion
+    {
+        [FieldOffset(0)]
+        public fiskaltrust.ifPOS.v0.ReceiptRequest v0;
+        [FieldOffset(0)]
+        public fiskaltrust.ifPOS.v1.ReceiptRequest v1;
+    }
+
+    [StructLayout(LayoutKind.Explicit)]
+    public struct ReceiptResponseUnion
+    {
+        [FieldOffset(0)]
+        public fiskaltrust.ifPOS.v0.ReceiptResponse v0;
+        [FieldOffset(0)]
+        public fiskaltrust.ifPOS.v1.ReceiptResponse v1;
+    }
+
+
+    public class AsyncPOSHelper : IPOS
     {
         private readonly IPOS _innerPOS;
-        public AsyncJournalPOSHelper(IPOS innerPOS)
+        public AsyncPOSHelper(IPOS innerPOS)
         {
             _innerPOS = innerPOS;
         }
@@ -32,9 +52,19 @@ namespace fiskaltrust.Middleware.Interface.Client.Http.Helpers
 
         public ifPOS.v0.ReceiptResponse Sign(ifPOS.v0.ReceiptRequest data) => _innerPOS.Sign(data);
 
-        public Task<ifPOS.v1.ReceiptResponse> SignAsync(ifPOS.v1.ReceiptRequest request) => _innerPOS.SignAsync(request);
+        public Task<ifPOS.v1.ReceiptResponse> SignAsync(ifPOS.v1.ReceiptRequest request) => Task.Run(() => {
+            var req = new ReceiptRequestUnion
+            {
+                v1 = request
+            };
 
-        public Stream Journal(long ftJournalType, long from, long to) => _innerPOS.Journal(ftJournalType, from, to);
+            var res = new ReceiptResponseUnion
+            {
+                v1 = _innerPOS.Sign(req.v0)
+            };
+
+            return res.v0;
+        });
 
         public IAsyncEnumerable<JournalResponse> JournalAsync(JournalRequest request)
         {
@@ -42,6 +72,6 @@ namespace fiskaltrust.Middleware.Interface.Client.Http.Helpers
             return stream.ToAsyncEnumerable();
         }
 
-        public Task<EchoResponse> EchoAsync(EchoRequest message) => _innerPOS.EchoAsync(message);
+        public Task<EchoResponse> EchoAsync(EchoRequest message) => Task.Run(() => _innerPOS.EchoAsync(message));
     }
 }
