@@ -60,10 +60,10 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap.Helpers
 
             var res = new ReceiptResponseUnion
             {
-                v1 = _innerPOS.Sign(req.v0)
+                v0 = _innerPOS.Sign(req.v0)
             };
 
-            return res.v0;
+            return res.v1;
         });
 
         public IAsyncEnumerable<JournalResponse> JournalAsync(JournalRequest request)
