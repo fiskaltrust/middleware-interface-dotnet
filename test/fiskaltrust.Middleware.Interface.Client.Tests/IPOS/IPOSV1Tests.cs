@@ -25,7 +25,8 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IPOS
             var queueId = Guid.NewGuid().ToString();
             var signRequest = new ReceiptRequest
             {
-                ftQueueID = queueId
+                ftQueueID = queueId,
+                cbChargeItems = new ChargeItem[] { new ChargeItem() }
             };
             var response = await client.SignAsync(signRequest);
             response.ftQueueID.Should().Be(queueId);

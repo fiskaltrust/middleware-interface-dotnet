@@ -27,7 +27,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IPOS.Wcf
             _serviceHost = null;
         }
 
-        protected override ifPOS.v0.IPOS CreateClient() => HttpPosFactory.CreatePosAsync(new HttpPosClientOptions { Url = new Uri($"{_url}/v0"), UseUnversionedLegacyUrls = true }).Result;
+        protected override ifPOS.v0.IPOS CreateClient() => HttpPosFactory.CreatePosAsync(new HttpPosClientOptions { Url = new Uri($"{_url}/v0"), UseUnversionedLegacyUrls = true, CommunicationType = HttpCommunicationType.Json }).Result;
 
         protected override void StartHost() => _serviceHost = WcfHelper.StartRestHost<ifPOS.v0.IPOS>(_url, new DummyPOS());
 

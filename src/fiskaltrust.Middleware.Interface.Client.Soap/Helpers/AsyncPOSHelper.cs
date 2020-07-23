@@ -1,5 +1,6 @@
 ﻿using fiskaltrust.ifPOS.v1;
 using fiskaltrust.Middleware.Interface.Client.Extensions;
+using fiskaltrust.Middleware.Interface.Client.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,25 +10,6 @@ using System.Runtime.InteropServices;
 
 namespace fiskaltrust.Middleware.Interface.Client.Soap.Helpers
 {
-    [StructLayout(LayoutKind.Explicit)]
-    public struct ReceiptRequestUnion
-    {
-        [FieldOffset(0)]
-        public fiskaltrust.ifPOS.v0.ReceiptRequest v0;
-        [FieldOffset(0)]
-        public fiskaltrust.ifPOS.v1.ReceiptRequest v1;
-    }
-
-    [StructLayout(LayoutKind.Explicit)]
-    public struct ReceiptResponseUnion
-    {
-        [FieldOffset(0)]
-        public fiskaltrust.ifPOS.v0.ReceiptResponse v0;
-        [FieldOffset(0)]
-        public fiskaltrust.ifPOS.v1.ReceiptResponse v1;
-    }
-
-
     public class AsyncPOSHelper : IPOS
     {
         private readonly IPOS _innerPOS;
@@ -52,18 +34,12 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap.Helpers
 
         public ifPOS.v0.ReceiptResponse Sign(ifPOS.v0.ReceiptRequest data) => _innerPOS.Sign(data);
 
+        public Stream Journal(long ftJournalType, long from, long to) => _innerPOS.Journal(ftJournalType, from, to);
+
         public Task<ifPOS.v1.ReceiptResponse> SignAsync(ifPOS.v1.ReceiptRequest request) => Task.Run(() => {
-            var req = new ReceiptRequestUnion
-            {
-                v1 = request
-            };
-
-            var res = new ReceiptResponseUnion
-            {
-                v0 = _innerPOS.Sign(req.v0)
-            };
-
-            return res.v1;
+            var requestV0 = ModelConverter<ifPOS.v1.ReceiptRequest, ifPOS.v0.ReceiptRequest>.Convert(request);
+            var responseV0 = _innerPOS.Sign(requestV0);
+            return ModelConverter<ifPOS.v0.ReceiptResponse, ifPOS.v1.ReceiptResponse>.Convert(responseV0);
         });
 
         public IAsyncEnumerable<JournalResponse> JournalAsync(JournalRequest request)
