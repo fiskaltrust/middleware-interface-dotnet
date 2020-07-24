@@ -1,19 +1,17 @@
-﻿using fiskaltrust.ifPOS.v1;
-using fiskaltrust.Middleware.Interface.Client.Extensions;
-using fiskaltrust.Middleware.Interface.Client.Helpers;
+﻿using fiskaltrust.Middleware.Interface.Client.Extensions;
+using fiskaltrust.Middleware.Interface.Client.Helpers.ModelConverters;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Runtime.InteropServices;
 
 namespace fiskaltrust.Middleware.Interface.Client.Soap.Helpers
 {
-    public class AsyncPOSHelper : IPOS
+    public class AsyncPOSHelper : ifPOS.v1.IPOS
     {
-        private readonly IPOS _innerPOS;
-        public AsyncPOSHelper(IPOS innerPOS)
+        private readonly ifPOS.v1.IPOS _innerPOS;
+        public AsyncPOSHelper(ifPOS.v1.IPOS innerPOS)
         {
             _innerPOS = innerPOS;
         }
@@ -37,17 +35,16 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap.Helpers
         public Stream Journal(long ftJournalType, long from, long to) => _innerPOS.Journal(ftJournalType, from, to);
 
         public Task<ifPOS.v1.ReceiptResponse> SignAsync(ifPOS.v1.ReceiptRequest request) => Task.Run(() => {
-            var requestV0 = ModelConverter<ifPOS.v1.ReceiptRequest, ifPOS.v0.ReceiptRequest>.Convert(request);
-            var responseV0 = _innerPOS.Sign(requestV0);
-            return ModelConverter<ifPOS.v0.ReceiptResponse, ifPOS.v1.ReceiptResponse>.Convert(responseV0);
+            var response = _innerPOS.Sign(v0.ReceiptRequest(request));
+            return v1.ReceiptResponse(response);
         });
 
-        public IAsyncEnumerable<JournalResponse> JournalAsync(JournalRequest request)
+        public IAsyncEnumerable<ifPOS.v1.JournalResponse> JournalAsync(ifPOS.v1.JournalRequest request)
         {
             var stream = _innerPOS.Journal(request.ftJournalType, request.From, request.To);
             return stream.ToAsyncEnumerable();
         }
 
-        public Task<EchoResponse> EchoAsync(EchoRequest message) => Task.Run(() => _innerPOS.EchoAsync(message));
+        public Task<ifPOS.v1.EchoResponse> EchoAsync(ifPOS.v1.EchoRequest message) => Task.Run(() => _innerPOS.EchoAsync(message));
     }
 }
