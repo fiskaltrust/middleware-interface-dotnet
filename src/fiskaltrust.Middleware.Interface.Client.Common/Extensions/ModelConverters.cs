@@ -1,20 +1,18 @@
 using System;
 using System.Linq;
 
-namespace fiskaltrust.Middleware.Interface.Client.Helpers.ModelConverters
+namespace fiskaltrust.Middleware.Interface.Client.Extensions
 {
-    static class Helper
+    public static class ModelConversionExtensions 
     {
-        public static T[] ConvertArray<U, T>(U[] from, Func<U, T> converter)
+        private static T[] ConvertArray<U, T>(U[] from, Func<U, T> converter)
         {
             if(from == null) return null;
 
             return from.Select(item => converter(item)).ToArray();
         }
-    }
-    public static class v0
-    {
-        public static ifPOS.v0.ReceiptRequest ReceiptRequest(ifPOS.v1.ReceiptRequest from)
+
+        public static ifPOS.v0.ReceiptRequest Into(this ifPOS.v1.ReceiptRequest from)
         {
             return new ifPOS.v0.ReceiptRequest()
             {
@@ -24,8 +22,8 @@ namespace fiskaltrust.Middleware.Interface.Client.Helpers.ModelConverters
                 cbTerminalID = from.cbTerminalID,
                 cbReceiptReference = from.cbReceiptReference,
                 cbReceiptMoment = from.cbReceiptMoment,
-                cbChargeItems = Helper.ConvertArray(from.cbChargeItems, ChargeItem),
-                cbPayItems = Helper.ConvertArray(from.cbPayItems, PayItem),
+                cbChargeItems = ConvertArray(from.cbChargeItems, i => i.Into()),
+                cbPayItems = ConvertArray(from.cbPayItems, i => i.Into()),
                 ftReceiptCase = from.ftReceiptCase,
                 ftReceiptCaseData = from.ftReceiptCaseData,
                 cbReceiptAmount = from.cbReceiptAmount,
@@ -37,7 +35,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Helpers.ModelConverters
             };
         }
 
-        public static ifPOS.v0.ChargeItem ChargeItem(ifPOS.v1.ChargeItem from)
+        public static ifPOS.v0.ChargeItem Into(this ifPOS.v1.ChargeItem from)
         {
             return new ifPOS.v0.ChargeItem()
             {
@@ -61,7 +59,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Helpers.ModelConverters
             };
         }
 
-        public static ifPOS.v0.PayItem PayItem(ifPOS.v1.PayItem from)
+        public static ifPOS.v0.PayItem Into(this ifPOS.v1.PayItem from)
         {
             return new ifPOS.v0.PayItem()
             {
@@ -78,11 +76,8 @@ namespace fiskaltrust.Middleware.Interface.Client.Helpers.ModelConverters
                 Moment = from.Moment,
             };
         }
-    }
 
-    public static class v1
-    {
-        public static ifPOS.v1.ReceiptResponse ReceiptResponse(ifPOS.v0.ReceiptResponse from)
+        public static ifPOS.v1.ReceiptResponse Into(this ifPOS.v0.ReceiptResponse from)
         {
             return new ifPOS.v1.ReceiptResponse()
             {
@@ -96,18 +91,18 @@ namespace fiskaltrust.Middleware.Interface.Client.Helpers.ModelConverters
                 ftReceiptIdentification = from.ftReceiptIdentification,
                 ftReceiptMoment = from.ftReceiptMoment,
                 ftReceiptHeader = from.ftReceiptHeader,
-                ftChargeItems = Helper.ConvertArray(from.ftChargeItems, ChargeItem),
+                ftChargeItems = ConvertArray(from.ftChargeItems, i => i.Into()),
                 ftChargeLines = from.ftChargeLines,
-                ftPayItems = Helper.ConvertArray(from.ftPayItems, PayItem),
+                ftPayItems = ConvertArray(from.ftPayItems, i => i.Into()),
                 ftPayLines = from.ftPayLines,
-                ftSignatures = Helper.ConvertArray(from.ftSignatures, SignatureItem),
+                ftSignatures = ConvertArray(from.ftSignatures, i => i.Into()),
                 ftReceiptFooter = from.ftReceiptFooter,
                 ftState = from.ftState,
                 ftStateData = from.ftStateData,
             };
         }
 
-        public static ifPOS.v1.ChargeItem ChargeItem(ifPOS.v0.ChargeItem from)
+        public static ifPOS.v1.ChargeItem Into(this ifPOS.v0.ChargeItem from)
         {
             return new ifPOS.v1.ChargeItem
             {
@@ -131,7 +126,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Helpers.ModelConverters
             };
         }
 
-        public static ifPOS.v1.PayItem PayItem(ifPOS.v0.PayItem from)
+        public static ifPOS.v1.PayItem Into(this ifPOS.v0.PayItem from)
         {
             return new ifPOS.v1.PayItem()
             {
@@ -149,7 +144,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Helpers.ModelConverters
             };
         }
 
-        public static ifPOS.v1.SignaturItem SignatureItem(ifPOS.v0.SignaturItem from)
+        public static ifPOS.v1.SignaturItem Into(this ifPOS.v0.SignaturItem from)
         {
             return new ifPOS.v1.SignaturItem()
             {

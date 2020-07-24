@@ -1,5 +1,4 @@
 ﻿using fiskaltrust.Middleware.Interface.Client.Extensions;
-using fiskaltrust.Middleware.Interface.Client.Helpers.ModelConverters;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -35,8 +34,8 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap.Helpers
         public Stream Journal(long ftJournalType, long from, long to) => _innerPOS.Journal(ftJournalType, from, to);
 
         public Task<ifPOS.v1.ReceiptResponse> SignAsync(ifPOS.v1.ReceiptRequest request) => Task.Run(() => {
-            var response = _innerPOS.Sign(v0.ReceiptRequest(request));
-            return v1.ReceiptResponse(response);
+            var response = _innerPOS.Sign(request.Into());
+            return response.Into();
         });
 
         public IAsyncEnumerable<ifPOS.v1.JournalResponse> JournalAsync(ifPOS.v1.JournalRequest request)
