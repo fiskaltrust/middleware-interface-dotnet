@@ -2,10 +2,37 @@
 using System;
 using System.IO;
 using System.Text;
+using System.ServiceModel;
+#if WCF
+using System.ServiceModel.Web;
+#endif
 
 namespace fiskaltrust.Middleware.Interface.Client.Tests.Helpers
 {
-    public class DummyPOS : ifPOS.v0.IPOS
+    [ServiceContract]
+    public interface IDummyPOS : ifPOS.v0.IPOS
+    {
+        [OperationContract]
+#if WCF
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "json/echo")]
+#endif
+        public string EchoVersionless(string message);
+
+        [OperationContract]
+#if WCF
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "json/sign")]
+#endif
+        public ifPOS.v0.ReceiptResponse SignVersionless(ifPOS.v0.ReceiptRequest request);
+
+
+        [OperationContract]
+#if WCF
+        [WebInvoke(UriTemplate = "json/journal?type={ftJournalType}&from={from}&to={to}")]
+#endif
+        public Stream JournalVersionless(long ftJournalType, long from, long to);
+    }
+
+    public class DummyPOS : IDummyPOS
     {
         private delegate string Echo_Delegate(string message);
         private delegate ifPOS.v0.ReceiptResponse Sign_Delegate(ifPOS.v0.ReceiptRequest request);
@@ -24,6 +51,8 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.Helpers
             return d.EndInvoke(result);
         }
 
+        public string EchoVersionless(string message) => Echo(message);
+
         public string Echo(string message) => message;
 
         public IAsyncResult BeginSign(ifPOS.v0.ReceiptRequest request, AsyncCallback callback, object state)
@@ -39,6 +68,8 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.Helpers
             return d.EndInvoke(result);
         }
 
+        public ifPOS.v0.ReceiptResponse SignVersionless(ifPOS.v0.ReceiptRequest request) => Sign(request);
+
         public ifPOS.v0.ReceiptResponse Sign(ifPOS.v0.ReceiptRequest request)
         {
             var response = new ifPOS.v0.ReceiptResponse
@@ -52,6 +83,8 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.Helpers
 
             return response;
         }
+
+        public Stream JournalVersionless(long ftJournalType, long from, long to) => Journal(ftJournalType, from, to);
 
         public Stream Journal(long ftJournalType, long from, long to)
         {
