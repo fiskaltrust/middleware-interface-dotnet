@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -59,14 +60,40 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
 
         string ifPOS.v0.IPOS.Echo(string message)
         {
+            if (_options.CommunicationType == HttpCommunicationType.Json)
+            {
+                return JsonEcho(message);
+            }
+            else
+            {
+                return XmlEcho(message);
+            }
+        }
+
+        string JsonEcho(string message)
+        {
             var jsonstring = JsonConvert.SerializeObject(message);
             var jsonContent = new StringContent(jsonstring, Encoding.UTF8, "application/json");
 
-            using (var response = _httpClient.PostAsync($"{_v0VersionUrl}Echo", jsonContent).Result)
+            using (var response = _httpClient.PostAsync($"{_v0VersionUrl}json/echo", jsonContent).Result)
             {
                 response.EnsureSuccessStatusCode();
-                var reponse = response.Content.ReadAsStringAsync().Result;
-                return JsonConvert.DeserializeObject<string>(reponse);
+                var content = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<string>(content);
+            }
+        }
+
+        string XmlEcho(string message)
+        {
+            var xmlString = XmlSerializationHelpers.Serialize(message);
+            var xmlContent = new StringContent(xmlString, Encoding.UTF8, "application/xml");
+
+            using (var response = _httpClient.PostAsync($"xml/{_v0VersionUrl}echo", xmlContent).Result)
+            {
+                response.EnsureSuccessStatusCode();
+                var content = response.Content.ReadAsStringAsync().Result;
+
+                return content;
             }
         }
 
@@ -128,11 +155,11 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
         {
             if (_options.CommunicationType == HttpCommunicationType.Json)
             {
-                return JsonSignAsync<ifPOS.v0.ReceiptRequest, ifPOS.v0.ReceiptResponse>(data, $"{_v0VersionUrl}sign").Result;
+                return JsonSignAsync<ifPOS.v0.ReceiptRequest, ifPOS.v0.ReceiptResponse>(data, $"json/{_v0VersionUrl}sign").Result;
             }
             else
             {
-                return XmlSignAsync<ifPOS.v0.ReceiptRequest, ifPOS.v0.ReceiptResponse>(data, $"{_v0VersionUrl}sign").Result;
+                return XmlSignAsync<ifPOS.v0.ReceiptRequest, ifPOS.v0.ReceiptResponse>(data, $"xml/{_v0VersionUrl}sign").Result;
             }
         }
 
@@ -195,10 +222,20 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
         {
             using (var client = GetClient(_options))
             {
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                string format;
+                if (_options.CommunicationType == HttpCommunicationType.Json)
+                {
+                    format = "json";
+                }
+                else
+                {
+                    format = "xml";
+                }
 
-                var response = client.PostAsync($"{_v0VersionUrl}journal?type={ftJournalType}&from={from}&to={to}", null).Result;
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue($"application/{format}"));
+
+                var response = client.PostAsync($"{format}/{_v0VersionUrl}journal?type={ftJournalType}&from={from}&to={to}", new StringContent("", Encoding.UTF8, $"application/{format}")).Result;
                 response.EnsureSuccessStatusCode();
                 var stream = response.Content.ReadAsStreamAsync().Result;
                 return stream;
