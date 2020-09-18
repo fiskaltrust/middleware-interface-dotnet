@@ -31,7 +31,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.Middleware.Inte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.Middleware.Interface.Client.Common", "src\fiskaltrust.Middleware.Interface.Client.Common\fiskaltrust.Middleware.Interface.Client.Common.csproj", "{4250D63B-366A-45C0-A2FB-0F9818961602}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fiskaltrust.Middleware.Interface.Tests.Helpers", "test\fiskaltrust.Middleware.Interface.Tests.Helpers\fiskaltrust.Middleware.Interface.Tests.Helpers.csproj", "{504F3A97-6CA6-4C91-8151-360F060C772F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fiskaltrust.Middleware.Interface.Tests.Helpers", "test\fiskaltrust.Middleware.Interface.Tests.Helpers\fiskaltrust.Middleware.Interface.Tests.Helpers.csproj", "{504F3A97-6CA6-4C91-8151-360F060C772F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fiskaltrust.interface.StrongName", "src\fiskaltrust.interface.StrongName\fiskaltrust.interface.StrongName.csproj", "{1F282047-8E68-4E38-9792-979CAED5A768}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{504F3A97-6CA6-4C91-8151-360F060C772F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{504F3A97-6CA6-4C91-8151-360F060C772F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{504F3A97-6CA6-4C91-8151-360F060C772F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F282047-8E68-4E38-9792-979CAED5A768}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F282047-8E68-4E38-9792-979CAED5A768}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F282047-8E68-4E38-9792-979CAED5A768}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F282047-8E68-4E38-9792-979CAED5A768}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +91,7 @@ Global
 		{8D5E806B-39EF-4FCD-AD59-5AB710F5D8BB} = {4A4977D1-0B9A-44F9-B4A3-3D08FBB58D14}
 		{4250D63B-366A-45C0-A2FB-0F9818961602} = {7CCEF987-3E5A-48D0-9D69-708C62526829}
 		{504F3A97-6CA6-4C91-8151-360F060C772F} = {4A4977D1-0B9A-44F9-B4A3-3D08FBB58D14}
+		{1F282047-8E68-4E38-9792-979CAED5A768} = {18766606-E68D-44CC-B89A-5807F901D943}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3CAE7E81-C6A5-44FA-8E98-F9207561129F}
