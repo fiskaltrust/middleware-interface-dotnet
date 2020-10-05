@@ -1,7 +1,8 @@
 fiskaltrust.Middleware Interface
 =========================
 
-[![Nuget](https://img.shields.io/nuget/v/fiskaltrust.interface?label=nuget)](https://nuget.org/packages/fiskaltrust.interface)
+[![Nuget](https://img.shields.io/nuget/v/fiskaltrust.interface?label=fiskaltrust.interface)](https://nuget.org/packages/fiskaltrust.interface)
+[![Nuget](https://img.shields.io/nuget/v/fiskaltrust.interface.StrongName?label=fiskaltrust.interface.StrongName)](https://nuget.org/packages/fiskaltrust.interface.StrongName)
 [![Build Status](https://fiskaltrust.visualstudio.com/department-develop-research/_apis/build/status/fiskaltrust.if/fiskaltrust.middleware-interface-dotnet?branchName=master)](https://fiskaltrust.visualstudio.com/department-develop-research/_build/latest?definitionId=334)
 
 A NuGet package that can be used to include the free fiskaltrust Middleware into POS systems.
