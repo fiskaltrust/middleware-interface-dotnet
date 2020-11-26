@@ -9,6 +9,16 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap
     {
         public static async Task<IPOS> CreatePosAsync(ClientOptions options)
         {
+            var soapClientOptions = new SoapClientOptions
+            {
+                RetryPolicyOptions = options.RetryPolicyOptions,
+                Url = options.Url
+            };
+            return await CreatePosAsync(soapClientOptions);
+        }
+
+        public static async Task<IPOS> CreatePosAsync(SoapClientOptions options)
+        {
             var connectionhandler = new SoapProxyConnectionHandler<IPOS>(options);
 
             if (options.RetryPolicyOptions != null)

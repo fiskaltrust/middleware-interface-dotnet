@@ -8,6 +8,16 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap
     {
         public static async Task<IDESSCD> CreateSSCDAsync(ClientOptions options)
         {
+            var soapClientOptions = new SoapClientOptions
+            {
+                RetryPolicyOptions = options.RetryPolicyOptions,
+                Url = options.Url
+            };
+            return await CreateSSCDAsync(soapClientOptions);
+        }
+
+        public static async Task<IDESSCD> CreateSSCDAsync(SoapClientOptions options)
+        {
             var connectionhandler = new SoapProxyConnectionHandler<IDESSCD>(options);
 
             if (options.RetryPolicyOptions != null)
