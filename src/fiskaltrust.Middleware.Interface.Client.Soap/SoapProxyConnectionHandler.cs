@@ -9,13 +9,10 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap
 {
     internal class SoapProxyConnectionHandler<T> : IProxyConnectionHandler<T> where T : class
     {
-        private const long MAX_RECEIVED_MESSAGE_SIZE = 16 * 1024 * 1024;
-        private const int RECEIVE_TIMEOUT_DAYS = 14;
-
         private T _proxy;
-        private readonly ClientOptions _options;
+        private readonly SoapClientOptions _options;
 
-        public SoapProxyConnectionHandler(ClientOptions options)
+        public SoapProxyConnectionHandler(SoapClientOptions options)
         {
             _options = options;
         }
@@ -77,14 +74,13 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap
         {
             // Use timeout * 2 to make sure the call doesn't end before the outer timeout
             var sendTimeout = _options.RetryPolicyOptions?.ClientTimeout.Double() ?? RetryPolicyOptions.Default.ClientTimeout.Double();
-            var receiveTimeout = TimeSpan.FromDays(RECEIVE_TIMEOUT_DAYS);
 
             return _options.Url.Scheme switch
             {
-                "http" => new BasicHttpBinding(BasicHttpSecurityMode.None) { MaxReceivedMessageSize = MAX_RECEIVED_MESSAGE_SIZE, SendTimeout = sendTimeout, ReceiveTimeout = receiveTimeout },
-                "https" => new BasicHttpBinding(BasicHttpSecurityMode.Transport) { MaxReceivedMessageSize = MAX_RECEIVED_MESSAGE_SIZE, SendTimeout = sendTimeout, ReceiveTimeout = receiveTimeout },
-                "net.pipe" => new NetNamedPipeBinding(NetNamedPipeSecurityMode.None) { MaxReceivedMessageSize = MAX_RECEIVED_MESSAGE_SIZE, SendTimeout = sendTimeout, ReceiveTimeout = receiveTimeout },
-                "net.tcp" => new NetTcpBinding(SecurityMode.None) { MaxReceivedMessageSize = MAX_RECEIVED_MESSAGE_SIZE, SendTimeout = sendTimeout, ReceiveTimeout = receiveTimeout },
+                "http" => new BasicHttpBinding(BasicHttpSecurityMode.None) { MaxReceivedMessageSize = _options.MaxReceivedMessageSize, SendTimeout = sendTimeout, ReceiveTimeout = _options.ReceiveTimeout },
+                "https" => new BasicHttpBinding(BasicHttpSecurityMode.Transport) { MaxReceivedMessageSize = _options.MaxReceivedMessageSize, SendTimeout = sendTimeout, ReceiveTimeout = _options.ReceiveTimeout },
+                "net.pipe" => new NetNamedPipeBinding(NetNamedPipeSecurityMode.None) { MaxReceivedMessageSize = _options.MaxReceivedMessageSize, SendTimeout = sendTimeout, ReceiveTimeout = _options.ReceiveTimeout },
+                "net.tcp" => new NetTcpBinding(SecurityMode.None) { MaxReceivedMessageSize = _options.MaxReceivedMessageSize, SendTimeout = sendTimeout, ReceiveTimeout = _options.ReceiveTimeout },
                 _ => throw new ArgumentException($"The url {_options.Url} is not supported.", nameof(_options.Url))
             };
         }

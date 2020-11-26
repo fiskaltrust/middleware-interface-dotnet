@@ -15,5 +15,4 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
         Json,
         Xml
     }
-
 }

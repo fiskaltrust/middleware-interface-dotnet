@@ -41,7 +41,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap.Helpers
         public IAsyncEnumerable<ifPOS.v1.JournalResponse> JournalAsync(ifPOS.v1.JournalRequest request)
         {
             var stream = _innerPOS.Journal(request.ftJournalType, request.From, request.To);
-            return stream.ToAsyncEnumerable();
+            return stream.ToAsyncEnumerable(request.MaxChunkSize);
         }
 
         public Task<ifPOS.v1.EchoResponse> EchoAsync(ifPOS.v1.EchoRequest message) => Task.Run(() => _innerPOS.EchoAsync(message));

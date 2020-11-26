@@ -7,15 +7,15 @@ namespace fiskaltrust.Middleware.Interface.Client.Extensions
 {
     public static class StreamExtensions
     {
-        public static async IAsyncEnumerable<JournalResponse> ToAsyncEnumerable(this Stream stream)
+        public static async IAsyncEnumerable<JournalResponse> ToAsyncEnumerable(this Stream stream, int chunkSize)
         {
-            var chunkSize = 4096;
             var buffer = new byte[chunkSize];
-            while ((_ = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+            int readAmount;
+            while ((readAmount = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
             {
                 yield return new JournalResponse
                 {
-                    Chunk = buffer.ToList()
+                    Chunk = buffer.Take(readAmount).ToList()
                 };
                 buffer = new byte[chunkSize];
             }

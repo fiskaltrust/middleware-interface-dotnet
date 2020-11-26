@@ -39,7 +39,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http.Helpers
         public IAsyncEnumerable<JournalResponse> JournalAsync(JournalRequest request)
         {
             var stream = _innerPOS.Journal(request.ftJournalType, request.From, request.To);
-            return stream.ToAsyncEnumerable();
+            return stream.ToAsyncEnumerable(request.MaxChunkSize);
         }
 
         public Task<EchoResponse> EchoAsync(EchoRequest message) => _innerPOS.EchoAsync(message);
