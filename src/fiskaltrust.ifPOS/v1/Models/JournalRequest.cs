@@ -2,7 +2,11 @@
 using System.Runtime.Serialization;
 
 namespace fiskaltrust.ifPOS.v1
-{
+{   /// <summary>
+/// Request to extract a journal from the local database. 
+/// Type and Timerange can be specified with the properties Journaltype,from and to. 
+/// </summary>
+
     [DataContract]
     public class JournalRequest
     {
