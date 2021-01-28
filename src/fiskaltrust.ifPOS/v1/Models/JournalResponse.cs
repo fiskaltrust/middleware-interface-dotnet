@@ -3,6 +3,9 @@ using System.Runtime.Serialization;
 
 namespace fiskaltrust.ifPOS.v1
 {
+    /// <summary>
+    /// The fiskaltrust.Middleware returns the requested JournalType as a FileStream.
+    /// </summary>
     [DataContract]
     public class JournalResponse
     {

@@ -2,8 +2,8 @@
 
 namespace fiskaltrust.ifPOS.v1
 {   /// <summary>
-/// Response to the EchoRequest. Returns the message provided in the EchoRequest if successfull.
-/// </summary>
+    /// Response to the EchoRequest. Returns the message provided in the EchoRequest if successfull.
+    /// </summary>
     [DataContract]
     public class EchoResponse
     {

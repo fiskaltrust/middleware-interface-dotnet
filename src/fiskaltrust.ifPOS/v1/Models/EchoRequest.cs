@@ -10,5 +10,6 @@ namespace fiskaltrust.ifPOS.v1
     {
         [DataMember(Order = 1)]
         public string Message { get; set; }
+
     }
 }
