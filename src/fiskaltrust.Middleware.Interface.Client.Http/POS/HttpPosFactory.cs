@@ -7,6 +7,11 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
 {
     public static class HttpPosFactory
     {
+        /// <summary>
+        /// Create HTTP POS Client
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns>proxy</returns>
         public static async Task<IPOS> CreatePosAsync(HttpPosClientOptions options)
         {
             var connectionhandler = new HttpProxyConnectionHandler<IPOS>(new AsyncJournalPOSHelper(new HttpPos(options)));
