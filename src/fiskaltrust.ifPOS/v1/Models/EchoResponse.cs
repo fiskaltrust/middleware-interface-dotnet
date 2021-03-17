@@ -1,7 +1,8 @@
 ﻿using System.Runtime.Serialization;
 
 namespace fiskaltrust.ifPOS.v1
-{   /// <summary>
+{   
+    /// <summary>
     /// Response to the EchoRequest. Returns the message provided in the EchoRequest if successfull.
     /// </summary>
     [DataContract]

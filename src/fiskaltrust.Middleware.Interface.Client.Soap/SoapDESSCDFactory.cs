@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 namespace fiskaltrust.Middleware.Interface.Client.Soap
 {
+    /// <summary>
+    /// Create SOAP SSCD.
+    /// </summary>
     public static class SoapDESSCDFactory
     {
         public static async Task<IDESSCD> CreateSSCDAsync(ClientOptions options)

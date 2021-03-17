@@ -4,13 +4,13 @@ using System.Threading.Tasks;
 
 namespace fiskaltrust.Middleware.Interface.Client.Grpc
 {
+    /// <summary>
+    /// Create grpc POS Client.
+    /// </summary>
+    /// <param name="options"></param>
+    /// <returns>proxy</returns>
     public static class GrpcPosFactory
     {
-        /// <summary>
-        /// Create grpc POS Client.
-        /// </summary>
-        /// <param name="options"></param>
-        /// <returns>proxy</returns>
         public static async Task<IPOS> CreatePosAsync(GrpcClientOptions options)
         {
             var connectionhandler = new GrpcProxyConnectionHandler<IPOS>(options);

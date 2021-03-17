@@ -2,11 +2,11 @@
 
 namespace fiskaltrust.Middleware.Interface.Client
 {
+    /// <summary>
+    /// Common options to configure on client side.
+    /// </summary>
     public class ClientOptions
     {
-        /// <summary>
-        /// Common options to configure on client side.
-        /// </summary>
         public Uri Url { get; set; }
         public RetryPolicyOptions RetryPolicyOptions { get; set; }
     }
