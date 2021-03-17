@@ -6,6 +6,11 @@ namespace fiskaltrust.Middleware.Interface.Client.Grpc
 {
     public static class GrpcDESSCDFactory
     {
+        /// <summary>
+        /// Create grpc SSCD.
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns>proxy</returns>
         public static async Task<IDESSCD> CreateSSCDAsync(GrpcClientOptions options)
         {
             var connectionhandler = new GrpcProxyConnectionHandler<IDESSCD>(options);

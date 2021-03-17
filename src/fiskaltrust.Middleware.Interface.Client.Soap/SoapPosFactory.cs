@@ -7,6 +7,11 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap
 {
     public static class SoapPosFactory
     {
+        /// <summary>
+        /// Create SOAP POS Client.
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns>proxy</returns>
         public static async Task<IPOS> CreatePosAsync(ClientOptions options)
         {
             var soapClientOptions = new SoapClientOptions
