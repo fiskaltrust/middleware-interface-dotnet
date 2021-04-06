@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 namespace fiskaltrust.Middleware.Interface.Client.Grpc
 {
+    /// <summary>
+    /// Create grpc SSCD.
+    /// </summary>
     public static class GrpcDESSCDFactory
     {
         public static async Task<IDESSCD> CreateSSCDAsync(GrpcClientOptions options)

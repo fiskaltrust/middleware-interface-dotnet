@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace fiskaltrust.Middleware.Interface.Client.Http
 {
+    /// <summary>
+    /// Create HTTP POS Client
+    /// </summary>
     public static class HttpPosFactory
     {
         public static async Task<IPOS> CreatePosAsync(HttpPosClientOptions options)

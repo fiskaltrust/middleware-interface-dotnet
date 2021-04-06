@@ -2,6 +2,9 @@
 
 namespace fiskaltrust.Middleware.Interface.Client
 {
+    /// <summary>
+    /// Set the Retries for calling the SCU, the Delay between the Retries and the Timeout for one call.
+    /// </summary>
     public class RetryPolicyOptions
     {
         public int Retries { get; set; }

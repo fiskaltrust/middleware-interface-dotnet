@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace fiskaltrust.Middleware.Interface.Client.Soap
 {
+    /// <summary>
+    /// Create SOAP POS Client.
+    /// </summary>
     public static class SoapPosFactory
     {
         public static async Task<IPOS> CreatePosAsync(ClientOptions options)

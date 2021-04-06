@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace fiskaltrust.ifPOS.v1
 {
     /// <summary>
-    /// Charge items entries are used for receipt requests as well as for receipt responses.
+    /// Charge items entries (goods or services) are used for receipt requests as well as for receipt responses.
     /// </summary>
     [DataContract]
     public class ChargeItem
