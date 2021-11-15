@@ -19,12 +19,18 @@ variables:
   value: any cpu
 - name: Solution
   value: 'fiskaltrust.Middleware.Interface.sln'
+- name: 'dotNetFramework'
+  value: 'net6.0'
 
 jobs:
   - job: Build 
     pool:
       vmImage: windows-latest
     steps:
+    - task: UseDotNet@2
+      inputs:
+        version: $(dotNetVersion)
+
     - task: VisualStudioTestPlatformInstaller@1
       displayName: VsTest Platform Installer
 
