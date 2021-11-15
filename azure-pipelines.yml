@@ -30,6 +30,10 @@ jobs:
     - task: UseDotNet@2
       inputs:
         version: $(dotNetVersion)
+    
+    - task: UseDotNet@2
+      inputs:
+        version: '3.0.100'
 
     - task: VisualStudioTestPlatformInstaller@1
       displayName: VsTest Platform Installer
