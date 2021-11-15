@@ -19,8 +19,8 @@ variables:
   value: any cpu
 - name: Solution
   value: 'fiskaltrust.Middleware.Interface.sln'
-- name: 'dotNetFramework'
-  value: 'net6.0'
+- name: 'dotNetVersion'
+  value: '6.0.100'
 
 jobs:
   - job: Build 
