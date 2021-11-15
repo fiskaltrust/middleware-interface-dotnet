@@ -11,7 +11,11 @@ namespace fiskaltrust.Middleware.Interface.Client.Grpc
     {
         public static async Task<IDESSCD> CreateSSCDAsync(GrpcClientOptions options)
         {
+#if NET6_0_OR_GREATER
             var connectionhandler = new GrpcProxyConnectionHandler<IDESSCD>(options);
+#else
+            var connectionhandler = new NativeGrpcProxyConnectionHandler<IDESSCD>(options); 
+#endif
 
             if (options.RetryPolicyOptions != null)
             {

@@ -1,34 +1,32 @@
-﻿#if NET6_0_OR_GREATER
+﻿#if !NET6_0_OR_GREATER
 
 using fiskaltrust.Middleware.Interface.Client.Common.RetryLogic;
+using Grpc.Core;
 using ProtoBuf.Grpc.Client;
 using System.Threading.Tasks;
-using Grpc.Net.Client;
 
 namespace fiskaltrust.Middleware.Interface.Client.Grpc
 {
-    internal class GrpcProxyConnectionHandler<T> : IProxyConnectionHandler<T> where T : class
+    internal class NativeGrpcProxyConnectionHandler<T> : IProxyConnectionHandler<T> where T : class
     {
         private T _proxy;
-        private GrpcChannel _channel;
+        private Channel _channel;
         private readonly GrpcClientOptions _options;
 
-        public GrpcProxyConnectionHandler(GrpcClientOptions options)
+        public NativeGrpcProxyConnectionHandler(GrpcClientOptions options)
         {
             _options = options;
         }
 
         public Task ReconnectAsync()
         {
-            if (_proxy != null)
+            if (_proxy != null && _channel.State == ChannelState.Ready)
             {
                 return Task.CompletedTask;
             }
-
-            GrpcClientFactory.AllowUnencryptedHttp2 = _options.AllowUnencryptedHttp2;
-            _channel = GrpcChannel.ForAddress(_options.Url, _options.ChannelOptions);
+            _channel = new Channel(_options.Url.Host, _options.Url.Port, _options.ChannelCredentials, _options.ChannelOptions);
             _proxy = _channel.CreateGrpcService<T>();
-            
+
             return Task.CompletedTask;
         }
 
@@ -45,14 +43,13 @@ namespace fiskaltrust.Middleware.Interface.Client.Grpc
             {
                 // We can ignore the case when shutdown failed
             }
-            GrpcClientFactory.AllowUnencryptedHttp2 = _options.AllowUnencryptedHttp2;
-            _channel = GrpcChannel.ForAddress(_options.Url, _options.ChannelOptions);
+            _channel = new Channel(_options.Url.Host, _options.Url.Port, _options.ChannelCredentials, _options.ChannelOptions);
             _proxy = _channel.CreateGrpcService<T>();
         }
 
         public async Task<T> GetProxyAsync()
         {
-            if (_proxy == null)
+            if (_proxy == null || _channel.State != ChannelState.Ready)
             {
                 await ReconnectAsync();
             }
