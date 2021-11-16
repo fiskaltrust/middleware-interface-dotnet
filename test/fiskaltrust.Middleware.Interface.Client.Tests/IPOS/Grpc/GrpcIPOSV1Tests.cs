@@ -19,8 +19,11 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IPOS.Grpc
 
         ~GrpcIPOSV1Tests()
         {
-            Task.Run(() => _server.ShutdownAsync()).Wait();
-            _server = null;
+            if (_server != null)
+            {
+                Task.Run(() => _server.ShutdownAsync()).Wait();
+                _server = null;
+            }
         }
 
         protected override ifPOS.v1.IPOS CreateClient() => GrpcPosFactory.CreatePosAsync(new GrpcClientOptions { Url = new Uri($"http://{_host}:{_port}") }).Result;

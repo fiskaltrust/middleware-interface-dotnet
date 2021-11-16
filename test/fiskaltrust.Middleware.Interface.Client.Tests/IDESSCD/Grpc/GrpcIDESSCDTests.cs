@@ -16,8 +16,11 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IDESSCD.Grpc
 
         ~GrpcIDESSCDTests()
         {
-            Task.Run(() => _server.ShutdownAsync()).Wait();
-            _server = null;
+            if (_server != null)
+            {
+                Task.Run(() => _server.ShutdownAsync()).Wait();
+                _server = null;
+            }
         }
 
         protected override ifPOS.v1.de.IDESSCD CreateClient() => GrpcDESSCDFactory.CreateSSCDAsync(new GrpcClientOptions { Url = new Uri($"http://{_host}:{_port}"), RetryPolicyOptions = _retryPolicyOptions }).Result;
