@@ -21,15 +21,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<_PackageFiles Include="$(OutputPath)\net461\fiskaltrust.Middleware.Interface.Client.Common.dll">
+		<_PackageFiles Include="$(OutputPath)\net461\fiskaltrust.Middleware.Interface.Client.Common.StrongName.dll">
 			<BuildAction>None</BuildAction>
 			<PackagePath>lib\net461\</PackagePath>
 		</_PackageFiles>
-		<_PackageFiles Include="$(OutputPath)\netstandard2.0\fiskaltrust.Middleware.Interface.Client.Common.dll">
+		<_PackageFiles Include="$(OutputPath)\netstandard2.0\fiskaltrust.Middleware.Interface.Client.Common.StrongName.dll">
 			<BuildAction>None</BuildAction>
 			<PackagePath>lib\netstandard2.0\</PackagePath>
 		</_PackageFiles>
-		<_PackageFiles Include="$(OutputPath)\net6.0\fiskaltrust.Middleware.Interface.Client.Common.dll">
+		<_PackageFiles Include="$(OutputPath)\net6.0\fiskaltrust.Middleware.Interface.Client.Common.StrongName.dll">
 			<BuildAction>None</BuildAction>
 			<PackagePath>lib\net6.0\</PackagePath>
 		</_PackageFiles>
