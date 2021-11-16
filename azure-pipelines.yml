@@ -33,7 +33,7 @@ jobs:
     
     - task: UseDotNet@2
       inputs:
-        version: '3.0.100'
+        version: '3.1.x'
 
     - task: VisualStudioTestPlatformInstaller@1
       displayName: VsTest Platform Installer
