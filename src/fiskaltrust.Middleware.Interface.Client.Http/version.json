@@ -2,6 +2,6 @@
   "version": "2.0.0-alpha1",
   "releaseBranches": [
     "^refs/heads/master$",
-    "^refs/tags/v\\d+(?:\\.\\d+)*(?:-.*)?$"
+    "^refs/tags/client/http/v\\d+(?:\\.\\d+)*(?:-.*)?$"
   ]
 }
