@@ -1,15 +1,12 @@
 ﻿using fiskaltrust.ifPOS.v1;
-using fiskaltrust.Middleware.Interface.Client.Http.Helpers;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
+using System.Text.Json;
+using System.Linq;
 
 namespace fiskaltrust.Middleware.Interface.Client.Http
 {
@@ -17,7 +14,6 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
     {
         private readonly HttpPosClientOptions _options;
         private readonly HttpClient _httpClient;
-        private readonly string _v0VersionUrl;
 
         private delegate string AsyncEchoCaller(string message);
         private delegate ifPOS.v0.ReceiptResponse AsyncSignCaller(ifPOS.v0.ReceiptRequest request);
@@ -28,7 +24,6 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
         {
             _httpClient = GetClient(options);
             _options = options;
-            _v0VersionUrl = _options.UseUnversionedLegacyUrls ? "" : "v0/";
 
         }
 
@@ -46,205 +41,97 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             return client;
         }
 
-        IAsyncResult ifPOS.v0.IPOS.BeginEcho(string message, AsyncCallback callback, object state)
-        {
-            var d = new AsyncEchoCaller((this as ifPOS.v0.IPOS).Echo);
-            return d.BeginInvoke(message, callback, d);
-        }
-
-        string ifPOS.v0.IPOS.EndEcho(IAsyncResult result)
-        {
-            var d = (AsyncEchoCaller)result.AsyncState;
-            return d.EndInvoke(result);
-        }
-
-        string ifPOS.v0.IPOS.Echo(string message)
-        {
-            if (_options.CommunicationType == HttpCommunicationType.Json)
-            {
-                return JsonEcho(message);
-            }
-            else
-            {
-                return XmlEcho(message);
-            }
-        }
-
-        string JsonEcho(string message)
-        {
-            var jsonstring = JsonConvert.SerializeObject(message);
-            var jsonContent = new StringContent(jsonstring, Encoding.UTF8, "application/json");
-
-            using (var response = _httpClient.PostAsync($"{_v0VersionUrl}json/echo", jsonContent).Result)
-            {
-                response.EnsureSuccessStatusCode();
-                var content = response.Content.ReadAsStringAsync().Result;
-                return JsonConvert.DeserializeObject<string>(content);
-            }
-        }
-
-        string XmlEcho(string message)
-        {
-            var xmlString = XmlSerializationHelpers.Serialize(message);
-            var xmlContent = new StringContent(xmlString, Encoding.UTF8, "application/xml");
-
-            using (var response = _httpClient.PostAsync($"xml/{_v0VersionUrl}echo", xmlContent).Result)
-            {
-                response.EnsureSuccessStatusCode();
-                var content = response.Content.ReadAsStringAsync().Result;
-
-                return content;
-            }
-        }
-
         async Task<EchoResponse> IPOS.EchoAsync(EchoRequest message)
         {
-            if (_options.CommunicationType == HttpCommunicationType.Json)
-            {
-                return await JsonEchoAsync(message);
-            }
-            else
-            {
-                return await XmlEchoAsync(message);
-            }
-        }
-
-        private async Task<EchoResponse> XmlEchoAsync(EchoRequest message)
-        {
-            var xmlString = XmlSerializationHelpers.Serialize(message);
-            var xmlContent = new StringContent(xmlString, Encoding.UTF8, "application/xml");
-
-            using (var response = await _httpClient.PostAsync("v1/Echo", xmlContent))
-            {
-                response.EnsureSuccessStatusCode();
-                var content = await response.Content.ReadAsStringAsync();
-
-                var xml = XElement.Parse(content);
-                string jsonText = JsonConvert.SerializeXNode(xml);
-                return JsonConvert.DeserializeObject<EchoResponse>(jsonText);
-            }
-        }
-
-        private async Task<EchoResponse> JsonEchoAsync(EchoRequest message)
-        {
-            var jsonstring = JsonConvert.SerializeObject(message);
+            var jsonstring = JsonSerializer.Serialize(message);
             var jsonContent = new StringContent(jsonstring, Encoding.UTF8, "application/json");
 
-            using (var response = await _httpClient.PostAsync("v1/Echo", jsonContent))
+            using (var response = await _httpClient.PostAsync("v2/Echo", jsonContent))
             {
                 response.EnsureSuccessStatusCode();
                 var content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<EchoResponse>(content.ToString());
-            }
-        }
-
-
-        IAsyncResult ifPOS.v0.IPOS.BeginSign(ifPOS.v0.ReceiptRequest data, AsyncCallback callback, object state)
-        {
-            var d = new AsyncSignCaller((this as ifPOS.v0.IPOS).Sign);
-            return d.BeginInvoke(data, callback, d);
-        }
-
-        ifPOS.v0.ReceiptResponse ifPOS.v0.IPOS.EndSign(IAsyncResult result)
-        {
-            var d = (AsyncSignCaller)result.AsyncState;
-            return d.EndInvoke(result);
-        }
-
-        ifPOS.v0.ReceiptResponse ifPOS.v0.IPOS.Sign(ifPOS.v0.ReceiptRequest data)
-        {
-            if (_options.CommunicationType == HttpCommunicationType.Json)
-            {
-                return JsonSignAsync<ifPOS.v0.ReceiptRequest, ifPOS.v0.ReceiptResponse>(data, $"json/{_v0VersionUrl}sign").Result;
-            }
-            else
-            {
-                return XmlSignAsync<ifPOS.v0.ReceiptRequest, ifPOS.v0.ReceiptResponse>(data, $"xml/{_v0VersionUrl}sign").Result;
+                return JsonSerializer.Deserialize<EchoResponse>(content.ToString());
             }
         }
 
         async Task<ReceiptResponse> IPOS.SignAsync(ReceiptRequest request)
         {
-            if (_options.CommunicationType == HttpCommunicationType.Json)
-            {
-                return await JsonSignAsync<ReceiptRequest, ReceiptResponse>(request, "v1/sign");
-            }
-            else
-            {
-                return await XmlSignAsync<ReceiptRequest, ReceiptResponse>(request, "v1/sign");
-            }
-        }
-
-        private async Task<TResponse> JsonSignAsync<TRequest, TResponse>(TRequest request, string endpoint)
-        {
-            var jsonstring = JsonConvert.SerializeObject(request);
+            var jsonstring = JsonSerializer.Serialize(request);
             var jsonContent = new StringContent(jsonstring, Encoding.UTF8, "application/json");
 
-            using (var response = await _httpClient.PostAsync(endpoint, jsonContent))
+            using (var response = await _httpClient.PostAsync("v2/Sign", jsonContent))
             {
                 var content = await response.Content.ReadAsStringAsync();
                 response.EnsureSuccessStatusCode();
 
-                return JsonConvert.DeserializeObject<TResponse>(content);
+                return JsonSerializer.Deserialize<ReceiptResponse>(content);
             }
         }
 
-        private async Task<TResponse> XmlSignAsync<TRequest, TResponse>(TRequest request, string endpoint)
+        async IAsyncEnumerable<JournalResponse> IPOS.JournalAsync(JournalRequest request)
         {
-            var xmlString = XmlSerializationHelpers.Serialize(request);
-            var xmlContent = new StringContent(xmlString, Encoding.UTF8, "application/xml");
-
-            using (var response = await _httpClient.PostAsync(endpoint, xmlContent))
+            using (var response = await _httpClient.GetAsync($"v2/Journal?type={request.ftJournalType}&from={request.From}&to={request.To}"))
             {
+                var content = await response.Content.ReadAsByteArrayAsync();
                 response.EnsureSuccessStatusCode();
-                var content = await response.Content.ReadAsStringAsync();
-                var xml = XElement.Parse(content);
-                string jsonText = JsonConvert.SerializeXNode(xml);
 
-                return JsonConvert.DeserializeObject<TResponse>(jsonText);
+                yield return new JournalResponse { Chunk = content.ToList() };
+                yield break;
             }
         }
 
+        [Obsolete("BeginEcho is deprecated, please use EchoAsync instead.")]
+        IAsyncResult ifPOS.v0.IPOS.BeginEcho(string message, AsyncCallback callback, object state)
+        {
+            throw new NotImplementedException("Sync methods are not implemented");
+        }
 
+        [Obsolete("EndEcho is deprecated, please use EchoAsync instead.")]
+        string ifPOS.v0.IPOS.EndEcho(IAsyncResult result)
+        {
+            throw new NotImplementedException("Sync methods are not implemented");
+        }
+
+        [Obsolete("Echo is deprecated, please use EchoAsync instead.")]
+        string ifPOS.v0.IPOS.Echo(string message)
+        {
+            throw new NotImplementedException("Sync methods are not implemented");
+        }
+
+        [Obsolete("BeginSign is deprecated, please use SignAsync instead.")]
+        IAsyncResult ifPOS.v0.IPOS.BeginSign(ifPOS.v0.ReceiptRequest data, AsyncCallback callback, object state)
+        {
+            throw new NotImplementedException("Sync methods are not implemented");
+        }
+
+        [Obsolete("EndSign is deprecated, please use SignAsync instead.")]
+        ifPOS.v0.ReceiptResponse ifPOS.v0.IPOS.EndSign(IAsyncResult result)
+        {
+            throw new NotImplementedException("Sync methods are not implemented");
+        }
+
+        [Obsolete("Sign is deprecated, please use SignAsync instead.")]
+        ifPOS.v0.ReceiptResponse ifPOS.v0.IPOS.Sign(ifPOS.v0.ReceiptRequest data)
+        {
+            throw new NotImplementedException("Sync methods are not implemented");
+        }
+
+        [Obsolete("BeginJournal is deprecated, please use JournalAsync instead.")]
         IAsyncResult ifPOS.v0.IPOS.BeginJournal(long ftJournalType, long from, long to, AsyncCallback callback, object state)
         {
-            var d = new AsyncJournalCaller((this as ifPOS.v0.IPOS).Journal);
-            return d.BeginInvoke(ftJournalType, from, to, callback, d);
+            throw new NotImplementedException("Sync methods are not implemented");
         }
 
+        [Obsolete("EndJournal is deprecated, please use JournalAsync instead.")]
         Stream ifPOS.v0.IPOS.EndJournal(IAsyncResult result)
         {
-            var d = (AsyncJournalCaller)result.AsyncState;
-            return d.EndInvoke(result);
+            throw new NotImplementedException("Sync methods are not implemented");
         }
 
+        [Obsolete("Journal is deprecated, please use JournalAsync instead.")]
         Stream ifPOS.v0.IPOS.Journal(long ftJournalType, long from, long to)
         {
-            using (var client = GetClient(_options))
-            {
-                string format;
-                if (_options.CommunicationType == HttpCommunicationType.Json)
-                {
-                    format = "json";
-                }
-                else
-                {
-                    format = "xml";
-                }
-
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue($"application/{format}"));
-
-                var response = client.PostAsync($"{format}/{_v0VersionUrl}journal?type={ftJournalType}&from={from}&to={to}", new StringContent("", Encoding.UTF8, $"application/{format}")).Result;
-                response.EnsureSuccessStatusCode();
-                var stream = response.Content.ReadAsStreamAsync().Result;
-                return stream;
-            }
-        }
-
-        IAsyncEnumerable<JournalResponse> IPOS.JournalAsync(JournalRequest request)
-        {
-            throw new NotSupportedException("Async streaming is not supported in HTTP. Please call the non-async Journal method.");
+            throw new NotImplementedException("Sync methods are not implemented");
         }
     }
 }

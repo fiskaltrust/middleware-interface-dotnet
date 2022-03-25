@@ -1,9 +1,9 @@
 ﻿using fiskaltrust.ifPOS.v1.de;
-using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace fiskaltrust.Middleware.Interface.Client.Http
@@ -56,14 +56,14 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
 
             if (parameter != null)
             {
-                var json = JsonConvert.SerializeObject(parameter);
+                var json = JsonSerializer.Serialize(parameter);
                 stringContent = new StringContent(json, Encoding.UTF8, "application/json");
             }
             var response = await _httpClient.PostAsync(url, stringContent).ConfigureAwait(false);
             response.EnsureSuccessStatusCode();
 
             var result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<T>(result);
+            return JsonSerializer.Deserialize<T>(result);
         }
 
         private async Task ExecuteHttpPostAsync(string urlVersion, string urlMethod, object parameter = null)
@@ -73,7 +73,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
 
             if (parameter != null)
             {
-                var json = JsonConvert.SerializeObject(parameter);
+                var json = JsonSerializer.Serialize(parameter);
                 stringContent = new StringContent(json, Encoding.UTF8, "application/json");
             }
             var response = await _httpClient.PostAsync(url, stringContent).ConfigureAwait(false);
@@ -87,7 +87,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             response.EnsureSuccessStatusCode();
 
             var result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<T>(result);
+            return JsonSerializer.Deserialize<T>(result);
         }
 
         private HttpClient GetClient(ClientOptions options)

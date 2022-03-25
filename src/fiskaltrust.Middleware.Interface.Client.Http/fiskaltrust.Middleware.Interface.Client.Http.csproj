@@ -1,13 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net461;netstandard2.0;net6.0</TargetFrameworks>
-		<LangVersion>8</LangVersion>
+		<TargetFrameworks>net6.0</TargetFrameworks>
+		<LangVersion>10</LangVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="fiskaltrust.interface" Version="2.0.0-alpha1" />
-		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -17,14 +16,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<_PackageFiles Include="$(OutputPath)\net461\fiskaltrust.Middleware.Interface.Client.Common.dll">
-			<BuildAction>None</BuildAction>
-			<PackagePath>lib\net461\</PackagePath>
-		</_PackageFiles>
-		<_PackageFiles Include="$(OutputPath)\netstandard2.0\fiskaltrust.Middleware.Interface.Client.Common.dll">
-			<BuildAction>None</BuildAction>
-			<PackagePath>lib\netstandard2.0\</PackagePath>
-		</_PackageFiles>
 		<_PackageFiles Include="$(OutputPath)\net6.0\fiskaltrust.Middleware.Interface.Client.Common.dll">
 			<BuildAction>None</BuildAction>
 			<PackagePath>lib\net6.0\</PackagePath>

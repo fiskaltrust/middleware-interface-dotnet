@@ -1,6 +1,5 @@
 ﻿using fiskaltrust.ifPOS.v1;
 using fiskaltrust.Middleware.Interface.Client.Common.RetryLogic;
-using fiskaltrust.Middleware.Interface.Client.Http.Helpers;
 using System.Threading.Tasks;
 
 namespace fiskaltrust.Middleware.Interface.Client.Http
@@ -12,7 +11,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
     {
         public static async Task<IPOS> CreatePosAsync(HttpPosClientOptions options)
         {
-            var connectionhandler = new HttpProxyConnectionHandler<IPOS>(new AsyncJournalPOSHelper(new HttpPos(options)));
+            var connectionhandler = new HttpProxyConnectionHandler<IPOS>(new HttpPos(options));
 
             if (options.RetryPolicyOptions != null)
             {
