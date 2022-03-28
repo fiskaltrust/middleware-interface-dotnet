@@ -23,7 +23,7 @@ variables:
   value: '6.0.100'
 
 jobs:
-  - job: Build 
+  - job: Build
     pool:
       vmImage: windows-latest
     steps:
