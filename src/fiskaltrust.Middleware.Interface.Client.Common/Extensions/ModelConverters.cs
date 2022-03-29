@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace fiskaltrust.Middleware.Interface.Client.Extensions
 {
-    public static class ModelConversionExtensions 
+    public static class ModelConversionExtensions
     {
         private static T[] ConvertArray<U, T>(U[] from, Func<U, T> converter)
         {
-            if(from == null) return null;
+            if (from == null) return null;
 
             return from.Select(item => converter(item)).ToArray();
         }

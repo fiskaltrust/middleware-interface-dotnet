@@ -6,7 +6,7 @@ namespace fiskaltrust.ifPOS.v2.me
     {
         [OperationContract(Name = "v2/RegisterInvoice")]
         RegisterInvoiceResponse RegisterInvoice(RegisterInvoiceRequest RegisterInvoiceRequest);
-        
+
         [OperationContract(Name = "v2/RegisterTCR")]
         RegisterTCRResponse RegisterTCR(RegisterTCRRequest RegisterTCRRequest);
 

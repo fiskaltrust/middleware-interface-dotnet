@@ -55,7 +55,8 @@ namespace fiskaltrust.ifPOS.Tests.Helpers
 
         public Stream Journal(long ftJournalType, long from, long to)
         {
-            var json = JsonConvert.SerializeObject(new {
+            var json = JsonConvert.SerializeObject(new
+            {
                 ftJournalType,
                 from,
                 to

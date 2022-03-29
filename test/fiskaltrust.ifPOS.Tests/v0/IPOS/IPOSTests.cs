@@ -51,6 +51,7 @@ namespace fiskaltrust.ifPOS.Tests.v0.IPOS
         }
 
         [Test]
+        [Obsolete]
         public void Sign()
         {
             var client = CreateClient();

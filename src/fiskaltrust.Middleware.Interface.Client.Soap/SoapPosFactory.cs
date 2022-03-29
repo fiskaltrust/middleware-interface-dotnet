@@ -1,6 +1,6 @@
 ﻿using fiskaltrust.ifPOS.v1;
 using fiskaltrust.Middleware.Interface.Client.Common.RetryLogic;
-using  fiskaltrust.Middleware.Interface.Client.Soap.Helpers;
+using fiskaltrust.Middleware.Interface.Client.Soap.Helpers;
 using System.Threading.Tasks;
 
 namespace fiskaltrust.Middleware.Interface.Client.Soap

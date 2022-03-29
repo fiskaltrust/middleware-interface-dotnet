@@ -16,20 +16,28 @@ namespace fiskaltrust.Middleware.Interface.Client.Http.Helpers
             _innerPOS = innerPOS;
         }
 
+        [Obsolete]
         public IAsyncResult BeginEcho(string message, AsyncCallback callback, object state) => _innerPOS.BeginEcho(message, callback, state);
 
+        [Obsolete]
         public IAsyncResult BeginJournal(long ftJournalType, long from, long to, AsyncCallback callback, object state) => _innerPOS.BeginJournal(ftJournalType, from, to, callback, state);
 
+        [Obsolete]
         public IAsyncResult BeginSign(ifPOS.v0.ReceiptRequest data, AsyncCallback callback, object state) => _innerPOS.BeginSign(data, callback, state);
 
+        [Obsolete]
         public string Echo(string message) => _innerPOS.Echo(message);
 
+        [Obsolete]
         public string EndEcho(IAsyncResult result) => _innerPOS.EndEcho(result);
 
+        [Obsolete]
         public Stream EndJournal(IAsyncResult result) => _innerPOS.EndJournal(result);
 
+        [Obsolete]
         public ifPOS.v0.ReceiptResponse EndSign(IAsyncResult result) => _innerPOS.EndSign(result);
 
+        [Obsolete]
         public ifPOS.v0.ReceiptResponse Sign(ifPOS.v0.ReceiptRequest data) => _innerPOS.Sign(data);
 
         public Task<ifPOS.v1.ReceiptResponse> SignAsync(ifPOS.v1.ReceiptRequest request) => _innerPOS.SignAsync(request);

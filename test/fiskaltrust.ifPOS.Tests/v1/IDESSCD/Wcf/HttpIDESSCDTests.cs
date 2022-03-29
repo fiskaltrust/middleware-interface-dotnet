@@ -48,7 +48,7 @@ namespace fiskaltrust.ifPOS.Tests.v1.IDESSCD
                     result.EnsureSuccessStatusCode();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

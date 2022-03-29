@@ -11,7 +11,7 @@ namespace fiskaltrust.ifPOS.v2.me
 
         public SignatureType Signature { get; set; }
 
-        public string Id { get; set; }  = "Request"; // TODO: Generalize. fixed to "Request"
+        public string Id { get; set; } = "Request"; // TODO: Generalize. fixed to "Request"
 
         public int Version { get; set; } = 1; // TODO: Generalize. fixed to  1
     }

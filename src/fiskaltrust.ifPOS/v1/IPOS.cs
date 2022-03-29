@@ -17,7 +17,7 @@ namespace fiskaltrust.ifPOS.v1
         /// </summary>
         /// <param name="request"></param>
         /// <returns>The functions "echo" and "sign" return bare-objects, the function "journal" returns a wrapped-object.</returns>
-        [OperationContract(Name = "v1/Sign")]        
+        [OperationContract(Name = "v1/Sign")]
 #if WCF
         [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v1/sign")]
 #endif
@@ -30,7 +30,7 @@ namespace fiskaltrust.ifPOS.v1
 
         [OperationContract(Name = "v1/Echo")]
 #if WCF
-        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare,  UriTemplate = "v1/echo")]        
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v1/echo")]
 #endif
         Task<EchoResponse> EchoAsync(EchoRequest message);
     }

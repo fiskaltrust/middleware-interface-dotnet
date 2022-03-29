@@ -19,6 +19,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IPOS
         public void BaseTearDown() => StopHost();
 
         [Test]
+        [Obsolete]
         public void Sign_ShouldReturnSameQueueId()
         {
             var client = CreateClient();
@@ -32,6 +33,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IPOS
         }
 
         [Test]
+        [Obsolete]
         public void Echo_ShouldReturnSameMessage()
         {
             var client = CreateClient();

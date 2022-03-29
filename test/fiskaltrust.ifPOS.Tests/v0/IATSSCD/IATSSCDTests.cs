@@ -15,7 +15,8 @@ namespace fiskaltrust.ifPOS.Tests.v0.IATSSCD
         private ifPOS.v0.IATSSCD _client;
 
         [OneTimeSetUp]
-        public void BaseSetUp() {
+        public void BaseSetUp()
+        {
             string url = "net.pipe://localhost/signing";
             _host = WcfHelper.StartHost<ifPOS.v0.IATSSCD>(url, new DummyATSSCD());
             _client = WcfHelper.GetProxy<ifPOS.v0.IATSSCD>(url);
@@ -23,7 +24,8 @@ namespace fiskaltrust.ifPOS.Tests.v0.IATSSCD
 
 
         [OneTimeTearDown]
-        public void BaseTearDown() {
+        public void BaseTearDown()
+        {
             _host.Close();
         }
 
