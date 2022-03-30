@@ -7,11 +7,7 @@ namespace fiskaltrust.ifPOS.v2.me
     public class RegisterInvoiceRequestHeaderType // TODO: Pull into me SCU?
     {
         public string UUID { get; set; }
-
         public DateTime SendDateTime { get; set; }
-
-        public SubseqDelivTypeSType SubseqDelivType { get; set; }
-
-        public bool SubseqDelivTypeSpecified { get; set; }
+        public SubseqDelivTypeSType? SubseqDelivType { get; set; }
     }
 }

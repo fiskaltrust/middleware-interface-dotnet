@@ -7,6 +7,5 @@ namespace fiskaltrust.ifPOS.v2.me
         public CanonicalizationMethodType CanonicalizationMethod { get; set; }
         public SignatureMethodType SignatureMethod { get; set; }
         public ReferenceType[] Reference { get; set; }
-        public string Id { get; set; }
     }
 }

@@ -7,6 +7,5 @@ namespace fiskaltrust.ifPOS.v2.me
         public object[] Items { get; set; }
         public ItemsChoiceType2[] ItemsElementName { get; set; }
         public string[] Text { get; set; }
-        public string Id { get; set; }
     }
 }

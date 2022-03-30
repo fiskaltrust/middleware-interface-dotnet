@@ -7,7 +7,5 @@ namespace fiskaltrust.ifPOS.v2.me
         public RegisterTCRResponseHeaderType Header { get; set; }
         public string TCRCode { get; set; }
         public SignatureType Signature { get; set; }
-        public string Id { get; set; } = "Request";
-        public int Version { get; set; } = 1;
     }
 }
