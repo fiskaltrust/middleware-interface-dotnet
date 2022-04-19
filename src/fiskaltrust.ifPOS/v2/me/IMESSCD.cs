@@ -6,12 +6,12 @@ namespace fiskaltrust.ifPOS.v2.me
     public interface IMESSCD
     {
         [OperationContract(Name = "v2/RegisterInvoice")]
-        Task<RegisterInvoiceResponse> RegisterInvoice(RegisterInvoiceRequest RegisterInvoiceRequest);
+        Task<RegisterInvoiceResponse> RegisterInvoiceAsync(RegisterInvoiceRequest RegisterInvoiceRequest);
 
         [OperationContract(Name = "v2/RegisterTCR")]
-        Task<RegisterTCRResponse> RegisterTCR(RegisterTCRRequest RegisterTCRRequest);
+        Task<RegisterTCRResponse> RegisterTCRAsync(RegisterTCRRequest RegisterTCRRequest);
 
         [OperationContract(Name = "v2/RegisterCashDeposit")]
-        Task<RegisterCashDepositResponse> RegisterCashDeposit(RegisterCashDepositRequest RegisterCashDepositRequest);
+        Task<RegisterCashDepositResponse> RegisterCashDepositAsync(RegisterCashDepositRequest RegisterCashDepositRequest);
     }
 }
