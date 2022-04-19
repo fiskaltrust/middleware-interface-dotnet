@@ -1,16 +1,17 @@
 using System.ServiceModel;
+using System.Threading.Tasks;
 namespace fiskaltrust.ifPOS.v2.me
 {
     [ServiceContract]
     public interface IMESSCD
     {
         [OperationContract(Name = "v2/RegisterInvoice")]
-        RegisterInvoiceResponse RegisterInvoice(RegisterInvoiceRequest RegisterInvoiceRequest);
+        Task<RegisterInvoiceResponse> RegisterInvoice(RegisterInvoiceRequest RegisterInvoiceRequest);
 
         [OperationContract(Name = "v2/RegisterTCR")]
-        RegisterTCRResponse RegisterTCR(RegisterTCRRequest RegisterTCRRequest);
+        Task<RegisterTCRResponse> RegisterTCR(RegisterTCRRequest RegisterTCRRequest);
 
         [OperationContract(Name = "v2/RegisterCashDeposit")]
-        RegisterCashDepositResponse RegisterCashDeposit(RegisterCashDepositRequest RegisterCashDepositRequest);
+        Task<RegisterCashDepositResponse> RegisterCashDeposit(RegisterCashDepositRequest RegisterCashDepositRequest);
     }
 }

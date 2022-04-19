@@ -27,6 +27,7 @@ namespace fiskaltrust.ifPOS.v2.me
         public int InvOrdNum { get; set; }
         public string TCRCode { get; set; }
         public bool IsIssuerInVAT { get; set; }
+        public bool IsSimplifiedInv { get; set; }
         public decimal? TaxFreeAmt { get; set; }
         public decimal? MarkUpAmt { get; set; }
         public decimal? GoodsExAmt { get; set; }

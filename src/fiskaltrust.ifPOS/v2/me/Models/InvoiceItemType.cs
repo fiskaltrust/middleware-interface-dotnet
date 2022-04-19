@@ -22,6 +22,7 @@ namespace fiskaltrust.ifPOS.v2.me
         public decimal PA { get; set; }
         public ExemptFromVATSType? EX { get; set; }
         public DateTime? VD { get; set; }
+        public decimal? VN { get; set; }
         public string? VSN { get; set; }
     }
 }
