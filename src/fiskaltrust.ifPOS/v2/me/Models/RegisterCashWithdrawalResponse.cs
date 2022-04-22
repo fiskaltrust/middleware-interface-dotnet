@@ -7,7 +7,7 @@ using System.Text;
 namespace fiskaltrust.ifPOS.v2.me
 {
     [DataContract]
-    public class RegisterCashDepositResponse
+    public class RegisterCashWithdrawalResponse
     {
     }
 }

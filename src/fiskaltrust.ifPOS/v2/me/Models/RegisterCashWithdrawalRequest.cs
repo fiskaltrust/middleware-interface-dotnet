@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace fiskaltrust.ifPOS.v2.me
 {
     [DataContract]
-    public class RegisterCashDepositRequest
+    public class RegisterCashWithdrawalRequest
     {
         /// <summary>
         /// Message identifier, equal to ftQueueItemId when used by fiskaltrust.
@@ -19,21 +19,27 @@ namespace fiskaltrust.ifPOS.v2.me
         public string TcrCode { get; set; }
 
         /// <summary>
-        /// The moment in which the cash deposit was made to the till.
+        /// Tax identification number (TIN) of the issuer.
         /// </summary>
         [DataMember(Order = 30)]
+        public string TIN { get; set; }
+
+        /// <summary>
+        /// The moment in which the cash withdrawal was made from the till.
+        /// </summary>
+        [DataMember(Order = 40)]
         public DateTime Moment { get; set; }
 
         /// <summary>
         /// When not null, signalizes that this receipt was late-signed because of the given reason. Null when the receipt was not processed in late-signing mode.
         /// </summary>
-        [DataMember(Order = 40)]
+        [DataMember(Order = 50)]
         public SubsequentDeliveryType? SubsequentDeliveryType { get; set; }
 
         /// <summary>
-        /// Amount that is deposited in the till.
+        /// Amount that is withdrawn from the till.
         /// </summary>
-        [DataMember(Order = 50)]
+        [DataMember(Order = 60)]
         public decimal Amount { get; set; }
     }
 }

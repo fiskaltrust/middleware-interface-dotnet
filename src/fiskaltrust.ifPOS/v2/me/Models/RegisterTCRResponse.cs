@@ -1,11 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
+
 namespace fiskaltrust.ifPOS.v2.me
 {
     [DataContract]
-    public class RegisterTCRResponse
+    public class RegisterTcrResponse
     {
-        public RegisterTCRResponseHeaderType Header { get; set; }
-        public string TCRCode { get; set; }
-        public SignatureType Signature { get; set; }
     }
 }
