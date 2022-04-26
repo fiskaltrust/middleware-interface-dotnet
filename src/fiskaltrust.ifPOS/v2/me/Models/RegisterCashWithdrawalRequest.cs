@@ -19,12 +19,6 @@ namespace fiskaltrust.ifPOS.v2.me
         public string TcrCode { get; set; }
 
         /// <summary>
-        /// Tax identification number (TIN) of the issuer.
-        /// </summary>
-        [DataMember(Order = 30)]
-        public string TIN { get; set; }
-
-        /// <summary>
         /// The moment in which the cash withdrawal was made from the till.
         /// </summary>
         [DataMember(Order = 40)]
