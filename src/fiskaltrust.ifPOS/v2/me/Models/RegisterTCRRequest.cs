@@ -28,19 +28,19 @@ namespace fiskaltrust.ifPOS.v2.me
         /// Code of the software used for invoice issuing.
         /// </summary>
         [DataMember(Order = 40)]
-        public string TcrSoftwareCode { get; set; }
+        public string? TcrSoftwareCode { get; set; }
 
         /// <summary>
         /// Code of the maintainer of the software used for invoice issuing.
         /// </summary>
         [DataMember(Order = 50)]
-        public string TcrSoftwareMaintainerCode { get; set; }
+        public string? TcrSoftwareMaintainerCode { get; set; }
 
         /// <summary>
         /// Type of the TCR, i.e. if it's a regular TCR or a self-service vending machine.
         /// </summary>
         [DataMember(Order = 60)]
-        public TcrType TcrType { get; set; }
+        public TcrType? TcrType { get; set; }
     }
 
     [DataContract]
