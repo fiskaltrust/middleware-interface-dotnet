@@ -1,7 +1,7 @@
 using System.ServiceModel;
 using System.Threading.Tasks;
 
-namespace fiskaltrust.ifPOS.v2.me
+namespace fiskaltrust.ifPOS.v1.me
 {
     /// <summary>
     /// The interface to communicate with fiskaltrust's SCUs for Montenegro.

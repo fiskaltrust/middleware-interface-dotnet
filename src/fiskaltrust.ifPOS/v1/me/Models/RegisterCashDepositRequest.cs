@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace fiskaltrust.ifPOS.v2.me
+namespace fiskaltrust.ifPOS.v1.me
 {
     [DataContract]
     public class RegisterCashDepositRequest
