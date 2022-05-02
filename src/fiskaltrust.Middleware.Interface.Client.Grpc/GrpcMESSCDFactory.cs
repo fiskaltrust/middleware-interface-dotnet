@@ -1,4 +1,4 @@
-﻿using fiskaltrust.ifPOS.v2.me;
+﻿using fiskaltrust.ifPOS.v1.me;
 using fiskaltrust.Middleware.Interface.Client.Common.RetryLogic;
 using System.Threading.Tasks;
 

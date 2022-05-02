@@ -1,4 +1,4 @@
-﻿using fiskaltrust.ifPOS.v2.me;
+﻿using fiskaltrust.ifPOS.v1.me;
 using Newtonsoft.Json;
 using System;
 using System.IO;
@@ -16,11 +16,11 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             _httpClient = GetClient(options);
         }
 
-        public async Task<RegisterInvoiceResponse> RegisterInvoiceAsync(RegisterInvoiceRequest registerInvoiceRequest) => await ExecuteHttpGetAsync<RegisterInvoiceResponse>("v2", "RI").ConfigureAwait(false);
+        public async Task<RegisterInvoiceResponse> RegisterInvoiceAsync(RegisterInvoiceRequest registerInvoiceRequest) => await ExecuteHttpGetAsync<RegisterInvoiceResponse>("v1", "Invoice").ConfigureAwait(false);
 
-        public async Task<RegisterTCRResponse> RegisterTCRAsync(RegisterTCRRequest registerTCRRequest) => await ExecuteHttpGetAsync<RegisterTCRResponse>("v2", "RTCR").ConfigureAwait(false);
+        public async Task<RegisterTcrResponse> RegisterTcrAsync(RegisterTcrRequest registerTcrRequest) => await ExecuteHttpGetAsync<RegisterTcrResponse>("v1", "Register").ConfigureAwait(false);
 
-        public async Task<RegisterCashDepositResponse> RegisterCashDepositAsync(RegisterCashDepositRequest registerCashDepositRequest) => await ExecuteHttpGetAsync<RegisterCashDepositResponse>("v2", "RCD").ConfigureAwait(false);
+        public async Task<RegisterCashDepositResponse> RegisterCashDepositAsync(RegisterCashDepositRequest registerCashDepositRequest) => await ExecuteHttpGetAsync<RegisterCashDepositResponse>("v1", "Deposit").ConfigureAwait(false);
 
         private async Task<T> ExecuteHttpGetAsync<T>(string urlVersion, string urlMethod)
         {
@@ -37,5 +37,11 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             var url = options.Url.ToString().EndsWith("/") ? options.Url : new Uri($"{options.Url}/");
             return new HttpClient { BaseAddress = url };
         }
+
+        public async Task UnregisterTcrAsync(RegisterTcrRequest registerTCRRequest) => await ExecuteHttpGetAsync<RegisterInvoiceResponse>("v1", "Unregister").ConfigureAwait(false);
+
+        public async Task<RegisterCashWithdrawalResponse> RegisterCashWithdrawalAsync(RegisterCashWithdrawalRequest registerCashDepositRequest) => await ExecuteHttpGetAsync<RegisterCashWithdrawalResponse>("v1", "Withdrawl").ConfigureAwait(false);
+
+        public async Task<ScuMeEchoResponse> EchoAsync(ScuMeEchoRequest request) => await ExecuteHttpGetAsync<ScuMeEchoResponse>("v1", "Echo").ConfigureAwait(false);
     }
 }
