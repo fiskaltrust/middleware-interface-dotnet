@@ -29,26 +29,6 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
                     return await Task.Run(async () => await action(await _proxyConnectionHandler.GetProxyAsync()), tokenSource.Token);
                 }
 
-/* Unmerged change from project 'fiskaltrust.Middleware.Interface.Client.Common(netstandard2.0)'
-Before:
-                catch (Exception ex)
-After:
-                catch (Exception)
-*/
-
-/* Unmerged change from project 'fiskaltrust.Middleware.Interface.Client.Common.StrongName(net461)'
-Before:
-                catch (Exception ex)
-After:
-                catch (Exception)
-*/
-
-/* Unmerged change from project 'fiskaltrust.Middleware.Interface.Client.Common.StrongName(netstandard2.0)'
-Before:
-                catch (Exception ex)
-After:
-                catch (Exception)
-*/
                 catch (TaskCanceledException)
                 {
                     if (trial == _options.Retries - 1)

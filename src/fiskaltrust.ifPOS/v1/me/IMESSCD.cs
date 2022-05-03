@@ -19,7 +19,7 @@ namespace fiskaltrust.ifPOS.v1.me
         /// Unregisters an electronic cash device (TCR) from the central invoice register (CIS).
         /// </summary>
         [OperationContract(Name = "v2/UnregisterTCR")]
-        Task UnregisterTcrAsync(RegisterTcrRequest registerTCRRequest);
+        Task UnregisterTcrAsync(UnregisterTcrRequest registerTCRRequest);
 
         /// <summary>
         /// Registers a cash deposit to the cash registers at the central invoice register (CIS).
@@ -31,7 +31,7 @@ namespace fiskaltrust.ifPOS.v1.me
         /// Registers a cash withdrawal from the cash registers at the central invoice register (CIS).
         /// </summary>
         [OperationContract(Name = "v2/RegisterCashWithdrawal")]
-        Task<RegisterCashWithdrawalResponse> RegisterCashWithdrawalAsync(RegisterCashWithdrawalRequest registerCashDepositRequest);
+        Task RegisterCashWithdrawalAsync(RegisterCashWithdrawalRequest registerCashWithdrawalRequest);
 
         /// <summary>
         /// Registers an invoice (i.e. a receipt in fiskaltrust's terminology) at the central invoice register (CIS).
