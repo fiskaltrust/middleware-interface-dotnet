@@ -19,7 +19,7 @@ namespace fiskaltrust.ifPOS.v1.me
         /// Unregisters an electronic cash device (TCR) from the central invoice register (CIS).
         /// </summary>
         [OperationContract(Name = "v2/UnregisterTCR")]
-        Task UnregisterTcrAsync(RegisterTcrRequest registerTCRRequest);
+        Task UnregisterTcrAsync(UnregisterTcrRequest registerTCRRequest);
 
         /// <summary>
         /// Registers a cash deposit to the cash registers at the central invoice register (CIS).
