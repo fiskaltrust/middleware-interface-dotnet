@@ -32,15 +32,22 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             return JsonConvert.DeserializeObject<T>(result);
         }
 
+        private async Task ExecuteHttpGetAsync(string urlVersion, string urlMethod)
+        {
+            var url = Path.Combine(urlVersion, urlMethod);
+            var response = await _httpClient.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+        }
+
         private HttpClient GetClient(ClientOptions options)
         {
             var url = options.Url.ToString().EndsWith("/") ? options.Url : new Uri($"{options.Url}/");
             return new HttpClient { BaseAddress = url };
         }
 
-        public async Task UnregisterTcrAsync(RegisterTcrRequest registerTCRRequest) => await ExecuteHttpGetAsync<RegisterInvoiceResponse>("v1", "Unregister").ConfigureAwait(false);
+        public async Task UnregisterTcrAsync(UnregisterTcrRequest registerTCRRequest) => await ExecuteHttpGetAsync<bool>("v1", "Unregister").ConfigureAwait(false);
 
-        public async Task<RegisterCashWithdrawalResponse> RegisterCashWithdrawalAsync(RegisterCashWithdrawalRequest registerCashDepositRequest) => await ExecuteHttpGetAsync<RegisterCashWithdrawalResponse>("v1", "Withdrawl").ConfigureAwait(false);
+        public async Task RegisterCashWithdrawalAsync(RegisterCashWithdrawalRequest registerCashDepositRequest) => await ExecuteHttpGetAsync("v1", "Withdrawl").ConfigureAwait(false);
 
         public async Task<ScuMeEchoResponse> EchoAsync(ScuMeEchoRequest request) => await ExecuteHttpGetAsync<ScuMeEchoResponse>("v1", "Echo").ConfigureAwait(false);
     }

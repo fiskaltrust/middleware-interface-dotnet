@@ -13,12 +13,12 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
 
         public async Task<RegisterCashDepositResponse> RegisterCashDepositAsync(RegisterCashDepositRequest registerCashDepositRequest) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.RegisterCashDepositAsync(registerCashDepositRequest));
 
-        public async Task<RegisterCashWithdrawalResponse> RegisterCashWithdrawalAsync(RegisterCashWithdrawalRequest registerCashDepositRequest) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.RegisterCashWithdrawalAsync(registerCashDepositRequest));
+        public async Task RegisterCashWithdrawalAsync(RegisterCashWithdrawalRequest registerCashDepositRequest) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.RegisterCashWithdrawalAsync(registerCashDepositRequest));
 
         public async Task<RegisterInvoiceResponse> RegisterInvoiceAsync(RegisterInvoiceRequest registerInvoiceRequest) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.RegisterInvoiceAsync(registerInvoiceRequest));
 
         public async Task<RegisterTcrResponse> RegisterTcrAsync(RegisterTcrRequest registerTcrRequest) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.RegisterTcrAsync(registerTcrRequest));
 
-        public async Task UnregisterTcrAsync(RegisterTcrRequest registerTCRRequest) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.UnregisterTcrAsync(registerTCRRequest));
+        public async Task UnregisterTcrAsync(UnregisterTcrRequest unregisterTCRRequest) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.UnregisterTcrAsync(unregisterTCRRequest));
     }
 }
