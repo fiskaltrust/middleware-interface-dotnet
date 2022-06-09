@@ -1,4 +1,5 @@
 ﻿using fiskaltrust.ifPOS.v1;
+using fiskaltrust.Middleware.Interface.Client.Extensions;
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -25,8 +26,8 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
             {
                 try
                 {
-                    var tokenSource = new CancellationTokenSource(_options.ClientTimeout);                    
-                    return await Task.Run(async () => await action(await _proxyConnectionHandler.GetProxyAsync()), tokenSource.Token);
+                    var tokenSource = new CancellationTokenSource(_options.ClientTimeout);
+                    return await Task.Run(async () => await action(await _proxyConnectionHandler.GetProxyAsync()).WithCancellation(tokenSource.Token), tokenSource.Token);
                 }
                 catch(TaskCanceledException)
                 {
@@ -65,7 +66,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
                 try
                 {
                     var tokenSource = new CancellationTokenSource(_options.ClientTimeout);
-                    await Task.Run(async () => await action(await _proxyConnectionHandler.GetProxyAsync()), tokenSource.Token);
+                    await Task.Run(async () => await action(await _proxyConnectionHandler.GetProxyAsync()).WithCancellation(tokenSource.Token), tokenSource.Token);
                     return;
                 }
                 catch (TaskCanceledException)
