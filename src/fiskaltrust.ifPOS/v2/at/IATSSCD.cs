@@ -30,7 +30,7 @@ namespace fiskaltrust.ifPOS.v2.at
         /// <summary>
         /// Function to test communication
         /// </summary>
-        [OperationContract]
+        [OperationContract(Name = "v2/Echo")]
         Task<EchoResponse> EchoAsync(EchoRequest echoRequest);
     }
 }
