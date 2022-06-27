@@ -37,7 +37,7 @@ namespace fiskaltrust.ifPOS.v1.me
         /// Computes the IIC (IKOV) of an invoice.
         /// </summary>
         [OperationContract(Name = "v2/ComputeIIC")]
-        Task<ComputeIICResponse> ComputeIICAsync(ComputeIICRequest registerCashDepositRequest);
+        Task<ComputeIICResponse> ComputeIICAsync(ComputeIICRequest computeIICRequest);
 
         /// <summary>
         /// Registers an invoice (i.e. a receipt in fiskaltrust's terminology) at the central invoice register (CIS).

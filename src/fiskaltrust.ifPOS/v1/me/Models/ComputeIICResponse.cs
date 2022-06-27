@@ -16,5 +16,10 @@ namespace fiskaltrust.ifPOS.v1.me
         [DataMember(Order = 10)]
         public string IIC { get; set; }
 
+        /// <summary>
+        /// Signature, calculated from the invoice data and signed with the PosOperator's private key.
+        /// </summary>
+        [DataMember(Order = 10)]
+        public string IICSignature { get; set; }
     }
 }
