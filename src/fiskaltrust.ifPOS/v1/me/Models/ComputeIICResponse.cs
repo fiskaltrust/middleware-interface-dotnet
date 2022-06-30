@@ -19,7 +19,7 @@ namespace fiskaltrust.ifPOS.v1.me
         /// <summary>
         /// Signature, calculated from the invoice data and signed with the PosOperator's private key.
         /// </summary>
-        [DataMember(Order = 10)]
+        [DataMember(Order = 20)]
         public string IICSignature { get; set; }
     }
 }
