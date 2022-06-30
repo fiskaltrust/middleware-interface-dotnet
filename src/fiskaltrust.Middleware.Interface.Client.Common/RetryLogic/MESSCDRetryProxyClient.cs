@@ -14,6 +14,8 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
         public async Task<RegisterCashDepositResponse> RegisterCashDepositAsync(RegisterCashDepositRequest registerCashDepositRequest) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.RegisterCashDepositAsync(registerCashDepositRequest));
 
         public async Task RegisterCashWithdrawalAsync(RegisterCashWithdrawalRequest registerCashDepositRequest) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.RegisterCashWithdrawalAsync(registerCashDepositRequest));
+        
+        public async Task<ComputeIICResponse> ComputeIICAsync(ComputeIICRequest computeIICRequest) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.ComputeIICAsync(computeIICRequest));
 
         public async Task<RegisterInvoiceResponse> RegisterInvoiceAsync(RegisterInvoiceRequest registerInvoiceRequest) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.RegisterInvoiceAsync(registerInvoiceRequest));
 

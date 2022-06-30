@@ -16,6 +16,8 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             _httpClient = GetClient(options);
         }
 
+        public async Task<ComputeIICResponse> ComputeIICAsync(ComputeIICRequest computeIICRequest) => await ExecuteHttpGetAsync<ComputeIICResponse>("v1", "ComputeIIC").ConfigureAwait(false);
+
         public async Task<RegisterInvoiceResponse> RegisterInvoiceAsync(RegisterInvoiceRequest registerInvoiceRequest) => await ExecuteHttpGetAsync<RegisterInvoiceResponse>("v1", "Invoice").ConfigureAwait(false);
 
         public async Task<RegisterTcrResponse> RegisterTcrAsync(RegisterTcrRequest registerTcrRequest) => await ExecuteHttpGetAsync<RegisterTcrResponse>("v1", "Register").ConfigureAwait(false);
