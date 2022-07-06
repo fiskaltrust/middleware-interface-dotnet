@@ -103,10 +103,28 @@ namespace fiskaltrust.ifPOS.v1.me
         /// </summary>
         [DataMember(Order = 160)]
         public BuyerDetails? Buyer { get; set; }
+
+        /// <summary>
+        /// The type of the invoicing (Invoice, Corrective, Summary).
+        /// </summary>
+        [DataMember(Order = 170)]
+        public InvoicingType InvoicingType { get; set; }
+
+        /// <summary>
+        /// IicReference, needed for Summary Receipt on nonCash correctives.
+        /// </summary>
+        [DataMember(Order = 180)]
+        public IicReference[]? IicReferences { get; set; }
     }
 
+    /// <summary>
+    /// Type of invoice (Cash, NonCash, Undefined)
+    /// </summary>
     public enum InvoiceType
     {
+        /// <summary>
+        /// Undefined
+        /// </summary>
         [EnumMember]
         Undefined,
         /// <summary>
@@ -119,6 +137,28 @@ namespace fiskaltrust.ifPOS.v1.me
         /// </summary>
         [EnumMember]
         NonCash
+    }
+
+    /// <summary>
+    /// Invoicing type (Invoice, Corrective, Summary, CreditNote)
+    /// </summary>
+    public enum InvoicingType
+    {
+        /// <summary>
+        /// Invoice
+        /// </summary>
+        [EnumMember]
+        Invoice,
+        /// <summary>
+        /// Corrective Invoice, e.g. void.
+        /// </summary>
+        [EnumMember]
+        Corrective,
+        /// <summary>
+        /// Summary Invoice, e.g. non cash partial void.
+        /// </summary>
+        [EnumMember]
+        Summary
     }
 
     public enum SelfIssuedInvoiceType
