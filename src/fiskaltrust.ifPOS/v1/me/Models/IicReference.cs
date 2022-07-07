@@ -6,6 +6,7 @@ namespace fiskaltrust.ifPOS.v1.me
     /// <summary>
     /// IicReference, needed for Summary Receipt on nonCash correctives.
     /// </summary>
+    [DataContract]
     public class IicReference
     {
         /// <summary>
