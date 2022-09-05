@@ -1,5 +1,6 @@
 ﻿using fiskaltrust.ifPOS.v1;
 using fiskaltrust.Middleware.Interface.Client.Extensions;
+using fiskaltrust.Middleware.Interface.Client.Common.Helpers;
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -27,16 +28,17 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
                 try
                 {
                     var tokenSource = new CancellationTokenSource(_options.ClientTimeout);
-                    return await Task.Run(async () => await action(await _proxyConnectionHandler.GetProxyAsync()).WithCancellation(tokenSource.Token), tokenSource.Token);
+                    var task = action(await _proxyConnectionHandler.GetProxyAsync());
+                    return await Task.Run(async () => await (Helpers.RuntimeHelpers.IsMono ? task.WithCancellation(tokenSource.Token) : task), tokenSource.Token);
                 }
-                catch(TaskCanceledException)
+                catch (TaskCanceledException)
                 {
                     if (trial == _options.Retries - 1)
                     {
                         throw new RetryPolicyException("The maximum number of retries was reached while sending this request.");
                     }
                 }
-                catch(ScuException)
+                catch (ScuException)
                 {
                     throw;
                 }
@@ -66,7 +68,8 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
                 try
                 {
                     var tokenSource = new CancellationTokenSource(_options.ClientTimeout);
-                    await Task.Run(async () => await action(await _proxyConnectionHandler.GetProxyAsync()).WithCancellation(tokenSource.Token), tokenSource.Token);
+                    var task = action(await _proxyConnectionHandler.GetProxyAsync());
+                    await Task.Run(async () => await (Helpers.RuntimeHelpers.IsMono ? task.WithCancellation(tokenSource.Token) : task).WithCancellation(tokenSource.Token), tokenSource.Token);
                     return;
                 }
                 catch (TaskCanceledException)
