@@ -31,7 +31,7 @@ namespace fiskaltrust.ifPOS.v1.me
         public SubsequentDeliveryType? SubsequentDeliveryType { get; set; }
 
         /// <summary>
-        /// Amount that is withdrawn from the till.
+        /// Relative amount that is withdrawn from the till.
         /// </summary>
         [DataMember(Order = 60)]
         public decimal Amount { get; set; }

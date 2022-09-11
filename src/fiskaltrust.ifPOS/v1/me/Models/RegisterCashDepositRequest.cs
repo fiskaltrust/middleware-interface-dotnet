@@ -31,7 +31,7 @@ namespace fiskaltrust.ifPOS.v1.me
         public SubsequentDeliveryType? SubsequentDeliveryType { get; set; }
 
         /// <summary>
-        /// Amount that is deposited in the till.
+        /// Absolute amount that is stored in the till after the cash deposit.
         /// </summary>
         [DataMember(Order = 50)]
         public decimal Amount { get; set; }
