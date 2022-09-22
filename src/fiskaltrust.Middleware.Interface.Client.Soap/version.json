@@ -2,6 +2,6 @@
   "version": "1.3.40",
   "releaseBranches": [
     "^refs/heads/master$",
-    "^refs/tags/client/v\\d+(?:\\.\\d+)*(?:-.*)?$"
+    "^refs/tags/client/soap/v\\d+(?:\\.\\d+)*(?:-.*)?$"
   ]
 }
