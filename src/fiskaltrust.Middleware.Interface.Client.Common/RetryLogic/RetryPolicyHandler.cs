@@ -25,21 +25,22 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
             {
                 try
                 {
-                    var tokenSource = new CancellationTokenSource(_options.ClientTimeout);                    
+                    var tokenSource = new CancellationTokenSource(_options.ClientTimeout);
                     return await Task.Run(async () => await action(await _proxyConnectionHandler.GetProxyAsync()), tokenSource.Token);
                 }
-                catch(TaskCanceledException)
+
+                catch (TaskCanceledException)
                 {
                     if (trial == _options.Retries - 1)
                     {
                         throw new RetryPolicyException("The maximum number of retries was reached while sending this request.");
                     }
                 }
-                catch(ScuException)
+                catch (ScuException)
                 {
                     throw;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     if (trial == _options.Retries - 1)
                     {
@@ -79,7 +80,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
                 {
                     throw;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     if (trial == _options.Retries - 1)
                     {

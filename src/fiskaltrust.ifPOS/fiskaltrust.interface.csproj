@@ -25,6 +25,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyCompany>fiskaltrust consulting gmbh</AssemblyCompany>
     <AssemblyProduct>fiskaltrust.if</AssemblyProduct>
+    <LangVersion>10.0</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net40'">

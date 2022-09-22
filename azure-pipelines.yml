@@ -32,12 +32,14 @@ jobs:
       inputs:
         mode: 'Multi'
         semverVersion: 'v1'
-    
+        
     - task: DotNetCoreCLI@2
       displayName: Restore
       inputs:
         command: 'restore'
         projects: '**/*.csproj'
+        feedsToUse: 'select'
+        vstsFeed: 'dev'   # TODO Remove before merge
 
     - task: DotNetCoreCLI@2
       displayName: Build

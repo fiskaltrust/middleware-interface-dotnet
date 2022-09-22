@@ -46,6 +46,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             return client;
         }
 
+        [Obsolete]
         IAsyncResult ifPOS.v0.IPOS.BeginEcho(string message, AsyncCallback callback, object state)
         {
             var d = new AsyncEchoCaller((this as ifPOS.v0.IPOS).Echo);
@@ -138,7 +139,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             }
         }
 
-
+        [Obsolete]
         IAsyncResult ifPOS.v0.IPOS.BeginSign(ifPOS.v0.ReceiptRequest data, AsyncCallback callback, object state)
         {
             var d = new AsyncSignCaller((this as ifPOS.v0.IPOS).Sign);

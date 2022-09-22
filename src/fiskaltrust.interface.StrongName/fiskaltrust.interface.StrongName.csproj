@@ -28,6 +28,7 @@
     <SignAssembly>true</SignAssembly>
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <AssemblyOriginatorKeyFile>fiskaltrust.interface.snk</AssemblyOriginatorKeyFile>
+	  <LangVersion>10.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
