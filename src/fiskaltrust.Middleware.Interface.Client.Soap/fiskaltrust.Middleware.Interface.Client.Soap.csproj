@@ -28,7 +28,7 @@
 		</_PackageFiles>
 		<_PackageFiles Include="$(OutputPath)\net6\fiskaltrust.Middleware.Interface.Client.Common.dll">
 			<BuildAction>None</BuildAction>
-			<PackagePath>lib\net6\</PackagePath>
+			<PackagePath>lib\net6.0\</PackagePath>
 		</_PackageFiles>
 	</ItemGroup>
 
