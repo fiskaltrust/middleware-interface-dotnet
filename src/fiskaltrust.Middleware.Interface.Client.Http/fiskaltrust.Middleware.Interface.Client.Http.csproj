@@ -25,6 +25,10 @@
       <BuildAction>None</BuildAction>
       <PackagePath>lib\netstandard2.0\</PackagePath>
     </_PackageFiles>
+	  <_PackageFiles Include="$(OutputPath)\net6\fiskaltrust.Middleware.Interface.Client.Common.dll">
+		  <BuildAction>None</BuildAction>
+		  <PackagePath>lib\net6\</PackagePath>
+	  </_PackageFiles>
   </ItemGroup>
   
   <PropertyGroup>
