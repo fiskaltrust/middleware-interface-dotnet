@@ -79,8 +79,13 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap
             {
                 "http" => new BasicHttpBinding(BasicHttpSecurityMode.None) { MaxReceivedMessageSize = _options.MaxReceivedMessageSize, SendTimeout = sendTimeout, ReceiveTimeout = _options.ReceiveTimeout },
                 "https" => new BasicHttpBinding(BasicHttpSecurityMode.Transport) { MaxReceivedMessageSize = _options.MaxReceivedMessageSize, SendTimeout = sendTimeout, ReceiveTimeout = _options.ReceiveTimeout },
-                "net.pipe" => new NetNamedPipeBinding(NetNamedPipeSecurityMode.None) { MaxReceivedMessageSize = _options.MaxReceivedMessageSize, SendTimeout = sendTimeout, ReceiveTimeout = _options.ReceiveTimeout },
                 "net.tcp" => new NetTcpBinding(SecurityMode.None) { MaxReceivedMessageSize = _options.MaxReceivedMessageSize, SendTimeout = sendTimeout, ReceiveTimeout = _options.ReceiveTimeout },
+
+#if NET6_0_OR_GREATER
+                "net.pipe" => throw new NotImplementedException("Named pipes are not supported anymore by .NET6+. Please either use an HTTP or NetTcp binding, or migrate to a more modern protocol like gRPC."),
+#else
+                "net.pipe" => new NetNamedPipeBinding(NetNamedPipeSecurityMode.None) { MaxReceivedMessageSize = _options.MaxReceivedMessageSize, SendTimeout = sendTimeout, ReceiveTimeout = _options.ReceiveTimeout },
+#endif
                 _ => throw new ArgumentException($"The url {_options.Url} is not supported.", nameof(_options.Url))
             };
         }

@@ -5,13 +5,17 @@ using System.Threading.Tasks;
 namespace fiskaltrust.Middleware.Interface.Client.Grpc
 {
     /// <summary>
-    /// Create grpc SSCD.
+    /// A factory to create a gRPC-based IDESSCD client instance for communicating with a Montenegrin SCU package.
     /// </summary>
     public static class GrpcMESSCDFactory
     {
         public static async Task<IMESSCD> CreateSSCDAsync(GrpcClientOptions options)
         {
+#if NET6_0_OR_GREATER
             var connectionhandler = new GrpcProxyConnectionHandler<IMESSCD>(options);
+#else
+            var connectionhandler = new NativeGrpcProxyConnectionHandler<IMESSCD>(options);
+#endif
 
             if (options.RetryPolicyOptions != null)
             {
