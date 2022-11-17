@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net461;netstandard2.0;net6</TargetFrameworks>
     <LangVersion>8</LangVersion>
   </PropertyGroup>
 
@@ -25,6 +25,10 @@
       <BuildAction>None</BuildAction>
       <PackagePath>lib\netstandard2.0\</PackagePath>
     </_PackageFiles>
+	  <_PackageFiles Include="$(OutputPath)\net6\fiskaltrust.Middleware.Interface.Client.Common.dll">
+		  <BuildAction>None</BuildAction>
+		  <PackagePath>lib\net6.0\</PackagePath>
+	  </_PackageFiles>
   </ItemGroup>
   
   <PropertyGroup>
