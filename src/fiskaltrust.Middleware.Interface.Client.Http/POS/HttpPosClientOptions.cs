@@ -11,6 +11,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
         public bool UseUnversionedLegacyUrls { get; set; } = false;
         public Guid? CashboxId { get; set; }
         public string AccessToken { get; set; }
+        public bool? DisableSslValidation { get; set; }
     }
 
     public enum HttpCommunicationType
