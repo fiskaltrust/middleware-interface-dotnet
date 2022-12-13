@@ -11,7 +11,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
     {
         private readonly HttpClient _httpClient;
 
-        public HttpMESSCD(ClientOptions options)
+        public HttpMESSCD(HttpMESSCDClientOptions options)
         {
             _httpClient = GetClient(options);
         }
@@ -41,10 +41,23 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             response.EnsureSuccessStatusCode();
         }
 
-        private HttpClient GetClient(ClientOptions options)
+        private HttpClient GetClient(HttpMESSCDClientOptions options)
         {
             var url = options.Url.ToString().EndsWith("/") ? options.Url : new Uri($"{options.Url}/");
-            return new HttpClient { BaseAddress = url };
+            if (options.DisableSslValidation.HasValue && options.DisableSslValidation.Value)
+            {
+                var handler = new HttpClientHandler
+                {
+                    ClientCertificateOptions = ClientCertificateOption.Manual,
+                    ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true
+                };
+
+                return new HttpClient(handler) { BaseAddress = url };
+            }
+            else
+            {
+                return new HttpClient { BaseAddress = url };
+            }
         }
 
         public async Task UnregisterTcrAsync(UnregisterTcrRequest registerTCRRequest) => await ExecuteHttpGetAsync<bool>("v1", "Unregister").ConfigureAwait(false);

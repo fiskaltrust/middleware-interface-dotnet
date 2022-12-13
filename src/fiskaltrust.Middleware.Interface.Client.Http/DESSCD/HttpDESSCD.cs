@@ -12,7 +12,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
     {
         private readonly HttpClient _httpClient;
 
-        public HttpDESSCD(ClientOptions options)
+        public HttpDESSCD(HttpDESSCDClientOptions options)
         {
             _httpClient = GetClient(options);
         }
@@ -90,10 +90,24 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             return JsonConvert.DeserializeObject<T>(result);
         }
 
-        private HttpClient GetClient(ClientOptions options)
+        private HttpClient GetClient(HttpDESSCDClientOptions options)
         {
             var url = options.Url.ToString().EndsWith("/") ? options.Url : new Uri($"{options.Url}/");
-            return new HttpClient { BaseAddress = url };
+
+            if (options.DisableSslValidation.HasValue && options.DisableSslValidation.Value)
+            {
+                var handler = new HttpClientHandler
+                {
+                    ClientCertificateOptions = ClientCertificateOption.Manual,
+                    ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true
+                };
+
+                return new HttpClient(handler) { BaseAddress = url };
+            }
+            else
+            {
+                return new HttpClient { BaseAddress = url };
+            }
         }
     }
 }
