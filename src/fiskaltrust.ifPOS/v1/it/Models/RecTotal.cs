@@ -12,16 +12,19 @@ namespace fiskaltrust.ifPOS.v1.it
         /// <summary>
         ///Payment Description
         /// </summary>
+        [DataMember]
         public string Description { get; set; }
 
         /// <summary>
         ///Payment Amount
         /// </summary>
+        [DataMember]
         public decimal Payment { get; set; }
 
         /// <summary>
         ///PaymentType
         /// </summary>
+        [DataMember]
         public PaymentType PaymentType { get; set; }
 
         /// <summary>
@@ -45,6 +48,7 @@ namespace fiskaltrust.ifPOS.v1.it
         ///  • 0 = Generic
         ///  • 1 = Multi-use voucher
         /// </summary>
+        [DataMember]
         public int Index { get; set; }
     }
 }
