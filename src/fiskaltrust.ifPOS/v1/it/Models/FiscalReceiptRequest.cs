@@ -8,7 +8,7 @@ namespace fiskaltrust.ifPOS.v1.it
     ///Emission of commercial documents (documenti commerciali)
     /// </summary>
     [DataContract]
-    public class FiscalReceiptRequest
+    public abstract class FiscalReceiptRequest
     {
 
         /// <summary>
@@ -23,11 +23,6 @@ namespace fiskaltrust.ifPOS.v1.it
         ///lines but before the FOOTER.
         /// </summary>
         public string QRcode { get; set; }
-
-        /// <summary>
-        /// printRecItems: Prints sale items on a commercial sale document.
-        /// </summary>
-        public List<RecItem> RecItems { get; set; }
 
         /// <summary>
         /// printRecSubtotalAdjustment: Prints discount or surcharge applied on the subtotal.

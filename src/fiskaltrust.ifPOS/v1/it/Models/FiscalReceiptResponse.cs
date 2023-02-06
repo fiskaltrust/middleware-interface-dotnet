@@ -38,5 +38,11 @@ namespace fiskaltrust.ifPOS.v1.it
         /// </summary>
         [DataMember]
         public ulong ZRepNumber { get; set; }
+
+        /// <summary>
+        /// STATUS given by the 5 bytes Alphanumeric
+        /// </summary>
+        [DataMember]
+        public DeviceStatus DeviceStatus { get; set; }
     }
 }
