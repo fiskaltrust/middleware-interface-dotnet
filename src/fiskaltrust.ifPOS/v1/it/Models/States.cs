@@ -57,20 +57,4 @@ namespace fiskaltrust.ifPOS.v1.it
         /// </summary>
         EndofLife = 9
     }
-
-    /// <summary>
-    ///  rtMainStatus indicates the RT main status
-    /// </summary>
-    [DataContract]
-    public enum FpState
-    {
-        /// <summary>
-        /// Not in service (MF)
-        /// </summary>
-        NotInService = 1,
-        /// <summary>
-        /// In service (RT)
-        /// </summary>
-        InService = 2,
-    }
 }

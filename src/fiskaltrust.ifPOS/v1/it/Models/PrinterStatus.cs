@@ -34,7 +34,7 @@ namespace fiskaltrust.ifPOS.v1.it
         ///  fpStatus indicates the printer status 
         /// </summary>
         [DataMember]
-        public FpStatus FpStatus { get; set; }
+        public DeviceStatus DeviceStatus { get; set; }
 
         /// <summary>
         ///  rtMainStatus indicates the RT main status *
