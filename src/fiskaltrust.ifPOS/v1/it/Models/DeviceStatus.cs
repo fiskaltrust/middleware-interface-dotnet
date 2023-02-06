@@ -226,7 +226,7 @@ namespace fiskaltrust.ifPOS.v1.it
         public Invoice Invoice { get; set; }
 
         /// <summary>
-        /// Operative
+        /// Byte 5: Operative
         /// </summary>
         [DataMember]
         public Operative Operative { get; set; }

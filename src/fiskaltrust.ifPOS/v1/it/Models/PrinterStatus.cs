@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.NetworkInformation;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace fiskaltrust.ifPOS.v1.it
 {
