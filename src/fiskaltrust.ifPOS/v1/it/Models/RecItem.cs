@@ -10,6 +10,12 @@ namespace fiskaltrust.ifPOS.v1.it
     public class RecItem
     {
         /// <summary>
+        /// Department ID number (range 1 to 99)
+        /// </summary>
+        [DataMember]
+        public int Department { get; set; }
+
+        /// <summary>
         /// When printing invoices based on the last commercial document, any 38-
         /// character descriptions are truncated to 37 characters
         /// </summary>

@@ -11,6 +11,12 @@ namespace fiskaltrust.ifPOS.v1.it
     public abstract class FiscalReceiptRequest
     {
         /// <summary>
+        /// Operator
+        /// </summary>
+        [DataMember]
+        public string Operator { get; set; }
+
+        /// <summary>
         /// Sends text messages to the customer display. You cannot insert carriage returns or line feeds so use 
         /// spaces to pad out line 1 and begin line 2. This sub-element has two attributes; one to indicate the
         /// operator and one for the text itself.The maximum number of characters is 40. This reduces to 20 if 
