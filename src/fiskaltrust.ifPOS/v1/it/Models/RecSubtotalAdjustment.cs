@@ -15,15 +15,6 @@ namespace fiskaltrust.ifPOS.v1.it
         [DataMember]
         public string Description { get; set; }
 
-        /// <summary>
-        ///determines discount/surcharge operation to perform:
-        ///1 = Discount on subtotal with subtotal printed out
-        ///2 = Discount on subtotal without subtotal printed out
-        /// 6 = Surcharge on subtotal with subtotal printed out
-        /// 7 = Surcharge on subtotal without subtotal printed out
-        /// </summary>
-        [DataMember]
-        public int AdjustmentType { get; set; }
 
         /// <summary>
         ///  A zero amount will throw a printer error 16.

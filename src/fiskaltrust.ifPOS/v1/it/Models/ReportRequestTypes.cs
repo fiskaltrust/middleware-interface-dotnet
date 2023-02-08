@@ -1,8 +1,11 @@
-﻿namespace fiskaltrust.ifPOS.v1.it
+﻿using System.Runtime.Serialization;
+
+namespace fiskaltrust.ifPOS.v1.it
 {
     /// <summary>
     ///The following three report types are supported:
     /// </summary>
+    [DataContract]
     public enum ReportRequestTypes
     {
         /// <summary>
