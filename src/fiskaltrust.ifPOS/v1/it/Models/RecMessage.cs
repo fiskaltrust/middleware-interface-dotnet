@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
+﻿using System.Runtime.Serialization;
 
 namespace fiskaltrust.ifPOS.v1.it
 {
@@ -39,7 +35,7 @@ namespace fiskaltrust.ifPOS.v1.it
     /// Sale items on a commercial sale document.
     /// </summary>
     [DataContract]
-    public class DisplayText
+    public class RecMessage
     {
         /// <summary>
         /// MessageType
