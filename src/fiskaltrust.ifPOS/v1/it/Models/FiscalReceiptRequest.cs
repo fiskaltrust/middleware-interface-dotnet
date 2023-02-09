@@ -23,7 +23,7 @@ namespace fiskaltrust.ifPOS.v1.it
         /// used with printerTicket files.
         /// </summary>
         [DataMember]
-        public DisplayText DisplayText { get; set; }
+        public RecMessage DisplayText { get; set; }
 
         /// <summary>
         ///Barcodes codes are printed at the end of the commercial document after the additional trailer

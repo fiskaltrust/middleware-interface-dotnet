@@ -6,7 +6,6 @@ using System.Text;
 
 namespace fiskaltrust.ifPOS.v1.it
 {
-
     /// <summary>
     /// Defines the row type to be printed:
     /// </summary>

@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace fiskaltrust.ifPOS.v1.it
 {
@@ -9,6 +10,12 @@ namespace fiskaltrust.ifPOS.v1.it
     [DataContract]
     public class RecItem
     {
+        /// <summary>
+        /// RecMessage
+        /// </summary>
+        [DataMember]
+        public List<RecMessage> RecMessages { get; set; }
+
         /// <summary>
         /// Department ID number (range 1 to 99)
         /// </summary>
