@@ -13,7 +13,7 @@ namespace fiskaltrust.ifPOS.v1.it
         /// Returns printer information 
         /// </summary>
         [OperationContract(Name = "v2/GetPrinterInfo")]
-        Task<PrinterStatus> GetPrinterStatusAsync();
+        Task<PrinterStatus> GetPrinterInfoAsync();
 
         /// <summary>
         /// Returns the input message (can be used for a communication test with the SCU).
@@ -22,10 +22,16 @@ namespace fiskaltrust.ifPOS.v1.it
         Task<ScuItEchoResponse> EchoAsync(ScuItEchoRequest request);
 
         /// <summary>
-        /// Send FiscalReceipt to the printer.
+        /// Send FiscalInvoice to the printer.
         /// </summary>
-        [OperationContract(Name = "v2/FiscalReceipt")]
-        Task<FiscalReceiptResponse> FiscalReceiptAsync(FiscalReceiptRequest request);
+        [OperationContract(Name = "v2/FiscalReceiptInvoice")]
+        Task<FiscalReceiptResponse> FiscalReceiptInvoiceAsync(FiscalReceiptInvoice request);
+
+        /// <summary>
+        /// Send FiscalRefund to the printer.
+        /// </summary>
+        [OperationContract(Name = "v2/FiscalReceiptRefund")]
+        Task<FiscalReceiptResponse> FiscalReceiptRefundAsync(FiscalReceiptRefund request);
 
         /// <summary>
         /// StartExportSession

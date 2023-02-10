@@ -10,40 +10,16 @@ namespace fiskaltrust.ifPOS.v1.it
     public class PrinterStatus
     {
         /// <summary>
-        /// cpuRel indicates the fiscal board firmware version
+        /// Version of firmware, memory etc
         /// </summary>
         [DataMember]
-        public string FiscalBoardFirmwareVersion { get; set; }
+        public string Version { get; set; }
 
         /// <summary>
-        ///  mfRel indicates the MPR (fiscal memory) firmware version
+        ///  Indicates the Printer status 
         /// </summary>
         [DataMember]
-        public string MprFirmwareVersion { get; set; }
-
-        /// <summary>
-        /// mfStatus indicates the MPR (fiscal memory) status (OK, FULL etc.)
-        /// </summary>
-        [DataMember]
-        public string MprStatus{ get; set; }
-
-        /// <summary>
-        ///  fpStatus indicates the printer status 
-        /// </summary>
-        [DataMember]
-        public DeviceStatus DeviceStatus { get; set; }
-
-        /// <summary>
-        ///  rtMainStatus indicates the RT main status *
-        /// </summary>
-        [DataMember]
-        public MainState MainState { get; set; }
-
-        /// <summary>
-        ///  rtMainStatus indicates the RT main status *
-        /// </summary>
-        [DataMember]
-        public SubState SubState { get; set; }
+        public string DeviceStatus { get; set; }
 
         /// <summary>
         ///  rtDailyOpen = indicates the logical DAY OPENED logical condition (0=closed{false} and 1=open{true})
