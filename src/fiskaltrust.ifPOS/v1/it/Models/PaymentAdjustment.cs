@@ -6,7 +6,7 @@ namespace fiskaltrust.ifPOS.v1.it
     /// When printing invoices based on the last commercial document, any 38-
     /// character descriptions are truncated to 37 characters
     /// </summary>
-    public class RecSubtotalAdjustment
+    public class PaymentAdjustment
     {
         /// <summary>
         /// When printing invoices based on the last commercial document, any 38-

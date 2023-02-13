@@ -7,7 +7,7 @@ namespace fiskaltrust.ifPOS.v1.it
     /// character descriptions are truncated to 37 characters
     /// </summary>
     [DataContract]
-    public class RecTotal
+    public class Payment
     {
         /// <summary>
         ///Payment Description
@@ -19,7 +19,7 @@ namespace fiskaltrust.ifPOS.v1.it
         ///Payment Amount
         /// </summary>
         [DataMember]
-        public decimal Payment { get; set; }
+        public decimal Amount { get; set; }
 
         /// <summary>
         ///PaymentType

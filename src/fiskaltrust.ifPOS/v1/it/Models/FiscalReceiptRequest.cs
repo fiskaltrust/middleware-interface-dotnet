@@ -11,6 +11,12 @@ namespace fiskaltrust.ifPOS.v1.it
     public abstract class FiscalReceiptRequest
     {
         /// <summary>
+        /// LotteryID
+        /// </summary>
+        [DataMember]
+        public string LotteryID { get; set; }
+
+        /// <summary>
         /// Operator
         /// </summary>
         [DataMember]
@@ -44,7 +50,7 @@ namespace fiskaltrust.ifPOS.v1.it
         /// printRecSubtotalAdjustment: Prints discount or surcharge applied on the subtotal.
         /// </summary>
         [DataMember]
-        public List<RecSubtotalAdjustment> RecSubtotalAdjustments { get; set; }
+        public List<PaymentAdjustment> PaymentAdjustments { get; set; }
 
         /// <summary>
         /// printRecTotal: One or more commands can be sent; more than one means that the payment is composed of several 
@@ -52,6 +58,6 @@ namespace fiskaltrust.ifPOS.v1.it
         /// commands can be sent
         /// </summary>
         [DataMember]
-        public List<RecTotal> RecTotals { get; set; }
+        public List<Payment> Payments { get; set; }
     }
 }

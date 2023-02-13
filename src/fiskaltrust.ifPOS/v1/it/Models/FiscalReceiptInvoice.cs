@@ -13,6 +13,6 @@ namespace fiskaltrust.ifPOS.v1.it
         /// <summary>
         /// printRecItems: Prints sale items on a commercial sale document.
         /// </summary>
-        public List<RecItem> RecItems { get; set; }
+        public List<Item> RecItems { get; set; }
     }
 }

@@ -32,13 +32,13 @@ namespace fiskaltrust.ifPOS.v1.it
     /// Modifiers are not supported in invoices
     /// </summary>
     [DataContract]
-    public class RecRefund : RecItem
+    public class Refund : Item
     {
         /// <summary>
         /// OperationType determines modifier operation to perform
         /// </summary>
         [DataMember]
-        public OperationType OperationType { get; set; }
+        public OperationType? OperationType { get; set; }
 
     }
 }

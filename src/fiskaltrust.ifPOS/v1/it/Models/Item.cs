@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace fiskaltrust.ifPOS.v1.it
 {
@@ -8,14 +7,14 @@ namespace fiskaltrust.ifPOS.v1.it
     /// Sale items on a commercial sale document.
     /// </summary>
     [DataContract]
-    public class RecItem
+    public class Item
     {
 
         /// <summary>
-        /// Department ID number (range 1 to 99)
+        /// Department ID number (range 1 to 99), VAT Group
         /// </summary>
         [DataMember]
-        public int Department { get; set; }
+        public int VatGroup { get; set; }
 
         /// <summary>
         /// When printing invoices based on the last commercial document, any 38-
@@ -51,16 +50,5 @@ namespace fiskaltrust.ifPOS.v1.it
         /// </summary>
         [DataMember]
         public decimal Amount { get; set; }
-
-        /// <summary>
-        /// Epson fiscal printers can accept prices from 0.00 up to 9999999.99. The 
-        /// FpMate CGI service automatically rounds down amounts with more than
-        ///two decimal places.If it exceeds 9999999.99, an error is returned.Either
-        ///a comma or a full stop (period) can represent the decimal point. Thousand
-        ///separators should not be used.
-        ///The unitPrice and payment attributes can be zero.
-        /// </summary>
-        [DataMember]
-        public decimal Payment { get; set; }
     }
 }
