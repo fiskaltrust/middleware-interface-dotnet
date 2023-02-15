@@ -15,6 +15,6 @@ namespace fiskaltrust.ifPOS.v1.it
         /// printRecRefunds: Prints Refunds/Voids on a commercial sale document.
         /// </summary>
         [DataMember]
-        public List<Refund> RecRefunds { get; set; }
+        public List<Refund> Refunds { get; set; }
     }
 }
