@@ -15,11 +15,17 @@ namespace fiskaltrust.ifPOS.v1.it
         [DataMember]
         public string Description { get; set; }
 
-
         /// <summary>
         ///  A zero amount will throw a printer error 16.
         /// </summary>
         [DataMember]
         public decimal Amount { get; set; }
+
+        /// <summary>
+        /// Department ID number (range 1 to 99), VAT Group
+        /// </summary>
+        [DataMember]
+        public int? VatGroup { get; set; }
+
     }
 }
