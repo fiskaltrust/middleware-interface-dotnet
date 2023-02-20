@@ -12,37 +12,37 @@ namespace fiskaltrust.ifPOS.v1.it
         /// <summary>
         /// Returns printer information 
         /// </summary>
-        [OperationContract(Name = "v2/GetPrinterInfo")]
+        [OperationContract(Name = "v1/GetPrinterInfo")]
         Task<PrinterStatus> GetPrinterInfoAsync();
 
         /// <summary>
         /// Returns the input message (can be used for a communication test with the SCU).
         /// </summary>
-        [OperationContract(Name = "v2/Echo")]
+        [OperationContract(Name = "v1/Echo")]
         Task<ScuItEchoResponse> EchoAsync(ScuItEchoRequest request);
 
         /// <summary>
         /// Send FiscalInvoice to the printer.
         /// </summary>
-        [OperationContract(Name = "v2/FiscalReceiptInvoice")]
+        [OperationContract(Name = "v1/FiscalReceiptInvoice")]
         Task<FiscalReceiptResponse> FiscalReceiptInvoiceAsync(FiscalReceiptInvoice request);
 
         /// <summary>
         /// Send FiscalRefund to the printer.
         /// </summary>
-        [OperationContract(Name = "v2/FiscalReceiptRefund")]
+        [OperationContract(Name = "v1/FiscalReceiptRefund")]
         Task<FiscalReceiptResponse> FiscalReceiptRefundAsync(FiscalReceiptRefund request);
 
         /// <summary>
         /// StartExportSession
         /// </summary>
-        [OperationContract(Name = "v2/StartExportSession")]
+        [OperationContract(Name = "v1/StartExportSession")]
         Task<StartExportSessionResponse> StartExportSessionAsync(StartExportSessionRequest request);
 
         /// <summary>
         /// EndExportSession
         /// </summary>
-        [OperationContract(Name = "v2/EndExportSession")]
+        [OperationContract(Name = "v1/EndExportSession")]
         Task<EndExportSessionResponse> EndExportSessionAsync(EndExportSessionRequest request);
     }
 }

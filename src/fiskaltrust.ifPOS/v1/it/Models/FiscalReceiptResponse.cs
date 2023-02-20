@@ -16,6 +16,12 @@ namespace fiskaltrust.ifPOS.v1.it
         public bool Success { get; set; }
 
         /// <summary>
+        /// Information on Error
+        /// </summary>
+        [DataMember]
+        public string ErrorInfo { get; set; }
+
+        /// <summary>
         ///  FiscalReceiptNumber: Daily sequence number without Z prefix
         /// </summary>
         [DataMember]
