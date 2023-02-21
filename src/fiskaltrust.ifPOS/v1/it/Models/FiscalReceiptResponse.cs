@@ -37,7 +37,7 @@ namespace fiskaltrust.ifPOS.v1.it
         /// FiscalReceiptAmount – Document value. Zero in the case of an automatic void
         /// </summary>
         [DataMember]
-        public DateTime Amount { get; set; }
+        public decimal Amount { get; set; }
 
         /// <summary>
         /// ZRepNumber – Z report sequence number for the day
