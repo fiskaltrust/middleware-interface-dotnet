@@ -25,7 +25,7 @@ namespace fiskaltrust.ifPOS.v1.it
         ///  FiscalReceiptNumber: Daily sequence number without Z prefix
         /// </summary>
         [DataMember]
-        public string Number { get; set; }
+        public ulong Number { get; set; }
 
         /// <summary>
         /// Document datetime
@@ -38,11 +38,5 @@ namespace fiskaltrust.ifPOS.v1.it
         /// </summary>
         [DataMember]
         public decimal Amount { get; set; }
-
-        /// <summary>
-        /// ZRepNumber – Z report sequence number for the day
-        /// </summary>
-        [DataMember]
-        public ulong ZRepNumber { get; set; }
     }
 }
