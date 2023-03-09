@@ -11,17 +11,17 @@ namespace fiskaltrust.ifPOS.v1.it
         /// <summary>
         /// Deposit (Acconto)
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 10)]
         Acconto = 10,
         /// <summary>
         /// Omaggio (Free of Charge)
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 20)]
         FreeOfCharge = 11,
         /// <summary>
         /// Buono monouso (single-use voucher)
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 30)]
         SingleUseVoucher = 12,
     }
 
@@ -37,7 +37,7 @@ namespace fiskaltrust.ifPOS.v1.it
         /// <summary>
         /// OperationType determines modifier operation to perform
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 10)]
         public OperationType? OperationType { get; set; }
 
     }

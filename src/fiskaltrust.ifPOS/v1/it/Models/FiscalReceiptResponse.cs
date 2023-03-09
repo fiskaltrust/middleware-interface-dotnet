@@ -12,31 +12,31 @@ namespace fiskaltrust.ifPOS.v1.it
         /// <summary>
         /// Indigating success
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 10)]
         public bool Success { get; set; }
 
         /// <summary>
         /// Information on Error
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 20)]
         public string ErrorInfo { get; set; }
 
         /// <summary>
         ///  FiscalReceiptNumber: Daily sequence number without Z prefix
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 30)]
         public ulong Number { get; set; }
 
         /// <summary>
         /// Document datetime
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 40)]
         public DateTime TimeStamp { get; set; }
 
         /// <summary>
         /// FiscalReceiptAmount – Document value. Zero in the case of an automatic void
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 50)]
         public decimal Amount { get; set; }
     }
 }

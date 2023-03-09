@@ -5,10 +5,10 @@ namespace fiskaltrust.ifPOS.v1.it
     [DataContract]
     public class StartExportSessionResponse
     {
-        [DataMember]
+        [DataMember(Order = 10)]
         public string TokenId { get; set; }
 
-        [DataMember]
+        [DataMember(Order = 20)]
         public string PrinterId { get; set; }
     }
 }

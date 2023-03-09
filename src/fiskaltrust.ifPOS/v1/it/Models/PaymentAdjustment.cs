@@ -12,19 +12,19 @@ namespace fiskaltrust.ifPOS.v1.it
         /// When printing invoices based on the last commercial document, any 38-
         /// character descriptions are truncated to 37 characters
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 10)]
         public string Description { get; set; }
 
         /// <summary>
         ///  A zero amount will throw a printer error 16.
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 20)]
         public decimal Amount { get; set; }
 
         /// <summary>
         /// Department ID number (range 1 to 99), VAT Group
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 30)]
         public int? VatGroup { get; set; }
 
     }

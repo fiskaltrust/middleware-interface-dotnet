@@ -13,20 +13,20 @@ namespace fiskaltrust.ifPOS.v1.it
         /// <summary>
         /// Department ID number (range 1 to 99), VAT Group
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 10)]
         public int VatGroup { get; set; }
 
         /// <summary>
         /// When printing invoices based on the last commercial document, any 38-
         /// character descriptions are truncated to 37 characters
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 20)]
         public string Description { get; set; }
 
         /// <summary>
         /// Epson fiscal printers can compute quantities from 0.001 up to 9999.999
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 30)]
         public decimal Quantity { get; set; }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace fiskaltrust.ifPOS.v1.it
         ///separators should not be used.
         ///The unitPrice and payment attributes can be zero.
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 40)]
         public decimal UnitPrice { get; set; }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace fiskaltrust.ifPOS.v1.it
         ///separators should not be used.
         ///The amount attribute cannot be zero!
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 50)]
         public decimal Amount { get; set; }
     }
 }

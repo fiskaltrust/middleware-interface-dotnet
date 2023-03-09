@@ -13,6 +13,7 @@ namespace fiskaltrust.ifPOS.v1.it
         /// <summary>
         /// printRecItems: Prints sale items on a commercial sale document.
         /// </summary>
+        [DataMember(Order = 10)]
         public List<Item> Items { get; set; }
     }
 }

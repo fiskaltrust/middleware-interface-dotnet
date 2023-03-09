@@ -11,15 +11,17 @@ namespace fiskaltrust.ifPOS.v1.it
         /// <summary>
         ///Financial report only
         /// </summary>
+        [EnumMember] 
         XReport = 1,
         /// <summary>
         ///t Fiscal daily closure only 
         /// </summary>
-        ZReport = 2,
+        [EnumMember] 
+        Report = 2,
         /// <summary>
         ///inancial report and fiscal daily closure (in that order)
         /// </summary>
+        [EnumMember] 
         XZReport = 3,
-
     }
 }

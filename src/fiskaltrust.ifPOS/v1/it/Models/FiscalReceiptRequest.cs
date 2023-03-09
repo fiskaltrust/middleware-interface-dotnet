@@ -13,13 +13,13 @@ namespace fiskaltrust.ifPOS.v1.it
         /// <summary>
         /// LotteryID
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 10)]
         public string LotteryID { get; set; }
 
         /// <summary>
         /// Operator
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 20)]
         public string Operator { get; set; }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace fiskaltrust.ifPOS.v1.it
         /// operator and one for the text itself.The maximum number of characters is 40. This reduces to 20 if 
         /// used with printerTicket files.
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 30)]
         public string DisplayText { get; set; }
 
         /// <summary>
@@ -36,20 +36,20 @@ namespace fiskaltrust.ifPOS.v1.it
         ///lines but before the FOOTER. Only one barcode can be printed in a commercial document unless the
         ///paper cut native command is used(1-137).
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 40)]
         public string Barcode { get; set; }
 
         /// <summary>
         ///QRcodes codes are printed at the end of the commercial document after the additional trailer
         ///lines but before the FOOTER.
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 50)]
         public string QRcode { get; set; }
 
         /// <summary>
         /// printRecSubtotalAdjustment: Prints discount or surcharge applied on the subtotal.
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 60)]
         public List<PaymentAdjustment> PaymentAdjustments { get; set; }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace fiskaltrust.ifPOS.v1.it
         /// partial payments.In this case, once the total has been reached or exceeded, no more payment
         /// commands can be sent
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 70)]
         public List<Payment> Payments { get; set; }
     }
 }

@@ -17,19 +17,19 @@ namespace fiskaltrust.ifPOS.v1.it
         /// <summary>
         /// Operator
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 10)]
         public string Operator { get; set; }
 
         /// <summary>
         /// ReportRequestTypes
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 20)]
         public ReportRequestTypes ReportRequestTypes { get; set; }
 
         /// <summary>
         /// Prepares data deletion at session end.
         /// </summary>
-        [DataMember]
+        [DataMember(Order = 30)]
         public bool Erase { get; set; }
     }
 }
