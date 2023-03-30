@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace fiskaltrust.ifPOS.v1.it
 {
     /// <summary>
-    /// Get Printer data from the last receipt
+    /// RecordData
     /// </summary>
     [DataContract]
-    public class RecData
+    public class RecordData
     {
         /// <summary>
         /// RecNumber
