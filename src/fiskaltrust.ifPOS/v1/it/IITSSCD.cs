@@ -34,6 +34,11 @@ namespace fiskaltrust.ifPOS.v1.it
         Task<FiscalReceiptResponse> FiscalReceiptRefundAsync(FiscalReceiptRefund request);
 
         /// <summary>
+        /// Get RecData of the last Receipt
+        /// </summary>
+        [OperationContract(Name = "v1/GetLastReceiptData")]
+        Task<RecData> GetLastRecData();
+        /// <summary>
         /// StartExportSession
         /// </summary>
         [OperationContract(Name = "v1/StartExportSession")]

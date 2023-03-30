@@ -38,5 +38,17 @@ namespace fiskaltrust.ifPOS.v1.it
         /// </summary>
         [DataMember(Order = 50)]
         public decimal Amount { get; set; }
+
+        /// <summary>
+        /// recNumber of the receipt.
+        /// </summary>
+        [DataMember(Order = 60)]
+        public decimal RecNumber { get; set; }
+
+        /// <summary>
+        /// zRecNumber of the receipt.
+        /// </summary>
+        [DataMember(Order = 70)]
+        public decimal ZRecNumber { get; set; }
     }
 }
