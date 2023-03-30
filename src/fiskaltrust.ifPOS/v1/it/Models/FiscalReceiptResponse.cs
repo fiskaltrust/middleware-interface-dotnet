@@ -55,6 +55,6 @@ namespace fiskaltrust.ifPOS.v1.it
         /// Record data of the receipt. Or ZRecord data on a daily receipt.
         /// </summary>
         [DataMember(Order = 80)]
-        public string RecordData { get; set; }
+        public string RecordDataJson { get; set; }
     }
 }
