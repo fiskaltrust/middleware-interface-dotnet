@@ -4,10 +4,10 @@ namespace fiskaltrust.ifPOS.v1.it
 {
 
     /// <summary>
-    /// queryPrinterStatus response
+    /// Details about the operational status of the printer or server
     /// </summary>
     [DataContract]
-    public class PrinterStatus
+    public class DeviceInfo
     {
         /// <summary>
         /// Version of firmware, memory etc

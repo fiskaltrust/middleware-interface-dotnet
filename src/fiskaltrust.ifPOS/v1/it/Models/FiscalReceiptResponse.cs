@@ -10,7 +10,7 @@ namespace fiskaltrust.ifPOS.v1.it
     public class FiscalReceiptResponse
     {
         /// <summary>
-        /// Indigating success
+        /// Indicating success
         /// </summary>
         [DataMember(Order = 10)]
         public bool Success { get; set; }

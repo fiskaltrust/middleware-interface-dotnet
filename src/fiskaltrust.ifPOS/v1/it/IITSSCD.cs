@@ -10,10 +10,10 @@ namespace fiskaltrust.ifPOS.v1.it
     public interface IITSSCD
     {
         /// <summary>
-        /// Returns printer information 
+        /// Returns device information from, e.g. from the printer or server
         /// </summary>
-        [OperationContract(Name = "v1/GetPrinterInfo")]
-        Task<PrinterStatus> GetPrinterInfoAsync();
+        [OperationContract(Name = "v1/GetDeviceInfo")]
+        Task<DeviceInfo> GetDeviceInfoAsync();
 
         /// <summary>
         /// Returns the input message (can be used for a communication test with the SCU).
@@ -22,15 +22,21 @@ namespace fiskaltrust.ifPOS.v1.it
         Task<ScuItEchoResponse> EchoAsync(ScuItEchoRequest request);
 
         /// <summary>
-        /// Send FiscalInvoice to the printer.
+        /// Send a request to fiscalize an invoice to the printer or server
         /// </summary>
         [OperationContract(Name = "v1/FiscalReceiptInvoice")]
         Task<FiscalReceiptResponse> FiscalReceiptInvoiceAsync(FiscalReceiptInvoice request);
 
         /// <summary>
-        /// Send FiscalRefund to the printer.
+        /// Send a request to fiscalize a refund to the printer or server
         /// </summary>
         [OperationContract(Name = "v1/FiscalReceiptRefund")]
         Task<FiscalReceiptResponse> FiscalReceiptRefundAsync(FiscalReceiptRefund request);
+
+        /// <summary>
+        /// Send a request to execute (and print) a daily closing receipt to the printer or server
+        /// </summary>
+        [OperationContract(Name = "v1/ExecuteDailyClosing")]
+        Task<DailyClosingResponse> ExecuteDailyClosingAsync(DailyClosingRequest request);
     }
 }
