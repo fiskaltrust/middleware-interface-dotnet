@@ -24,10 +24,6 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
 
         public async Task<FiscalReceiptResponse> FiscalReceiptRefundAsync(FiscalReceiptRefund request) => await ExecuteHttpGetAsync<FiscalReceiptResponse>("v1", "refund").ConfigureAwait(false);
 
-        public async Task<StartExportSessionResponse> StartExportSessionAsync(StartExportSessionRequest request) => await ExecuteHttpGetAsync<StartExportSessionResponse>("v1", "startExport").ConfigureAwait(false);
-
-        public async Task<EndExportSessionResponse> EndExportSessionAsync(EndExportSessionRequest request) => await ExecuteHttpGetAsync<EndExportSessionResponse>("v1", "endExport").ConfigureAwait(false);
-
         private async Task<T> ExecuteHttpGetAsync<T>(string urlVersion, string urlMethod)
         {
             var url = Path.Combine(urlVersion, urlMethod);
