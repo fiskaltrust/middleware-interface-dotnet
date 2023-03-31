@@ -37,18 +37,18 @@ namespace fiskaltrust.ifPOS.v1.it
         /// recNumber of the receipt.
         /// </summary>
         [DataMember(Order = 60)]
-        public decimal RecNumber { get; set; }
+        public long ReceiptNumber { get; set; }
 
         /// <summary>
         /// zRecNumber of the receipt.
         /// </summary>
         [DataMember(Order = 70)]
-        public decimal ZRecNumber { get; set; }
+        public long ZRepNumber { get; set; }
 
         /// <summary>
         /// Record data of the receipt.
         /// </summary>
         [DataMember(Order = 80)]
-        public string RecordDataJson { get; set; }
+        public string ReceiptDataJson { get; set; }
     }
 }

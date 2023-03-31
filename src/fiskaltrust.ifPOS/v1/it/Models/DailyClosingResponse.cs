@@ -32,17 +32,17 @@ namespace fiskaltrust.ifPOS.v1.it
         /// </summary>
         [DataMember(Order = 40)]
         public decimal DailyAmount { get; set; }
-                
+
         /// <summary>
         /// The ascending daily closing number
         /// </summary>
         [DataMember(Order = 50)]
-        public decimal ZRepNumber { get; set; }
+        public long ZRepNumber { get; set; }
 
         /// <summary>
         /// ZRecord data of the daily closing receipt
         /// </summary>
         [DataMember(Order = 60)]
-        public string RecordDataJson { get; set; }
+        public string ReportDataJson { get; set; }
     }
 }
