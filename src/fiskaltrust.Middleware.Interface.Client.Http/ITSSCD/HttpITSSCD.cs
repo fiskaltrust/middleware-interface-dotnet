@@ -16,13 +16,16 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             _httpClient = GetClient(options);
         }
 
-        public async Task<PrinterStatus> GetPrinterInfoAsync() => await ExecuteHttpGetAsync<PrinterStatus>("v1", "printerInfo").ConfigureAwait(false);
+        public async Task<DeviceInfo> GetDeviceInfoAsync() => await ExecuteHttpGetAsync<DeviceInfo>("v1", "GetDeviceInfo").ConfigureAwait(false);
 
-        public async Task<ScuItEchoResponse> EchoAsync(ScuItEchoRequest request) => await ExecuteHttpGetAsync<ScuItEchoResponse>("v1", "echo").ConfigureAwait(false);
+        public async Task<ScuItEchoResponse> EchoAsync(ScuItEchoRequest request) => await ExecuteHttpGetAsync<ScuItEchoResponse>("v1", "Echo").ConfigureAwait(false);
 
-        public async Task<FiscalReceiptResponse> FiscalReceiptInvoiceAsync(FiscalReceiptInvoice request) => await ExecuteHttpGetAsync<FiscalReceiptResponse>("v1", "invoice").ConfigureAwait(false);
+        public async Task<FiscalReceiptResponse> FiscalReceiptInvoiceAsync(FiscalReceiptInvoice request) => await ExecuteHttpGetAsync<FiscalReceiptResponse>("v1", "FiscalReceiptInvoice").ConfigureAwait(false);
 
-        public async Task<FiscalReceiptResponse> FiscalReceiptRefundAsync(FiscalReceiptRefund request) => await ExecuteHttpGetAsync<FiscalReceiptResponse>("v1", "refund").ConfigureAwait(false);
+        public async Task<FiscalReceiptResponse> FiscalReceiptRefundAsync(FiscalReceiptRefund request) => await ExecuteHttpGetAsync<FiscalReceiptResponse>("v1", "FiscalReceiptRefund").ConfigureAwait(false);
+
+        public async Task<DailyClosingResponse> ExecuteDailyClosingAsync(DailyClosingRequest request) => await ExecuteHttpGetAsync<DailyClosingResponse>("v1", "ExecuteDailyClosing").ConfigureAwait(false);
+
 
         private async Task<T> ExecuteHttpGetAsync<T>(string urlVersion, string urlMethod)
         {
