@@ -25,7 +25,7 @@ namespace fiskaltrust.ifPOS.v1.it
         /// Document datetime
         /// </summary>
         [DataMember(Order = 40)]
-        public DateTime TimeStamp { get; set; }
+        public DateTime ReceiptDateTime { get; set; }
 
         /// <summary>
         /// FiscalReceiptAmount – Document value. Zero in the case of an automatic void
