@@ -22,12 +22,6 @@ namespace fiskaltrust.ifPOS.v1.it
         public string ErrorInfo { get; set; }
 
         /// <summary>
-        ///  FiscalReceiptNumber: Daily sequence number without Z prefix
-        /// </summary>
-        [DataMember(Order = 30)]
-        public ulong Number { get; set; }
-
-        /// <summary>
         /// Document datetime
         /// </summary>
         [DataMember(Order = 40)]

@@ -65,15 +65,21 @@ namespace fiskaltrust.ifPOS.v1.it
         public string ExpireTACommunicationCertificateDate { get; set; }
 
         /// <summary>
-        ///  indicates the mode *  
+        /// indicates the mode *  
         /// </summary>
         [DataMember(Order = 100)]
         public bool TrainingMode { get; set; }
 
         /// <summary>
-        ///   indicates the last firmware update outcome *
+        /// indicates the last firmware update outcome *
         /// </summary>
         [DataMember(Order = 110)]
-        public string UpgradeResult  { get; set; }
+        public string UpgradeResult { get; set; }
+
+        /// <summary>
+        /// Serialnumber of the printer
+        /// </summary>
+        [DataMember(Order = 120)]
+        public string SerialNumber { get; set; }
     }
 }
