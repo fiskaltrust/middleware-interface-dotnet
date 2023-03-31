@@ -46,7 +46,7 @@ namespace fiskaltrust.ifPOS.v1.it
         public decimal ZRecNumber { get; set; }
 
         /// <summary>
-        /// Record data of the receipt. Or ZRecord data on a daily receipt.
+        /// Record data of the receipt.
         /// </summary>
         [DataMember(Order = 80)]
         public string RecordDataJson { get; set; }
