@@ -1,7 +1,0 @@
-{
-  "version": "1.3.45-rc3",
-  "releaseBranches": [
-    "^refs/heads/master$",
-    "^refs/tags/v\\d+(?:\\.\\d+)*(?:-.*)?$"
-  ]
-}
