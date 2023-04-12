@@ -27,7 +27,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IDESSCD.Wcf
                 StopHost();
         }
 
-        protected override ifPOS.v1.de.IDESSCD CreateClient() => HttpDESSCDFactory.CreateSSCDAsync(new HttpPosClientOptions { Url = new Uri(_url), RetryPolicyOptions = _retryPolicyOptions }).Result;
+        protected override ifPOS.v1.de.IDESSCD CreateClient() => HttpDESSCDFactory.CreateSSCDAsync(new HttpDESSCDClientOptions { Url = new Uri(_url), RetryPolicyOptions = _retryPolicyOptions }).Result;
 
         protected override void StartHost()
         {

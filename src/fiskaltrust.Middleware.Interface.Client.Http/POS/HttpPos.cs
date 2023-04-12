@@ -6,14 +6,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace fiskaltrust.Middleware.Interface.Client.Http
 {
-    internal class HttpPos : IPOS
+    internal sealed class HttpPos : IPOS, IDisposable
     {
         private readonly HttpPosClientOptions _options;
         private readonly HttpClient _httpClient;
@@ -35,7 +34,24 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
         private HttpClient GetClient(HttpPosClientOptions options)
         {
             var url = options.Url.ToString().EndsWith("/") ? options.Url : new Uri($"{options.Url}/");
-            var client = new HttpClient { BaseAddress = url };
+
+            HttpClient client;
+
+            if (options.DisableSslValidation.HasValue && options.DisableSslValidation.Value)
+            {
+                var handler = new HttpClientHandler
+                {
+                    ClientCertificateOptions = ClientCertificateOption.Manual,
+                    ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true
+                };
+
+                client = new HttpClient(handler) { BaseAddress = url };
+            }
+            else
+            {
+                client = new HttpClient { BaseAddress = url };
+            }
+
 
             if (options.CashboxId.HasValue)
                 client.DefaultRequestHeaders.Add("cashboxid", options.CashboxId.Value.ToString());
@@ -245,5 +261,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
         {
             throw new NotSupportedException("Async streaming is not supported in HTTP. Please call the non-async Journal method.");
         }
+
+        public void Dispose() => _httpClient?.Dispose();
     }
 }

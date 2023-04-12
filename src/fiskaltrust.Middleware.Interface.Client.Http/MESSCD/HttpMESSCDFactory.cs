@@ -9,7 +9,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
     /// </summary>
     public static class HttpMESSCDFactory
     {
-        public static async Task<IMESSCD> CreateSSCDAsync(ClientOptions options)
+        public static async Task<IMESSCD> CreateSSCDAsync(HttpMESSCDClientOptions options)
         {
             var connectionhandler = new HttpProxyConnectionHandler<IMESSCD>(new HttpMESSCD(options));
 
