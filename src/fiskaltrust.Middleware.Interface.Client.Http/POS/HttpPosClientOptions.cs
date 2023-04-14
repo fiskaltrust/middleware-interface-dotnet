@@ -3,7 +3,7 @@
 namespace fiskaltrust.Middleware.Interface.Client.Http
 {
     /// <summary>
-    /// Set Client Options Communication type,Url, CashboxId and AccessToken.
+    /// Used to pass client options to the underlying HTTP client
     /// </summary>
     public class HttpPosClientOptions : ClientOptions
     {
@@ -11,6 +11,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
         public bool UseUnversionedLegacyUrls { get; set; } = false;
         public Guid? CashboxId { get; set; }
         public string AccessToken { get; set; }
+        public bool? DisableSslValidation { get; set; }
     }
 
     public enum HttpCommunicationType

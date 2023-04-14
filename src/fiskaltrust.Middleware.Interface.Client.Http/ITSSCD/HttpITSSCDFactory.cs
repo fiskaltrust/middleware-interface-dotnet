@@ -9,7 +9,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
     /// </summary>
     public static class HttpITSSCDFactory
     {
-        public static async Task<IITSSCD> CreateSSCDAsync(ClientOptions options)
+        public static async Task<IITSSCD> CreateSSCDAsync(HttpITSSCDClientOptions options)
         {
             var connectionhandler = new HttpProxyConnectionHandler<IITSSCD>(new HttpITSSCD(options));
 
