@@ -1,4 +1,5 @@
-﻿using System;
+﻿using fiskaltrust.ifPOS.v1.errors;
+using System;
 using System.Runtime.Serialization;
 
 namespace fiskaltrust.ifPOS.v1.it
@@ -19,7 +20,7 @@ namespace fiskaltrust.ifPOS.v1.it
         /// Information on Error
         /// </summary>
         [DataMember(Order = 20)]
-        public string ErrorInfo { get; set; }
+        public SSCDErrorInfo SSCDErrorInfo { get; set; }
 
         /// <summary>
         /// Document datetime
