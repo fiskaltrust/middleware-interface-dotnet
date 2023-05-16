@@ -33,7 +33,7 @@ namespace fiskaltrust.ifPOS.v1.errors
     /// SSCDErrorInfo
     /// </summary>
     [DataContract]
-    public class SSCDErrorInfo : Exception
+    public class SSCDErrorInfo
     {
         /// <summary>
         /// SSCDErrorType
@@ -76,11 +76,5 @@ namespace fiskaltrust.ifPOS.v1.errors
                 Type = SSCDErrorType.Device
             };
         }
-
-        /// <summary>
-        /// SSCDErrorInfo SerializationInfo
-        /// </summary>
-        protected SSCDErrorInfo(SerializationInfo info, StreamingContext context) : base(info, context) { }
-
     }
 }
