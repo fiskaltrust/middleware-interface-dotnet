@@ -76,5 +76,11 @@ namespace fiskaltrust.ifPOS.v1.errors
                 Type = SSCDErrorType.Device
             };
         }
+
+        /// <summary>
+        /// SSCDErrorInfo SerializationInfo
+        /// </summary>
+        protected SSCDErrorInfo(SerializationInfo info, StreamingContext context) : base(info, context) { }
+
     }
 }
