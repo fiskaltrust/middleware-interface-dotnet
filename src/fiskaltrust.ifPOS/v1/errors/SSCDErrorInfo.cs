@@ -33,48 +33,17 @@ namespace fiskaltrust.ifPOS.v1.errors
     /// SSCDErrorInfo
     /// </summary>
     [DataContract]
-    public class SSCDErrorInfo : Exception
+    public class SSCDErrorInfo
     {
         /// <summary>
         /// SSCDErrorType
         /// </summary>
         [DataMember(Order = 10)]
-        public SSCDErrorType Type { get; private set; }
+        public SSCDErrorType Type { get; set; }
         /// <summary>
         /// SSCD Error Info
         /// </summary>
         [DataMember(Order = 20)]
-        public string Info { get; private set; }
-
-        /// <summary>
-        /// SSCDErrorInfo
-        /// </summary>
-        public SSCDErrorInfo(string errorInfo)
-        {
-            Info = errorInfo;
-            Type = SSCDErrorType.General;
-        }
-
-        /// <summary>
-        /// SSCDErrorInfo From Connection SSCDErrorType
-        /// </summary>
-        public static SSCDErrorInfo FromConnection(string errorInfo)
-        {
-            return new(errorInfo)
-            {
-                Type = SSCDErrorType.Connection
-            };
-        }
-
-        /// <summary>
-        /// SSCDErrorInfo From Device SSCDErrorType
-        /// </summary>
-        public static SSCDErrorInfo FromDevice(string errorInfo)
-        {
-            return new(errorInfo)
-            {
-                Type = SSCDErrorType.Device
-            };
-        }
+        public string Info { get; set; }
     }
 }
