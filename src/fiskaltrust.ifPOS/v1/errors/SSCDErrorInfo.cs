@@ -39,11 +39,11 @@ namespace fiskaltrust.ifPOS.v1.errors
         /// SSCDErrorType
         /// </summary>
         [DataMember(Order = 10)]
-        public SSCDErrorType Type { get; private set; }
+        public SSCDErrorType Type { get; set; }
         /// <summary>
         /// SSCD Error Info
         /// </summary>
         [DataMember(Order = 20)]
-        public string Info { get; private set; }
+        public string Info { get; set; }
     }
 }
