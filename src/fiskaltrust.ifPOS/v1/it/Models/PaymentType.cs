@@ -43,6 +43,11 @@ namespace fiskaltrust.ifPOS.v1.it
         ///With respect to Payment discount, index specifies the sub-type. Definded in PaymentDiscountIndex
         /// </summary>
         [EnumMember] 
-        PaymentDiscount = 6
+        PaymentDiscount = 6,
+        /// <summary>
+        ///Multi use voucher
+        /// </summary>
+        [EnumMember]
+        Voucher = 7
     }
 }

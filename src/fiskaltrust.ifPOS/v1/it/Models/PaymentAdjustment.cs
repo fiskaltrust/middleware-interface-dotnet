@@ -28,5 +28,11 @@ namespace fiskaltrust.ifPOS.v1.it
         [DataMember(Order = 30)]
         public int? VatGroup { get; set; }
 
+        /// <summary>
+        /// PaymentAdjustmentType
+        /// </summary>
+        [DataMember(Order = 40)]
+        public PaymentAdjustmentType PaymentAdjustmentType { get; set; }
+
     }
 }
