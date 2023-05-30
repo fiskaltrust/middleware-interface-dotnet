@@ -50,5 +50,11 @@ namespace fiskaltrust.ifPOS.v1.it
         /// </summary>
         [DataMember(Order = 50)]
         public decimal Amount { get; set; }
+
+        /// <summary>
+        /// AdditionalInformation
+        /// </summary>
+        [DataMember(Order = 60)]
+        public string AdditionalInformation { get; set; }
     }
 }
