@@ -34,5 +34,11 @@ namespace fiskaltrust.ifPOS.v1.it
         [DataMember(Order = 40)]
         public PaymentAdjustmentType PaymentAdjustmentType { get; set; }
 
+        /// <summary>
+        /// AdditionalInformation
+        /// </summary>
+        [DataMember(Order = 50)]
+        public string AdditionalInformation { get; set; }
+
     }
 }
