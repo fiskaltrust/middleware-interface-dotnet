@@ -50,5 +50,11 @@ namespace fiskaltrust.ifPOS.v1.it
         /// </summary>
         [DataMember(Order = 40)]
         public int Index { get; set; }
+
+        /// <summary>
+        /// AdditionalInformation
+        /// </summary>
+        [DataMember(Order = 50)]
+        public string AdditionalInformation { get; set; }
     }
 }
