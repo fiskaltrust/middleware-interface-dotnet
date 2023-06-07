@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="fiskaltrust.interface.StrongName" Version="1.3.46-rc1" />
+    <PackageReference Include="fiskaltrust.interface.StrongName" Version="1.3.46-rc1-23158-63745" />
   </ItemGroup>
   
   <ItemGroup>
