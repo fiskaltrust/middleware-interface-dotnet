@@ -27,7 +27,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
 
         public async Task<DailyClosingResponse> ExecuteDailyClosingAsync(DailyClosingRequest request) => await ExecuteHttpPostAsync<DailyClosingResponse>("v1", "ExecuteDailyClosing", request).ConfigureAwait(false);
 
-        public async Task<Response> NonFiscalReceipt(NonFiscalRequest request) => await ExecuteHttpPostAsync<Response>("v1", "NonFiscalRequest", request).ConfigureAwait(false);
+        public async Task<Response> NonFiscalReceiptAsync(NonFiscalRequest request) => await ExecuteHttpPostAsync<Response>("v1", "NonFiscalReceipt", request).ConfigureAwait(false);
 
         private async Task<T> ExecuteHttpPostAsync<T>(string urlVersion, string urlMethod, object parameter = null)
         {
