@@ -6,6 +6,7 @@ namespace fiskaltrust.ifPOS.v1.it
     /// <summary>
     /// Basic Response
     /// </summary>
+    [DataContract]
     public class Response
     {
         /// <summary>
