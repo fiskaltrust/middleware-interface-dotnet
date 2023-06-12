@@ -42,7 +42,7 @@ namespace fiskaltrust.ifPOS.v1.it
         /// <summary>
         /// Send a request to fiscalize an invoice to the printer or server
         /// </summary>
-        [OperationContract(Name = "v1/NonFiscalRequest")]
-        Task<Response> NonFiscalReceipt(NonFiscalRequest request);
+        [OperationContract(Name = "v1/NonFiscalReceipt")]
+        Task<Response> NonFiscalReceiptAsync(NonFiscalRequest request);
     }
 }
