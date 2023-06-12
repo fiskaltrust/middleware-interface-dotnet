@@ -74,35 +74,5 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
                 return new HttpClient { BaseAddress = url };
             }
         }
-
-        Task<DeviceInfo> IITSSCD.GetDeviceInfoAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<ScuItEchoResponse> IITSSCD.EchoAsync(ScuItEchoRequest request)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<FiscalReceiptResponse> IITSSCD.FiscalReceiptInvoiceAsync(FiscalReceiptInvoice request)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<FiscalReceiptResponse> IITSSCD.FiscalReceiptRefundAsync(FiscalReceiptRefund request)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<DailyClosingResponse> IITSSCD.ExecuteDailyClosingAsync(DailyClosingRequest request)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<Response> IITSSCD.NonFiscalReceipt(NonFiscalRequest request)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
