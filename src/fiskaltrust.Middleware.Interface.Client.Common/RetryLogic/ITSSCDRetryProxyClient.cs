@@ -17,5 +17,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
         public async Task<FiscalReceiptResponse> FiscalReceiptRefundAsync(FiscalReceiptRefund request) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.FiscalReceiptRefundAsync(request));
 
         public async Task<DailyClosingResponse> ExecuteDailyClosingAsync(DailyClosingRequest request) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.ExecuteDailyClosingAsync(request));
+
+        public async Task<Response> NonFiscalReceiptAsync(NonFiscalRequest request) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.NonFiscalReceiptAsync(request));
     }
 }

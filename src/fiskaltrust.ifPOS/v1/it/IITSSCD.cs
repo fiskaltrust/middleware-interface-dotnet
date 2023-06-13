@@ -38,5 +38,11 @@ namespace fiskaltrust.ifPOS.v1.it
         /// </summary>
         [OperationContract(Name = "v1/ExecuteDailyClosing")]
         Task<DailyClosingResponse> ExecuteDailyClosingAsync(DailyClosingRequest request);
+
+        /// <summary>
+        /// Send a request to fiscalize an invoice to the printer or server
+        /// </summary>
+        [OperationContract(Name = "v1/NonFiscalReceipt")]
+        Task<Response> NonFiscalReceiptAsync(NonFiscalRequest request);
     }
 }
