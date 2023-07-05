@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net461;netstandard2.0;net6</TargetFrameworks>
@@ -11,7 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net6' ">
-		<PackageReference Include="Grpc.Net.Client" Version="2.49.0" />
+		<PackageReference Include="Grpc.Net.Client" Version="2.52.0" />
 		<PackageReference Include="protobuf-net.Grpc" Version="1.0.179" />
 	</ItemGroup>
 
