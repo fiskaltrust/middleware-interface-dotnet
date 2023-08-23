@@ -54,7 +54,7 @@ namespace fiskaltrust.ifPOS.v1.it
         /// <summary>
         /// Returns a generic class with general information on the device wrapped by the SCU.
         /// </summary>
-        [OperationContract(Name = "v1/GetInfo")]
-        Task<Info> GetInfoAsync();
+        [OperationContract(Name = "v1/GetRTInfo")]
+        Task<Info> GetRTInfoAsync();
     }
 }
