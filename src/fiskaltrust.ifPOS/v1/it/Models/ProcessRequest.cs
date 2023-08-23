@@ -11,9 +11,5 @@ namespace fiskaltrust.ifPOS.v1.it
 
         [DataMember(Order = 20)]
         public ReceiptResponse ReceiptResponse { get; set; }
-
-
-        [DataMember(Order = 30)]
-        public bool Print { get; set; }
     }
 }
