@@ -14,7 +14,6 @@ namespace fiskaltrust.ifPOS.v1.it
         /// Contains a json serialized object with generic info for the given device
         /// </summary>
         [DataMember(Order = 10)]
-        public string InfoData { get; set; }
- 
+        public string InfoData { get; set; } 
     }
 }
