@@ -52,24 +52,6 @@ namespace fiskaltrust.ifPOS.v1.it
         Task<ProcessResponse> ProcessReceiptAsync(ProcessRequest request);
 
         /// <summary>
-        /// This endpoint offers a generic invoice processing option to process the given receiptrequest / receiptresponse pair. The specific SCU implementation will decide which receipt type to process.
-        /// </summary>
-        [OperationContract(Name = "v1/ProcessInvoice")]
-        Task<ProcessResponse> ProcessInvoiceAsync(ProcessRequest request);
-
-        /// <summary>
-        /// Send a request to cancel a receipt
-        /// </summary>
-        [OperationContract(Name = "v1/ProcessReceiptCancellation")]
-        Task<ProcessResponse> ProcessReceiptCancellationAsync(ProcessRequest request);
-
-        /// <summary>
-        /// Send a request to cancel an invoice
-        /// </summary>
-        [OperationContract(Name = "v1/ProcessInvoiceCancellation")]
-        Task<ProcessResponse> ProcessInvoiceCancellationAsync(ProcessRequest request);
-
-        /// <summary>
         /// Returns a generic class with general information on the device wrapped by the SCU.
         /// </summary>
         [OperationContract(Name = "v1/GetInfo")]
