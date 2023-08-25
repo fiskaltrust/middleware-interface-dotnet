@@ -44,5 +44,17 @@ namespace fiskaltrust.ifPOS.v1.it
         /// </summary>
         [OperationContract(Name = "v1/NonFiscalReceipt")]
         Task<Response> NonFiscalReceiptAsync(NonFiscalRequest request);
+
+        /// <summary>
+        /// This endpoint offers a generic receipt processiong option to process the given receiptrequest / receiptresponse pair. The specific SCU implementation will decide which receipt type to process.
+        /// </summary>
+        [OperationContract(Name = "v1/ProcessReceipt")]
+        Task<ProcessResponse> ProcessReceiptAsync(ProcessRequest request);
+
+        /// <summary>
+        /// Returns a generic class with general information on the device wrapped by the SCU.
+        /// </summary>
+        [OperationContract(Name = "v1/GetRTInfo")]
+        Task<RTInfo> GetRTInfoAsync();
     }
 }

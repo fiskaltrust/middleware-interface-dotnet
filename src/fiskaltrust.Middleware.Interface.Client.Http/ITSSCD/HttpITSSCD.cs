@@ -29,6 +29,10 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
 
         public async Task<Response> NonFiscalReceiptAsync(NonFiscalRequest request) => await ExecuteHttpPostAsync<Response>("v1", "NonFiscalReceipt", request).ConfigureAwait(false);
 
+        public async Task<ProcessResponse> ProcessReceiptAsync(ProcessRequest request)=> await ExecuteHttpPostAsync<ProcessResponse>("v1", "ProcessReceipt", request).ConfigureAwait(false);
+       
+        public async Task<RTInfo> GetRTInfoAsync()=> await ExecuteHttpGetAsync<RTInfo>("v1", "GetRTInfo").ConfigureAwait(false);
+
         private async Task<T> ExecuteHttpPostAsync<T>(string urlVersion, string urlMethod, object parameter = null)
         {
             var url = Path.Combine(urlVersion, urlMethod);

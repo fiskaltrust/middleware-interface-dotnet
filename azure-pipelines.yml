@@ -53,8 +53,8 @@ jobs:
         secureFileId: 'codesigning.pfx'
         signCertPassword: '$(Code_Signing_Password)'
         filePaths: |
-         **/*.dll
-         **/*.exe
+         **/fiskaltrust*.dll
+         **/fiskaltrust*.exe
 
     - script: dotnet test --no-build --configuration $(buildConfiguration)  --test-adapter-path:. --logger:nunit;LogFilePath=TestResults.xml
       displayName: 'dotnet test ifPOS'
