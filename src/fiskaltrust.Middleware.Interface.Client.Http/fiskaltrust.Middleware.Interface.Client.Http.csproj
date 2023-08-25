@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net461;netstandard2.0;net6</TargetFrameworks>
     <LangVersion>8</LangVersion>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,7 +31,13 @@
 		  <PackagePath>lib\net6.0\</PackagePath>
 	  </_PackageFiles>
   </ItemGroup>
-  
+   
+  <Target DependsOnTargets="ResolveReferences" Name="CopyProjectReferencesToPackage">
+    <ItemGroup>
+      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+    </ItemGroup>
+  </Target>
+
   <PropertyGroup>
     <PackageId>fiskaltrust.Middleware.Interface.Client.Http</PackageId>
     <Authors>fiskaltrust</Authors>

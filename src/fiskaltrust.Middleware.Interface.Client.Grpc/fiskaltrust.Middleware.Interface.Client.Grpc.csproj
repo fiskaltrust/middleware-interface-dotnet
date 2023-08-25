@@ -2,6 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net461;netstandard2.0;net6</TargetFrameworks>
+		<TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
 	</PropertyGroup>
 
 	<ItemGroup Condition=" '$(TargetFramework)' != 'net6' ">
@@ -35,6 +36,12 @@
 			<PackagePath>lib\net6.0\</PackagePath>
 		</_PackageFiles>
 	</ItemGroup>
+
+    <Target DependsOnTargets="ResolveReferences" Name="CopyProjectReferencesToPackage">
+        <ItemGroup>
+            <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+        </ItemGroup>
+    </Target>
 
 	<PropertyGroup>
 		<PackageId>fiskaltrust.Middleware.Interface.Client.Grpc</PackageId>

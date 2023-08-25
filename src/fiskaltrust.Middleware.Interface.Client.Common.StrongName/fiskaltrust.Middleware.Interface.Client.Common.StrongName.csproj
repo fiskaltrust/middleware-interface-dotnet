@@ -6,11 +6,18 @@
     <IsPackable>false</IsPackable>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>../fiskaltrust.interface.StrongName/fiskaltrust.interface.snk</AssemblyOriginatorKeyFile>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
   </PropertyGroup>
 
   <ItemGroup>
 		<ProjectReference Include="..\fiskaltrust.ifPOS\fiskaltrust.interface.csproj" />
   </ItemGroup>
+
+  <Target DependsOnTargets="ResolveReferences" Name="CopyProjectReferencesToPackage">
+    <ItemGroup>
+      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+    </ItemGroup>
+  </Target>
   
   <ItemGroup>
     <Compile Include="..\fiskaltrust.Middleware.Interface.Client.Common\**\*.cs" Exclude="..\fiskaltrust.Middleware.Interface.Client.Common\obj\**\*.cs" />
