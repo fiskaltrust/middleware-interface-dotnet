@@ -7,14 +7,17 @@ fiskaltrust.Middleware Interface
 A NuGet package that can be used to include the free fiskaltrust Middleware into POS systems.
 
 ## Overview
-The fiskaltrust Middleware is a software that can be used in POS systems to fullfil legal requirements with minimal impact and development effort. It works both on Windows and Linux, and can be integrated via gRPC, WCF or REST. Simply put, the fiskaltrust.Middleware publishes the `IPOS` interface via one (or multiple) of these protocols, and the POS system can use that endpoint to sign receipts and request exports (= journals).
+The fiskaltrust Middleware is a software that can be used in POS systems to fullfill legal requirements with minimal impact and development effort.
+It works both on Windows and Linux, and can be integrated via gRPC, WCF or REST.
+Simply put, the fiskaltrust.Middleware publishes the `IPOS` interface via one (or multiple) of these protocols, and the POS system can use that endpoint to sign receipts and request exports (= journals).
 
 This repository contains the .NET interface as a NuGet package; due to the open nature of the used protocols, other programming languages are supported too.
 
 ## Getting Started
 To implement the Middleware into your POS system, please include the latest version of the NuGet package and take a look at the [interface documentation](https://github.com/fiskaltrust/interface-doc).
 
-Additionally, please have a look at the [demo repository](https://github.com/fiskaltrust/demo/), which contains minimal sample applications for a broad variety of programming languages. Some usage examples can also be taken from the [tests](test/fiskaltrust.ifPOS.Tests/v1/IPOS/Wcf).
+Additionally, please have a look at our demo repositories
+([dotnet](https://github.com/fiskaltrust/middleware-demo-dotnet), [node](https://github.com/fiskaltrust/middleware-demo-node), [postman](https://github.com/fiskaltrust/middleware-demo-postman), [java](https://github.com/fiskaltrust/middleware-demo-java), [C/C++/rust](https://github.com/fiskaltrust/middleware-demo/), which contain minimal sample applications. Some usage examples can also be taken from the [tests](test/fiskaltrust.ifPOS.Tests/v1/IPOS/Wcf).
 
 ## Clients
 For even simpler usage, we offer client packages for the supported communication protocols. Just follow the link in the Badge to install the respective package, and use the snippets above to create an instance of IPOS.
