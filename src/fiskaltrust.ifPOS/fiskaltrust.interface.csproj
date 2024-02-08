@@ -8,17 +8,7 @@
     <PackageProjectUrl>https://github.com/fiskaltrust/middleware-interface-dotnet</PackageProjectUrl>
     <PackageIconUrl>https://portal.fiskaltrust.at/Content/favicons/favicon-64x64.png</PackageIconUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Description>fiskaltrust.interface describes the interface that is used to communicate with the fiskaltrust.Middleware</Description>
-    <PackageReleaseNotes>
-      20161024: Added async-interface definition.
-      20160528: Extended interface definition for journal.
-      20160525: Splitted Utilities into seperated package.
-      20160514: Added support for .net35 and pcl, documentation update.
-      20160512: ReceiptRequest und ReceiptResponse erweitert, Dokumentation aktualisiert.
-      20160418: Zusätzlicher Schnittstellendefinition mit der die verwendeten Signaturerstellungseinheiten veröffentlicht werden.
-      20160214: Zusätzliches Feld cbPreviousReceiptID im ReceiptRequest um auf einen relevanten Vorbeleg verweisen zu können.
-      20151030: Definitin der Schnittstelle
-    </PackageReleaseNotes>
+    <Description>fiskaltrust.interface describes the interface that is used to communicate with the fiskaltrust.Middleware</Description>   
     <Copyright>Copyright 2016</Copyright>
     <PackageTags>fiskaltrust interface</PackageTags>
     <TargetFrameworks>net40;net461;netstandard2.0;netstandard2.1</TargetFrameworks>
