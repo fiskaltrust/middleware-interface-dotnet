@@ -17,7 +17,7 @@ namespace fiskaltrust.ifPOS.v1.at
         /// </summary>
         [OperationContract(Name = "v1/Certificate")]
 #if WCF
-        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v2/certificate", Method = "GET")]
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v1/certificate", Method = "GET")]
 #endif
         Task<CertificateResponse> CertificateAsync();
 
@@ -26,7 +26,7 @@ namespace fiskaltrust.ifPOS.v1.at
         /// </summary>
         [OperationContract(Name = "v1/ZDA")]
 #if WCF
-        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v2/zda", Method = "GET")]
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v1/zda", Method = "GET")]
 #endif
         Task<ZdaResponse> ZdaAsync();
 
@@ -35,7 +35,7 @@ namespace fiskaltrust.ifPOS.v1.at
         /// </summary>
         [OperationContract(Name = "v1/Sign")]
 #if WCF
-        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v2/sign", Method = "POST")]
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v1/sign", Method = "POST")]
 #endif
         Task<SignResponse> SignAsync(SignRequest signRequest);
 
@@ -44,7 +44,7 @@ namespace fiskaltrust.ifPOS.v1.at
         /// </summary>
         [OperationContract(Name = "v1/Echo")]
 #if WCF
-        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v2/echo", Method = "POST")]
+        [WebInvoke(BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "v1/echo", Method = "POST")]
 #endif
         Task<EchoResponse> EchoAsync(EchoRequest echoRequest);
     }
