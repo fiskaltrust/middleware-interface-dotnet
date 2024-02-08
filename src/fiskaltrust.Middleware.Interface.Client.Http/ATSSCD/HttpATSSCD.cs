@@ -22,13 +22,13 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             _httpClient = GetClient(options);
         }
 
-        public async Task<CertificateResponse> CertificateAsync() => await ExecuteHttpGetAsync<CertificateResponse>("v2", "Certificate").ConfigureAwait(false);
+        public async Task<CertificateResponse> CertificateAsync() => await ExecuteHttpGetAsync<CertificateResponse>("v1", "Certificate").ConfigureAwait(false);
 
-        public async Task<ZdaResponse> ZdaAsync() => await ExecuteHttpGetAsync<ZdaResponse>("v2", "Zda").ConfigureAwait(false);
+        public async Task<ZdaResponse> ZdaAsync() => await ExecuteHttpGetAsync<ZdaResponse>("v1", "Zda").ConfigureAwait(false);
 
-        public async Task<SignResponse> SignAsync(SignRequest signRequest) => await ExecuteHttpPostAsync<SignResponse>("v2", "Sign", signRequest).ConfigureAwait(false);
+        public async Task<SignResponse> SignAsync(SignRequest signRequest) => await ExecuteHttpPostAsync<SignResponse>("v1", "Sign", signRequest).ConfigureAwait(false);
 
-        public async Task<EchoResponse> EchoAsync(EchoRequest echoRequest) => await ExecuteHttpPostAsync<EchoResponse>("v2", "Echo", echoRequest).ConfigureAwait(false);
+        public async Task<EchoResponse> EchoAsync(EchoRequest echoRequest) => await ExecuteHttpPostAsync<EchoResponse>("v1", "Echo", echoRequest).ConfigureAwait(false);
 
         public byte[] Certificate() => Task.Run(async () => await ExecuteHttpGetAsync<byte[]>("v0", "Certificate").ConfigureAwait(false)).Result;
 
