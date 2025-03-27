@@ -11,7 +11,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IDESSCD.Grpc
     public class GrpcIDESSCDTests : IDESSCDTests
     {
         private string _host = "localhost";
-        private int _port = 40144;
+        private int _port = 40145;
         private static Server _server;
 
         ~GrpcIDESSCDTests()
