@@ -9,5 +9,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Soap
     {
         public long MaxReceivedMessageSize { get; set; } = 16 * 1024 * 1024;
         public TimeSpan ReceiveTimeout { get; set; } = TimeSpan.FromDays(14);
+        public Guid? CashboxId { get; set; }
+        public string? AccessToken { get; set; }
     }
 }
