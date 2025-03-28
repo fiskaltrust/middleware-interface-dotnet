@@ -315,3 +315,5 @@ ModelManifest.xml
 /JournalData.json
 
 /.vscode
+
+.DS_Store

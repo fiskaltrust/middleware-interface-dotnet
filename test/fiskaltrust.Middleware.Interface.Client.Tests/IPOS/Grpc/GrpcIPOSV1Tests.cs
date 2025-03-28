@@ -14,7 +14,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IPOS.Grpc
     public class GrpcIPOSV1Tests : IPOSV1Tests
     {
         private string _host = "localhost";
-        private int _port = 10042;
+        private int _port = 40142;
         private static Server _server;
 
         ~GrpcIPOSV1Tests()
