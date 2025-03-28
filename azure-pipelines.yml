@@ -23,7 +23,7 @@ variables:
 jobs:
   - job: Build 
     pool:
-      vmImage: windows-2022
+      vmImage: windows-latest
     steps:
     - task: VisualStudioTestPlatformInstaller@1
       displayName: VsTest Platform Installer
