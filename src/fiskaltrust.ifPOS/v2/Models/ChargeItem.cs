@@ -19,7 +19,7 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
         [JsonPropertyName("Description")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public string Description { get; set; } = string.Empty;
+        public string Description { get; set; }
 
         [JsonPropertyName("Amount")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
@@ -100,7 +100,7 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         [JsonConverter(typeof(JsonStringEnumConverter))]
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
-        public Currency Currency { get; set; } = Currency.EUR;
+        public Currency Currency { get; set; }
 
         [JsonPropertyName("DecimalPrecisionMultiplier")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]

@@ -13,7 +13,7 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
 
         [JsonPropertyName("Quantity")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        [DataMember(EmitDefaultValue = true, IsRequired = false)]
+        [DataMember(EmitDefaultValue = true, IsRequired = true)]
         public decimal? QuantitySerialization
         {
             get => Quantity == 1 ? null : Quantity;
@@ -26,12 +26,12 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
         [JsonPropertyName("Description")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public string Description { get; set; } = string.Empty;
+        public string Description { get; set; }
 
         [JsonPropertyName("Amount")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public decimal Amount { get; set; } = 0;
+        public decimal Amount { get; set; }
 
         [JsonPropertyName("ftPayItemCase")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -81,12 +81,12 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
         [JsonPropertyName("Currency")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        [DataMember(EmitDefaultValue = false, IsRequired = false)]
-        public Currency Currency { get; set; } = Currency.EUR;
+        [DataMember(Order = 170, EmitDefaultValue = false, IsRequired = false)]
+        public Currency Currency { get; set; }
 
         [JsonPropertyName("DecimalPrecisionMultiplier")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        [DataMember(EmitDefaultValue = false, IsRequired = false)]
+        [DataMember(Order = 180, EmitDefaultValue = false, IsRequired = false)]
         public int DecimalPrecisionMultiplierSerialization
         {
             get => DecimalPrecisionMultiplier == 1 ? 0 : DecimalPrecisionMultiplier;

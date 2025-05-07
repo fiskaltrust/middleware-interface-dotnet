@@ -10,91 +10,91 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
         [JsonPropertyName("ftQueueID")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public Guid ftQueueID { get; set; } = Guid.Empty;
+        public Guid ftQueueID { get; set; }
 
         [JsonPropertyName("ftQueueItemID")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public Guid ftQueueItemID { get; set; } = Guid.Empty;
+        public Guid ftQueueItemID { get; set; }
 
         [JsonPropertyName("ftQueueRow")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public ulong ftQueueRow { get; set; } = 0;
+        public ulong ftQueueRow { get; set; }
 
         [JsonPropertyName("ftCashBoxIdentification")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public string ftCashBoxIdentification { get; set; } = "undefined";
-
-        [JsonPropertyName("ftReceiptIdentification")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
-        [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public string ftReceiptIdentification { get; set; } = "ft0#";
-
-        [JsonPropertyName("ftReceiptMoment")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
-        [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public DateTime ftReceiptMoment { get; set; } = DateTime.UtcNow;
-
-        [JsonPropertyName("ftSignatures")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
-        [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public List<SignatureItem> ftSignatures { get; set; } = new List<SignatureItem>();
-
-        [JsonPropertyName("ftState")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
-        [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public ulong ftState { get; set; } = 0;
-
-        [JsonPropertyName("ftStateData")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        [DataMember(EmitDefaultValue = false, IsRequired = false)]
-        public object? ftStateData { get; set; }
+        public string ftCashBoxIdentification { get; set; }
 
         [JsonPropertyName("ftCashBoxID")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public Guid ftCashBoxID { get; set; } = Guid.Empty;
+        public Guid? ftCashBoxID { get; set; }
 
         [JsonPropertyName("cbTerminalID")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public string cbTerminalID { get; set; } = "undefined";
+        public string? cbTerminalID { get; set; }
 
         [JsonPropertyName("cbReceiptReference")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public string cbReceiptReference { get; set; } = "undefined";
+        public string? cbReceiptReference { get; set; }
+
+        [JsonPropertyName("ftReceiptIdentification")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
+        [DataMember(EmitDefaultValue = true, IsRequired = true)]
+        public string ftReceiptIdentification { get; set; }
+
+        [JsonPropertyName("ftReceiptMoment")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
+        [DataMember(EmitDefaultValue = true, IsRequired = true)]
+        public DateTime ftReceiptMoment { get; set; }
 
         [JsonPropertyName("ftReceiptHeader")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        [DataMember(EmitDefaultValue = false, IsRequired = false)]
+        [DataMember(EmitDefaultValue = true, IsRequired = true)]
         public List<string>? ftReceiptHeader { get; set; }
 
         [JsonPropertyName("ftChargeItems")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        [DataMember(EmitDefaultValue = false, IsRequired = false)]
+        [DataMember(EmitDefaultValue = true, IsRequired = true)]
         public List<ChargeItem>? ftChargeItems { get; set; }
 
         [JsonPropertyName("ftChargeLines")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        [DataMember(EmitDefaultValue = false, IsRequired = false)]
+        [DataMember(EmitDefaultValue = true, IsRequired = true)]
         public List<string>? ftChargeLines { get; set; }
 
         [JsonPropertyName("ftPayItems")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        [DataMember(EmitDefaultValue = false, IsRequired = false)]
+        [DataMember(EmitDefaultValue = true, IsRequired = true)]
         public List<PayItem>? ftPayItems { get; set; }
 
         [JsonPropertyName("ftPayLines")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        [DataMember(EmitDefaultValue = false, IsRequired = false)]
+        [DataMember(EmitDefaultValue = true, IsRequired = true)]
         public List<string>? ftPayLines { get; set; }
+
+        [JsonPropertyName("ftSignatures")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [DataMember(EmitDefaultValue = true, IsRequired = true)]
+        public List<SignatureItem> ftSignatures { get; set; }
 
         [JsonPropertyName("ftReceiptFooter")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        [DataMember(EmitDefaultValue = false, IsRequired = false)]
+        [DataMember(EmitDefaultValue = true, IsRequired = true)]
         public List<string>? ftReceiptFooter { get; set; }
+
+        [JsonPropertyName("ftState")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
+        [DataMember(EmitDefaultValue = true, IsRequired = true)]
+        public ulong ftState { get; set; }
+
+        [JsonPropertyName("ftStateData")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [DataMember(EmitDefaultValue = true, IsRequired = true)]
+        public object? ftStateData { get; set; }
     }
 }

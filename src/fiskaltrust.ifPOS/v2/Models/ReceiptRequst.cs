@@ -10,37 +10,37 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
         [JsonPropertyName("cbTerminalID")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         [DataMember(Order = 10, EmitDefaultValue = false, IsRequired = false)]
-        public string? cbTerminalID { get; set; } = "undefined";
+        public string? cbTerminalID { get; set; }
 
         [JsonPropertyName("cbReceiptReference")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(Order = 20, EmitDefaultValue = true, IsRequired = true)]
-        public string cbReceiptReference { get; set; } = "undefined";
+        public string cbReceiptReference { get; set; }
 
         [JsonPropertyName("cbReceiptMoment")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(Order = 30, EmitDefaultValue = true, IsRequired = true)]
-        public DateTime cbReceiptMoment { get; set; } = DateTime.UtcNow;
+        public DateTime cbReceiptMoment { get; set; }
 
         [JsonPropertyName("cbChargeItems")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(Order = 40, EmitDefaultValue = true, IsRequired = true)]
-        public List<ChargeItem> cbChargeItems { get; set; } = new List<ChargeItem>();
+        public List<ChargeItem> cbChargeItems { get; set; }
 
         [JsonPropertyName("cbPayItems")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(Order = 50, EmitDefaultValue = true, IsRequired = true)]
-        public List<PayItem> cbPayItems { get; set; } = new List<PayItem>();
+        public List<PayItem> cbPayItems { get; set; }
 
         [JsonPropertyName("ftCashBoxID")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         [DataMember(Order = 60, EmitDefaultValue = false, IsRequired = false)]
-        public Guid ftCashBoxID { get; set; } = Guid.Empty;
+        public Guid? ftCashBoxID { get; set; }
 
         [JsonPropertyName("ftPosSystemId")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         [DataMember(Order = 70, EmitDefaultValue = false, IsRequired = false)]
-        public Guid ftPosSystemId { get; set; } = Guid.Empty;
+        public Guid? ftPosSystemId { get; set; }
 
         [JsonPropertyName("ftReceiptCase")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
@@ -91,7 +91,7 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         [JsonConverter(typeof(JsonStringEnumConverter))]
         [DataMember(Order = 170, EmitDefaultValue = false, IsRequired = false)]
-        public Currency Currency { get; set; } = Currency.EUR;
+        public Currency Currency { get; set; }
 
         [JsonPropertyName("DecimalPrecisionMultiplier")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
