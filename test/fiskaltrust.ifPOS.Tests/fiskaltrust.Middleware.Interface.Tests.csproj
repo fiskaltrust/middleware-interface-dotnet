@@ -57,7 +57,7 @@
     <PackageReference Include="Grpc.Core" Version="2.46.6" />
     <PackageReference Include="protobuf-net.Grpc.Native" Version="1.2.2" />
     <PackageReference Include="System.Interactive.Async" Version="4.0.0" />
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="9.0.4" />
     <PackageReference Include="System.Linq.Async" Version="4.0.0" />
   </ItemGroup>
 
