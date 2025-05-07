@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
-using Newtonsoft.Json;
 
 namespace fiskaltrust.Middleware.ifPOS.v2.Models
 {
