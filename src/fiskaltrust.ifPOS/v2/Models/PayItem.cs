@@ -26,12 +26,12 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
         [JsonPropertyName("Description")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public required string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         [JsonPropertyName("Amount")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public required decimal Amount { get; set; }
+        public decimal Amount { get; set; } = 0;
 
         [JsonPropertyName("ftPayItemCase")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]

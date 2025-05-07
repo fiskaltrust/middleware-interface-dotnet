@@ -10,12 +10,12 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
         [JsonPropertyName("cbOperationItemID")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public required Guid cbOperationItemID { get; set; }
+        public Guid cbOperationItemID { get; set; }
 
         [JsonPropertyName("ftQueueID")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public required Guid ftQueueID { get; set; }
+        public Guid ftQueueID { get; set; }
 
         [JsonPropertyName("ftPosSystemID")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -30,12 +30,12 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
         [JsonPropertyName("Method")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public required string Method { get; set; }
+        public string Method { get; set; } = string.Empty;
 
         [JsonPropertyName("Path")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public required string Path { get; set; }
+        public string Path { get; set; } = string.Empty;
 
         [JsonPropertyName("RequestHeaders")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
@@ -45,7 +45,7 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
         [JsonPropertyName("Request")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public required string Request { get; set; }
+        public string Request { get; set; } = string.Empty;
 
         [JsonPropertyName("Response")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -60,17 +60,17 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
         [JsonPropertyName("LastState")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public required string LastState { get; set; }
+        public string LastState { get; set; } = string.Empty;
 
         [JsonPropertyName("TimeStamp")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public required DateTimeOffset TimeStamp { get; set; }
+        public DateTimeOffset TimeStamp { get; set; } = DateTimeOffset.UtcNow;
 
         [JsonPropertyName("ftOperationItemMoment")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public required DateTimeOffset ftOperationItemMoment { get; set; }
+        public DateTimeOffset ftOperationItemMoment { get; set; } = DateTimeOffset.UtcNow;
 
         #region ICloneable Members
         public object Clone() => MemberwiseClone() as OperationItem;

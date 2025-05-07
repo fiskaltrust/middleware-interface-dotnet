@@ -14,12 +14,12 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
         [JsonPropertyName("ftSignatureFormat")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public required ulong ftSignatureFormat { get; set; } = 0;
+        public ulong ftSignatureFormat { get; set; } = 0;
 
         [JsonPropertyName("ftSignatureType")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public required ulong ftSignatureType { get; set; } = 0;
+        public ulong ftSignatureType { get; set; } = 0;
 
         [JsonPropertyName("Caption")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
@@ -29,6 +29,6 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
         [JsonPropertyName("Data")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public required object Data { get; set; }
+        public object Data { get; set; } = new object();
     }
 }

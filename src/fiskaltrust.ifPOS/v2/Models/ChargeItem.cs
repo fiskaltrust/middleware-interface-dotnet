@@ -14,22 +14,22 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
         [JsonPropertyName("Quantity")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public required decimal Quantity { get; set; } = 1m;
+        public decimal Quantity { get; set; } = 1m;
 
         [JsonPropertyName("Description")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public required string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         [JsonPropertyName("Amount")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public required decimal Amount { get; set; } = 0;
+        public decimal Amount { get; set; } = 0;
 
         [JsonPropertyName("VATRate")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public required decimal VATRate { get; set; } = 0;
+        public decimal VATRate { get; set; } = 0;
 
         [JsonPropertyName("ftChargeItemCase")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]

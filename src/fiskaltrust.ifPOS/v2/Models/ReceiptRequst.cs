@@ -15,7 +15,7 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
         [JsonPropertyName("cbReceiptReference")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(Order = 20, EmitDefaultValue = true, IsRequired = true)]
-        public required string cbReceiptReference { get; set; } = "undefined";
+        public string cbReceiptReference { get; set; } = "undefined";
 
         [JsonPropertyName("cbReceiptMoment")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
@@ -25,12 +25,12 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
         [JsonPropertyName("cbChargeItems")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(Order = 40, EmitDefaultValue = true, IsRequired = true)]
-        public required List<ChargeItem> cbChargeItems { get; set; } = new List<ChargeItem>();
+        public List<ChargeItem> cbChargeItems { get; set; } = new List<ChargeItem>();
 
         [JsonPropertyName("cbPayItems")]
         [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
         [DataMember(Order = 50, EmitDefaultValue = true, IsRequired = true)]
-        public required List<PayItem> cbPayItems { get; set; } = new List<PayItem>();
+        public List<PayItem> cbPayItems { get; set; } = new List<PayItem>();
 
         [JsonPropertyName("ftCashBoxID")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
