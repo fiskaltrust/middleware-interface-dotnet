@@ -28,7 +28,7 @@
     <SignAssembly>true</SignAssembly>
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <AssemblyOriginatorKeyFile>fiskaltrust.interface.snk</AssemblyOriginatorKeyFile>
-	  <LangVersion>10.0</LangVersion>
+    <LangVersion>10.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -59,6 +59,20 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'net461'">
     <PackageReference Include="System.Interactive.Async" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="System.ServiceModel.Primitives" Version="4.5.3" />
+    <PackageReference Include="System.Text.Json" Version="9.0.4" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
+    <PackageReference Include="System.ServiceModel.Primitives" Version="4.5.3" />
+    <PackageReference Include="System.Text.Json" Version="9.0.4" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
+    <PackageReference Include="System.Text.Json" Version="9.0.4" />
   </ItemGroup>
 
   <ItemGroup>
