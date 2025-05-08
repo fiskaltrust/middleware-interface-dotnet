@@ -1,34 +1,29 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace fiskaltrust.Middleware.ifPOS.v2.Models
 {
     public class SignatureItem
     {
-        [JsonPropertyName("ftSignatureItemId")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("ftSignatureItemId")]
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public Guid? ftSignatureItemId { get; set; }
 
-        [JsonPropertyName("ftSignatureFormat")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
+        [JsonProperty("ftSignatureFormat")]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public ulong ftSignatureFormat { get; set; }
+        public long ftSignatureFormat { get; set; }
 
-        [JsonPropertyName("ftSignatureType")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
+        [JsonProperty("ftSignatureType")]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public ulong ftSignatureType { get; set; }
+        public long ftSignatureType { get; set; }
 
-        [JsonPropertyName("Caption")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("Caption")]
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public string? Caption { get; set; }
 
-        [JsonPropertyName("Data")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
+        [JsonProperty("Data")]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public object Data { get; set; }
+        public string Data { get; set; }
     }
 }

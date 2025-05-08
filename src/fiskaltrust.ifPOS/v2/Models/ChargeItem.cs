@@ -1,110 +1,91 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace fiskaltrust.Middleware.ifPOS.v2.Models
 {
     public class ChargeItem
     {
-        [JsonPropertyName("ftChargeItemId")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("ftChargeItemId")]
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public Guid? ftChargeItemId { get; set; }
 
-        [JsonPropertyName("Quantity")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
+        [JsonProperty("Quantity")]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
         public decimal Quantity { get; set; } = 1m;
 
-        [JsonPropertyName("Description")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
+        [JsonProperty("Description")]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
         public string Description { get; set; }
 
-        [JsonPropertyName("Amount")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
+        [JsonProperty("Amount")]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
         public decimal Amount { get; set; } = 0;
 
-        [JsonPropertyName("VATRate")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
+        [JsonProperty("VATRate")]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
         public decimal VATRate { get; set; } = 0;
 
-        [JsonPropertyName("ftChargeItemCase")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("ftChargeItemCase")]
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
-        public ulong ftChargeItemCase { get; set; } = 0;
+        public long ftChargeItemCase { get; set; } = 0;
 
-        [JsonPropertyName("ftChargeItemCaseData")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("ftChargeItemCaseData")]
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public object? ftChargeItemCaseData { get; set; }
 
-        [JsonPropertyName("VATAmount")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("VATAmount")]
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public decimal? VATAmount { get; set; }
 
-        [JsonPropertyName("Moment")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("Moment")]
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public DateTime? Moment { get; set; }
 
-        [JsonPropertyName("Position")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("Position")]
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public decimal Position { get; set; } = 0;
 
-        [JsonPropertyName("AccountNumber")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("AccountNumber")]
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public string? AccountNumber { get; set; }
 
-        [JsonPropertyName("CostCenter")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("CostCenter")]
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public string? CostCenter { get; set; }
 
-        [JsonPropertyName("ProductGroup")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("ProductGroup")]
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public string? ProductGroup { get; set; }
 
-        [JsonPropertyName("ProductNumber")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("ProductNumber")]
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public string? ProductNumber { get; set; }
 
-        [JsonPropertyName("ProductBarcode")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("ProductBarcode")]
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public string? ProductBarcode { get; set; }
 
-        [JsonPropertyName("Unit")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("Unit")]
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public string? Unit { get; set; }
 
-        [JsonPropertyName("UnitQuantity")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("UnitQuantity")]
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public decimal? UnitQuantity { get; set; }
 
-        [JsonPropertyName("UnitPrice")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("UnitPrice")]
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public decimal? UnitPrice { get; set; }
 
-        [JsonPropertyName("Currency")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        [JsonConverter(typeof(JsonStringEnumConverter))]
-        [DataMember(EmitDefaultValue = false, IsRequired = false)]
+        [JsonProperty("Currency")]
+        [JsonConverter(typeof(StringEnumConverter))]
+        [DataMember(Order = 170, EmitDefaultValue = false, IsRequired = false)]
         public Currency Currency { get; set; }
 
-        [JsonPropertyName("DecimalPrecisionMultiplier")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        [DataMember(EmitDefaultValue = false, IsRequired = false)]
+        [JsonProperty("DecimalPrecisionMultiplier")]
+        [DataMember(Order = 180, EmitDefaultValue = false, IsRequired = false)]
         public int DecimalPrecisionMultiplierSerialization
         {
             get => DecimalPrecisionMultiplier == 1 ? 0 : DecimalPrecisionMultiplier;

@@ -1,100 +1,83 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace fiskaltrust.Middleware.ifPOS.v2.Models
 {
     public class ReceiptRequest
     {
-        [JsonPropertyName("cbTerminalID")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("cbTerminalID")]
         [DataMember(Order = 10, EmitDefaultValue = false, IsRequired = false)]
         public string? cbTerminalID { get; set; }
 
-        [JsonPropertyName("cbReceiptReference")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
+        [JsonProperty("cbReceiptReference")]
         [DataMember(Order = 20, EmitDefaultValue = true, IsRequired = true)]
         public string cbReceiptReference { get; set; }
 
-        [JsonPropertyName("cbReceiptMoment")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
+        [JsonProperty("cbReceiptMoment")]
         [DataMember(Order = 30, EmitDefaultValue = true, IsRequired = true)]
         public DateTime cbReceiptMoment { get; set; }
 
-        [JsonPropertyName("cbChargeItems")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
+        [JsonProperty("cbChargeItems")]
         [DataMember(Order = 40, EmitDefaultValue = true, IsRequired = true)]
         public List<ChargeItem> cbChargeItems { get; set; }
 
-        [JsonPropertyName("cbPayItems")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
+        [JsonProperty("cbPayItems")]
         [DataMember(Order = 50, EmitDefaultValue = true, IsRequired = true)]
         public List<PayItem> cbPayItems { get; set; }
 
-        [JsonPropertyName("ftCashBoxID")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("ftCashBoxID")]
         [DataMember(Order = 60, EmitDefaultValue = false, IsRequired = false)]
         public Guid? ftCashBoxID { get; set; }
 
-        [JsonPropertyName("ftPosSystemId")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("ftPosSystemId")]
         [DataMember(Order = 70, EmitDefaultValue = false, IsRequired = false)]
         public Guid? ftPosSystemId { get; set; }
 
-        [JsonPropertyName("ftReceiptCase")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
+        [JsonProperty("ftReceiptCase")]
         [DataMember(Order = 80, EmitDefaultValue = false, IsRequired = false)]
-        public ulong ftReceiptCase { get; set; } = 0;
+        public long ftReceiptCase { get; set; } = 0;
 
-        [JsonPropertyName("ftReceiptCaseData")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("ftReceiptCaseData")]
         [DataMember(Order = 90, EmitDefaultValue = false, IsRequired = false)]
         public object? ftReceiptCaseData { get; set; }
 
-        [JsonPropertyName("ftQueueID")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("ftQueueID")]
         [DataMember(Order = 100, EmitDefaultValue = false, IsRequired = false)]
         public Guid? ftQueueID { get; set; }
 
-        [JsonPropertyName("cbPreviousReceiptReference")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("cbPreviousReceiptReference")]
         [DataMember(Order = 110, EmitDefaultValue = false, IsRequired = false)]
         public string? cbPreviousReceiptReference { get; set; }
 
-        [JsonPropertyName("cbReceiptAmount")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("cbReceiptAmount")]
         [DataMember(Order = 120, EmitDefaultValue = false, IsRequired = false)]
         public decimal? cbReceiptAmount { get; set; }
 
-        [JsonPropertyName("cbUser")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("cbUser")]
         [DataMember(Order = 130, EmitDefaultValue = false, IsRequired = false)]
         public object? cbUser { get; set; }
 
-        [JsonPropertyName("cbArea")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("cbArea")]
         [DataMember(Order = 140, EmitDefaultValue = false, IsRequired = false)]
         public object? cbArea { get; set; }
 
-        [JsonPropertyName("cbCustomer")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("cbCustomer")]
         [DataMember(Order = 150, EmitDefaultValue = false, IsRequired = false)]
         public object? cbCustomer { get; set; }
 
-        [JsonPropertyName("cbSettlement")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("cbSettlement")]
         [DataMember(Order = 160, EmitDefaultValue = false, IsRequired = false)]
         public object? cbSettlement { get; set; }
 
-        [JsonPropertyName("Currency")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-        [JsonConverter(typeof(JsonStringEnumConverter))]
+        [JsonProperty("Currency")]
+        [JsonConverter(typeof(StringEnumConverter))]
         [DataMember(Order = 170, EmitDefaultValue = false, IsRequired = false)]
         public Currency Currency { get; set; }
 
-        [JsonPropertyName("DecimalPrecisionMultiplier")]
-        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonProperty("DecimalPrecisionMultiplier")]
         [DataMember(Order = 180, EmitDefaultValue = false, IsRequired = false)]
         public int DecimalPrecisionMultiplierSerialization
         {
