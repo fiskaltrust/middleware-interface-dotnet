@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using fiskaltrust.Middleware.Localization.v2.Models.ifPOS.v2.Cases;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -38,7 +39,7 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
 
         [JsonProperty("ftReceiptCase")]
         [DataMember(Order = 80, EmitDefaultValue = false, IsRequired = false)]
-        public long ftReceiptCase { get; set; } = 0;
+        public ReceiptCase  ftReceiptCase { get; set; } = 0;
 
         [JsonProperty("ftReceiptCaseData")]
         [DataMember(Order = 90, EmitDefaultValue = false, IsRequired = false)]

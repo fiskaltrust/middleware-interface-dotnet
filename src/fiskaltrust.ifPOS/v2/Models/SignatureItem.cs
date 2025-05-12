@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using fiskaltrust.Middleware.Localization.v2.Models.ifPOS.v2.Cases;
 using Newtonsoft.Json;
 
 namespace fiskaltrust.Middleware.ifPOS.v2.Models
@@ -12,11 +13,11 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
 
         [JsonProperty("ftSignatureFormat")]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public long ftSignatureFormat { get; set; }
+        public SignatureFormat  ftSignatureFormat { get; set; }
 
         [JsonProperty("ftSignatureType")]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public long ftSignatureType { get; set; }
+        public SignatureType  ftSignatureType { get; set; }
 
         [JsonProperty("Caption")]
         [DataMember(EmitDefaultValue = false, IsRequired = false)]

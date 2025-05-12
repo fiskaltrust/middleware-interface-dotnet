@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using fiskaltrust.Middleware.Localization.v2.Models.ifPOS.v2.Cases;
 using Newtonsoft.Json;
 
 namespace fiskaltrust.Middleware.ifPOS.v2.Models
@@ -73,7 +74,7 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
 
         [JsonProperty("ftState")]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public long ftState { get; set; }
+        public State  ftState { get; set; }
 
         [JsonProperty("ftStateData")]
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
