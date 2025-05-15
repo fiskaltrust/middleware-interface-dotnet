@@ -4,7 +4,7 @@ using fiskaltrust.Middleware.Localization.v2.Models.ifPOS.v2.Cases;
 using NUnit.Framework;
 using Newtonsoft.Json;
 
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1_TESTS
 using System.Text.Json;
 #endif
 
@@ -62,7 +62,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             Assert.AreEqual(original.DecimalPrecisionMultiplier, deserialized.DecimalPrecisionMultiplier);
         }
 
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1_TESTS
         [Test]
         public void SystemTextJson_SerializeDeserialize_PreservesAllProperties()
         {
