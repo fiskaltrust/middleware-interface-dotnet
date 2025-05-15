@@ -25,12 +25,6 @@ jobs:
     pool:
       vmImage: windows-latest
     steps:
-      - task: UseDotNet@2
-        displayName: 'Install .NET Core 6.0'
-        inputs:
-          packageType: 'sdk'
-          version: '6.0.x'
-
       - task: VisualStudioTestPlatformInstaller@1
         displayName: VsTest Platform Installer
 
@@ -61,47 +55,17 @@ jobs:
           filePaths: |
             **/fiskaltrust*.dll
             **/fiskaltrust*.exe
-      
-      # Test for all target frameworks
-      - script: dotnet test --no-build --configuration $(buildConfiguration) --test-adapter-path:. --logger:nunit;LogFilePath=TestResults-net461.xml -f net461
-        displayName: 'dotnet test ifPOS - net461'
-        workingDirectory:  'test\fiskaltrust.ifPOS.Tests'
-        continueOnError: true
 
-      - script: dotnet test --no-build --configuration $(buildConfiguration) --test-adapter-path:. --logger:nunit;LogFilePath=TestResults-net6.xml -f net6.0
-        displayName: 'dotnet test ifPOS - net6.0'
+      - script: dotnet test --no-build --configuration $(buildConfiguration)  --test-adapter-path:. --logger:nunit;LogFilePath=TestResults.xml
+        displayName: 'dotnet test ifPOS'
         workingDirectory:  'test\fiskaltrust.ifPOS.Tests'
-        continueOnError: true
 
-      - script: dotnet test --no-build --configuration $(buildConfiguration) --test-adapter-path:. --logger:nunit;LogFilePath=TestResults-netstandard21.xml -f netstandard2.1
-        displayName: 'dotnet test ifPOS - netstandard2.1'
-        workingDirectory:  'test\fiskaltrust.ifPOS.Tests'
-        continueOnError: true
-      
-      # Client tests
-      - script: dotnet test --no-build --configuration $(buildConfiguration) --test-adapter-path:. --logger:nunit;LogFilePath=TestResults.xml
+      - script: dotnet test --no-build --configuration $(buildConfiguration)  --test-adapter-path:. --logger:nunit;LogFilePath=TestResults.xml
         displayName: 'dotnet test Clients'
         workingDirectory:  'test\fiskaltrust.Middleware.Interface.Client.Tests'
-      
-      # Additional tests for fiskaltrust.Middleware.Interface.Tests
-      - script: dotnet test --no-build --configuration $(buildConfiguration) --test-adapter-path:. --logger:nunit;LogFilePath=TestResults-net461.xml -f net461
-        displayName: 'dotnet test Interface - net461'
-        workingDirectory:  'test\fiskaltrust.Middleware.Interface.Tests'
-        continueOnError: true
 
-      - script: dotnet test --no-build --configuration $(buildConfiguration) --test-adapter-path:. --logger:nunit;LogFilePath=TestResults-net6.xml -f net6.0
-        displayName: 'dotnet test Interface - net6.0'
-        workingDirectory:  'test\fiskaltrust.Middleware.Interface.Tests'
-        continueOnError: true
-
-      - script: dotnet test --no-build --configuration $(buildConfiguration) --test-adapter-path:. --logger:nunit;LogFilePath=TestResults-netstandard21.xml -f netstandard2.1
-        displayName: 'dotnet test Interface - netstandard2.1'
-        workingDirectory:  'test\fiskaltrust.Middleware.Interface.Tests'
-        continueOnError: true
-      
-      # Run serialization tests specifically
-      - script: dotnet test --no-build --configuration $(buildConfiguration) --test-adapter-path:. --logger:nunit;LogFilePath=TestResults-serialization.xml -f netstandard2.1 --filter "FullyQualifiedName~SerializationTests"
-        displayName: 'Run Serialization Tests - netstandard2.1'
+      - script: dotnet test --no-build --configuration $(buildConfiguration) --test-adapter-path:. --logger:nunit;LogFilePath=TestResults.xml
+        displayName: 'dotnet test Interface'
         workingDirectory:  'test\fiskaltrust.Middleware.Interface.Tests'
         continueOnError: true
 
