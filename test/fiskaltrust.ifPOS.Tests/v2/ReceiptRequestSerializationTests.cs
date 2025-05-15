@@ -78,10 +78,10 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             Assert.AreEqual(original.ftQueueID, deserialized.ftQueueID);
             Assert.AreEqual(original.cbPreviousReceiptReference, deserialized.cbPreviousReceiptReference);
             Assert.AreEqual(original.cbReceiptAmount, deserialized.cbReceiptAmount);
-            Assert.AreEqual(original.cbUser, deserialized.cbUser);
-            Assert.AreEqual(original.cbArea, deserialized.cbArea);
-            Assert.AreEqual(original.cbCustomer, deserialized.cbCustomer);
-            Assert.AreEqual(original.cbSettlement, deserialized.cbSettlement);
+            Assert.AreEqual(original.cbUser?.ToString(), deserialized.cbUser?.ToString());
+            Assert.AreEqual(original.cbArea?.ToString(), deserialized.cbArea?.ToString());
+            Assert.AreEqual(original.cbCustomer?.ToString(), deserialized.cbCustomer?.ToString());
+            Assert.AreEqual(original.cbSettlement?.ToString(), deserialized.cbSettlement?.ToString());
             Assert.AreEqual(original.Currency, deserialized.Currency);
             Assert.AreEqual(original.DecimalPrecisionMultiplier, deserialized.DecimalPrecisionMultiplier);
         }
@@ -114,10 +114,10 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             Assert.AreEqual(original.ftQueueID, deserialized.ftQueueID);
             Assert.AreEqual(original.cbPreviousReceiptReference, deserialized.cbPreviousReceiptReference);
             Assert.AreEqual(original.cbReceiptAmount, deserialized.cbReceiptAmount);
-            Assert.AreEqual(original.cbUser, deserialized.cbUser);
-            Assert.AreEqual(original.cbArea, deserialized.cbArea);
-            Assert.AreEqual(original.cbCustomer, deserialized.cbCustomer);
-            Assert.AreEqual(original.cbSettlement, deserialized.cbSettlement);
+            Assert.AreEqual(original.cbUser?.ToString(), deserialized.cbUser?.ToString());
+            Assert.AreEqual(original.cbArea?.ToString(), deserialized.cbArea?.ToString());
+            Assert.AreEqual(original.cbCustomer?.ToString(), deserialized.cbCustomer?.ToString());
+            Assert.AreEqual(original.cbSettlement?.ToString(), deserialized.cbSettlement?.ToString());
             Assert.AreEqual(original.Currency, deserialized.Currency);
             Assert.AreEqual(original.DecimalPrecisionMultiplier, deserialized.DecimalPrecisionMultiplier);
         }
@@ -137,10 +137,11 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             var newtonsoftJson = JsonConvert.SerializeObject(item, Formatting.Indented);
             var systemTextJson = System.Text.Json.JsonSerializer.Serialize(item, systemTextJsonOptions);
 
+            // Parse both JSONs to verify structure
             var newtonsoftDoc = Newtonsoft.Json.Linq.JObject.Parse(newtonsoftJson);
             var systemTextDoc = System.Text.Json.JsonDocument.Parse(systemTextJson);
 
-            // Assert 
+            // Assert - Check that all properties exist in both
             foreach (var prop in newtonsoftDoc.Properties())
             {
                 Assert.IsTrue(systemTextDoc.RootElement.TryGetProperty(prop.Name, out _), 
