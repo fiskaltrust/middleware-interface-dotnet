@@ -64,11 +64,6 @@ jobs:
         displayName: 'dotnet test Clients'
         workingDirectory:  'test\fiskaltrust.Middleware.Interface.Client.Tests'
 
-      - script: dotnet test --no-build --configuration $(buildConfiguration) --test-adapter-path:. --logger:nunit;LogFilePath=TestResults.xml
-        displayName: 'dotnet test Interface'
-        workingDirectory:  'test\fiskaltrust.Middleware.Interface.Tests'
-        continueOnError: true
-
       - task: PublishTestResults@2
         displayName: 'Publish Test Results'
         inputs:
