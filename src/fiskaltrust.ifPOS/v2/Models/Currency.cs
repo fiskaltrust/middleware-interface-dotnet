@@ -2,9 +2,16 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
+#if NETSTANDARD2_1
+using System.Text.Json.Serialization;
+#endif
+
 namespace fiskaltrust.Middleware.ifPOS.v2.Models
 {
-    [JsonConverter(typeof(StringEnumConverter))]
+    [Newtonsoft.Json.JsonConverter(typeof(StringEnumConverter))]
+#if NETSTANDARD2_1
+    [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
+#endif
     public enum Currency
     {
         EUR,
