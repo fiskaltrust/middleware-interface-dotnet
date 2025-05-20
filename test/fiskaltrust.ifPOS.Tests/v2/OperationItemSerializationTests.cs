@@ -111,6 +111,49 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
                 Assert.IsTrue(systemTextDoc.RootElement.TryGetProperty(prop.Name, out _), 
                     $"Property '{prop.Name}' not found in System.Text.Json output");
             }
+
+            foreach (var prop in newtonsoftDoc.Properties())
+            {
+                if (systemTextDoc.RootElement.TryGetProperty(prop.Name, out var systemTextValue))
+                {
+                    var newtonsoftValue = newtonsoftDoc[prop.Name];
+            
+                    if (newtonsoftValue.Type == Newtonsoft.Json.Linq.JTokenType.Object || 
+                        newtonsoftValue.Type == Newtonsoft.Json.Linq.JTokenType.Array)
+                    {
+                        continue;
+                    }
+
+                    if (prop.Name == "TimeStamp" || prop.Name.EndsWith("Moment"))
+                    {
+                        continue;
+                    }
+
+                    Assert.AreEqual(
+                        newtonsoftValue.ToString(), 
+                        GetJsonElementValueAsString(systemTextValue),
+                        $"Property '{prop.Name}' has different values in the two serializations");
+                }
+            }
+        }
+
+        private string GetJsonElementValueAsString(System.Text.Json.JsonElement element)
+        {
+            switch (element.ValueKind)
+            {
+                case System.Text.Json.JsonValueKind.String:
+                    return element.GetString();
+                case System.Text.Json.JsonValueKind.Number:
+                    return element.GetRawText();
+                case System.Text.Json.JsonValueKind.True:
+                    return "true";
+                case System.Text.Json.JsonValueKind.False:
+                    return "false";
+                case System.Text.Json.JsonValueKind.Null:
+                    return "null";
+                default:
+                    return element.ToString();
+            }
         }
 #endif
 

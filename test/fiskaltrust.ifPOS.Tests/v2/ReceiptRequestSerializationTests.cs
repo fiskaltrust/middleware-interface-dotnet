@@ -137,15 +137,67 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             var newtonsoftJson = JsonConvert.SerializeObject(item, Formatting.Indented);
             var systemTextJson = System.Text.Json.JsonSerializer.Serialize(item, systemTextJsonOptions);
 
-            // Parse both JSONs to verify structure
             var newtonsoftDoc = Newtonsoft.Json.Linq.JObject.Parse(newtonsoftJson);
             var systemTextDoc = System.Text.Json.JsonDocument.Parse(systemTextJson);
 
-            // Assert - Check that all properties exist in both
+            // Assert
             foreach (var prop in newtonsoftDoc.Properties())
             {
                 Assert.IsTrue(systemTextDoc.RootElement.TryGetProperty(prop.Name, out _), 
                     $"Property '{prop.Name}' not found in System.Text.Json output");
+            }
+
+            foreach (var prop in newtonsoftDoc.Properties())
+            {
+                if (systemTextDoc.RootElement.TryGetProperty(prop.Name, out var systemTextValue))
+                {
+                    var newtonsoftValue = newtonsoftDoc[prop.Name];
+                    
+                    if (newtonsoftValue.Type == Newtonsoft.Json.Linq.JTokenType.Object || 
+                        newtonsoftValue.Type == Newtonsoft.Json.Linq.JTokenType.Array)
+                    {
+                        continue;
+                    }
+
+                    if (prop.Name.EndsWith("Amount"))
+                    {
+                        continue;
+                    }
+
+                    if (prop.Name == "TimeStamp" || prop.Name.EndsWith("Moment"))
+                    {
+                        continue;
+                    }
+
+                    if (prop.Name.EndsWith("Case"))
+                    {
+                        continue;
+                    }
+
+                    Assert.AreEqual(
+                        newtonsoftValue.ToString(), 
+                        GetJsonElementValueAsString(systemTextValue),
+                        $"Property '{prop.Name}' has different values in the two serializations");
+                }
+            }
+        }
+
+        private string GetJsonElementValueAsString(System.Text.Json.JsonElement element)
+        {
+            switch (element.ValueKind)
+            {
+                case System.Text.Json.JsonValueKind.String:
+                    return element.GetString();
+                case System.Text.Json.JsonValueKind.Number:
+                    return element.GetRawText();
+                case System.Text.Json.JsonValueKind.True:
+                    return "true";
+                case System.Text.Json.JsonValueKind.False:
+                    return "false";
+                case System.Text.Json.JsonValueKind.Null:
+                    return "null";
+                default:
+                    return element.ToString();
             }
         }
 #endif
