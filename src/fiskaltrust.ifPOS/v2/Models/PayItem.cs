@@ -19,22 +19,18 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public Guid? ftPayItemId { get; set; }
 
+        private decimal _quantity = 1;
+
         [JsonProperty("Quantity")]
 #if NETSTANDARD2_1
         [JsonPropertyName("Quantity")]
 #endif
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public decimal? QuantitySerialization
+        public decimal? Quantity
         {
-            get => Quantity == 1 ? null : Quantity;
-            set => Quantity = value ?? 1;
+            get => _quantity == 1 ? null : _quantity;
+            set => _quantity = value ?? 1;
         }
-
-        [Newtonsoft.Json.JsonIgnore]
-#if NETSTANDARD2_1
-        [System.Text.Json.Serialization.JsonIgnore]
-#endif
-        public decimal Quantity { get; set; } = 1;
 
         [JsonProperty("Description")]
 #if NETSTANDARD2_1
@@ -122,21 +118,17 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
         [DataMember(Order = 170, EmitDefaultValue = false, IsRequired = false)]
         public Currency Currency { get; set; }
 
+        private int _decimalPrecisionMultiplier = 1;
+
         [JsonProperty("DecimalPrecisionMultiplier")]
 #if NETSTANDARD2_1
         [JsonPropertyName("DecimalPrecisionMultiplier")]
 #endif
         [DataMember(Order = 180, EmitDefaultValue = false, IsRequired = false)]
-        public int DecimalPrecisionMultiplierSerialization
+        public int DecimalPrecisionMultiplier
         {
-            get => DecimalPrecisionMultiplier == 1 ? 0 : DecimalPrecisionMultiplier;
-            set => DecimalPrecisionMultiplier = value == 0 ? 1 : value;
+            get => _decimalPrecisionMultiplier == 1 ? 0 : _decimalPrecisionMultiplier;
+            set => _decimalPrecisionMultiplier = value == 0 ? 1 : value;
         }
-
-        [Newtonsoft.Json.JsonIgnore]
-#if NETSTANDARD2_1
-        [System.Text.Json.Serialization.JsonIgnore]
-#endif
-        public int DecimalPrecisionMultiplier { get; set; } = 1;
     }
 }
