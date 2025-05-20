@@ -12,7 +12,6 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
 {
     public class PayItem
     {
-        [JsonProperty("ftPayItemId")]
 #if NETSTANDARD2_1
         [JsonPropertyName("ftPayItemId")]
 #endif
@@ -21,7 +20,6 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
 
         private decimal _quantity = 1;
 
-        [JsonProperty("Quantity")]
 #if NETSTANDARD2_1
         [JsonPropertyName("Quantity")]
 #endif
@@ -32,84 +30,72 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
             set => _quantity = value ?? 1;
         }
 
-        [JsonProperty("Description")]
 #if NETSTANDARD2_1
         [JsonPropertyName("Description")]
 #endif
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
         public string Description { get; set; }
 
-        [JsonProperty("Amount")]
 #if NETSTANDARD2_1
         [JsonPropertyName("Amount")]
 #endif
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
         public decimal Amount { get; set; }
 
-        [JsonProperty("ftPayItemCase")]
 #if NETSTANDARD2_1
         [JsonPropertyName("ftPayItemCase")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public PayItemCase ftPayItemCase { get; set; } = 0;
 
-        [JsonProperty("ftPayItemCaseData")]
 #if NETSTANDARD2_1
         [JsonPropertyName("ftPayItemCaseData")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public object? ftPayItemCaseData { get; set; }
 
-        [JsonProperty("Moment")]
 #if NETSTANDARD2_1
         [JsonPropertyName("Moment")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public DateTime? Moment { get; set; }
 
-        [JsonProperty("Position")]
 #if NETSTANDARD2_1
         [JsonPropertyName("Position")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public decimal Position { get; set; } = 0;
 
-        [JsonProperty("AccountNumber")]
 #if NETSTANDARD2_1
         [JsonPropertyName("AccountNumber")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public string? AccountNumber { get; set; }
 
-        [JsonProperty("CostCenter")]
 #if NETSTANDARD2_1
         [JsonPropertyName("CostCenter")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public string? CostCenter { get; set; }
 
-        [JsonProperty("MoneyGroup")]
 #if NETSTANDARD2_1
         [JsonPropertyName("MoneyGroup")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public string? MoneyGroup { get; set; }
 
-        [JsonProperty("MoneyNumber")]
 #if NETSTANDARD2_1
         [JsonPropertyName("MoneyNumber")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public string? MoneyNumber { get; set; }
 
-        [JsonProperty("MoneyBarcode")]
 #if NETSTANDARD2_1
         [JsonPropertyName("MoneyBarcode")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public string? MoneyBarcode { get; set; }
 
-        [JsonProperty("Currency")]
         [Newtonsoft.Json.JsonConverter(typeof(StringEnumConverter))]
 #if NETSTANDARD2_1
         [JsonPropertyName("Currency")]
@@ -120,7 +106,6 @@ namespace fiskaltrust.Middleware.ifPOS.v2.Models
 
         private int _decimalPrecisionMultiplier = 1;
 
-        [JsonProperty("DecimalPrecisionMultiplier")]
 #if NETSTANDARD2_1
         [JsonPropertyName("DecimalPrecisionMultiplier")]
 #endif
