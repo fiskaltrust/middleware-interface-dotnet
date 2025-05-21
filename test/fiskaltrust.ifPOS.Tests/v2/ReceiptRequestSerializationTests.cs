@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using fiskaltrust.Middleware.ifPOS.v2.Models;
 using fiskaltrust.Middleware.Localization.v2.Models.ifPOS.v2.Cases;
 using NUnit.Framework;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 #if NETSTANDARD2_1_TESTS
 using System.Text.Json;
+using System.Text.Json.Serialization;
 #endif
 
 namespace fiskaltrust.Middleware.Interface.Tests.v2
@@ -67,23 +70,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             var deserialized = JsonConvert.DeserializeObject<ReceiptRequest>(json);
 
             // Assert
-            Assert.AreEqual(original.cbTerminalID, deserialized.cbTerminalID);
-            Assert.AreEqual(original.cbReceiptReference, deserialized.cbReceiptReference);
-            Assert.AreEqual(original.cbReceiptMoment, deserialized.cbReceiptMoment);
-            Assert.AreEqual(original.cbChargeItems.Count, deserialized.cbChargeItems.Count);
-            Assert.AreEqual(original.cbPayItems.Count, deserialized.cbPayItems.Count);
-            Assert.AreEqual(original.ftCashBoxID, deserialized.ftCashBoxID);
-            Assert.AreEqual(original.ftPosSystemId, deserialized.ftPosSystemId);
-            Assert.AreEqual(original.ftReceiptCase, deserialized.ftReceiptCase);
-            Assert.AreEqual(original.ftQueueID, deserialized.ftQueueID);
-            Assert.AreEqual(original.cbPreviousReceiptReference, deserialized.cbPreviousReceiptReference);
-            Assert.AreEqual(original.cbReceiptAmount, deserialized.cbReceiptAmount);
-            Assert.AreEqual(original.cbUser?.ToString(), deserialized.cbUser?.ToString());
-            Assert.AreEqual(original.cbArea?.ToString(), deserialized.cbArea?.ToString());
-            Assert.AreEqual(original.cbCustomer?.ToString(), deserialized.cbCustomer?.ToString());
-            Assert.AreEqual(original.cbSettlement?.ToString(), deserialized.cbSettlement?.ToString());
-            Assert.AreEqual(original.Currency, deserialized.Currency);
-            Assert.AreEqual(original.DecimalPrecisionMultiplier, deserialized.DecimalPrecisionMultiplier);
+            AssertReceiptRequestsEqual(original, deserialized);
         }
 
 #if NETSTANDARD2_1_TESTS
@@ -95,7 +82,9 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             var options = new JsonSerializerOptions 
             { 
                 WriteIndented = true,
-                Converters = { new System.Text.Json.Serialization.JsonStringEnumConverter() }
+                PropertyNamingPolicy = null,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+                Converters = { new JsonStringEnumConverter() }
             };
 
             // Act
@@ -103,47 +92,61 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             var deserialized = System.Text.Json.JsonSerializer.Deserialize<ReceiptRequest>(json, options);
 
             // Assert
-            Assert.AreEqual(original.cbTerminalID, deserialized.cbTerminalID);
-            Assert.AreEqual(original.cbReceiptReference, deserialized.cbReceiptReference);
-            Assert.AreEqual(original.cbReceiptMoment, deserialized.cbReceiptMoment);
-            Assert.AreEqual(original.cbChargeItems.Count, deserialized.cbChargeItems.Count);
-            Assert.AreEqual(original.cbPayItems.Count, deserialized.cbPayItems.Count);
-            Assert.AreEqual(original.ftCashBoxID, deserialized.ftCashBoxID);
-            Assert.AreEqual(original.ftPosSystemId, deserialized.ftPosSystemId);
-            Assert.AreEqual(original.ftReceiptCase, deserialized.ftReceiptCase);
-            Assert.AreEqual(original.ftQueueID, deserialized.ftQueueID);
-            Assert.AreEqual(original.cbPreviousReceiptReference, deserialized.cbPreviousReceiptReference);
-            Assert.AreEqual(original.cbReceiptAmount, deserialized.cbReceiptAmount);
-            Assert.AreEqual(original.cbUser?.ToString(), deserialized.cbUser?.ToString());
-            Assert.AreEqual(original.cbArea?.ToString(), deserialized.cbArea?.ToString());
-            Assert.AreEqual(original.cbCustomer?.ToString(), deserialized.cbCustomer?.ToString());
-            Assert.AreEqual(original.cbSettlement?.ToString(), deserialized.cbSettlement?.ToString());
-            Assert.AreEqual(original.Currency, deserialized.Currency);
-            Assert.AreEqual(original.DecimalPrecisionMultiplier, deserialized.DecimalPrecisionMultiplier);
+            AssertReceiptRequestsEqual(original, deserialized);
         }
 
         [Test]
-        public void BothSerializers_ProduceSameStructure()
+        public void BothSerializers_ProduceSameOutput()
         {
             // Arrange
             var item = CreateTestReceiptRequest();
-            var systemTextJsonOptions = new JsonSerializerOptions 
-            { 
-                WriteIndented = true,
-                Converters = { new System.Text.Json.Serialization.JsonStringEnumConverter() }
+
+            var newtonsoftSettings = new JsonSerializerSettings
+            {
+                Formatting = Formatting.None,
+                DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+                NullValueHandling = NullValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                PreserveReferencesHandling = PreserveReferencesHandling.None,
+                Converters = { 
+                    new Newtonsoft.Json.Converters.StringEnumConverter(namingStrategy: null)
+                }
+            };
+
+            var systemTextJsonOptions = new JsonSerializerOptions
+            {
+                WriteIndented = false,
+                PropertyNamingPolicy = null,
+                PropertyNameCaseInsensitive = true, 
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+                NumberHandling = JsonNumberHandling.AllowReadingFromString,
+                ReferenceHandler = ReferenceHandler.IgnoreCycles,
+                ReadCommentHandling = JsonCommentHandling.Skip,
+                AllowTrailingCommas = true,
+                MaxDepth = 64,
+                Converters = {
+                    new JsonStringEnumConverter(namingPolicy: null),
+                    new SystemTextJsonConverters.DateTimeConverter(),
+                    new SystemTextJsonConverters.DecimalConverter()
+                }
             };
 
             // Act
-            var newtonsoftJson = JsonConvert.SerializeObject(item, Formatting.Indented);
+            var newtonsoftJson = JsonConvert.SerializeObject(item, newtonsoftSettings);
             var systemTextJson = System.Text.Json.JsonSerializer.Serialize(item, systemTextJsonOptions);
+            
+            var fromNewtonsoft = JsonConvert.DeserializeObject<ReceiptRequest>(newtonsoftJson);
+            var fromSystemText = JsonConvert.DeserializeObject<ReceiptRequest>(systemTextJson);
+            
+            AssertReceiptRequestsEqual(fromNewtonsoft, fromSystemText);
 
-            var newtonsoftDoc = Newtonsoft.Json.Linq.JObject.Parse(newtonsoftJson);
-            var systemTextDoc = System.Text.Json.JsonDocument.Parse(systemTextJson);
+            var newtonsoftDoc = JObject.Parse(newtonsoftJson);
+            var systemTextDoc = JsonDocument.Parse(systemTextJson);
 
-            // Assert
             foreach (var prop in newtonsoftDoc.Properties())
             {
-                Assert.IsTrue(systemTextDoc.RootElement.TryGetProperty(prop.Name, out _), 
+                Assert.IsTrue(systemTextDoc.RootElement.TryGetProperty(prop.Name, out _),
                     $"Property '{prop.Name}' not found in System.Text.Json output");
             }
 
@@ -153,24 +156,81 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
                 {
                     var newtonsoftValue = newtonsoftDoc[prop.Name];
                     
-                    if (newtonsoftValue.Type == Newtonsoft.Json.Linq.JTokenType.Object || 
-                        newtonsoftValue.Type == Newtonsoft.Json.Linq.JTokenType.Array)
+                    if (newtonsoftValue.Type == JTokenType.Object || 
+                        newtonsoftValue.Type == JTokenType.Array)
                     {
+                        Assert.IsTrue(
+                            systemTextValue.ValueKind == JsonValueKind.Object || 
+                            systemTextValue.ValueKind == JsonValueKind.Array,
+                            $"Property '{prop.Name}' should be an object or array in both serializations");
                         continue;
                     }
 
-                    if (prop.Name.EndsWith("Amount"))
+                    if (newtonsoftValue.Type == JTokenType.Integer || 
+                        newtonsoftValue.Type == JTokenType.Float)
                     {
+                        if (systemTextValue.ValueKind == JsonValueKind.Number)
+                        {
+                            decimal newtonVal = newtonsoftValue.Value<decimal>();
+                            decimal sysVal = systemTextValue.GetDecimal();
+                            Assert.AreEqual(newtonVal, sysVal, 
+                                $"Property '{prop.Name}' has different numeric values");
+                        }
+                        else if (systemTextValue.ValueKind == JsonValueKind.String)
+                        {
+                            if (decimal.TryParse(newtonsoftValue.ToString(), out var newtonVal) && 
+                                decimal.TryParse(systemTextValue.GetString(), out var sysVal))
+                            {
+                                Assert.AreEqual(newtonVal, sysVal, 
+                                    $"Property '{prop.Name}' has different numeric values");
+                            }
+                        }
                         continue;
                     }
 
-                    if (prop.Name == "TimeStamp" || prop.Name.EndsWith("Moment"))
+                    if (newtonsoftValue.Type == JTokenType.Date || 
+                        (newtonsoftValue.Type == JTokenType.String && 
+                         DateTime.TryParse(newtonsoftValue.ToString(), out _)))
                     {
+                        if (systemTextValue.ValueKind == JsonValueKind.String)
+                        {
+                            if (DateTime.TryParse(newtonsoftValue.ToString(), out var date1) && 
+                                DateTime.TryParse(systemTextValue.GetString(), out var date2))
+                            {
+                                var date1Utc = date1.Kind == DateTimeKind.Unspecified ? 
+                                    DateTime.SpecifyKind(date1, DateTimeKind.Utc) : date1.ToUniversalTime();
+                                var date2Utc = date2.Kind == DateTimeKind.Unspecified ? 
+                                    DateTime.SpecifyKind(date2, DateTimeKind.Utc) : date2.ToUniversalTime();
+                                    
+                                Assert.AreEqual(date1Utc, date2Utc, 
+                                    $"Property '{prop.Name}' has different date/time values");
+                            }
+                        }
                         continue;
                     }
 
-                    if (prop.Name.EndsWith("Case"))
+                    if (prop.Name == "Currency" || prop.Name.EndsWith("Case"))
                     {
+                        string newtonStr = newtonsoftValue.ToString().ToLowerInvariant();
+                        string sysStr = GetJsonElementValueAsString(systemTextValue).ToLowerInvariant();
+                        Assert.AreEqual(newtonStr, sysStr,
+                            $"Property '{prop.Name}' has different enum values");
+                        continue;
+                    }
+
+                    if (newtonsoftValue.Type == JTokenType.Boolean)
+                    {
+                        bool newtonVal = newtonsoftValue.Value<bool>();
+                        bool sysVal = systemTextValue.GetBoolean();
+                        Assert.AreEqual(newtonVal, sysVal, 
+                            $"Property '{prop.Name}' has different boolean values");
+                        continue;
+                    }
+
+                    if (newtonsoftValue.Type == JTokenType.Null)
+                    {
+                        Assert.AreEqual(JsonValueKind.Null, systemTextValue.ValueKind,
+                            $"Property '{prop.Name}' is null in Newtonsoft but not in System.Text.Json");
                         continue;
                     }
 
@@ -182,23 +242,52 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             }
         }
 
-        private string GetJsonElementValueAsString(System.Text.Json.JsonElement element)
+        private static class SystemTextJsonConverters
         {
-            switch (element.ValueKind)
+            public class DateTimeConverter : System.Text.Json.Serialization.JsonConverter<DateTime>
             {
-                case System.Text.Json.JsonValueKind.String:
-                    return element.GetString();
-                case System.Text.Json.JsonValueKind.Number:
-                    return element.GetRawText();
-                case System.Text.Json.JsonValueKind.True:
-                    return "true";
-                case System.Text.Json.JsonValueKind.False:
-                    return "false";
-                case System.Text.Json.JsonValueKind.Null:
-                    return "null";
-                default:
-                    return element.ToString();
+                public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+                {
+                    string dateStr = reader.GetString();
+                    DateTime date = DateTime.Parse(dateStr, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
+                    return date;
+                }
+
+                public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+                {
+                    writer.WriteStringValue(value.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+                }
             }
+
+            public class DecimalConverter : System.Text.Json.Serialization.JsonConverter<decimal>
+            {
+                public override decimal Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+                {
+                    if (reader.TokenType == JsonTokenType.String)
+                    {
+                        return decimal.Parse(reader.GetString(), CultureInfo.InvariantCulture);
+                    }
+                    return reader.GetDecimal();
+                }
+
+                public override void Write(Utf8JsonWriter writer, decimal value, JsonSerializerOptions options)
+                {
+                    writer.WriteNumberValue(value);
+                }
+            }
+        }
+
+        private string GetJsonElementValueAsString(JsonElement element)
+        {
+            return element.ValueKind switch
+            {
+                JsonValueKind.String => element.GetString(),
+                JsonValueKind.Number => element.GetRawText(),
+                JsonValueKind.True => "true",
+                JsonValueKind.False => "false",
+                JsonValueKind.Null => "null",
+                _ => element.ToString(),
+            };
         }
 #endif
 
@@ -220,6 +309,27 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
 
             // Assert
             Assert.IsTrue(json.Contains("\"DecimalPrecisionMultiplier\":0"));
+        }
+
+        private void AssertReceiptRequestsEqual(ReceiptRequest expected, ReceiptRequest actual)
+        {
+            Assert.AreEqual(expected.cbTerminalID, actual.cbTerminalID);
+            Assert.AreEqual(expected.cbReceiptReference, actual.cbReceiptReference);
+            Assert.AreEqual(expected.cbReceiptMoment, actual.cbReceiptMoment);
+            Assert.AreEqual(expected.cbChargeItems.Count, actual.cbChargeItems.Count);
+            Assert.AreEqual(expected.cbPayItems.Count, actual.cbPayItems.Count);
+            Assert.AreEqual(expected.ftCashBoxID, actual.ftCashBoxID);
+            Assert.AreEqual(expected.ftPosSystemId, actual.ftPosSystemId);
+            Assert.AreEqual(expected.ftReceiptCase, actual.ftReceiptCase);
+            Assert.AreEqual(expected.ftQueueID, actual.ftQueueID);
+            Assert.AreEqual(expected.cbPreviousReceiptReference, actual.cbPreviousReceiptReference);
+            Assert.AreEqual(expected.cbReceiptAmount, actual.cbReceiptAmount);
+            Assert.AreEqual(expected.cbUser?.ToString(), actual.cbUser?.ToString());
+            Assert.AreEqual(expected.cbArea?.ToString(), actual.cbArea?.ToString());
+            Assert.AreEqual(expected.cbCustomer?.ToString(), actual.cbCustomer?.ToString());
+            Assert.AreEqual(expected.cbSettlement?.ToString(), actual.cbSettlement?.ToString());
+            Assert.AreEqual(expected.Currency, actual.Currency);
+            Assert.AreEqual(expected.DecimalPrecisionMultiplier, actual.DecimalPrecisionMultiplier);
         }
     }
 }
