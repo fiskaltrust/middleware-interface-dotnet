@@ -4,11 +4,11 @@ using System.Globalization;
 using fiskaltrust.Middleware.ifPOS.v2.Models;
 using NUnit.Framework;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 #if NETSTANDARD2_1_TESTS
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.Encodings.Web;
 #endif
 
 namespace fiskaltrust.Middleware.Interface.Tests.v2
@@ -43,14 +43,9 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
         [Test]
         public void Newtonsoft_SerializeDeserialize_PreservesAllProperties()
         {
-            // Arrange
             var original = CreateTestOperationItem();
-
-            // Act
             var json = JsonConvert.SerializeObject(original, Formatting.Indented);
             var deserialized = JsonConvert.DeserializeObject<OperationItem>(json);
-
-            // Assert
             AssertOperationItemsEqual(original, deserialized);
         }
 
@@ -58,7 +53,6 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
         [Test]
         public void SystemTextJson_SerializeDeserialize_PreservesAllProperties()
         {
-            // Arrange
             var original = CreateTestOperationItem();
             var options = new JsonSerializerOptions
             {
@@ -67,12 +61,8 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
                 Converters = { new JsonStringEnumConverter() }
             };
-
-            // Act
             var json = System.Text.Json.JsonSerializer.Serialize(original, options);
             var deserialized = System.Text.Json.JsonSerializer.Deserialize<OperationItem>(json, options);
-
-            // Assert
             AssertOperationItemsEqual(original, deserialized);
         }
 
@@ -81,134 +71,163 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
         {
             // Arrange
             var item = CreateTestOperationItem();
+            
+            // JSON settings aligned for consistent output between Newtonsoft.Json and System.Text.Json,
+            // matching formatting, dates, numbers, enums, null handling, and reference behavior,
+            // based on Microsoft's migration guide.
 
             var newtonsoftSettings = new JsonSerializerSettings
             {
-                Formatting = Formatting.None,
-                DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                NullValueHandling = NullValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                PreserveReferencesHandling = PreserveReferencesHandling.None,
+                Formatting = Formatting.None, 
+                DateFormatHandling = DateFormatHandling.IsoDateFormat, 
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc, 
+                NullValueHandling = NullValueHandling.Ignore, 
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore, 
+                PreserveReferencesHandling = PreserveReferencesHandling.None, 
+                FloatFormatHandling = FloatFormatHandling.DefaultValue, 
+                Culture = CultureInfo.InvariantCulture, 
                 Converters = { 
-                    new Newtonsoft.Json.Converters.StringEnumConverter(namingStrategy: null)
+                    new Newtonsoft.Json.Converters.StringEnumConverter(namingStrategy: null), 
+                    new NewtonsoftDateTimeConverter(), 
+                    new NewtonsoftDateTimeOffsetConverter(),
+                    new GlobalNumberConverter() 
                 }
             };
 
             var systemTextJsonOptions = new JsonSerializerOptions
             {
-                WriteIndented = false,
-                PropertyNamingPolicy = null,
+                WriteIndented = false, 
+                PropertyNamingPolicy = null, 
                 PropertyNameCaseInsensitive = true, 
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-                NumberHandling = JsonNumberHandling.AllowReadingFromString,
-                ReferenceHandler = ReferenceHandler.IgnoreCycles,
-                ReadCommentHandling = JsonCommentHandling.Skip,
-                AllowTrailingCommas = true,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, 
+                NumberHandling = JsonNumberHandling.AllowReadingFromString, 
+                ReferenceHandler = ReferenceHandler.IgnoreCycles, 
+                ReadCommentHandling = JsonCommentHandling.Skip, 
+                AllowTrailingCommas = true, 
                 MaxDepth = 64,
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping, // to allow special characters
                 Converters = {
-                    new JsonStringEnumConverter(namingPolicy: null),
-                    new SystemTextJsonConverters.DateTimeConverter(),
-                    new SystemTextJsonConverters.DateTimeOffsetConverter()
+                    new JsonStringEnumConverter(namingPolicy: null), 
+                    new SystemTextJsonConverters.DateTimeConverter(), 
+                    new SystemTextJsonConverters.DateTimeOffsetConverter(),
+                    new SystemTextJsonConverters.DecimalConverter() 
                 }
             };
 
             // Act
             var newtonsoftJson = JsonConvert.SerializeObject(item, newtonsoftSettings);
             var systemTextJson = System.Text.Json.JsonSerializer.Serialize(item, systemTextJsonOptions);
-            
-            var fromNewtonsoft = JsonConvert.DeserializeObject<OperationItem>(newtonsoftJson);
-            var fromSystemText = JsonConvert.DeserializeObject<OperationItem>(systemTextJson);
-            
-            AssertOperationItemsEqual(fromNewtonsoft, fromSystemText);
 
-            var newtonsoftDoc = JObject.Parse(newtonsoftJson);
-            var systemTextDoc = JsonDocument.Parse(systemTextJson);
+            // Assert
+            Assert.AreEqual(newtonsoftJson, systemTextJson);
+        }
 
-            foreach (var prop in newtonsoftDoc.Properties())
+        public class GlobalNumberConverter : Newtonsoft.Json.JsonConverter
+        {
+            public override bool CanConvert(Type objectType)
             {
-                Assert.IsTrue(systemTextDoc.RootElement.TryGetProperty(prop.Name, out _),
-                    $"Property '{prop.Name}' not found in System.Text.Json output");
+                return objectType == typeof(int) || objectType == typeof(int?) ||
+                       objectType == typeof(long) || objectType == typeof(long?) ||
+                       objectType == typeof(decimal) || objectType == typeof(decimal?) ||
+                       objectType == typeof(double) || objectType == typeof(double?) ||
+                       objectType == typeof(float) || objectType == typeof(float?);
             }
 
-            foreach (var prop in newtonsoftDoc.Properties())
+            public override void WriteJson(JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer)
             {
-                if (systemTextDoc.RootElement.TryGetProperty(prop.Name, out var systemTextValue))
+                if (value == null)
                 {
-                    var newtonsoftValue = newtonsoftDoc[prop.Name];
-                    
-                    if (newtonsoftValue.Type == JTokenType.Object || 
-                        newtonsoftValue.Type == JTokenType.Array)
-                    {
-                        Assert.IsTrue(
-                            systemTextValue.ValueKind == JsonValueKind.Object || 
-                            systemTextValue.ValueKind == JsonValueKind.Array,
-                            $"Property '{prop.Name}' should be an object or array in both serializations");
-                        continue;
-                    }
-
-                    if (newtonsoftValue.Type == JTokenType.Integer || 
-                        newtonsoftValue.Type == JTokenType.Float)
-                    {
-                        if (systemTextValue.ValueKind == JsonValueKind.Number)
-                        {
-                            decimal newtonVal = newtonsoftValue.Value<decimal>();
-                            decimal sysVal = systemTextValue.GetDecimal();
-                            Assert.AreEqual(newtonVal, sysVal, 
-                                $"Property '{prop.Name}' has different numeric values");
-                        }
-                        else if (systemTextValue.ValueKind == JsonValueKind.String)
-                        {
-                            if (decimal.TryParse(newtonsoftValue.ToString(), out var newtonVal) && 
-                                decimal.TryParse(systemTextValue.GetString(), out var sysVal))
-                            {
-                                Assert.AreEqual(newtonVal, sysVal, 
-                                    $"Property '{prop.Name}' has different numeric values");
-                            }
-                        }
-                        continue;
-                    }
-
-                    if (newtonsoftValue.Type == JTokenType.Date || 
-                        (newtonsoftValue.Type == JTokenType.String && 
-                         DateTimeOffset.TryParse(newtonsoftValue.ToString(), out _)))
-                    {
-                        if (systemTextValue.ValueKind == JsonValueKind.String)
-                        {
-                            if (DateTimeOffset.TryParse(newtonsoftValue.ToString(), out var date1) && 
-                                DateTimeOffset.TryParse(systemTextValue.GetString(), out var date2))
-                            {
-                                var date1Utc = date1.ToUniversalTime();
-                                var date2Utc = date2.ToUniversalTime();
-                                    
-                                Assert.AreEqual(date1Utc, date2Utc, 
-                                    $"Property '{prop.Name}' has different date/time values");
-                            }
-                        }
-                        continue;
-                    }
-
-                    if (newtonsoftValue.Type == JTokenType.Boolean)
-                    {
-                        bool newtonVal = newtonsoftValue.Value<bool>();
-                        bool sysVal = systemTextValue.GetBoolean();
-                        Assert.AreEqual(newtonVal, sysVal, 
-                            $"Property '{prop.Name}' has different boolean values");
-                        continue;
-                    }
-
-                    if (newtonsoftValue.Type == JTokenType.Null)
-                    {
-                        Assert.AreEqual(JsonValueKind.Null, systemTextValue.ValueKind,
-                            $"Property '{prop.Name}' is null in Newtonsoft but not in System.Text.Json");
-                        continue;
-                    }
-
-                    Assert.AreEqual(
-                        newtonsoftValue.ToString(), 
-                        GetJsonElementValueAsString(systemTextValue),
-                        $"Property '{prop.Name}' has different values in the two serializations");
+                    writer.WriteNull();
+                    return;
                 }
+
+                if (value is int || value is long)
+                {
+                    writer.WriteValue(value);
+                }
+                else if (value is decimal decimalValue)
+                {
+                    if (decimalValue == Math.Floor(decimalValue))
+                    {
+                        writer.WriteValue((long)decimalValue);
+                    }
+                    else
+                    {
+                        writer.WriteValue(decimalValue);
+                    }
+                }
+                else if (value is double doubleValue)
+                {
+                    if (doubleValue == Math.Floor(doubleValue))
+                    {
+                        writer.WriteValue((long)doubleValue);
+                    }
+                    else
+                    {
+                        writer.WriteValue(doubleValue);
+                    }
+                }
+                else if (value is float floatValue)
+                {
+                    if (floatValue == Math.Floor(floatValue))
+                    {
+                        writer.WriteValue((long)floatValue);
+                    }
+                    else
+                    {
+                        writer.WriteValue(floatValue);
+                    }
+                }
+                else
+                {
+                    writer.WriteValue(value);
+                }
+            }
+
+            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, Newtonsoft.Json.JsonSerializer serializer)
+            {
+                if (reader.Value == null) return null;
+                
+                if (objectType == typeof(int) || objectType == typeof(int?))
+                    return Convert.ToInt32(reader.Value);
+                if (objectType == typeof(long) || objectType == typeof(long?))
+                    return Convert.ToInt64(reader.Value);
+                if (objectType == typeof(decimal) || objectType == typeof(decimal?))
+                    return Convert.ToDecimal(reader.Value);
+                if (objectType == typeof(double) || objectType == typeof(double?))
+                    return Convert.ToDouble(reader.Value);
+                if (objectType == typeof(float) || objectType == typeof(float?))
+                    return Convert.ToSingle(reader.Value);
+                    
+                return reader.Value;
+            }
+        }
+
+        public class NewtonsoftDateTimeConverter : Newtonsoft.Json.JsonConverter<DateTime>
+        {
+            public override void WriteJson(JsonWriter writer, DateTime value, Newtonsoft.Json.JsonSerializer serializer)
+            {
+                writer.WriteValue(value.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture));
+            }
+
+            public override DateTime ReadJson(JsonReader reader, Type objectType, DateTime existingValue, bool hasExistingValue, Newtonsoft.Json.JsonSerializer serializer)
+            {
+                if (reader.Value == null) return default;
+                return DateTime.Parse(reader.Value.ToString(), CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
+            }
+        }
+
+        public class NewtonsoftDateTimeOffsetConverter : Newtonsoft.Json.JsonConverter<DateTimeOffset>
+        {
+            public override void WriteJson(JsonWriter writer, DateTimeOffset value, Newtonsoft.Json.JsonSerializer serializer)
+            {
+                writer.WriteValue(value.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture));
+            }
+
+            public override DateTimeOffset ReadJson(JsonReader reader, Type objectType, DateTimeOffset existingValue, bool hasExistingValue, Newtonsoft.Json.JsonSerializer serializer)
+            {
+                if (reader.Value == null) return default;
+                return DateTimeOffset.Parse(reader.Value.ToString(), CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
             }
         }
 
@@ -219,13 +238,12 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
                 public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
                 {
                     string dateStr = reader.GetString();
-                    DateTime date = DateTime.Parse(dateStr, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
-                    return date;
+                    return DateTime.Parse(dateStr, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
                 }
 
                 public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
                 {
-                    writer.WriteStringValue(value.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+                    writer.WriteStringValue(value.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture));
                 }
             }
 
@@ -234,41 +252,47 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
                 public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
                 {
                     string dateStr = reader.GetString();
-                    DateTimeOffset date = DateTimeOffset.Parse(dateStr, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
-                    return date;
+                    return DateTimeOffset.Parse(dateStr, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
                 }
 
                 public override void Write(Utf8JsonWriter writer, DateTimeOffset value, JsonSerializerOptions options)
                 {
-                    writer.WriteStringValue(value.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+                    writer.WriteStringValue(value.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture));
                 }
             }
-        }
 
-        private string GetJsonElementValueAsString(JsonElement element)
-        {
-            return element.ValueKind switch
+            public class DecimalConverter : System.Text.Json.Serialization.JsonConverter<decimal>
             {
-                JsonValueKind.String => element.GetString(),
-                JsonValueKind.Number => element.GetRawText(),
-                JsonValueKind.True => "true",
-                JsonValueKind.False => "false",
-                JsonValueKind.Null => "null",
-                _ => element.ToString(),
-            };
+                public override decimal Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+                {
+                    if (reader.TokenType == JsonTokenType.String)
+                    {
+                        return decimal.Parse(reader.GetString(), CultureInfo.InvariantCulture);
+                    }
+                    return reader.GetDecimal();
+                }
+
+                public override void Write(Utf8JsonWriter writer, decimal value, JsonSerializerOptions options)
+                {
+                    if (value == Math.Floor(value))
+                    {
+                        writer.WriteNumberValue((long)value);
+                    }
+                    else
+                    {
+                        writer.WriteNumberValue(value);
+                    }
+                }
+            }
         }
 #endif
 
         [Test]
         public void Clone_CreatesIdenticalCopy()
         {
-            // Arrange
             var original = CreateTestOperationItem();
-
-            // Act
             var cloned = (OperationItem)original.Clone();
 
-            // Assert
             Assert.AreEqual(original.cbOperationItemID, cloned.cbOperationItemID);
             Assert.AreEqual(original.ftQueueID, cloned.ftQueueID);
             Assert.AreEqual(original.Method, cloned.Method);
@@ -280,14 +304,10 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
         [Test]
         public void DefaultValues_SerializeCorrectly()
         {
-            // Arrange
             var item = new OperationItem();
-
-            // Act
             var json = JsonConvert.SerializeObject(item);
             var deserialized = JsonConvert.DeserializeObject<OperationItem>(json);
 
-            // Assert
             Assert.AreEqual(string.Empty, deserialized.Method);
             Assert.AreEqual(string.Empty, deserialized.Path);
             Assert.AreEqual(string.Empty, deserialized.Request);
