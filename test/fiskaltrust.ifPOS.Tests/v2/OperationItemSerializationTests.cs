@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using fiskaltrust.Middleware.ifPOS.v2.Models;
+using fiskaltrust.ifPOS.v2;
 using NUnit.Framework;
 using Newtonsoft.Json;
 

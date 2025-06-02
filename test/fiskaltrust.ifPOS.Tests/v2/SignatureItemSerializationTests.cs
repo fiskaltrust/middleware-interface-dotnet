@@ -1,6 +1,6 @@
 ﻿using System;
-using fiskaltrust.Middleware.ifPOS.v2.Models;
-using fiskaltrust.Middleware.Localization.v2.Models.ifPOS.v2.Cases;
+using fiskaltrust.ifPOS.v2;
+using fiskaltrust.ifPOS.v2.Cases;
 using NUnit.Framework;
 using Newtonsoft.Json;
 
