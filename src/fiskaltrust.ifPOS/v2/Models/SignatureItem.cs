@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using fiskaltrust.Middleware.Localization.v2.Models.ifPOS.v2.Cases;
+using fiskaltrust.ifPOS.v2.Cases;
 #if NETSTANDARD2_1
 using System.Text.Json.Serialization;
 #endif
 
-namespace fiskaltrust.Middleware.ifPOS.v2.Models
+namespace fiskaltrust.ifPOS.v2
 {
     public class SignatureItem
     {

@@ -1,5 +1,4 @@
-﻿namespace fiskaltrust.Middleware.Localization.v2.Models.ifPOS.v2.Cases;
-
+﻿namespace fiskaltrust.ifPOS.v2.Cases;
 public enum ReceiptCase : long
 {
     UnknownReceipt0x0000 = 0x0000,
@@ -26,6 +25,7 @@ public enum ReceiptCase : long
     ProtocolAccountingEvent0x3002 = 0x3002,
     InternalUsageMaterialConsumption0x3003 = 0x3003,
     Order0x3004 = 0x3004,
+    Pay0x3005 = 0x3005,
     CopyReceiptPrintExistingReceipt0x3010 = 0x3010,
 
     InitialOperationReceipt0x4001 = 0x4001,

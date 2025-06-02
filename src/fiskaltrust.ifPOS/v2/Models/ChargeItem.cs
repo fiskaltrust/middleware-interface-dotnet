@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using fiskaltrust.Middleware.Localization.v2.Models.ifPOS.v2.Cases;
+using fiskaltrust.ifPOS.v2.Cases;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -8,7 +8,7 @@ using Newtonsoft.Json.Converters;
 using System.Text.Json.Serialization;
 #endif
 
-namespace fiskaltrust.Middleware.ifPOS.v2.Models
+namespace fiskaltrust.ifPOS.v2
 {
     public class ChargeItem
     {

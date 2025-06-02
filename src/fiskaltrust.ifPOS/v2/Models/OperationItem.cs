@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 #endif
 
-namespace fiskaltrust.Middleware.ifPOS.v2.Models
+namespace fiskaltrust.ifPOS.v2
 {
     public class OperationItem : ICloneable
     {

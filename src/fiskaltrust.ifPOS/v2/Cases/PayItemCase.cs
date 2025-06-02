@@ -1,5 +1,4 @@
-﻿namespace fiskaltrust.Middleware.Localization.v2.Models.ifPOS.v2.Cases;
-
+﻿namespace fiskaltrust.ifPOS.v2.Cases;
 public enum PayItemCase : long
 {
     UnknownPaymentType = 0x00,
