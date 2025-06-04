@@ -8,3 +8,9 @@ public enum StateFlags : long
     MessageIsPending = 0x0000_0000_0000_0040,
     DailyClosingIsDue = 0x0000_0000_0000_0100,
 }
+
+public static class StateFlagsExt
+{
+    public static State WithFlag(this State self, StateFlags flag) => (State) ((long) self | (long) flag);
+    public static bool IsFlag(this State self, StateFlags flag) => ((long) self & (long) flag) == (long) flag;
+}

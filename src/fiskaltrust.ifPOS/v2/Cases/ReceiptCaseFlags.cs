@@ -20,3 +20,9 @@ public enum ReceiptCaseFlags : long
 
     PreventEnablingOrDisablingSigningDevices = 0x0000_0000_2000_0000,
 }
+
+public static class ReceiptCaseFlagsExt
+{
+    public static ReceiptCase WithFlag(this ReceiptCase self, ReceiptCaseFlags flag) => (ReceiptCase) ((long) self | (long) flag);
+    public static bool IsFlag(this ReceiptCase self, ReceiptCaseFlags flag) => ((long) self & (long) flag) == (long) flag;
+}

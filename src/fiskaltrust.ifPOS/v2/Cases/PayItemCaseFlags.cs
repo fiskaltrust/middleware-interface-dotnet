@@ -13,3 +13,11 @@ public enum PayItemCaseFlags : long
     Interface = 0x0100_0000,
     ShowInChargeItems = 0x8000_0000,
 }
+
+public static class PayItemCaseFlagsExt
+{
+    public static PayItemCase WithFlag(this PayItemCase self, PayItemCaseFlags flag) => (PayItemCase) ((long) self | (long) flag);
+
+    // HasFlag would be a nicer name but that method does alrady exist for all enums
+    public static bool IsFlag(this PayItemCase self, PayItemCaseFlags flag) => ((long) self & (long) flag) == (long) flag;
+}
