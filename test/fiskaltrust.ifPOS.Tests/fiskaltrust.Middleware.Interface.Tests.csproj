@@ -63,8 +63,4 @@
     <PackageReference Include="System.Linq.Async" Version="4.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="v2\" />
-  </ItemGroup>
-
 </Project>
