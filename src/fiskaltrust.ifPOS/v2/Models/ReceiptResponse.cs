@@ -98,7 +98,7 @@ namespace fiskaltrust.ifPOS.v2
         [JsonPropertyName("ftSignatures")]
 #endif
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public List<SignatureItem> ftSignatures { get; set; }
+        public List<SignatureItem> ftSignatures { get; set; } = new List<SignatureItem>();
 
 #if NETSTANDARD2_1
         [JsonPropertyName("ftReceiptFooter")]
