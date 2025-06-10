@@ -16,17 +16,23 @@ namespace fiskaltrust.ifPOS.v2
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public Guid? ftPayItemId { get; set; }
 
-        private decimal _quantity = 1;
-
+        [Newtonsoft.Json.JsonProperty("Quantity", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore)]
 #if NETSTANDARD2_1
         [JsonPropertyName("Quantity")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 #endif
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
-        public decimal? Quantity
+        public decimal? QuantitySerialization
         {
-            get => _quantity == 1 ? null : _quantity;
-            set => _quantity = value ?? 1;
+            get => Quantity == 1 ? null : Quantity;
+            set => Quantity = !value.HasValue ? 1 : value.Value;
         }
+
+        [Newtonsoft.Json.JsonIgnore]
+#if NETSTANDARD2_1
+        [JsonIgnore]
+#endif
+        public decimal Quantity { get; set; } = 1;
 
 #if NETSTANDARD2_1
         [JsonPropertyName("Description")]
