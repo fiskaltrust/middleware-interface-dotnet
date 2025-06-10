@@ -127,8 +127,8 @@ namespace fiskaltrust.ifPOS.v2
 
         [Newtonsoft.Json.JsonProperty("DecimalPrecisionMultiplier")]
 #if NETSTANDARD2_1
-         [JsonPropertyName("DecimalPrecisionMultiplier")]
-         [System.Text.Json.JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        [JsonPropertyName("DecimalPrecisionMultiplier")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 #endif
         [DataMember(Order = 180, EmitDefaultValue = false, IsRequired = false)]
         public int DecimalPrecisionMultiplierSerialization
@@ -139,7 +139,7 @@ namespace fiskaltrust.ifPOS.v2
 
         [Newtonsoft.Json.JsonIgnore]
 #if NETSTANDARD2_1
-         [System.Text.Json.JsonIgnore]
+        [JsonIgnore]
 #endif
         public int DecimalPrecisionMultiplier { get; set; } = 1;
     }
