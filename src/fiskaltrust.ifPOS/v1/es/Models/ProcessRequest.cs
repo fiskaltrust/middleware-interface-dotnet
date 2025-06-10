@@ -6,7 +6,7 @@ namespace fiskaltrust.ifPOS.v1.es
     [DataContract]
     public class ProcessRequest
     {
-        [DataMember(Order =10)]
+        [DataMember(Order = 10)]
         public required ReceiptRequest ReceiptRequest { get; set; }
 
         [DataMember(Order = 20)]
