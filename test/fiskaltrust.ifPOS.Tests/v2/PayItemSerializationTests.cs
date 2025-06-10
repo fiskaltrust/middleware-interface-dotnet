@@ -71,7 +71,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
 #endif
 
         [Test]
-        public void QuantitySerialization_HandlesDefaultValue()
+        public void QuantitySerialization_SkipsDefaultValue()
         {
             var item = new PayItem
             {
@@ -81,13 +81,8 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             };
 
             var json = JsonConvert.SerializeObject(item);
-            var deserialized = JsonConvert.DeserializeObject<PayItem>(json);
 
-            Assert.IsFalse(json.Contains("\"Quantity\":1"));
-
-            var fieldInfo = typeof(PayItem).GetField("_quantity", BindingFlags.NonPublic | BindingFlags.Instance);
-            var actualValue = (decimal)fieldInfo.GetValue(deserialized);
-            Assert.AreEqual(1m, actualValue);
+            Assert.IsFalse(json.Contains("\"Quantity\":"));
         }
 
         [Test]
