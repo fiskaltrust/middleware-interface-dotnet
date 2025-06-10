@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 #if NETSTANDARD2_1
 using System.Text.Json.Serialization;
@@ -7,8 +8,9 @@ using System.Text.Json.Serialization;
 namespace fiskaltrust.ifPOS.v2
 {
 #if NETSTANDARD2_1
-    [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
+    [JsonConverter(typeof(JsonStringEnumConverter))]
 #endif
+    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     public enum Currency
     {
         EUR,

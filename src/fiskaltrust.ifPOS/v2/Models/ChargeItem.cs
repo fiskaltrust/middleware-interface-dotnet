@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 using fiskaltrust.ifPOS.v2.Cases;
 
 #if NETSTANDARD2_1
@@ -118,9 +119,10 @@ namespace fiskaltrust.ifPOS.v2
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public decimal? UnitPrice { get; set; }
 
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
 #if NETSTANDARD2_1
         [JsonPropertyName("Currency")]
-        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
 #endif
         [DataMember(Order = 170, EmitDefaultValue = false, IsRequired = false)]
         public Currency Currency { get; set; }
