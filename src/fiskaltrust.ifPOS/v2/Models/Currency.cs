@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using Newtonsoft.Json.Converters;
 
 #if NETSTANDARD2_1
 using System.Text.Json.Serialization;
@@ -7,7 +6,6 @@ using System.Text.Json.Serialization;
 
 namespace fiskaltrust.ifPOS.v2
 {
-    [Newtonsoft.Json.JsonConverter(typeof(StringEnumConverter))]
 #if NETSTANDARD2_1
     [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
 #endif

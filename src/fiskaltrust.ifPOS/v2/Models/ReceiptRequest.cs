@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using fiskaltrust.ifPOS.v2.Cases;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 #if NETSTANDARD2_1
 using System.Text.Json.Serialization;
@@ -109,7 +107,6 @@ namespace fiskaltrust.ifPOS.v2
         [DataMember(Order = 160, EmitDefaultValue = false, IsRequired = false)]
         public object? cbSettlement { get; set; }
 
-        [Newtonsoft.Json.JsonConverter(typeof(StringEnumConverter))]
 #if NETSTANDARD2_1
         [JsonPropertyName("Currency")]
         [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
@@ -117,16 +114,22 @@ namespace fiskaltrust.ifPOS.v2
         [DataMember(Order = 170, EmitDefaultValue = false, IsRequired = false)]
         public Currency Currency { get; set; }
 
-        private int _decimalPrecisionMultiplier = 1;
-
+        [Newtonsoft.Json.JsonProperty("DecimalPrecisionMultiplier")]
 #if NETSTANDARD2_1
-        [JsonPropertyName("DecimalPrecisionMultiplier")]
+         [JsonPropertyName("DecimalPrecisionMultiplier")]
+         [System.Text.Json.JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 #endif
         [DataMember(Order = 180, EmitDefaultValue = false, IsRequired = false)]
-        public int DecimalPrecisionMultiplier
+        public int DecimalPrecisionMultiplierSerialization
         {
-            get => _decimalPrecisionMultiplier == 1 ? 0 : _decimalPrecisionMultiplier;
-            set => _decimalPrecisionMultiplier = value == 0 ? 1 : value;
+            get => DecimalPrecisionMultiplier == 1 ? 0 : DecimalPrecisionMultiplier;
+            set => DecimalPrecisionMultiplier = value == 0 ? 1 : value;
         }
+
+        [Newtonsoft.Json.JsonIgnore]
+#if NETSTANDARD2_1
+         [System.Text.Json.JsonIgnore]
+#endif
+        public int DecimalPrecisionMultiplier { get; set; } = 1;
     }
 }
