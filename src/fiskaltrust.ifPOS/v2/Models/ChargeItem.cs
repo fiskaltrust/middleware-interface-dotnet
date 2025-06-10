@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
 using fiskaltrust.ifPOS.v2.Cases;
 
 #if NETSTANDARD2_1

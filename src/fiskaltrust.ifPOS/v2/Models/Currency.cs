@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
 
 #if NETSTANDARD2_1
 using System.Text.Json.Serialization;
