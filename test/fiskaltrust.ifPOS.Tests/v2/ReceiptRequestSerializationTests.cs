@@ -93,7 +93,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
 #endif
 
         [Test]
-        public void DecimalPrecisionMultiplier_SerializesAsZeroWhenOne()
+        public void DecimalPrecisionMultiplier_ShouldNotSerialize_WhenOne()
         {
             var request = new ReceiptRequest
             {
@@ -105,7 +105,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             };
 
             var json = JsonConvert.SerializeObject(request);
-            Assert.IsTrue(json.Contains("\"DecimalPrecisionMultiplier\":0"));
+            Assert.IsFalse(json.Contains("\"DecimalPrecisionMultiplier\":"));
         }
 
         [Test]

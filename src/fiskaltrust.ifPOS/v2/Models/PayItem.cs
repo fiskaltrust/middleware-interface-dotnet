@@ -102,7 +102,7 @@ namespace fiskaltrust.ifPOS.v2
         [DataMember(Order = 170, EmitDefaultValue = false, IsRequired = false)]
         public Currency Currency { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("DecimalPrecisionMultiplier")]
+        [Newtonsoft.Json.JsonProperty("DecimalPrecisionMultiplier", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore)]
 #if NETSTANDARD2_1
         [JsonPropertyName("DecimalPrecisionMultiplier")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]

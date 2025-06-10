@@ -72,7 +72,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
 #endif
 
         [Test]
-        public void DecimalPrecisionMultiplier_SerializesAsZeroWhenOne()
+        public void DecimalPrecisionMultiplier_ShouldNotSerialize_WhenOne()
         {
             var item = new ChargeItem
             {
@@ -83,7 +83,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             };
 
             var json = JsonConvert.SerializeObject(item);
-            Assert.IsTrue(json.Contains("\"DecimalPrecisionMultiplier\":0"));
+            Assert.IsFalse(json.Contains("\"DecimalPrecisionMultiplier\":"));
         }
 
         [Test]
