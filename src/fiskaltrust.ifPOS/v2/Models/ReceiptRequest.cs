@@ -75,7 +75,7 @@ namespace fiskaltrust.ifPOS.v2
         [JsonPropertyName("cbPreviousReceiptReference")]
 #endif
         [DataMember(Order = 110, EmitDefaultValue = false, IsRequired = false)]
-        public string? cbPreviousReceiptReference { get; set; }
+        public object? cbPreviousReceiptReference { get; set; }
 
 #if NETSTANDARD2_1
         [JsonPropertyName("cbReceiptAmount")]
