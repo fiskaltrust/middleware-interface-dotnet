@@ -6,5 +6,7 @@
     public class HttpESSSCDClientOptions : ClientOptions
     {
         public bool? DisableSslValidation { get; set; }
+        public Guid? CashboxId { get; set; }
+        public string? AccessToken { get; set; }
     }
 }
