@@ -2,11 +2,14 @@
 
 public enum ReceiptCaseFlagsGR : long
 {
-    IsSelfPricingOperation = 0x0100_0000_0000,
+    /// <remarks>
+    /// Value: 0x0000_0100_0000_0000
+    /// </remarks>
+    IsSelfPricingOperation = 0x0000_0100_0000_0000,
 }
 
 public static class ReceiptCaseFlagsGRExt
 {
-    public static ReceiptCase WithFlag(this ReceiptCase self, ReceiptCaseFlagsGR flag) => (ReceiptCase) ((long) self | (long) flag);
-    public static bool IsFlag(this ReceiptCase self, ReceiptCaseFlags flag) => ((long) self & (long) flag) == (long) flag;
+    public static ReceiptCase WithFlag(this ReceiptCase self, ReceiptCaseFlagsGR flag) => (ReceiptCase)((long)self | (long)flag);
+    public static bool IsFlag(this ReceiptCase self, ReceiptCaseFlags flag) => ((long)self & (long)flag) == (long)flag;
 }
