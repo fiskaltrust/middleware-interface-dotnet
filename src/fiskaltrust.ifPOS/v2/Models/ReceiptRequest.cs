@@ -6,6 +6,7 @@ using fiskaltrust.ifPOS.v2.Converters;
 
 #if NETSTANDARD2_1
 using System.Text.Json.Serialization;
+using System.Text.Json;
 #endif
 
 namespace fiskaltrust.ifPOS.v2
@@ -72,13 +73,11 @@ namespace fiskaltrust.ifPOS.v2
         [DataMember(Order = 100, EmitDefaultValue = false, IsRequired = false)]
         public Guid? ftQueueID { get; set; }
 
-        [Newtonsoft.Json.JsonConverter(typeof(StringOrStringArrayNewtonsoftConverter))]
 #if NETSTANDARD2_1
         [JsonPropertyName("cbPreviousReceiptReference")]
-        [JsonConverter(typeof(StringOrStringArraySystemTextJsonConverter))]
 #endif
         [DataMember(Order = 110, EmitDefaultValue = false, IsRequired = false)]
-        public string[]? cbPreviousReceiptReference { get; set; }
+        public cbPreviousReceiptReference? cbPreviousReceiptReference { get; set; }
 
 #if NETSTANDARD2_1
         [JsonPropertyName("cbReceiptAmount")]

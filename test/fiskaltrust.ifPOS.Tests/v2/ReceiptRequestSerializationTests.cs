@@ -49,7 +49,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
                 ftReceiptCase = ReceiptCase.OneReceipt0x2001,
                 ftReceiptCaseData = new { CustomData = "TestValue" },
                 ftQueueID = Guid.Parse("aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"),
-                cbPreviousReceiptReference = new string[] { "RECEIPT-2024-000" },
+                cbPreviousReceiptReference = "RECEIPT-2024-000",
                 cbReceiptAmount = 10.99m,
                 cbUser = new { User = "User1" },
                 cbArea = "Area1",
@@ -150,7 +150,10 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
         {
             // Arrange
             var request = CreateTestReceiptRequest();
-            request.cbPreviousReceiptReference = new string[] { "SINGLE-REFERENCE" };
+            request.cbPreviousReceiptReference = "SINGLE-REFERENCE";
+
+            Assert.That(request.cbPreviousReceiptReference.IsSingle);
+            Assert.AreEqual(request.cbPreviousReceiptReference.SingleValue, "SINGLE-REFERENCE");
 
             // Act
             var json = JsonConvert.SerializeObject(request);
@@ -167,8 +170,15 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             var request = CreateTestReceiptRequest();
             request.cbPreviousReceiptReference = new string[] { "REF-1", "REF-2" };
 
+            Assert.That(request.cbPreviousReceiptReference.IsGroup);
+            Assert.AreEqual(request.cbPreviousReceiptReference.GroupValue, new string[] { "REF-1", "REF-2" });
             // Act
             var json = JsonConvert.SerializeObject(request);
+
+            request.cbPreviousReceiptReference.Match(
+                single => Console.WriteLine(single),
+                group => Console.WriteLine(string.Join(", ", group))
+            );
 
             // Assert
             Assert.IsTrue(json.Contains("\"cbPreviousReceiptReference\":[\"REF-1\",\"REF-2\"]"));
@@ -199,8 +209,8 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
 
             // Assert
             Assert.IsNotNull(deserialized.cbPreviousReceiptReference);
-            Assert.AreEqual(1, deserialized.cbPreviousReceiptReference.Length);
-            Assert.AreEqual("SINGLE-REF", deserialized.cbPreviousReceiptReference[0]);
+            Assert.That(deserialized.cbPreviousReceiptReference.IsSingle);
+            Assert.AreEqual("SINGLE-REF", deserialized.cbPreviousReceiptReference.SingleValue);
         }
 
         [Test]
@@ -227,9 +237,9 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
 
             // Assert
             Assert.IsNotNull(deserialized.cbPreviousReceiptReference);
-            Assert.AreEqual(2, deserialized.cbPreviousReceiptReference.Length);
-            Assert.AreEqual("REF-1", deserialized.cbPreviousReceiptReference[0]);
-            Assert.AreEqual("REF-2", deserialized.cbPreviousReceiptReference[1]);
+            Assert.That(deserialized.cbPreviousReceiptReference.IsGroup);
+            Assert.AreEqual("REF-1", deserialized.cbPreviousReceiptReference.GroupValue[0]);
+            Assert.AreEqual("REF-2", deserialized.cbPreviousReceiptReference.GroupValue[1]);
         }
 
 #if NETSTANDARD2_1_TESTS
@@ -238,7 +248,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
         {
             // Arrange
             var request = CreateTestReceiptRequest();
-            request.cbPreviousReceiptReference = new string[] { "SINGLE-REFERENCE" };
+            request.cbPreviousReceiptReference = "SINGLE-REFERENCE";
 
             // Act
             var json = System.Text.Json.JsonSerializer.Serialize(request);
@@ -273,8 +283,8 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
 
             // Assert
             Assert.IsNotNull(deserialized.cbPreviousReceiptReference);
-            Assert.AreEqual(1, deserialized.cbPreviousReceiptReference.Length);
-            Assert.AreEqual("SINGLE-REF", deserialized.cbPreviousReceiptReference[0]);
+            Assert.That(deserialized.cbPreviousReceiptReference.IsSingle);
+            Assert.AreEqual("SINGLE-REF", deserialized.cbPreviousReceiptReference.SingleValue);
         }
 
         [Test]
@@ -288,9 +298,9 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
 
             // Assert
             Assert.IsNotNull(deserialized.cbPreviousReceiptReference);
-            Assert.AreEqual(2, deserialized.cbPreviousReceiptReference.Length);
-            Assert.AreEqual("REF-1", deserialized.cbPreviousReceiptReference[0]);
-            Assert.AreEqual("REF-2", deserialized.cbPreviousReceiptReference[1]);
+            Assert.That(deserialized.cbPreviousReceiptReference.IsGroup);
+            Assert.AreEqual("REF-1", deserialized.cbPreviousReceiptReference.GroupValue[0]);
+            Assert.AreEqual("REF-2", deserialized.cbPreviousReceiptReference.GroupValue[1]);
         }
 #endif
 
