@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 #if NETSTANDARD2_1
 using System.Text.Json.Serialization;
@@ -16,7 +17,7 @@ namespace fiskaltrust.ifPOS.v2;
 public record cbPreviousReceiptReference
 {
     public record Single : cbPreviousReceiptReference { public string Value { get; set; } public Single(string v) => Value = v; };
-    public static implicit operator cbPreviousReceiptReference(string v) => new Single(v);
+    public static implicit operator cbPreviousReceiptReference(string v) => string.IsNullOrEmpty(v) ? null : new Single(v);
 
     public record Group : cbPreviousReceiptReference { public string[] Value { get; set; } public Group(string[] g) => Value = g; };
     public static implicit operator cbPreviousReceiptReference(string[] g) => new Group(g);
@@ -50,9 +51,8 @@ public record cbPreviousReceiptReference
     };
 
     public void Match(
-    Action<string> single,
-    Action<string[]> group
-)
+        Action<string> single,
+        Action<string[]> group)
     {
         Action action = this switch
         {
@@ -65,12 +65,27 @@ public record cbPreviousReceiptReference
 
     public R Match<R>(
         Func<string, R> single,
-        Func<string[], R> group
-    ) => this switch
-    {
-        Single s => single(s.Value),
-        Group g => group(g.Value)
-    };
+        Func<string[], R> group) => this switch
+        {
+            Single s => single(s.Value),
+            Group g => group(g.Value)
+        };
+
+    public Task MatchAsync(
+        Func<string, Task> single,
+        Func<string[], Task> group) => this switch
+        {
+            Single s => single(s.Value),
+            Group g => group(g.Value)
+        };
+
+    public async Task<R> MatchAsync<R>(
+        Func<string, Task<R>> single,
+        Func<string[], Task<R>> group) => this switch
+        {
+            Single s => await single(s.Value),
+            Group g => await group(g.Value)
+        };
 #pragma warning restore
 }
 
