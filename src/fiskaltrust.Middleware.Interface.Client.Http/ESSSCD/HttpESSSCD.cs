@@ -51,8 +51,9 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
 
         private HttpClient GetClient(HttpESSSCDClientOptions options)
         {
+            HttpClient httpClient;
             var url = options.Url.ToString().EndsWith("/") ? options.Url : new Uri($"{options.Url}/");
-            if (options.DisableSslValidation.HasValue && options.DisableSslValidation.Value)
+           if (options.DisableSslValidation.HasValue && options.DisableSslValidation.Value)
             {
                 var handler = new HttpClientHandler
                 {
@@ -60,12 +61,22 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
                     ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) => true
                 };
 
-                return new HttpClient(handler) { BaseAddress = url };
+                httpClient = new HttpClient(handler) { BaseAddress = url };
             }
             else
             {
-                return new HttpClient { BaseAddress = url };
+                httpClient= new HttpClient { BaseAddress = url };
             }
-        }       
+            if (options.CashboxId.HasValue)
+            {
+                httpClient.DefaultRequestHeaders.Add("x-cashbox-id", options.CashboxId.ToString());
+            }
+            if (!string.IsNullOrEmpty(options.AccessToken))
+            {
+               httpClient.DefaultRequestHeaders.Add("x-cashbox-accesstoken", options.AccessToken);
+            }
+
+            return _httpClient;
+        }
     }
 }
