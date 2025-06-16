@@ -79,12 +79,12 @@ public record cbPreviousReceiptReference
             Group g => group(g.Value)
         };
 
-    public async Task<R> MatchAsync<R>(
+    public Task<R> MatchAsync<R>(
         Func<string, Task<R>> single,
         Func<string[], Task<R>> group) => this switch
         {
-            Single s => await single(s.Value),
-            Group g => await group(g.Value)
+            Single s => single(s.Value),
+            Group g => group(g.Value)
         };
 #pragma warning restore
 }
