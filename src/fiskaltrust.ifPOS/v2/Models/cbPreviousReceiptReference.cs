@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-#if NETSTANDARD2_1
+#if !WCF
 using System.Text.Json.Serialization;
 using System.Text.Json;
 #endif
@@ -11,7 +11,7 @@ using System.Text.Json;
 namespace fiskaltrust.ifPOS.v2;
 
 [Newtonsoft.Json.JsonConverter(typeof(PreviousReceiptReferenceConverterNewtonsoft))]
-#if NETSTANDARD2_1
+#if !WCF
 [JsonConverter(typeof(PreviousReceiptReferenceConverterSystemTextJson))]
 #endif
 public record cbPreviousReceiptReference
@@ -111,7 +111,7 @@ public class PreviousReceiptReferenceConverterNewtonsoft : Newtonsoft.Json.JsonC
 
 }
 
-#if NETSTANDARD2_1
+#if !WCF
 public class PreviousReceiptReferenceConverterSystemTextJson : JsonConverter<cbPreviousReceiptReference>
 {
     public override cbPreviousReceiptReference Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

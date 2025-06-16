@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using Newtonsoft.Json;
 
-#if NETSTANDARD2_1_TESTS
+#if !WCF
 using System.Text.Json;
 #endif
 
@@ -31,7 +31,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             AssertJournalRequestsEqual(original, deserialized);
         }
 
-#if NETSTANDARD2_1_TESTS
+#if !WCF
         [Test]
         public void SystemTextJson_SerializeDeserialize_PreservesAllProperties()
         {

@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using fiskaltrust.ifPOS.v2.Cases;
 
-#if NETSTANDARD2_1
+#if !WCF
 using System.Text.Json.Serialization;
 #endif
 
@@ -11,115 +11,115 @@ namespace fiskaltrust.ifPOS.v2
     public class ChargeItem
     {
 
-#if NETSTANDARD2_1
+#if !WCF
         [JsonPropertyName("ftChargeItemId")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public Guid? ftChargeItemId { get; set; }
-#if NETSTANDARD2_1
+#if !WCF
         [JsonPropertyName("Quantity")]
 #endif
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
         public decimal Quantity { get; set; } = 1m;
 
-#if NETSTANDARD2_1
+#if !WCF
         [JsonPropertyName("Description")]
 #endif
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
         public string Description { get; set; }
 
-#if NETSTANDARD2_1
+#if !WCF
         [JsonPropertyName("Amount")]
 #endif
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
         public decimal Amount { get; set; } = 0;
 
-#if NETSTANDARD2_1
+#if !WCF
         [JsonPropertyName("VATRate")]
 #endif
         [DataMember(EmitDefaultValue = true, IsRequired = true)]
         public decimal VATRate { get; set; } = 0;
 
-#if NETSTANDARD2_1
+#if !WCF
         [JsonPropertyName("ftChargeItemCase")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public ChargeItemCase ftChargeItemCase { get; set; } = 0;
 
-#if NETSTANDARD2_1
+#if !WCF
         [JsonPropertyName("ftChargeItemCaseData")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public object? ftChargeItemCaseData { get; set; }
 
-#if NETSTANDARD2_1
+#if !WCF
         [JsonPropertyName("VATAmount")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public decimal? VATAmount { get; set; }
 
-#if NETSTANDARD2_1
+#if !WCF
         [JsonPropertyName("Moment")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public DateTime? Moment { get; set; }
 
-#if NETSTANDARD2_1
+#if !WCF
         [JsonPropertyName("Position")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public decimal Position { get; set; } = 0;
 
-#if NETSTANDARD2_1
+#if !WCF
         [JsonPropertyName("AccountNumber")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public string? AccountNumber { get; set; }
 
-#if NETSTANDARD2_1
+#if !WCF
         [JsonPropertyName("CostCenter")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public string? CostCenter { get; set; }
 
-#if NETSTANDARD2_1
+#if !WCF
         [JsonPropertyName("ProductGroup")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public string? ProductGroup { get; set; }
 
-#if NETSTANDARD2_1
+#if !WCF
         [JsonPropertyName("ProductNumber")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public string? ProductNumber { get; set; }
 
-#if NETSTANDARD2_1
+#if !WCF
         [JsonPropertyName("ProductBarcode")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public string? ProductBarcode { get; set; }
 
-#if NETSTANDARD2_1
+#if !WCF
         [JsonPropertyName("Unit")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public string? Unit { get; set; }
 
-#if NETSTANDARD2_1
+#if !WCF
         [JsonPropertyName("UnitQuantity")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public decimal? UnitQuantity { get; set; }
 
-#if NETSTANDARD2_1
+#if !WCF
         [JsonPropertyName("UnitPrice")]
 #endif
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public decimal? UnitPrice { get; set; }
 
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-#if NETSTANDARD2_1
+#if !WCF
         [JsonPropertyName("Currency")]
         [JsonConverter(typeof(JsonStringEnumConverter))]
 #endif
@@ -127,7 +127,7 @@ namespace fiskaltrust.ifPOS.v2
         public Currency Currency { get; set; }
 
         [Newtonsoft.Json.JsonProperty("DecimalPrecisionMultiplier", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore)]
-#if NETSTANDARD2_1
+#if !WCF
         [JsonPropertyName("DecimalPrecisionMultiplier")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 #endif
@@ -139,7 +139,7 @@ namespace fiskaltrust.ifPOS.v2
         }
 
         [Newtonsoft.Json.JsonIgnore]
-#if NETSTANDARD2_1
+#if !WCF
         [JsonIgnore]
 #endif
         public int DecimalPrecisionMultiplier { get; set; } = 1;

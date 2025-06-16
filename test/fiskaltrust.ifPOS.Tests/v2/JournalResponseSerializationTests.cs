@@ -3,7 +3,7 @@ using fiskaltrust.ifPOS.v2;
 using NUnit.Framework;
 using Newtonsoft.Json;
 
-#if NETSTANDARD2_1_TESTS
+#if !WCF
 using System.Text.Json;
 #endif
 
@@ -16,7 +16,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
         {
             return new JournalResponse
             {
-                Chunk = new List<byte> { 0x48, 0x65, 0x6C, 0x6C, 0x6F, 0x20, 0x57, 0x6F, 0x72, 0x6C, 0x64 } 
+                Chunk = new List<byte> { 0x48, 0x65, 0x6C, 0x6C, 0x6F, 0x20, 0x57, 0x6F, 0x72, 0x6C, 0x64 }
             };
         }
 
@@ -29,7 +29,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             AssertJournalResponsesEqual(original, deserialized);
         }
 
-#if NETSTANDARD2_1_TESTS
+#if !WCF
         [Test]
         public void SystemTextJson_SerializeDeserialize_PreservesAllProperties()
         {

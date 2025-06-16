@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'net6.0'">
-    <DefineConstants>GRPC;STREAMING;NETSTANDARD2_1_TESTS</DefineConstants>
+    <DefineConstants>GRPC;STREAMING</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net461' OR '$(TargetFramework)' == 'net40'">

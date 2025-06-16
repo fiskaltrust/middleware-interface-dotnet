@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using System.ServiceModel.Security;
 
 
-#if NETSTANDARD2_1_TESTS
+#if !WCF
 using System.Text.Json;
 #endif
 
@@ -68,7 +68,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             Assert.IsTrue(json.Contains("\"cbUser\":{\"User\":\"User1\"}"));
             Assert.IsTrue(json.Contains("\"cbArea\":\"Area1\""));
         }
-#if NETSTANDARD2_1_TESTS
+#if !WCF
         [Test]
         public void SystemTextJson_object_IsSerializedAsJson()
         {
@@ -88,7 +88,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             AssertReceiptRequestsEqual(original, deserialized, true);
         }
 
-#if NETSTANDARD2_1_TESTS
+#if !WCF
         [Test]
         public void SystemTextJson_SerializeDeserialize_PreservesAllProperties()
         {
@@ -242,7 +242,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             Assert.AreEqual("REF-2", deserialized.cbPreviousReceiptReference.GroupValue[1]);
         }
 
-#if NETSTANDARD2_1_TESTS
+#if !WCF
         [Test]
         public void SystemTextJson_SinglePreviousReceiptReference_SerializesAsString()
         {
@@ -345,7 +345,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             }
             else
             {
-#if NETSTANDARD2_1_TESTS
+#if !WCF
                 Assert.AreEqual(System.Text.Json.JsonSerializer.Serialize(expected.cbUser), System.Text.Json.JsonSerializer.Serialize(actual.cbUser));
 #endif
             }
