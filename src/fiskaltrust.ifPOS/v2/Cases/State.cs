@@ -4,17 +4,11 @@ namespace fiskaltrust.ifPOS.v2.Cases;
 
 public enum State : long
 {
-    /// <remarks>
-    /// Value: 0x0000_0000
-    /// </remarks>
+    /// <value><c>0x0000_0000</c></value>
     Success = 0x0000_0000,
-    /// <remarks>
-    /// Value: 0xEEEE_EEEE
-    /// </remarks>
+    /// <value><c>0xEEEE_EEEE</c></value>
     Error = 0xEEEE_EEEE,
-    /// <remarks>
-    /// Value: 0xFFFF_FFFF
-    /// </remarks>
+    /// <value><c>0xFFFF_FFFF</c></value>
     Fail = 0xFFFF_FFFF
 }
 

@@ -2,25 +2,15 @@
 
 public enum StateFlags : long
 {
-    /// <remarks>
-    /// Value: 0x0000_0000_0000_0001
-    /// </remarks>
+    /// <value><c>0x0000_0000_0000_0001</c></value>
     SecurityMechanismDeactivated = 0x0000_0000_0000_0001,
-    /// <remarks>
-    /// Value: 0x0000_0000_0000_0002
-    /// </remarks>
+    /// <value><c>0x0000_0000_0000_0002</c></value>
     SCUTemporaryOutOfService = 0x0000_0000_0000_0002,
-    /// <remarks>
-    /// Value: 0x0000_0000_0000_0008
-    /// </remarks>
+    /// <value><c>0x0000_0000_0000_0008</c></value>
     LateSigningModeIsActive = 0x0000_0000_0000_0008,
-    /// <remarks>
-    /// Value: 0x0000_0000_0000_0040
-    /// </remarks>
+    /// <value><c>0x0000_0000_0000_0040</c></value>
     MessageIsPending = 0x0000_0000_0000_0040,
-    /// <remarks>
-    /// Value: 0x0000_0000_0000_0100
-    /// </remarks>
+    /// <value><c>0x0000_0000_0000_0100</c></value>
     DailyClosingIsDue = 0x0000_0000_0000_0100,
 }
 

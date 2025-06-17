@@ -2,21 +2,13 @@
 
 public enum SignatureTypeCategory
 {
-    /// <remarks>
-    /// Value: 0x0000
-    /// </remarks>
+    /// <value><c>0x0000</c></value>
     Uncategorized = 0x0000,
-    /// <remarks>
-    /// Value: 0x1000
-    /// </remarks>
+    /// <value><c>0x1000</c></value>
     Information = 0x1000,
-    /// <remarks>
-    /// Value: 0x2000
-    /// </remarks>
+    /// <value><c>0x2000</c></value>
     Alert = 0x2000,
-    /// <remarks>
-    /// Value: 0x3000
-    /// </remarks>
+    /// <value><c>0x3000</c></value>
     Failure = 0x3000,
 }
 

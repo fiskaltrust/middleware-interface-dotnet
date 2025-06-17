@@ -4,33 +4,19 @@ namespace fiskaltrust.ifPOS.v2.Cases;
 
 public enum ChargeItemCase : long
 {
-    /// <remarks>
-    /// Value: 0x0
-    /// </remarks>
+    /// <value><c>0x0</c></value>
     UnknownService = 0x0,  // Unknown type of service for IT (1.3.45)
-    /// <remarks>
-    /// Value: 0x1
-    /// </remarks>
+    /// <value><c>0x1</c></value>
     DiscountedVatRate1 = 0x1,  // Discounted-1 VAT rate (as of 1.1.2022, this is 10%) (1.3.45)
-    /// <remarks>
-    /// Value: 0x2
-    /// </remarks>
+    /// <value><c>0x2</c></value>
     DiscountedVatRate2 = 0x2,  // Discounted 2 VAT rate (as of 1.1.2022, this is 5%) (1.3.45)
-    /// <remarks>
-    /// Value: 0x3
-    /// </remarks>
+    /// <value><c>0x3</c></value>
     NormalVatRate = 0x3,  // Normal VAT rate (as of 1.1.2022, this is 22%) (1.3.45)
-    /// <remarks>
-    /// Value: 0x4
-    /// </remarks>
+    /// <value><c>0x4</c></value>
     SuperReducedVatRate1 = 0x4,  // Super reduced 1 VAT rate (1.3.45)
-    /// <remarks>
-    /// Value: 0x5
-    /// </remarks>
+    /// <value><c>0x5</c></value>
     SuperReducedVatRate2 = 0x5,  // Super reduced 2 VAT rate (1.3.45)
-    /// <remarks>
-    /// Value: 0x6
-    /// </remarks>
+    /// <value><c>0x6</c></value>
     ParkingVatRate = 0x6,  // Parking VAT rate, Reversal of tax liability (1.3.45)
     /// <remarks>
     /// Value:   //

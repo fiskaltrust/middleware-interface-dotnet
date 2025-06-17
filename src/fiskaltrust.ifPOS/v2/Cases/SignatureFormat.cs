@@ -4,62 +4,34 @@ namespace fiskaltrust.ifPOS.v2.Cases;
 
 public enum SignatureFormat : long
 {
-    /// <remarks>
-    /// Value: 0x0000
-    /// </remarks>
+    /// <value><c>0x0000</c></value>
     Unknown = 0x0000,
-    /// <remarks>
-    /// Value: 0x0001
-    /// </remarks>
+    /// <value><c>0x0001</c></value>
     Text = 0x0001,
-    /// <remarks>
-    /// Value: 0x0002
-    /// </remarks>
+    /// <value><c>0x0002</c></value>
     Link = 0x0002,
-    /// <remarks>
-    /// Value: 0x0003
-    /// </remarks>
+    /// <value><c>0x0003</c></value>
     QRCode = 0x0003,
-    /// <remarks>
-    /// Value: 0x0004
-    /// </remarks>
+    /// <value><c>0x0004</c></value>
     Code128 = 0x0004,
-    /// <remarks>
-    /// Value: 0x0005
-    /// </remarks>
+    /// <value><c>0x0005</c></value>
     OcrA = 0x0005,
-    /// <remarks>
-    /// Value: 0x0006
-    /// </remarks>
+    /// <value><c>0x0006</c></value>
     Pdf417 = 0x0006,
-    /// <remarks>
-    /// Value: 0x0007
-    /// </remarks>
+    /// <value><c>0x0007</c></value>
     DataMatrix = 0x0007,
-    /// <remarks>
-    /// Value: 0x0008
-    /// </remarks>
+    /// <value><c>0x0008</c></value>
     Aztec = 0x0008,
-    /// <remarks>
-    /// Value: 0x0009
-    /// </remarks>
+    /// <value><c>0x0009</c></value>
     Ean8Barcode = 0x0009,
 
-    /// <remarks>
-    /// Value: 0x000A
-    /// </remarks>
+    /// <value><c>0x000A</c></value>
     Ean13 = 0x000A,
-    /// <remarks>
-    /// Value: 0x000B
-    /// </remarks>
+    /// <value><c>0x000B</c></value>
     UPCA = 0x000B,
-    /// <remarks>
-    /// Value: 0x000C
-    /// </remarks>
+    /// <value><c>0x000C</c></value>
     Code39 = 0x000C,
-    /// <remarks>
-    /// Value: 0x000D
-    /// </remarks>
+    /// <value><c>0x000D</c></value>
     Base64 = 0x000D
 }
 

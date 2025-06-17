@@ -4,9 +4,7 @@ namespace fiskaltrust.ifPOS.v2.Cases;
 
 public enum SignatureType : long
 {
-    /// <remarks>
-    /// Value: 0x0
-    /// </remarks>
+    /// <value><c>0x0</c></value>
     Unknown = 0
 }
 

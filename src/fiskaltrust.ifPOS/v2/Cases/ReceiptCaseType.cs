@@ -2,25 +2,15 @@
 
 public enum ReceiptCaseType : long
 {
-    /// <remarks>
-    /// Value: 0x0000
-    /// </remarks>
+    /// <value><c>0x0000</c></value>
     Receipt = 0x0000,
-    /// <remarks>
-    /// Value: 0x1000
-    /// </remarks>
+    /// <value><c>0x1000</c></value>
     Invoice = 0x1000,
-    /// <remarks>
-    /// Value: 0x2000
-    /// </remarks>
+    /// <value><c>0x2000</c></value>
     DailyOperations = 0x2000,
-    /// <remarks>
-    /// Value: 0x3000
-    /// </remarks>
+    /// <value><c>0x3000</c></value>
     Log = 0x3000,
-    /// <remarks>
-    /// Value: 0x4000
-    /// </remarks>
+    /// <value><c>0x4000</c></value>
     Lifecycle = 0x4000
 }
 

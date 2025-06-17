@@ -4,69 +4,37 @@ namespace fiskaltrust.ifPOS.v2.Cases;
 
 public enum PayItemCase : long
 {
-    /// <remarks>
-    /// Value: 0x00
-    /// </remarks>
+    /// <value><c>0x00</c></value>
     UnknownPaymentType = 0x00,
-    /// <remarks>
-    /// Value: 0x01
-    /// </remarks>
+    /// <value><c>0x01</c></value>
     CashPayment = 0x01,
-    /// <remarks>
-    /// Value: 0x02
-    /// </remarks>
+    /// <value><c>0x02</c></value>
     NonCash = 0x02,
-    /// <remarks>
-    /// Value: 0x03
-    /// </remarks>
+    /// <value><c>0x03</c></value>
     CrossedCheque = 0x03,
-    /// <remarks>
-    /// Value: 0x04
-    /// </remarks>
+    /// <value><c>0x04</c></value>
     DebitCardPayment = 0x04,
-    /// <remarks>
-    /// Value: 0x05
-    /// </remarks>
+    /// <value><c>0x05</c></value>
     CreditCardPayment = 0x05,
-    /// <remarks>
-    /// Value: 0x06
-    /// </remarks>
+    /// <value><c>0x06</c></value>
     VoucherPaymentCouponVoucherByMoneyValue = 0x06,
-    /// <remarks>
-    /// Value: 0x07
-    /// </remarks>
+    /// <value><c>0x07</c></value>
     OnlinePayment = 0x07,
-    /// <remarks>
-    /// Value: 0x08
-    /// </remarks>
+    /// <value><c>0x08</c></value>
     LoyaltyProgramCustomerCardPayment = 0x08,
-    /// <remarks>
-    /// Value: 0x09
-    /// </remarks>
+    /// <value><c>0x09</c></value>
     AccountsReceivable = 0x09,
-    /// <remarks>
-    /// Value: 0x0A
-    /// </remarks>
+    /// <value><c>0x0A</c></value>
     SEPATransfer = 0x0A,
-    /// <remarks>
-    /// Value: 0x0B
-    /// </remarks>
+    /// <value><c>0x0B</c></value>
     OtherBankTransfer = 0x0B,
-    /// <remarks>
-    /// Value: 0x0C
-    /// </remarks>
+    /// <value><c>0x0C</c></value>
     TransferToCashbookVaultOwnerEmployee = 0x0C,
-    /// <remarks>
-    /// Value: 0x0D
-    /// </remarks>
+    /// <value><c>0x0D</c></value>
     InternalMaterialConsumption = 0x0D,
-    /// <remarks>
-    /// Value: 0x0E
-    /// </remarks>
+    /// <value><c>0x0E</c></value>
     Grant = 0x0E,
-    /// <remarks>
-    /// Value: 0x0F
-    /// </remarks>
+    /// <value><c>0x0F</c></value>
     TicketRestaurant = 0x0F
 }
 

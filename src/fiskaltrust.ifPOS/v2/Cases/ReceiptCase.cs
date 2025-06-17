@@ -4,117 +4,63 @@ namespace fiskaltrust.ifPOS.v2.Cases;
 
 public enum ReceiptCase : long
 {
-    /// <remarks>
-    /// Value: 0x0000
-    /// </remarks>
+    /// <value><c>0x0000</c></value>
     UnknownReceipt0x0000 = 0x0000,
-    /// <remarks>
-    /// Value: 0x0001
-    /// </remarks>
+    /// <value><c>0x0001</c></value>
     PointOfSaleReceipt0x0001 = 0x0001,
-    /// <remarks>
-    /// Value: 0x0002
-    /// </remarks>
+    /// <value><c>0x0002</c></value>
     PaymentTransfer0x0002 = 0x0002,
-    /// <remarks>
-    /// Value: 0x0003
-    /// </remarks>
+    /// <value><c>0x0003</c></value>
     PointOfSaleReceiptWithoutObligation0x0003 = 0x0003,
-    /// <remarks>
-    /// Value: 0x0004
-    /// </remarks>
+    /// <value><c>0x0004</c></value>
     ECommerce0x0004 = 0x0004,
-    /// <remarks>
-    /// Value: 0x0005
-    /// </remarks>
+    /// <value><c>0x0005</c></value>
     Protocol0x0005 = 0x0005,
 
-    /// <remarks>
-    /// Value: 0x1000
-    /// </remarks>
+    /// <value><c>0x1000</c></value>
     InvoiceUnknown0x1000 = 0x1000,
-    /// <remarks>
-    /// Value: 0x1001
-    /// </remarks>
+    /// <value><c>0x1001</c></value>
     InvoiceB2C0x1001 = 0x1001,
-    /// <remarks>
-    /// Value: 0x1002
-    /// </remarks>
+    /// <value><c>0x1002</c></value>
     InvoiceB2B0x1002 = 0x1002,
-    /// <remarks>
-    /// Value: 0x1003
-    /// </remarks>
+    /// <value><c>0x1003</c></value>
     InvoiceB2G0x1003 = 0x1003,
 
-    /// <remarks>
-    /// Value: 0x2000
-    /// </remarks>
+    /// <value><c>0x2000</c></value>
     ZeroReceipt0x2000 = 0x2000,
-    /// <remarks>
-    /// Value: 0x2001
-    /// </remarks>
+    /// <value><c>0x2001</c></value>
     OneReceipt0x2001 = 0x2001,
-    /// <remarks>
-    /// Value: 0x2010
-    /// </remarks>
+    /// <value><c>0x2010</c></value>
     ShiftClosing0x2010 = 0x2010,
-    /// <remarks>
-    /// Value: 0x2011
-    /// </remarks>
+    /// <value><c>0x2011</c></value>
     DailyClosing0x2011 = 0x2011,
-    /// <remarks>
-    /// Value: 0x2012
-    /// </remarks>
+    /// <value><c>0x2012</c></value>
     MonthlyClosing0x2012 = 0x2012,
-    /// <remarks>
-    /// Value: 0x2013
-    /// </remarks>
+    /// <value><c>0x2013</c></value>
     YearlyClosing0x2013 = 0x2013,
 
-    /// <remarks>
-    /// Value: 0x3000
-    /// </remarks>
+    /// <value><c>0x3000</c></value>
     ProtocolUnspecified0x3000 = 0x3000,
-    /// <remarks>
-    /// Value: 0x3001
-    /// </remarks>
+    /// <value><c>0x3001</c></value>
     ProtocolTechnicalEvent0x3001 = 0x3001,
-    /// <remarks>
-    /// Value: 0x3002
-    /// </remarks>
+    /// <value><c>0x3002</c></value>
     ProtocolAccountingEvent0x3002 = 0x3002,
-    /// <remarks>
-    /// Value: 0x3003
-    /// </remarks>
+    /// <value><c>0x3003</c></value>
     InternalUsageMaterialConsumption0x3003 = 0x3003,
-    /// <remarks>
-    /// Value: 0x3004
-    /// </remarks>
+    /// <value><c>0x3004</c></value>
     Order0x3004 = 0x3004,
-    /// <remarks>
-    /// Value: 0x3005
-    /// </remarks>
+    /// <value><c>0x3005</c></value>
     Pay0x3005 = 0x3005,
-    /// <remarks>
-    /// Value: 0x3010
-    /// </remarks>
+    /// <value><c>0x3010</c></value>
     CopyReceiptPrintExistingReceipt0x3010 = 0x3010,
 
-    /// <remarks>
-    /// Value: 0x4001
-    /// </remarks>
+    /// <value><c>0x4001</c></value>
     InitialOperationReceipt0x4001 = 0x4001,
-    /// <remarks>
-    /// Value: 0x4002
-    /// </remarks>
+    /// <value><c>0x4002</c></value>
     OutOfOperationReceipt0x4002 = 0x4002,
-    /// <remarks>
-    /// Value: 0x4011
-    /// </remarks>
+    /// <value><c>0x4011</c></value>
     InitSCUSwitch0x4011 = 0x4011,
-    /// <remarks>
-    /// Value: 0x4012
-    /// </remarks>
+    /// <value><c>0x4012</c></value>
     FinishSCUSwitch0x4012 = 0x4012,
 }
 

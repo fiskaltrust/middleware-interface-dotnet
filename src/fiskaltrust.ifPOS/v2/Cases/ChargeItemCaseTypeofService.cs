@@ -2,49 +2,27 @@
 
 public enum ChargeItemCaseTypeOfService
 {
-    /// <remarks>
-    /// Value: 0x00
-    /// </remarks>
+    /// <value><c>0x00</c></value>
     UnknownService = 0x00,
-    /// <remarks>
-    /// Value: 0x10
-    /// </remarks>
+    /// <value><c>0x10</c></value>
     Delivery = 0x10,
-    /// <remarks>
-    /// Value: 0x20
-    /// </remarks>
+    /// <value><c>0x20</c></value>
     OtherService = 0x20,
-    /// <remarks>
-    /// Value: 0x30
-    /// </remarks>
+    /// <value><c>0x30</c></value>
     Tip = 0x30,
-    /// <remarks>
-    /// Value: 0x40
-    /// </remarks>
+    /// <value><c>0x40</c></value>
     Voucher = 0x40,
-    /// <remarks>
-    /// Value: 0x50
-    /// </remarks>
+    /// <value><c>0x50</c></value>
     CatalogService = 0x50,
-    /// <remarks>
-    /// Value: 0x60
-    /// </remarks>
+    /// <value><c>0x60</c></value>
     NotOwnSales = 0x60,
-    /// <remarks>
-    /// Value: 0x70
-    /// </remarks>
+    /// <value><c>0x70</c></value>
     OwnConsumption = 0x70,
-    /// <remarks>
-    /// Value: 0x80
-    /// </remarks>
+    /// <value><c>0x80</c></value>
     Grant = 0x80,
-    /// <remarks>
-    /// Value: 0x90
-    /// </remarks>
+    /// <value><c>0x90</c></value>
     Receivable = 0x90,
-    /// <remarks>
-    /// Value: 0xA0
-    /// </remarks>
+    /// <value><c>0xA0</c></value>
     CashTransfer = 0xA0,
 }
 

@@ -2,17 +2,11 @@
 
 public enum ChargeItemCaseFlags : long
 {
-    /// <remarks>
-    /// Value: 0x0000_0000_0001_0000
-    /// </remarks>
+    /// <value><c>0x0000_0000_0001_0000</c></value>
     Void = 0x0000_0000_0001_0000,
-    /// <remarks>
-    /// Value: 0x0000_0000_0002_0000
-    /// </remarks>
+    /// <value><c>0x0000_0000_0002_0000</c></value>
     Refund = 0x0000_0000_0002_0000,
-    /// <remarks>
-    /// Value: 0x0000_0000_0004_0000
-    /// </remarks>
+    /// <value><c>0x0000_0000_0004_0000</c></value>
     ExtraOrDiscount = 0x0000_0000_0004_0000,
 }
 
