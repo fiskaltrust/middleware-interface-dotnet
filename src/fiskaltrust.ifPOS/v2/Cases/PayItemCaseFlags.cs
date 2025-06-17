@@ -28,6 +28,6 @@ public static class PayItemCaseFlagsExt
 {
     public static PayItemCase WithFlag(this PayItemCase self, PayItemCaseFlags flag) => (PayItemCase)((ulong)self | (ulong)flag);
 
-    // HasFlag would be a nicer name but that method does alrady exist for all enums
+    // HasFlag would be a nicer name but that method does already exist for all enums
     public static bool IsFlag(this PayItemCase self, PayItemCaseFlags flag) => ((ulong)self & (ulong)flag) == (ulong)flag;
 }
