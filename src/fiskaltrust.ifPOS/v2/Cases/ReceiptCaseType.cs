@@ -1,6 +1,6 @@
 ﻿namespace fiskaltrust.ifPOS.v2.Cases;
 
-public enum ReceiptCaseType : long
+public enum ReceiptCaseType : ulong
 {
     /// <value><c>0x0000</c></value>
     Receipt = 0x0000,
@@ -16,7 +16,7 @@ public enum ReceiptCaseType : long
 
 public static class ReceiptCaseTypeExt
 {
-    public static bool IsType(this ReceiptCase self, ReceiptCaseType type) => ((long)self & 0xF000) == (long)type;
+    public static bool IsType(this ReceiptCase self, ReceiptCaseType type) => ((ulong)self & 0xF000) == (ulong)type;
     public static ReceiptCase WithType(this ReceiptCase self, ReceiptCaseType state) => (ReceiptCase)(((ulong)self & 0xFFFF_FFFF_FFFF_0FFF) | (ulong)state);
-    public static ReceiptCaseType Type(this ReceiptCase self) => (ReceiptCaseType)((long)self & 0xF000);
+    public static ReceiptCaseType Type(this ReceiptCase self) => (ReceiptCaseType)((ulong)self & 0xF000);
 }

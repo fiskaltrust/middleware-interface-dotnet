@@ -1,6 +1,6 @@
 ﻿namespace fiskaltrust.ifPOS.v2.Cases;
 
-public enum SignatureFormatPosition : long
+public enum SignatureFormatPosition : ulong
 {
     /// <value><c>0x0000_0000_0000_0000</c></value>
     AfterPayItemBlockBeforeFooter = 0x0000_0000_0000_0000,
@@ -18,6 +18,6 @@ public enum SignatureFormatPosition : long
 
 public static class SignatureFormatPositionExt
 {
-    public static SignatureFormat WithPosition(this SignatureFormat self, SignatureFormatPosition flag) => (SignatureFormat)((long)self | (long)flag);
-    public static bool IsPosition(this SignatureFormat self, SignatureFormatPosition flag) => ((long)self & (long)flag) == (long)flag;
+    public static SignatureFormat WithPosition(this SignatureFormat self, SignatureFormatPosition flag) => (SignatureFormat)((ulong)self | (ulong)flag);
+    public static bool IsPosition(this SignatureFormat self, SignatureFormatPosition flag) => ((ulong)self & (ulong)flag) == (ulong)flag;
 }

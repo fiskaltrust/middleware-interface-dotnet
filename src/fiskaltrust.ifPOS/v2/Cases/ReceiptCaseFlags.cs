@@ -1,6 +1,6 @@
 ﻿namespace fiskaltrust.ifPOS.v2.Cases;
 
-public enum ReceiptCaseFlags : long
+public enum ReceiptCaseFlags : ulong
 {
     /// <value><c>0x0000_0000_0001_0000</c></value>
     LateSigning = 0x0000_0000_0001_0000,
@@ -38,6 +38,6 @@ public enum ReceiptCaseFlags : long
 
 public static class ReceiptCaseFlagsExt
 {
-    public static ReceiptCase WithFlag(this ReceiptCase self, ReceiptCaseFlags flag) => (ReceiptCase)((long)self | (long)flag);
-    public static bool IsFlag(this ReceiptCase self, ReceiptCaseFlags flag) => ((long)self & (long)flag) == (long)flag;
+    public static ReceiptCase WithFlag(this ReceiptCase self, ReceiptCaseFlags flag) => (ReceiptCase)((ulong)self | (ulong)flag);
+    public static bool IsFlag(this ReceiptCase self, ReceiptCaseFlags flag) => ((ulong)self & (ulong)flag) == (ulong)flag;
 }

@@ -16,6 +16,6 @@ public enum SignatureTypeFlags
 
 public static class SignatureTypeFlagsExt
 {
-    public static SignatureType WithFlag(this SignatureType self, SignatureTypeFlags flag) => (SignatureType)((long)self | (long)flag);
-    public static bool IsFlag(this SignatureType self, SignatureTypeFlags flag) => ((long)self & (long)flag) == (long)flag;
+    public static SignatureType WithFlag(this SignatureType self, SignatureTypeFlags flag) => (SignatureType)((ulong)self | (ulong)flag);
+    public static bool IsFlag(this SignatureType self, SignatureTypeFlags flag) => ((ulong)self & (ulong)flag) == (ulong)flag;
 }

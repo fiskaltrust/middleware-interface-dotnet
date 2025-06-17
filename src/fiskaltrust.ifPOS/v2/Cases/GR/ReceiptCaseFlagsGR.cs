@@ -1,6 +1,6 @@
 ﻿namespace fiskaltrust.ifPOS.v2.Cases;
 
-public enum ReceiptCaseFlagsGR : long
+public enum ReceiptCaseFlagsGR : ulong
 {
     /// <value><c>0x0000_0100_0000_0000</c></value>
     IsSelfPricingOperation = 0x0000_0100_0000_0000,
@@ -8,6 +8,6 @@ public enum ReceiptCaseFlagsGR : long
 
 public static class ReceiptCaseFlagsGRExt
 {
-    public static ReceiptCase WithFlag(this ReceiptCase self, ReceiptCaseFlagsGR flag) => (ReceiptCase)((long)self | (long)flag);
-    public static bool IsFlag(this ReceiptCase self, ReceiptCaseFlagsGR flag) => ((long)self & (long)flag) == (long)flag;
+    public static ReceiptCase WithFlag(this ReceiptCase self, ReceiptCaseFlagsGR flag) => (ReceiptCase)((ulong)self | (ulong)flag);
+    public static bool IsFlag(this ReceiptCase self, ReceiptCaseFlagsGR flag) => ((ulong)self & (ulong)flag) == (ulong)flag;
 }

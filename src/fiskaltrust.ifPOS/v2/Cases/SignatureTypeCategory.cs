@@ -15,5 +15,5 @@ public enum SignatureTypeCategory
 public static class SignatureTypeCategoryExt
 {
     public static SignatureType WithCategory(this SignatureType self, SignatureTypeCategory category) => (SignatureType)(((ulong)self & 0xFFFF_FFFF_FFFF_0FFF) | (ulong)category);
-    public static bool IsCategory(this SignatureType self, SignatureTypeCategory category) => ((long)self & 0xF000) == (long)category;
+    public static bool IsCategory(this SignatureType self, SignatureTypeCategory category) => ((ulong)self & 0xF000) == (ulong)category;
 }

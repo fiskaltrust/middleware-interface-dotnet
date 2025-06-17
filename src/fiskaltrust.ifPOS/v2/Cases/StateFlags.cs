@@ -1,6 +1,6 @@
 ﻿namespace fiskaltrust.ifPOS.v2.Cases;
 
-public enum StateFlags : long
+public enum StateFlags : ulong
 {
     /// <value><c>0x0000_0000_0000_0001</c></value>
     SecurityMechanismDeactivated = 0x0000_0000_0000_0001,
@@ -16,6 +16,6 @@ public enum StateFlags : long
 
 public static class StateFlagsExt
 {
-    public static State WithFlag(this State self, StateFlags flag) => (State)((long)self | (long)flag);
-    public static bool IsFlag(this State self, StateFlags flag) => ((long)self & (long)flag) == (long)flag;
+    public static State WithFlag(this State self, StateFlags flag) => (State)((ulong)self | (ulong)flag);
+    public static bool IsFlag(this State self, StateFlags flag) => ((ulong)self & (ulong)flag) == (ulong)flag;
 }
