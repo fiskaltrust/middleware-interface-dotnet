@@ -5,27 +5,23 @@ namespace fiskaltrust.ifPOS.v2.Cases;
 public enum ChargeItemCase : ulong
 {
     /// <value><c>0x0</c></value>
-    UnknownService = 0x0,  // Unknown type of service for IT (1.3.45)
+    UnknownService = 0x0,
     /// <value><c>0x1</c></value>
-    DiscountedVatRate1 = 0x1,  // Discounted-1 VAT rate (as of 1.1.2022, this is 10%) (1.3.45)
+    DiscountedVatRate1 = 0x1,
     /// <value><c>0x2</c></value>
-    DiscountedVatRate2 = 0x2,  // Discounted 2 VAT rate (as of 1.1.2022, this is 5%) (1.3.45)
+    DiscountedVatRate2 = 0x2,
     /// <value><c>0x3</c></value>
-    NormalVatRate = 0x3,  // Normal VAT rate (as of 1.1.2022, this is 22%) (1.3.45)
+    NormalVatRate = 0x3,
     /// <value><c>0x4</c></value>
-    SuperReducedVatRate1 = 0x4,  // Super reduced 1 VAT rate (1.3.45)
+    SuperReducedVatRate1 = 0x4,
     /// <value><c>0x5</c></value>
-    SuperReducedVatRate2 = 0x5,  // Super reduced 2 VAT rate (1.3.45)
+    SuperReducedVatRate2 = 0x5,
     /// <value><c>0x6</c></value>
-    ParkingVatRate = 0x6,  // Parking VAT rate, Reversal of tax liability (1.3.45)
-    /// <remarks>
-    /// Value:   //
-    /// </remarks>
-    ZeroVatRate = 0x7,  // Zero VAT rate (1.3.45)
-    /// <remarks>
-    /// Value:  //
-    /// </remarks>
-    NotTaxable = 0x8  // Not taxable (for processing, see 0x4954000000000001) (1.3.45)
+    ParkingVatRate = 0x6,
+    /// <value><c>0x7</c></value>
+    ZeroVatRate = 0x7,
+    /// <value><c>0x8</c></value>
+    NotTaxable = 0x8
 }
 
 public static class ChargeItemCaseExt
