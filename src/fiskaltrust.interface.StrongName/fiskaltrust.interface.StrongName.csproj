@@ -61,6 +61,10 @@
     <PackageReference Include="System.Interactive.Async" Version="4.0.0" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)' != 'net40' AND '$(TargetFramework)' != 'net461'">
+    <PackageReference Include="System.Text.Json" Version="9.0.4" />
+  </ItemGroup>
+
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="System.ServiceModel.Primitives" Version="4.5.3" />
   </ItemGroup>

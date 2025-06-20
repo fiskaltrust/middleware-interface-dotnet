@@ -1,12 +1,12 @@
 ﻿using System.Runtime.Serialization;
 
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
 using System.Text.Json.Serialization;
 #endif
 
 namespace fiskaltrust.ifPOS.v2
 {
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
     [JsonConverter(typeof(JsonStringEnumConverter))]
 #endif
     [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]

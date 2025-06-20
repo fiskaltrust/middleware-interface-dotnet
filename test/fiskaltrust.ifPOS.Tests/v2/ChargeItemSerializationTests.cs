@@ -46,7 +46,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             AssertChargeItemsEqual(original, deserialized);
         }
 
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
         [Test]
         public void SystemTextJson_SerializeDeserialize_PreservesAllProperties()
         {

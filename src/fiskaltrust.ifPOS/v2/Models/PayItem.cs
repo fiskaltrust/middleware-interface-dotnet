@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using fiskaltrust.ifPOS.v2.Cases;
 
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
 using System.Text.Json.Serialization;
 #endif
 
@@ -10,14 +10,14 @@ namespace fiskaltrust.ifPOS.v2
 {
         public class PayItem
         {
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
                 [JsonPropertyName("ftPayItemId")]
 #endif
                 [DataMember(EmitDefaultValue = false, IsRequired = false)]
                 public Guid? ftPayItemId { get; set; }
 
                 [Newtonsoft.Json.JsonProperty("Quantity", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore)]
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
                 [JsonPropertyName("Quantity")]
                 [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 #endif
@@ -29,79 +29,79 @@ namespace fiskaltrust.ifPOS.v2
                 }
 
                 [Newtonsoft.Json.JsonIgnore]
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
                 [JsonIgnore]
 #endif
                 public decimal Quantity { get; set; } = 1;
 
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
                 [JsonPropertyName("Description")]
 #endif
                 [DataMember(EmitDefaultValue = true, IsRequired = true)]
                 public string Description { get; set; }
 
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
                 [JsonPropertyName("Amount")]
 #endif
                 [DataMember(EmitDefaultValue = true, IsRequired = true)]
                 public decimal Amount { get; set; }
 
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
                 [JsonPropertyName("ftPayItemCase")]
 #endif
                 [DataMember(EmitDefaultValue = false, IsRequired = false)]
                 public PayItemCase ftPayItemCase { get; set; } = 0;
 
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
                 [JsonPropertyName("ftPayItemCaseData")]
 #endif
                 [DataMember(EmitDefaultValue = false, IsRequired = false)]
                 public object? ftPayItemCaseData { get; set; }
 
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
                 [JsonPropertyName("Moment")]
 #endif
                 [DataMember(EmitDefaultValue = false, IsRequired = false)]
                 public DateTime? Moment { get; set; }
 
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
                 [JsonPropertyName("Position")]
 #endif
                 [DataMember(EmitDefaultValue = false, IsRequired = false)]
                 public decimal Position { get; set; } = 0;
 
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
                 [JsonPropertyName("AccountNumber")]
 #endif
                 [DataMember(EmitDefaultValue = false, IsRequired = false)]
                 public string? AccountNumber { get; set; }
 
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
                 [JsonPropertyName("CostCenter")]
 #endif
                 [DataMember(EmitDefaultValue = false, IsRequired = false)]
                 public string? CostCenter { get; set; }
 
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
                 [JsonPropertyName("MoneyGroup")]
 #endif
                 [DataMember(EmitDefaultValue = false, IsRequired = false)]
                 public string? MoneyGroup { get; set; }
 
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
                 [JsonPropertyName("MoneyNumber")]
 #endif
                 [DataMember(EmitDefaultValue = false, IsRequired = false)]
                 public string? MoneyNumber { get; set; }
 
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
                 [JsonPropertyName("MoneyBarcode")]
 #endif
                 [DataMember(EmitDefaultValue = false, IsRequired = false)]
                 public string? MoneyBarcode { get; set; }
 
                 [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
                 [JsonPropertyName("Currency")]
                 [JsonConverter(typeof(JsonStringEnumConverter))]
 #endif
@@ -109,7 +109,7 @@ namespace fiskaltrust.ifPOS.v2
                 public Currency Currency { get; set; }
 
                 [Newtonsoft.Json.JsonProperty("DecimalPrecisionMultiplier", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore)]
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
                 [JsonPropertyName("DecimalPrecisionMultiplier")]
                 [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 #endif
@@ -121,7 +121,7 @@ namespace fiskaltrust.ifPOS.v2
                 }
 
                 [Newtonsoft.Json.JsonIgnore]
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
                 [JsonIgnore]
 #endif
                 public int DecimalPrecisionMultiplier { get; set; } = 1;
