@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-#if !WCF
+#if NETCOREAPP3_0_OR_GREATER
 using System.Text.Json;
 using System.Text.Json.Serialization;
 #endif
@@ -50,7 +50,7 @@ namespace fiskaltrust.ifPOS.v2.Converters
     }
   }
 
-#if !WCF
+#if NETCOREAPP3_0_OR_GREATER
   public class StringOrStringArraySystemTextJsonConverter : System.Text.Json.Serialization.JsonConverter<string[]>
   {
     public override string[] Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)

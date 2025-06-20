@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-#if !WCF
+#if NETCOREAPP3_0_OR_GREATER
 using System.Text.Json.Serialization;
 #endif
 
@@ -11,7 +11,7 @@ namespace fiskaltrust.ifPOS.v2
     /// </summary>
     public class EchoResponse
     {
-#if !WCF
+#if NETCOREAPP3_0_OR_GREATER
         [JsonPropertyName("Message")]
 #endif
         [DataMember(Order = 1, EmitDefaultValue = true, IsRequired = true)]

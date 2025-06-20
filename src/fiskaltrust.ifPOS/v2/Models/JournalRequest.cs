@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-#if !WCF
+#if NETCOREAPP3_0_OR_GREATER
 using System.Text.Json.Serialization;
 #endif
 
@@ -12,19 +12,19 @@ namespace fiskaltrust.ifPOS.v2
         /// </summary>
         public class JournalRequest
         {
-#if !WCF
+#if NETCOREAPP3_0_OR_GREATER
                 [JsonPropertyName("ftJournalType")]
 #endif
                 [DataMember(Order = 1, EmitDefaultValue = true, IsRequired = true)]
                 public long ftJournalType { get; set; }
 
-#if !WCF
+#if NETCOREAPP3_0_OR_GREATER
                 [JsonPropertyName("From")]
 #endif
                 [DataMember(Order = 2, EmitDefaultValue = true, IsRequired = true)]
                 public long From { get; set; }
 
-#if !WCF
+#if NETCOREAPP3_0_OR_GREATER
                 [JsonPropertyName("To")]
 #endif
                 [DataMember(Order = 3, EmitDefaultValue = true, IsRequired = true)]
@@ -32,7 +32,7 @@ namespace fiskaltrust.ifPOS.v2
 
                 private int _maxChunkSize = 4096;
 
-#if !WCF
+#if NETCOREAPP3_0_OR_GREATER
                 [JsonPropertyName("MaxChunkSize")]
 #endif
                 [DataMember(Order = 4, EmitDefaultValue = false, IsRequired = false)]

@@ -5,7 +5,7 @@ using fiskaltrust.ifPOS.v2.Cases;
 using NUnit.Framework;
 using Newtonsoft.Json;
 
-#if !WCF
+#if NETCOREAPP3_0_OR_GREATER
 using System.Text.Json;
 #endif
 
@@ -75,7 +75,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             AssertReceiptResponsesEqual(original, deserialized);
         }
 
-#if !WCF
+#if NETCOREAPP3_0_OR_GREATER
         [Test]
         public void SystemTextJson_SerializeDeserialize_PreservesAllProperties()
         {
