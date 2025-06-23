@@ -50,4 +50,6 @@ public static class ChargeItemCaseExt
     public static bool IsVat(this ChargeItemCase self, ChargeItemCase @case) => ((ulong)self & 0xF) == (ulong)@case;
     public static ChargeItemCase WithVat(this ChargeItemCase self, ChargeItemCase state) => (ChargeItemCase)(((ulong)self & 0xFFFF_FFFF_FFFF_FFF0) | (ulong)state);
     public static ChargeItemCase Vat(this ChargeItemCase self) => (ChargeItemCase)((ulong)self & 0xF);
+    public static decimal GetVATAmount(this ChargeItem self) => self.VATAmount ?? (self.Amount / (100 + self.VATRate) * self.VATRate);
+
 }
