@@ -17,5 +17,11 @@ namespace fiskaltrust.ifPOS.v2.es
 
         [DataMember(Order = 40)]
         public ReceiptResponse? PreviousReceiptResponse { get; set; }
+
+        [DataMember(Order = 50)]
+        public ReceiptRequest? ReferencedReceiptRequest { get; set; }
+
+        [DataMember(Order = 60)]
+        public ReceiptResponse? ReferencedReceiptResponse { get; set; }
     }
 }
