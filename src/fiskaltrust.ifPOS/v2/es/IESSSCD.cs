@@ -1,7 +1,7 @@
 ﻿using System.ServiceModel;
 using System.Threading.Tasks;
 
-namespace fiskaltrust.ifPOS.v1.es
+namespace fiskaltrust.ifPOS.v2.es
 {
     [ServiceContract]
     public interface IESSSCD

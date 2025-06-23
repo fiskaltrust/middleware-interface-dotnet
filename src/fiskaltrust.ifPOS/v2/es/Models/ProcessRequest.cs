@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace fiskaltrust.ifPOS.v1.es
+namespace fiskaltrust.ifPOS.v2.es
 
 {
     [DataContract]
