@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 
 namespace fiskaltrust.ifPOS.v2
 {
+#nullable enable
         public class ChargeItem
         {
                 [Newtonsoft.Json.JsonProperty("ftChargeItemId", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore)]

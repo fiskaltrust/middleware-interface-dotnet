@@ -11,6 +11,7 @@ using System.Text.Json;
 
 namespace fiskaltrust.ifPOS.v2
 {
+#nullable enable
         public class ReceiptRequest
         {
                 [Newtonsoft.Json.JsonProperty("cbTerminalID", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore)]

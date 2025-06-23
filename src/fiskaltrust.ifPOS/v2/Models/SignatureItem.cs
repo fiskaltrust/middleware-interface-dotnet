@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace fiskaltrust.ifPOS.v2
 {
+#nullable enable
         public class SignatureItem
         {
                 [Newtonsoft.Json.JsonProperty("ftSignatureItemId", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore)]

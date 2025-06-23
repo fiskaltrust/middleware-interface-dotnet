@@ -9,6 +9,7 @@ using System.Text.Json;
 #endif
 
 namespace fiskaltrust.ifPOS.v2;
+#nullable enable
 
 [Newtonsoft.Json.JsonConverter(typeof(PreviousReceiptReferenceConverterNewtonsoft))]
 #if !WCF

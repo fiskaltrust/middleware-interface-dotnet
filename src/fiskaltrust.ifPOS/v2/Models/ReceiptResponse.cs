@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 
 namespace fiskaltrust.ifPOS.v2
 {
+#nullable enable
         public class ReceiptResponse
         {
                 [Newtonsoft.Json.JsonProperty("ftQueueID", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Include)]
