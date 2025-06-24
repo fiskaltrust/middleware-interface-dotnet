@@ -11,7 +11,7 @@ using System.ServiceModel.Security;
 using System.Text.Json;
 #endif
 
-namespace fiskaltrust.Middleware.Interface.Tests.v2
+namespace fiskaltrust.ifPOS.Tests.v2.Serialization
 {
     [TestFixture]
     public class ReceiptRequestSerializationTests

@@ -7,6 +7,12 @@
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
+
+  <ItemGroup>
+        <PackageReference Include="FluentAssertions" Version="5.10.3" />
+        <PackageReference Include="AutoFixture" Version="4.11.0" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\src\fiskaltrust.ifPOS\fiskaltrust.interface.csproj" />
     <ProjectReference Include="..\fiskaltrust.Middleware.Interface.Tests.Helpers\fiskaltrust.Middleware.Interface.Tests.Helpers.csproj" />
