@@ -195,7 +195,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             var json = JsonConvert.SerializeObject(request);
 
             // Assert
-            Assert.IsTrue(json.Contains("\"cbPreviousReceiptReference\":"));
+            Assert.IsFalse(json.Contains("\"cbPreviousReceiptReference\":"));
         }
 
         [Test]
