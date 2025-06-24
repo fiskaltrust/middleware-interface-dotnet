@@ -23,7 +23,7 @@ namespace fiskaltrust.ifPOS.v2
                 [JsonPropertyName("Quantity")]
                 [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 #endif
-                [DataMember(EmitDefaultValue = true, IsRequired = true)]
+                [DataMember(EmitDefaultValue = false, IsRequired = false)]
                 public decimal? QuantitySerialization
                 {
                         get => Quantity == 1 ? null : Quantity;

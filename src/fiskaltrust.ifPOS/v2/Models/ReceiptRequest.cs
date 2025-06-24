@@ -76,7 +76,7 @@ namespace fiskaltrust.ifPOS.v2
                 [JsonPropertyName("ftReceiptCase")]
                 [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
 #endif
-                [DataMember(Order = 80, EmitDefaultValue = false, IsRequired = false)]
+                [DataMember(Order = 80, EmitDefaultValue = true, IsRequired = true)]
                 public ReceiptCase ftReceiptCase { get; set; } = 0;
 
                 [Newtonsoft.Json.JsonProperty("ftReceiptCaseData", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore)]

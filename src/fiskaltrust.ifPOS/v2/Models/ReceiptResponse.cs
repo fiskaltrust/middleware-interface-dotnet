@@ -56,7 +56,7 @@ namespace fiskaltrust.ifPOS.v2
                 [JsonPropertyName("cbTerminalID")]
                 [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 #endif
-                [DataMember(EmitDefaultValue = true, IsRequired = true)]
+                [DataMember(EmitDefaultValue = false, IsRequired = false)]
                 public string? cbTerminalID { get; set; }
 
                 [Newtonsoft.Json.JsonProperty("cbReceiptReference")]
@@ -87,7 +87,7 @@ namespace fiskaltrust.ifPOS.v2
                 [JsonPropertyName("ftReceiptHeader")]
                 [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 #endif
-                [DataMember(EmitDefaultValue = true, IsRequired = true)]
+                [DataMember(EmitDefaultValue = false, IsRequired = false)]
                 public List<string>? ftReceiptHeader { get; set; }
 
                 [Newtonsoft.Json.JsonProperty("ftChargeItems", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore)]
@@ -95,7 +95,7 @@ namespace fiskaltrust.ifPOS.v2
                 [JsonPropertyName("ftChargeItems")]
                 [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 #endif
-                [DataMember(EmitDefaultValue = true, IsRequired = true)]
+                [DataMember(EmitDefaultValue = false, IsRequired = false)]
                 public List<ChargeItem>? ftChargeItems { get; set; }
 
                 [Newtonsoft.Json.JsonProperty("ftChargeLines", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore)]
@@ -103,7 +103,7 @@ namespace fiskaltrust.ifPOS.v2
                 [JsonPropertyName("ftChargeLines")]
                 [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 #endif
-                [DataMember(EmitDefaultValue = true, IsRequired = true)]
+                [DataMember(EmitDefaultValue = false, IsRequired = false)]
                 public List<string>? ftChargeLines { get; set; }
 
                 [Newtonsoft.Json.JsonProperty("ftPayItems", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore)]
@@ -111,7 +111,7 @@ namespace fiskaltrust.ifPOS.v2
                 [JsonPropertyName("ftPayItems")]
                 [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 #endif
-                [DataMember(EmitDefaultValue = true, IsRequired = true)]
+                [DataMember(EmitDefaultValue = false, IsRequired = false)]
                 public List<PayItem>? ftPayItems { get; set; }
 
                 [Newtonsoft.Json.JsonProperty("ftPayLines", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore)]
@@ -119,7 +119,7 @@ namespace fiskaltrust.ifPOS.v2
                 [JsonPropertyName("ftPayLines")]
                 [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 #endif
-                [DataMember(EmitDefaultValue = true, IsRequired = true)]
+                [DataMember(EmitDefaultValue = false, IsRequired = false)]
                 public List<string>? ftPayLines { get; set; }
 
                 [Newtonsoft.Json.JsonProperty("ftSignatures", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore)]
@@ -127,7 +127,7 @@ namespace fiskaltrust.ifPOS.v2
                 [JsonPropertyName("ftSignatures")]
                 [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 #endif
-                [DataMember(EmitDefaultValue = true, IsRequired = true)]
+                [DataMember(EmitDefaultValue = false, IsRequired = false)]
                 public List<SignatureItem> ftSignatures { get; set; } = new List<SignatureItem>();
 
                 [Newtonsoft.Json.JsonProperty("ftReceiptFooter", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore)]
@@ -135,7 +135,7 @@ namespace fiskaltrust.ifPOS.v2
                 [JsonPropertyName("ftReceiptFooter")]
                 [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 #endif
-                [DataMember(EmitDefaultValue = true, IsRequired = true)]
+                [DataMember(EmitDefaultValue = false, IsRequired = false)]
                 public List<string>? ftReceiptFooter { get; set; }
 
                 [Newtonsoft.Json.JsonProperty("ftState", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Include)]
@@ -151,7 +151,7 @@ namespace fiskaltrust.ifPOS.v2
                 [JsonPropertyName("ftStateData")]
                 [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 #endif
-                [DataMember(EmitDefaultValue = true, IsRequired = true)]
+                [DataMember(EmitDefaultValue = false, IsRequired = false)]
                 public object? ftStateData { get; set; }
         }
 }
