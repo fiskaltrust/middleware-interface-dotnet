@@ -1,4 +1,4 @@
-﻿using fiskaltrust.ifPOS.v1.es;
+﻿using fiskaltrust.ifPOS.v2.es;
 using Newtonsoft.Json;
 using System;
 using System.IO;
