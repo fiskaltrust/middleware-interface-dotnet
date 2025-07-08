@@ -17,9 +17,9 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             _httpClient = GetClient(options);
         }
 
-        public async Task<ESSSCDInfo> GetInfoAsync() => await ExecuteHttpGetAsync<ESSSCDInfo>("v1", "GetInfo").ConfigureAwait(false);
+        public async Task<ESSSCDInfo> GetInfoAsync() => await ExecuteHttpGetAsync<ESSSCDInfo>("v2", "GetInfo").ConfigureAwait(false);
 
-        public async Task<ProcessResponse> ProcessReceiptAsync(ProcessRequest request)=> await ExecuteHttpPostAsync<ProcessResponse>("v1", "ProcessReceipt", request).ConfigureAwait(false);
+        public async Task<ProcessResponse> ProcessReceiptAsync(ProcessRequest request)=> await ExecuteHttpPostAsync<ProcessResponse>("v2", "ProcessReceipt", request).ConfigureAwait(false);
        
        
         private async Task<T> ExecuteHttpPostAsync<T>(string urlVersion, string urlMethod, object parameter = null)
