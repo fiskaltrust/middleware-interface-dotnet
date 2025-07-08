@@ -76,7 +76,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
                httpClient.DefaultRequestHeaders.Add("x-cashbox-accesstoken", options.AccessToken);
             }
 
-            return _httpClient;
+            return httpClient;
         }
     }
 }
