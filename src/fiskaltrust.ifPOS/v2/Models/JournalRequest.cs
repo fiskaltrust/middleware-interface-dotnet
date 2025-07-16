@@ -1,6 +1,9 @@
 ﻿using System.Runtime.Serialization;
+using fiskaltrust.ifPOS.v2.Cases;
+using System;
 
-#if NETCOREAPP3_0_OR_GREATER
+
+#if !WCF
 using System.Text.Json.Serialization;
 #endif
 
@@ -12,34 +15,28 @@ namespace fiskaltrust.ifPOS.v2
         /// </summary>
         public class JournalRequest
         {
-#if NETCOREAPP3_0_OR_GREATER
+                [Newtonsoft.Json.JsonProperty("ftJournalType", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Include)]
+#if !WCF
                 [JsonPropertyName("ftJournalType")]
+                [JsonIgnore(Condition = JsonIgnoreCondition.Never)]
 #endif
                 [DataMember(Order = 1, EmitDefaultValue = true, IsRequired = true)]
-                public long ftJournalType { get; set; }
+                public JournalType ftJournalType { get; set; } = 0;
 
-#if NETCOREAPP3_0_OR_GREATER
+                [Newtonsoft.Json.JsonProperty("From", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore)]
+#if !WCF
                 [JsonPropertyName("From")]
+                [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 #endif
-                [DataMember(Order = 2, EmitDefaultValue = true, IsRequired = true)]
-                public long From { get; set; }
+                [DataMember(Order = 2, EmitDefaultValue = false, IsRequired = false)]
+                public DateTime? From { get; set; }
 
-#if NETCOREAPP3_0_OR_GREATER
+                [Newtonsoft.Json.JsonProperty("To", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore)]
+#if !WCF
                 [JsonPropertyName("To")]
+                [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
 #endif
-                [DataMember(Order = 3, EmitDefaultValue = true, IsRequired = true)]
-                public long To { get; set; }
-
-                private int _maxChunkSize = 4096;
-
-#if NETCOREAPP3_0_OR_GREATER
-                [JsonPropertyName("MaxChunkSize")]
-#endif
-                [DataMember(Order = 4, EmitDefaultValue = false, IsRequired = false)]
-                public int MaxChunkSize
-                {
-                        get => _maxChunkSize;
-                        set => _maxChunkSize = value;
-                }
+                [DataMember(Order = 3, EmitDefaultValue = false, IsRequired = false)]
+                public DateTime? To { get; set; }
         }
 }
