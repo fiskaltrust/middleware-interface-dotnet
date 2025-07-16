@@ -1,4 +1,5 @@
-﻿using fiskaltrust.ifPOS.v2.es;
+﻿using fiskaltrust.ifPOS.v2;
+using fiskaltrust.ifPOS.v2.es;
 using Newtonsoft.Json;
 using System;
 using System.IO;
@@ -16,7 +17,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
         {
             _httpClient = GetClient(options);
         }
-
+        public async Task<EchoResponse> EchoAsync(EchoRequest echoRequest) => await ExecuteHttpPostAsync<EchoResponse>("v2", "Echo", echoRequest).ConfigureAwait(false);
         public async Task<ESSSCDInfo> GetInfoAsync() => await ExecuteHttpGetAsync<ESSSCDInfo>("v2", "GetInfo").ConfigureAwait(false);
 
         public async Task<ProcessResponse> ProcessReceiptAsync(ProcessRequest request)=> await ExecuteHttpPostAsync<ProcessResponse>("v2", "ProcessReceipt", request).ConfigureAwait(false);

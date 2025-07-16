@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="fiskaltrust.interface" Version="1.3.73-rc2-25175-83284" />
+    <PackageReference Include="fiskaltrust.interface" Version="1.3.73-rc5-25197-83747" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
