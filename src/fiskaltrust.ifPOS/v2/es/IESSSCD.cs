@@ -6,6 +6,9 @@ namespace fiskaltrust.ifPOS.v2.es
     [ServiceContract]
     public interface IESSSCD
     {
+        [OperationContract(Name = "v2/Echo")]
+        Task<EchoResponse> EchoAsync(EchoRequest echoRequest);
+
         [OperationContract(Name = "v2/ProcessReceipt")]
         Task<ProcessResponse> ProcessReceiptAsync(ProcessRequest request);
 
