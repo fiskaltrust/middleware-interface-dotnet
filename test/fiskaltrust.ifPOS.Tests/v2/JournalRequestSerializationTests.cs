@@ -1,8 +1,10 @@
 ﻿using fiskaltrust.ifPOS.v2;
 using NUnit.Framework;
 using Newtonsoft.Json;
+using fiskaltrust.ifPOS.v2.Cases;
+using System;
 
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
 using System.Text.Json;
 #endif
 
@@ -15,10 +17,9 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
         {
             return new JournalRequest
             {
-                ftJournalType = 4919338167972134913,
-                From = 1640995200000, // 2022-01-01 00:00:00 UTC in milliseconds
-                To = 1672531199000,   // 2022-12-31 23:59:59 UTC in milliseconds
-                MaxChunkSize = 8192
+                ftJournalType = (JournalType)0x4445000000000001,
+                From = new DateTime(2022, 01, 01).Ticks,
+                To = new DateTime(2022, 12, 31).Ticks,
             };
         }
 
@@ -31,7 +32,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             AssertJournalRequestsEqual(original, deserialized);
         }
 
-#if NETCOREAPP3_0_OR_GREATER
+#if !WCF
         [Test]
         public void SystemTextJson_SerializeDeserialize_PreservesAllProperties()
         {
@@ -51,63 +52,12 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
         }
 #endif
 
-        [Test]
-        public void DefaultMaxChunkSize_SerializesCorrectly()
-        {
-            var request = new JournalRequest
-            {
-                ftJournalType = 1,
-                From = 0,
-                To = 1000
-            };
-
-            var json = JsonConvert.SerializeObject(request);
-            var deserialized = JsonConvert.DeserializeObject<JournalRequest>(json);
-
-            Assert.AreEqual(4096, deserialized.MaxChunkSize);
-        }
-
-        [Test]
-        public void CustomMaxChunkSize_SerializesCorrectly()
-        {
-            var request = new JournalRequest
-            {
-                ftJournalType = 1,
-                From = 0,
-                To = 1000,
-                MaxChunkSize = 16384
-            };
-
-            var json = JsonConvert.SerializeObject(request);
-            var deserialized = JsonConvert.DeserializeObject<JournalRequest>(json);
-
-            Assert.AreEqual(16384, deserialized.MaxChunkSize);
-        }
-
-        [Test]
-        public void LargeValues_SerializeCorrectly()
-        {
-            var request = new JournalRequest
-            {
-                ftJournalType = long.MaxValue,
-                From = long.MaxValue - 1000,
-                To = long.MaxValue,
-                MaxChunkSize = int.MaxValue
-            };
-
-            var json = JsonConvert.SerializeObject(request);
-            var deserialized = JsonConvert.DeserializeObject<JournalRequest>(json);
-
-            AssertJournalRequestsEqual(request, deserialized);
-        }
-
         private void AssertJournalRequestsEqual(JournalRequest expected, JournalRequest actual)
         {
             Assert.IsNotNull(actual);
             Assert.AreEqual(expected.ftJournalType, actual.ftJournalType);
             Assert.AreEqual(expected.From, actual.From);
             Assert.AreEqual(expected.To, actual.To);
-            Assert.AreEqual(expected.MaxChunkSize, actual.MaxChunkSize);
         }
     }
 }
