@@ -13,10 +13,10 @@ namespace fiskaltrust.ifPOS.v2.es
         public ReceiptResponse ReceiptResponse { get; set; }
 
         [DataMember(Order = 30)]
-        public ReceiptRequest? PreviousReceiptRequest { get; set; }
+        public ReceiptRequest? LastReceiptRequest { get; set; }
 
         [DataMember(Order = 40)]
-        public ReceiptResponse? PreviousReceiptResponse { get; set; }
+        public ReceiptResponse? LastReceiptResponse { get; set; }
 
         [DataMember(Order = 50)]
         public ReceiptRequest? ReferencedReceiptRequest { get; set; }
