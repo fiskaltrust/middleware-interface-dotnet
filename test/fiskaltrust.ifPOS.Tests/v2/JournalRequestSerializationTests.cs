@@ -18,8 +18,8 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2
             return new JournalRequest
             {
                 ftJournalType = (JournalType)0x4445000000000001,
-                From = new DateTime(2022, 01, 01),
-                To = new DateTime(2022, 12, 31),
+                From = new DateTime(2022, 01, 01).Ticks,
+                To = new DateTime(2022, 12, 31).Ticks,
             };
         }
 
