@@ -38,14 +38,5 @@ namespace fiskaltrust.ifPOS.v2
 #endif
                 [DataMember(Order = 3, EmitDefaultValue = false, IsRequired = false)]
                 public long To { get; set; }
-
-
-                [Newtonsoft.Json.JsonProperty("Take", DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore)]
-#if !WCF
-                [JsonPropertyName("Take")]
-                [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
-#endif
-                [DataMember(Order = 3, EmitDefaultValue = false, IsRequired = false)]
-                public long? Take { get; set; }
         }
 }
