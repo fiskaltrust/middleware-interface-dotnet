@@ -55,12 +55,17 @@ public static class PayItemCaseExt
 
     public static PayItemCase WithCountry(this PayItemCase self, ulong country) => (PayItemCase)(((ulong)self & 0x0000_FFFF_FFFF_FFFF) | (country << (4 * 12)));
     public static ulong CountryCode(this PayItemCase self) => (ulong)self >> (4 * 12);
-    public static string Country(this PayItemCase self)
+#nullable enable
+    public static string? Country(this PayItemCase self)
     {
         var countryCode = self.CountryCode();
-
+        if (countryCode == 0)
+        {
+            return null;
+        }
         return Char.ConvertFromUtf32((char)(countryCode & 0xFF00) >> (4 * 2)) + Char.ConvertFromUtf32((char)(countryCode & 0x00FF));
     }
+#nullable disable
     public static bool IsCase(this PayItemCase self, PayItemCase @case) => ((ulong)self & 0xFF) == (ulong)@case;
     public static PayItemCase WithCase(this PayItemCase self, PayItemCase state) => (PayItemCase)(((ulong)self & 0xFFFF_FFFF_FFFF_FF00) | (ulong)state);
     public static PayItemCase Case(this PayItemCase self) => (PayItemCase)((ulong)self & 0xFF);

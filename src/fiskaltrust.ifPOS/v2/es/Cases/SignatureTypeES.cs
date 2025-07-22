@@ -5,11 +5,17 @@ namespace fiskaltrust.ifPOS.v2.es.Cases;
 
 public enum SignatureTypeES : long
 {
+    /// <value><c>0x4553_2000_0000_1001</c></value>
     InitialOperationReceipt = 0x4553_2000_0000_1001,
+    /// <value><c>0x4553_2000_0000_1002</c></value>
     OutOfOperationReceipt = 0x4553_2000_0000_1002,
+    /// <value><c>0x4553_2000_0000_0001</c></value>
     Url = 0x4553_2000_0000_0001,
+    /// <value><c>0x4553_2000_0000_0002</c></value>
     NIF = 0x4553_2000_0000_0002,
+    /// <value><c>0x4553_2000_0000_0003</c></value>
     Signature = 0x4553_2000_0000_0003,
+    /// <value><c>0x4553_2000_0000_0004</c></value>
     Huella = 0x4553_2000_0000_0004,
 }
 

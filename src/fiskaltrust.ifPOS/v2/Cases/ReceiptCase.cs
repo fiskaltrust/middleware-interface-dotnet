@@ -80,13 +80,17 @@ public static class ReceiptCaseExt
 
     public static ReceiptCase WithCountry(this ReceiptCase self, ulong country) => (ReceiptCase)(((ulong)self & 0x0000_FFFF_FFFF_FFFF) | (country << (4 * 12)));
     public static ulong CountryCode(this ReceiptCase self) => (ulong)self >> (4 * 12);
-    public static string Country(this ReceiptCase self)
+#nullable enable
+    public static string? Country(this ReceiptCase self)
     {
         var countryCode = self.CountryCode();
-
+        if (countryCode == 0)
+        {
+            return null;
+        }
         return Char.ConvertFromUtf32((char)(countryCode & 0xFF00) >> (4 * 2)) + Char.ConvertFromUtf32((char)(countryCode & 0x00FF));
     }
-
+#nullable disable
     public static bool IsCase(this ReceiptCase self, ReceiptCase @case) => ((ulong)self & 0xFFFF) == (ulong)@case;
     public static ReceiptCase WithCase(this ReceiptCase self, ReceiptCase state) => (ReceiptCase)(((ulong)self & 0xFFFF_FFFF_FFFF_0000) | (ulong)state);
     public static ReceiptCase Case(this ReceiptCase self) => (ReceiptCase)((ulong)self & 0xFFFF);

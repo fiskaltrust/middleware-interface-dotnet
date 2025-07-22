@@ -28,12 +28,17 @@ public static class StateExt
 
     public static State WithCountry(this State self, ulong country) => (State)(((ulong)self & 0x0000_FFFF_FFFF_FFFF) | (country << (4 * 12)));
     public static ulong CountryCode(this State self) => (ulong)self >> (4 * 12);
-    public static string Country(this State self)
+#nullable enable
+    public static string? Country(this State self)
     {
         var countryCode = self.CountryCode();
-
+        if (countryCode == 0)
+        {
+            return null;
+        }
         return Char.ConvertFromUtf32((char)(countryCode & 0xFF00) >> (4 * 2)) + Char.ConvertFromUtf32((char)(countryCode & 0x00FF));
     }
+#nullable disable
     public static bool IsState(this State self, State state) => ((ulong)self & 0xFFFF_FFFF) == (ulong)state;
     public static State WithState(this State self, State state) => (State)(((ulong)self & 0xFFFF_FFFF_0000_0000) | (ulong)state);
     public static State State(this State self) => (State)((ulong)self & 0xFFFF_FFFF);
