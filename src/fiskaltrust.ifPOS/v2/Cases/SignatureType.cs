@@ -24,10 +24,15 @@ public static class SignatureTypeExt
 
     public static SignatureType WithCountry(this SignatureType self, ulong country) => (SignatureType)(((ulong)self & 0x0000_FFFF_FFFF_FFFF) | (country << (4 * 12)));
     public static ulong CountryCode(this SignatureType self) => (ulong)self >> (4 * 12);
-    public static string Country(this SignatureType self)
+#nullable enable
+    public static string? Country(this SignatureType self)
     {
         var countryCode = self.CountryCode();
-
+        if (countryCode == 0)
+        {
+            return null;
+        }
         return Char.ConvertFromUtf32((char)(countryCode & 0xFF00) >> (4 * 2)) + Char.ConvertFromUtf32((char)(countryCode & 0x00FF));
     }
+#nullable disable
 }

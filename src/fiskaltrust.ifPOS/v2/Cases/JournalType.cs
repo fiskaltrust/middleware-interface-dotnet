@@ -32,13 +32,17 @@ public static class JournalTypeExt
 
     public static JournalType WithCountry(this JournalType self, ulong country) => (JournalType)(((ulong)self & 0x0000_FFFF_FFFF_FFFF) | (country << (4 * 12)));
     public static ulong CountryCode(this JournalType self) => (ulong)self >> (4 * 12);
-    public static string Country(this JournalType self)
+#nullable enable
+    public static string? Country(this JournalType self)
     {
         var countryCode = self.CountryCode();
-
+        if (countryCode == 0)
+        {
+            return null;
+        }
         return Char.ConvertFromUtf32((char)(countryCode & 0xFF00) >> (4 * 2)) + Char.ConvertFromUtf32((char)(countryCode & 0x00FF));
     }
-
+#nullable disable
     public static bool IsCase(this JournalType self, JournalType @case) => ((ulong)self & 0xFFFF) == (ulong)@case;
     public static JournalType WithCase(this JournalType self, JournalType state) => (JournalType)(((ulong)self & 0xFFFF_FFFF_FFFF_0000) | (ulong)state);
     public static JournalType Case(this JournalType self) => (JournalType)((ulong)self & 0xFFFF);
