@@ -1,4 +1,5 @@
-﻿using fiskaltrust.ifPOS.v2.es;
+﻿#if SYSTEM_TEXT_JSON
+using fiskaltrust.ifPOS.v2.es;
 using fiskaltrust.Middleware.Interface.Client.Common.RetryLogic;
 using System.Threading.Tasks;
 
@@ -25,3 +26,4 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
         }
     }
 }
+#endif

@@ -1,10 +1,11 @@
-﻿using fiskaltrust.ifPOS.v2;
+﻿#if SYSTEM_TEXT_JSON
+using fiskaltrust.ifPOS.v2;
 using fiskaltrust.ifPOS.v2.es;
-using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace fiskaltrust.Middleware.Interface.Client.Http
@@ -30,19 +31,18 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
 
             if (parameter != null)
             {
-                var json = JsonConvert.SerializeObject(parameter);
+                var json = JsonSerializer.Serialize(parameter);
                 stringContent = new StringContent(json, Encoding.UTF8, "application/json");
             }
             var response = await _httpClient.PostAsync(url, stringContent).ConfigureAwait(false);
             if (!response.IsSuccessStatusCode)
             {
                 var errorContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
                 throw new Exception($"Request failed with status {response.StatusCode}: {errorContent}", new HttpRequestException(errorContent));
             }
 
             var result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<T>(result);
+            return JsonSerializer.Deserialize<T>(result);
         }
 
         private async Task<T> ExecuteHttpGetAsync<T>(string urlPath)
@@ -56,7 +56,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             }
 
             var result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<T>(result);
+            return JsonSerializer.Deserialize<T>(result);
         }
 
         private string ConstructPath(string urlPath) => Path.Combine("v2", urlPath);
@@ -92,3 +92,4 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
         }
     }
 }
+#endif
