@@ -17,15 +17,15 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
         {
             _httpClient = GetClient(options);
         }
-        public async Task<EchoResponse> EchoAsync(EchoRequest echoRequest) => await ExecuteHttpPostAsync<EchoResponse>("v2", "Echo", echoRequest).ConfigureAwait(false);
-        public async Task<ESSSCDInfo> GetInfoAsync() => await ExecuteHttpGetAsync<ESSSCDInfo>("v2", "GetInfo").ConfigureAwait(false);
+        public async Task<EchoResponse> EchoAsync(EchoRequest echoRequest) => await ExecuteHttpPostAsync<EchoResponse>("Echo", echoRequest).ConfigureAwait(false);
+        public async Task<ESSSCDInfo> GetInfoAsync() => await ExecuteHttpGetAsync<ESSSCDInfo>("GetInfo").ConfigureAwait(false);
 
-        public async Task<ProcessResponse> ProcessReceiptAsync(ProcessRequest request)=> await ExecuteHttpPostAsync<ProcessResponse>("v2", "ProcessReceipt", request).ConfigureAwait(false);
-       
-       
-        private async Task<T> ExecuteHttpPostAsync<T>(string urlVersion, string urlMethod, object parameter = null)
+        public async Task<ProcessResponse> ProcessReceiptAsync(ProcessRequest request) => await ExecuteHttpPostAsync<ProcessResponse>("ProcessReceipt", request).ConfigureAwait(false);
+
+
+        private async Task<T> ExecuteHttpPostAsync<T>(string urlPath, object parameter = null)
         {
-            var url = Path.Combine(urlVersion, urlMethod);
+            var url = ConstructPath(urlPath);
             StringContent stringContent = null;
 
             if (parameter != null)
@@ -34,27 +34,37 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
                 stringContent = new StringContent(json, Encoding.UTF8, "application/json");
             }
             var response = await _httpClient.PostAsync(url, stringContent).ConfigureAwait(false);
-            response.EnsureSuccessStatusCode();
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                throw new HttpRequestException($"HTTP request failed with status {response.StatusCode}: {errorContent}");
+            }
 
             var result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             return JsonConvert.DeserializeObject<T>(result);
         }
 
-        private async Task<T> ExecuteHttpGetAsync<T>(string urlVersion, string urlMethod)
+        private async Task<T> ExecuteHttpGetAsync<T>(string urlPath)
         {
-            var url = Path.Combine(urlVersion, urlMethod);
+            var url = ConstructPath(urlPath);
             var response = await _httpClient.GetAsync(url);
-            response.EnsureSuccessStatusCode();
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                throw new HttpRequestException($"HTTP request failed with status {response.StatusCode}: {errorContent}");
+            }
 
             var result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             return JsonConvert.DeserializeObject<T>(result);
         }
+
+        private string ConstructPath(string urlPath) => Path.Combine("v2", urlPath);
 
         private HttpClient GetClient(HttpESSSCDClientOptions options)
         {
             HttpClient httpClient;
             var url = options.Url.ToString().EndsWith("/") ? options.Url : new Uri($"{options.Url}/");
-           if (options.DisableSslValidation.HasValue && options.DisableSslValidation.Value)
+            if (options.DisableSslValidation.HasValue && options.DisableSslValidation.Value)
             {
                 var handler = new HttpClientHandler
                 {
@@ -66,7 +76,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             }
             else
             {
-                httpClient= new HttpClient { BaseAddress = url };
+                httpClient = new HttpClient { BaseAddress = url };
             }
             if (options.CashboxId.HasValue)
             {
@@ -74,7 +84,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             }
             if (!string.IsNullOrEmpty(options.AccessToken))
             {
-               httpClient.DefaultRequestHeaders.Add("x-cashbox-accesstoken", options.AccessToken);
+                httpClient.DefaultRequestHeaders.Add("x-cashbox-accesstoken", options.AccessToken);
             }
 
             return httpClient;
