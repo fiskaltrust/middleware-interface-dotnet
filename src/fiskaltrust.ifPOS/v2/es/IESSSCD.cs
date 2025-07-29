@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿#if !WCF
+using System.ServiceModel;
 using System.Threading.Tasks;
 
 namespace fiskaltrust.ifPOS.v2.es
@@ -16,3 +17,4 @@ namespace fiskaltrust.ifPOS.v2.es
         Task<ESSSCDInfo> GetInfoAsync();
     }
 }
+#endif
