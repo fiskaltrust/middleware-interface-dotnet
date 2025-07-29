@@ -37,7 +37,8 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             if (!response.IsSuccessStatusCode)
             {
                 var errorContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                throw new HttpRequestException($"HTTP request failed with status {response.StatusCode}: {errorContent}");
+
+                throw new Exception($"Request failed with status {response.StatusCode}: {errorContent}", new HttpRequestException(errorContent));
             }
 
             var result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -51,7 +52,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
             if (!response.IsSuccessStatusCode)
             {
                 var errorContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                throw new HttpRequestException($"HTTP request failed with status {response.StatusCode}: {errorContent}");
+                throw new Exception($"Request failed with status {response.StatusCode}: {errorContent}", new HttpRequestException(errorContent));
             }
 
             var result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
