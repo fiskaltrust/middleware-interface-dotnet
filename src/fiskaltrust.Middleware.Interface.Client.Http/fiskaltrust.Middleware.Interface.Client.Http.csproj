@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="fiskaltrust.interface" Version="1.3.75-rc5" />
+    <PackageReference Include="fiskaltrust.interface" Version="1.3.75-rc1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
