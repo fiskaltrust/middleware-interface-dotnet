@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if SYSTEM_TEXT_JSON
+using System;
 
 namespace fiskaltrust.Middleware.Interface.Client.Http
 {
@@ -12,3 +13,4 @@ namespace fiskaltrust.Middleware.Interface.Client.Http
         public string AccessToken { get; set; }
     }
 }
+#endif
