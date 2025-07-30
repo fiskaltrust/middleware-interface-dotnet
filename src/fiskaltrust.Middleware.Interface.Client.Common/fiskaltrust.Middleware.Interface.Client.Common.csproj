@@ -9,4 +9,8 @@
 	<ItemGroup>
 	  <PackageReference Include="fiskaltrust.interface" Version="1.3.75-rc1" />
 	</ItemGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)' != 'net40' AND '$(TargetFramework)' != 'net461'">
+    <DefineConstants>SYSTEM_TEXT_JSON</DefineConstants>
+  </PropertyGroup>
 </Project>

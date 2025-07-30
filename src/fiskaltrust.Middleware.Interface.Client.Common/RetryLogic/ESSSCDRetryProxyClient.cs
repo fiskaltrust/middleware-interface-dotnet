@@ -1,4 +1,5 @@
-﻿using fiskaltrust.ifPOS.v2;
+﻿#if SYSTEM_TEXT_JSON
+using fiskaltrust.ifPOS.v2;
 using fiskaltrust.ifPOS.v2.es;
 using System.Threading.Tasks;
 
@@ -15,3 +16,4 @@ namespace fiskaltrust.Middleware.Interface.Client.Common.RetryLogic
         public async Task<ProcessResponse> ProcessReceiptAsync(ProcessRequest request) => await _retryPolicyHelper.RetryFuncAsync(async (proxy) => await proxy.ProcessReceiptAsync(request));
     }
 }
+#endif
