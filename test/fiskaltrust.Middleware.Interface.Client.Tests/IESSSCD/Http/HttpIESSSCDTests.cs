@@ -1,4 +1,4 @@
-﻿#if !WCF
+﻿#if !WCF && SYSTEM_TEXT_JSON
 using fiskaltrust.Middleware.Interface.Client.Tests.Helpers;
 using System.ServiceModel;
 using NUnit.Framework;
