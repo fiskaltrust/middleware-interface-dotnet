@@ -1,4 +1,5 @@
-﻿using fiskaltrust.ifPOS.v2;
+﻿#if SYSTEM_TEXT_JSON
+using fiskaltrust.ifPOS.v2;
 using fiskaltrust.ifPOS.v2.es;
 using System;
 using System.Net.Cache;
@@ -30,3 +31,4 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.Helpers
             });
     }
 }
+#endif

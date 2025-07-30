@@ -1,4 +1,5 @@
-﻿using fiskaltrust.ifPOS.v2;
+﻿#if SYSTEM_TEXT_JSON
+using fiskaltrust.ifPOS.v2;
 using fiskaltrust.ifPOS.v2.es;
 using FluentAssertions;
 using NUnit.Framework;
@@ -47,3 +48,4 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IESSSCD
         }
     }
 }
+#endif

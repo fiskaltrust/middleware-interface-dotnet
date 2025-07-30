@@ -1,4 +1,4 @@
-﻿#if !WCF
+﻿#if !WCF && SYSTEM_TEXT_JSON
 using fiskaltrust.Middleware.Interface.Client.Tests.Helpers;
 using System.ServiceModel;
 using NUnit.Framework;
@@ -34,7 +34,8 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IESSSCD
             _webHost?.Dispose();
         }
 
-        protected override ifPOS.v2.es.IESSSCD CreateClient() => HttpESSSCDFactory.CreateSSCDAsync(new HttpESSSCDClientOptions {
+        protected override ifPOS.v2.es.IESSSCD CreateClient() => HttpESSSCDFactory.CreateSSCDAsync(new HttpESSSCDClientOptions
+        {
             Url = new Uri(_url)
         }).Result;
 
@@ -44,7 +45,7 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IESSSCD
             var uri = new Uri(_url);
             var baseUrl = $"{uri.Scheme}://{uri.Host}:{uri.Port}";
             var pathBase = uri.AbsolutePath.TrimEnd('/');
-            
+
             _webHost = new WebHostBuilder()
                 .UseKestrel()
                 .UseUrls(baseUrl)
