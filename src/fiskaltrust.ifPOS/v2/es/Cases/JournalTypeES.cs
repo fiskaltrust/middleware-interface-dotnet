@@ -5,8 +5,8 @@ namespace fiskaltrust.ifPOS.v2.es.Cases;
 
 public enum JournalTypeES : long
 {
-    /// <value><c>0x4553_2000_0000_1001</c></value>
-    VeriFactu = 0x4553_2000_0000_1001,
+    /// <value><c>0x4553_2000_0000_0001</c></value>
+    VeriFactu = 0x4553_2000_0000_0001,
 }
 
 public static class JournalTypeESExt
