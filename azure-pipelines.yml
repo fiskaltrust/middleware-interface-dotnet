@@ -25,6 +25,12 @@ jobs:
     pool:
       vmImage: windows-latest
     steps:
+      - task: UseDotNet@2
+        displayName: "Install .NET 6 SDK"
+        inputs:
+          packageType: "sdk"
+          version: "6.x"
+
       - task: VisualStudioTestPlatformInstaller@1
         displayName: VsTest Platform Installer
 
