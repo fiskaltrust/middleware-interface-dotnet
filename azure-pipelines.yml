@@ -12,13 +12,13 @@ pr:
   - master
 
 variables:
-  - group: "Code Signing Certificates"
+  - group: 'Code Signing Certificates'
   - name: BuildConfiguration
     value: release
   - name: BuildPlatform
     value: any cpu
   - name: Solution
-    value: "fiskaltrust.Middleware.Interface.sln"
+    value: 'fiskaltrust.Middleware.Interface.sln'
 
 jobs:
   - job: Build
@@ -36,45 +36,45 @@ jobs:
 
       - task: yavt@1
         inputs:
-          mode: "Multi"
-          semverVersion: "v1"
+          mode: 'Multi'
+          semverVersion: 'v1'
 
       - task: DotNetCoreCLI@2
         displayName: Restore
         inputs:
-          command: "restore"
-          projects: "**/*.csproj"
-          feedsToUse: "select"
-          vstsFeed: "dev" # TODO Remove before merge
+          command: 'restore'
+          projects: '**/*.csproj'
+          feedsToUse: 'select'
+          vstsFeed: 'dev'   # TODO Remove before merge
 
       - task: DotNetCoreCLI@2
         displayName: Build
         inputs:
-          projects: "$(Solution)"
-          arguments: "--configuration $(BuildConfiguration)"
+          projects: '$(Solution)'
+          arguments: '--configuration $(BuildConfiguration)'
 
       - task: codesigning@2
-        displayName: "Code Signing "
+        displayName: 'Code Signing '
         inputs:
-          secureFileId: "codesigning.pfx"
-          signCertPassword: "$(Code_Signing_Password)"
+          secureFileId: 'codesigning.pfx'
+          signCertPassword: '$(Code_Signing_Password)'
           filePaths: |
             **/fiskaltrust*.dll
             **/fiskaltrust*.exe
 
       - script: dotnet test --no-build --configuration $(buildConfiguration)  --test-adapter-path:. --logger:nunit;LogFilePath=TestResults.xml
-        displayName: "dotnet test ifPOS"
-        workingDirectory: 'test\fiskaltrust.ifPOS.Tests'
+        displayName: 'dotnet test ifPOS'
+        workingDirectory:  'test\fiskaltrust.ifPOS.Tests'
 
       - script: dotnet test --no-build --configuration $(buildConfiguration)  --test-adapter-path:. --logger:nunit;LogFilePath=TestResults.xml
-        displayName: "dotnet test Clients"
-        workingDirectory: 'test\fiskaltrust.Middleware.Interface.Client.Tests'
+        displayName: 'dotnet test Clients'
+        workingDirectory:  'test\fiskaltrust.Middleware.Interface.Client.Tests'
 
       - task: PublishTestResults@2
-        displayName: "Publish Test Results"
+        displayName: 'Publish Test Results'
         inputs:
           testResultsFormat: NUnit
-          testResultsFiles: "**/*TestResults*.xml"
+          testResultsFiles: '**/*TestResults*.xml'
           mergeTestResults: true
           failTaskOnFailedTests: true
           buildConfiguration: $(buildConfiguration)
@@ -82,12 +82,12 @@ jobs:
       - task: DotNetCoreCLI@2
         displayName: dotnet pack
         inputs:
-          command: "pack"
-          packagesToPack: "src/**/*.csproj"
+          command: 'pack'
+          packagesToPack: 'src/**/*.csproj'
           nobuild: true
-          versioningScheme: "off"
+          versioningScheme: 'off'
 
       - task: PublishBuildArtifacts@1
-        displayName: "Publish Artifact: drop"
+        displayName: 'Publish Artifact: drop'
         inputs:
-          PathtoPublish: "$(build.artifactstagingdirectory)"
+          PathtoPublish: '$(build.artifactstagingdirectory)'
