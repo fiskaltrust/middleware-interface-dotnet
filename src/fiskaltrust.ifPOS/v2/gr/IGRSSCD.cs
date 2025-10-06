@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if !WCF
+using System.Collections.Generic;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using fiskaltrust.ifPOS.v2;
@@ -17,3 +18,4 @@ namespace fiskaltrust.ifPOS.v2.gr
         Task<GRSSCDInfo> GetInfoAsync();
     }
 }
+#endif
