@@ -9,7 +9,7 @@ namespace fiskaltrust.ifPOS.v2.pt
         Task<EchoResponse> EchoAsync(EchoRequest echoRequest);
 
         [OperationContract(Name = "v2/ProcessReceipt")]
-        Task<ProcessResponse> ProcessReceiptAsync(ProcessRequest request);
+        Task<(ProcessResponse response, string hash)> ProcessReceiptAsync(ProcessRequest request, string? lastHash);
 
         [OperationContract(Name = "v2/GetInfo")]
         Task<PTSSCDInfo> GetInfoAsync();

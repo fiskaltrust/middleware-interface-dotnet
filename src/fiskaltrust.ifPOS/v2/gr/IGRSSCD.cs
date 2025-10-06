@@ -11,7 +11,7 @@ namespace fiskaltrust.ifPOS.v2.gr
         Task<EchoResponse> EchoAsync(EchoRequest echoRequest);
 
         [OperationContract(Name = "v2/ProcessReceipt")]
-        Task<ProcessResponse> ProcessReceiptAsync(ProcessRequest request);
+        Task<ProcessResponse> ProcessReceiptAsync(ProcessRequest request, List<(ReceiptRequest, ReceiptResponse)> receiptReferences);
 
         [OperationContract(Name = "v2/GetInfo")]
         Task<GRSSCDInfo> GetInfoAsync();
