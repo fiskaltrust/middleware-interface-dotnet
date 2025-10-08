@@ -76,25 +76,18 @@ jobs:
           SM_TLS_SKIP_VERIFY: false
 
       - pwsh: |
-          if (Test-Path "$(Build.SourcesDirectory)\storage\src") {
-            Write-Host "Found storage\src directory. Proceeding with code signing..."
-            Get-ChildItem -Path "$(Build.SourcesDirectory)\storage\src" -Include fiskaltrust*.dll, fiskaltrust*.exe -Recurse | ForEach-Object {          
-              signtool sign `
-                  /tr http://timestamp.sectigo.com/?td=sha256 `
-                  /td SHA256 `
-                  /fd SHA256 `
-                  /csp "DigiCert Signing Manager KSP" `
-                  /kc "$(KEYPAIR_ALIAS)" `
-                  /f $(Agent.TempDirectory)\KeyCert.pem `
-                  $_.FullName
-            }
-            if (Test-Path "~\.signingmanager\logs\smksp.log") {
-              Write-Host $(Get-Content -Path "~\.signingmanager\logs\smksp.log")
-            }
-          } else {
-            Write-Host "Path $(Build.SourcesDirectory)\storage\src does not exist. Skipping code signing."
-            Write-Host "This is expected when not building from a storage tag."
+          Get-ChildItem -Path "$(Build.SourcesDirectory)" -Include fiskaltrust*.dll, fiskaltrust*.exe -Recurse | ForEach-Object {          
+            signtool sign `
+                /tr http://timestamp.sectigo.com/?td=sha256 `
+                /td SHA256 `
+                /fd SHA256 `
+                /csp "DigiCert Signing Manager KSP" `
+                /kc "$(KEYPAIR_ALIAS)" `
+                /f $(Agent.TempDirectory)\KeyCert.pem `
+                $_.FullName
           }
+          Write-Host $(Get-Content -Path "~\.signingmanager\logs\smksp.log")
+        displayName: "Code Signing"
         # condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/storage/v')
         env:
           SM_HOST: "$(SM_HOST)"
