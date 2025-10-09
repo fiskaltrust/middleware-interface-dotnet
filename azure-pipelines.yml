@@ -54,13 +54,13 @@ jobs:
           arguments: '--configuration $(BuildConfiguration)'
 
       - task: SSMClientToolsSetup@1
-        condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/storage/v')
+        condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
 
       - task: SSMSigningToolsSetup@1
-        condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/storage/v')
+        condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
 
       - task: DownloadSecureFile@1
-        condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/storage/v')
+        condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
         name: clientCertificate
         displayName: "Download client certificate"
         inputs:
@@ -89,7 +89,7 @@ jobs:
           }
           Write-Host $(Get-Content -Path "~\.signingmanager\logs\smksp.log")
         displayName: "Code Signing"
-        condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/storage/v')
+        condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
         env:
           SM_HOST: "$(SM_HOST)"
           SM_API_KEY: "$(SM_API_KEY)"
