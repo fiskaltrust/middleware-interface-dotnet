@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace fiskaltrust.ifPOS.v2.be
 {
-    public interface BEKSSCD
+    public interface IBESSCD
     {
         [OperationContract(Name = "v2/Echo")]
         Task<EchoResponse> EchoAsync(EchoRequest echoRequest);
