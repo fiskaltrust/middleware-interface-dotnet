@@ -8,6 +8,12 @@ public enum ChargeItemCaseFlags : ulong
     Refund = 0x0000_0000_0002_0000,
     /// <value><c>0x0000_0000_0004_0000</c></value>
     ExtraOrDiscount = 0x0000_0000_0004_0000,
+    /// <value><c>0x0000_0000_0008_0000</c></value>
+    Downpayment = 0x0000_0000_0008_0000,
+    /// <value><c>0x0000_0000_0010_0000</c></value>
+    ReturnableDeposit = 0x0000_0000_0010_0000,
+    /// <value><c>0x0000_0000_0020_0000</c></value>
+    TakeAway = 0x0000_0000_0020_0000,
 }
 
 public static class ChargeItemCaseFlagsExt
