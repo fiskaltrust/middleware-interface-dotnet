@@ -18,7 +18,9 @@ namespace fiskaltrust.ifPOS.v2.pl
         public string InfoData { get; set; }
 
         /// <summary>
-        /// Serial number of the fiscal device (numer fabryczny).
+        /// Serial number of the fiscal register: the numer fabryczny for hardware devices, or the
+        /// numer unikatowy for software registers (kasy wirtualne), which have no factory number.
+        /// Null for SCUs without a register (e.g. KSeF invoice SCUs).
         /// </summary>
         [DataMember(Order = 20)]
         [JsonPropertyName("SerialNumber")]
