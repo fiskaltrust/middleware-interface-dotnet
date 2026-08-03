@@ -19,6 +19,11 @@ To implement the Middleware into your POS system, please include the latest vers
 Additionally, please have a look at our demo repositories
 ([dotnet](https://github.com/fiskaltrust/middleware-demo-dotnet), [node](https://github.com/fiskaltrust/middleware-demo-node), [postman](https://github.com/fiskaltrust/middleware-demo-postman), [java](https://github.com/fiskaltrust/middleware-demo-java), [C/C++/rust](https://github.com/fiskaltrust/middleware-demo/), which contain minimal sample applications. Some usage examples can also be taken from the [tests](test/fiskaltrust.ifPOS.Tests/v1/IPOS/Wcf).
 
+### ifPOS v2
+The `fiskaltrust.ifPOS.v2` namespace contains the next generation of the interface, including a fluent, type-safe **Case Builder API** for constructing and reading the `ftReceiptCase`, `ftChargeItemCase`, `ftPayItemCase`, `ftState`, `ftSignatureType` and related case values, as well as country-specific extensions (e.g. `fiskaltrust.ifPOS.v2.es` for Spain).
+
+See the [v2 Case Builder API documentation](src/fiskaltrust.ifPOS/v2/README.md) for details, and the [v2 tests](test/fiskaltrust.ifPOS.Tests/v2) for usage examples.
+
 ## Clients
 For even simpler usage, we offer client packages for the supported communication protocols. Just follow the link in the Badge to install the respective package, and use the snippets above to create an instance of IPOS.
 
@@ -79,7 +84,7 @@ var pos = await SoapPosFactory.CreatePosAsync(new ClientOptions
 If you want to contribute to this repository, please review this README file to understand how it is structured and which tools are used.
 
 ## Versioning
-Currently, the _Minor_ version is incremented for each country that is added to the interface. Starting with the future version 2.0, we will switch to [semantic versioning](https://semver.org/).
+Historically, the _Minor_ version was incremented for each country that was added to the interface. Starting with version 2.0 (the `fiskaltrust.ifPOS.v2` namespace), we follow [semantic versioning](https://semver.org/).
 
 For the list of currently available versions, please have a look at the [NuGet Version History](https://www.nuget.org/packages/fiskaltrust.interface/).
 

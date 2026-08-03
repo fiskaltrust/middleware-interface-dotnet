@@ -16,6 +16,10 @@ public enum ReceiptCase : ulong
     ECommerce0x0004 = 0x0004,
     /// <value><c>0x0005</c></value>
     DeliveryNote0x0005 = 0x0005,
+    /// <value><c>0x0006</c></value>
+    TableCheck0x0006 = 0x0006,
+    /// <value><c>0x0007</c></value>
+    ProForma0x0007 = 0x0007,
 
     /// <value><c>0x1000</c></value>
     InvoiceUnknown0x1000 = 0x1000,
