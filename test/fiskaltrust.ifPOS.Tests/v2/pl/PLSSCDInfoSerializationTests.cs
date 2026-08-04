@@ -12,8 +12,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2.pl
         {
             return new PLSSCDInfo
             {
-                InfoData = "{\"uniqueDeviceNumber\":\"ZAS1234567890\",\"crkReachable\":true}",
-                SerialNumber = "ABC1234567"
+                InfoData = "{\"serialNumber\":\"ABC1234567\",\"uniqueDeviceNumber\":\"ZAS1234567890\",\"crkReachable\":true}"
             };
         }
 
@@ -42,8 +41,7 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2.pl
             // so the raw-output comparison uses a value without quotes.
             var item = new PLSSCDInfo
             {
-                InfoData = "plain-device-info",
-                SerialNumber = "ABC1234567"
+                InfoData = "plain-device-info"
             };
             var newtonsoftJson = JsonConvert.SerializeObject(item);
             var systemTextJson = System.Text.Json.JsonSerializer.Serialize(item);
@@ -59,14 +57,12 @@ namespace fiskaltrust.Middleware.Interface.Tests.v2.pl
 
             Assert.IsNotNull(deserialized);
             Assert.IsNull(deserialized.InfoData);
-            Assert.IsNull(deserialized.SerialNumber);
         }
 
         private void AssertPLSSCDInfosEqual(PLSSCDInfo expected, PLSSCDInfo actual)
         {
             Assert.IsNotNull(actual);
             Assert.AreEqual(expected.InfoData, actual.InfoData);
-            Assert.AreEqual(expected.SerialNumber, actual.SerialNumber);
         }
     }
 }
