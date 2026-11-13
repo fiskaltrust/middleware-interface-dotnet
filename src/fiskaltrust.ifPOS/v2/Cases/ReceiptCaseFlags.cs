@@ -27,8 +27,9 @@ public enum ReceiptCaseFlags : ulong
     AdditionalInformationRequested = 0x0000_0000_0200_0000,
     /// <value><c>0x0000_0000_0400_0000</c></value>
     SCUDataDownloadRequested = 0x0000_0000_0400_0000,
+    /// <summary>Group by Position-Number: charge items whose Position has the same integer part form one line item; the fractional part orders items inside the group. Applies to sales receipts.</summary>
     /// <value><c>0x0000_0000_0800_0000</c></value>
-    EnforceServiceOperations = 0x0000_0000_0800_0000,
+    GroupByPositionNumber = 0x0000_0000_0800_0000,
     /// <value><c>0x0000_0000_1000_0000</c></value>
     CleanupOpenTransactions = 0x0000_0000_1000_0000,
 

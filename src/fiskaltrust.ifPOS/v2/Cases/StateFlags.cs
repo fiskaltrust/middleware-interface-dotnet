@@ -12,6 +12,12 @@ public enum StateFlags : ulong
     MessageIsPending = 0x0000_0000_0000_0040,
     /// <value><c>0x0000_0000_0000_0100</c></value>
     DailyClosingIsDue = 0x0000_0000_0000_0100,
+    /// <value><c>0x0000_0000_0000_0200</c></value>
+    MonthlyClosingIsDue = 0x0000_0000_0000_0200,
+    /// <value><c>0x0000_0000_0000_0400</c></value>
+    YearlyClosingIsDue = 0x0000_0000_0000_0400,
+    /// <value><c>0x0000_0000_0000_0800</c></value>
+    ArchiveIsDue = 0x0000_0000_0000_0800,
 }
 
 public static class StateFlagsExt

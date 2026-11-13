@@ -19,7 +19,9 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IPOS.Grpc
 
         ~GrpcIPOSV1Tests()
         {
-            Task.Run(() => _server.ShutdownAsync()).Wait();
+            var server = _server;
+            _server = null;
+            try { server?.ShutdownAsync().Wait(); } catch { }
             _server = null;
         }
 

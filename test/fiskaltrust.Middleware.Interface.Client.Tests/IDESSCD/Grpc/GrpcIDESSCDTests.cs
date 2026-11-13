@@ -16,7 +16,9 @@ namespace fiskaltrust.Middleware.Interface.Client.Tests.IDESSCD.Grpc
 
         ~GrpcIDESSCDTests()
         {
-            Task.Run(() => _server.ShutdownAsync()).Wait();
+            var server = _server;
+            _server = null;
+            try { server?.ShutdownAsync().Wait(); } catch { }
             _server = null;
         }
 
